@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace Client.SiteMaster
 {
-    public partial class StandardMaster : CustomMaster
+    public partial class NoMenuMaster : CustomMaster
     {
         protected void Page_Load(object sender, EventArgs e)
         {

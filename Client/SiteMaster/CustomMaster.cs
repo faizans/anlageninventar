@@ -5,7 +5,8 @@ using System.Web;
 
 namespace Client.SiteMaster
 {
-    public class CustomMaster
+    public class CustomMaster : System.Web.UI.MasterPage
     {
+
     }
 }
