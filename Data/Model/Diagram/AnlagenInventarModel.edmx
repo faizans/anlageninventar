@@ -137,7 +137,7 @@
           <Key>
             <PropertyRef Name="BuildingId" />
           </Key>
-          <Property Name="BuildingId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="BuildingId" Type="int" Nullable="false" />
           <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="Code" Type="varchar" MaxLength="50" />
         </EntityType>
@@ -166,7 +166,7 @@
           <Key>
             <PropertyRef Name="FloorId" />
           </Key>
-          <Property Name="FloorId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="FloorId" Type="int" Nullable="false" />
           <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="BuildingId" Type="int" Nullable="false" />
         </EntityType>
@@ -183,7 +183,7 @@
           <Key>
             <PropertyRef Name="RoomId" />
           </Key>
-          <Property Name="RoomId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="RoomId" Type="int" Nullable="false" />
           <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="FloorId" Type="int" Nullable="false" />
           <Property Name="Code" Type="varchar" MaxLength="50" />
@@ -467,33 +467,33 @@
           <Key>
             <PropertyRef Name="AppUserId" />
           </Key>
-          <Property Name="AppUserId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="Domain" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="IsAdmin" Type="Boolean" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="1000" Unicode="false" FixedLength="false" />
-          <Property Name="UserRole" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Type="Int32" Name="AppUserId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Domain" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="IsAdmin" Nullable="false" />
+          <Property Type="String" Name="Password" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="UserRole" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
           <NavigationProperty Name="Rooms" Relationship="Data.Model.Diagram.AppUser2Room" FromRole="AppUser" ToRole="Room" />
         </EntityType>
         <EntityType Name="Article">
           <Key>
             <PropertyRef Name="ArticleId" />
           </Key>
-          <Property Name="ArticleId" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="Barcode" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="ArticleGroupId" Type="Int32" />
-          <Property Name="SupplierBranchId" Type="Int32" />
-          <Property Name="RoomId" Type="Int32" />
-          <Property Name="AcquisitionDate" Type="DateTime" Precision="3" />
-          <Property Name="DepreciationCategoryId" Type="Int32" Nullable="false" />
-          <Property Name="ArticleCategoryId" Type="Int32" />
-          <Property Name="InsuranceCategoryId" Type="Int32" />
-          <Property Name="OldBarcode" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Type="Int32" Name="ArticleId" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Barcode" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="ArticleGroupId" />
+          <Property Type="Int32" Name="SupplierBranchId" />
+          <Property Type="Int32" Name="RoomId" />
+          <Property Type="DateTime" Name="AcquisitionDate" Precision="3" />
+          <Property Type="Int32" Name="DepreciationCategoryId" Nullable="false" />
+          <Property Type="Int32" Name="ArticleCategoryId" />
+          <Property Type="Int32" Name="InsuranceCategoryId" />
+          <Property Type="String" Name="OldBarcode" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="ArticleCategory" Relationship="Data.Model.Diagram.FK_Article_ArticleCategory" FromRole="Article" ToRole="ArticleCategory" />
           <NavigationProperty Name="ArticleGroup" Relationship="Data.Model.Diagram.FK_Article_ArticleGroup" FromRole="Article" ToRole="ArticleGroup" />
           <NavigationProperty Name="DepreciationCategory" Relationship="Data.Model.Diagram.FK_Article_DepreciationCategory" FromRole="Article" ToRole="DepreciationCategory" />
@@ -506,19 +506,19 @@
           <Key>
             <PropertyRef Name="ArticleCategoryId" />
           </Key>
-          <Property Name="ArticleCategoryId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="Code" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Type="Int32" Name="ArticleCategoryId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Code" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Articles" Relationship="Data.Model.Diagram.FK_Article_ArticleCategory" FromRole="ArticleCategory" ToRole="Article" />
         </EntityType>
         <EntityType Name="ArticleGroup">
           <Key>
             <PropertyRef Name="ArticleGroupId" />
           </Key>
-          <Property Name="ArticleGroupId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
-          <Property Name="RoomId" Type="Int32" Nullable="false" />
-          <Property Name="Barcode" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Type="Int32" Name="ArticleGroupId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="RoomId" Nullable="false" />
+          <Property Type="String" Name="Barcode" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Articles" Relationship="Data.Model.Diagram.FK_Article_ArticleGroup" FromRole="ArticleGroup" ToRole="Article" />
           <NavigationProperty Name="Room" Relationship="Data.Model.Diagram.FK_ArticleGroup_Room" FromRole="ArticleGroup" ToRole="Room" />
         </EntityType>
@@ -526,22 +526,22 @@
           <Key>
             <PropertyRef Name="BuildingId" />
           </Key>
-          <Property Name="BuildingId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="Code" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Type="Int32" Name="BuildingId" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Code" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Floors" Relationship="Data.Model.Diagram.FK_Floor_Building" FromRole="Building" ToRole="Floor" />
         </EntityType>
         <EntityType Name="Depreciation">
           <Key>
             <PropertyRef Name="DepreciationId" />
           </Key>
-          <Property Name="DepreciationId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="ArticleId" Type="Int32" Nullable="false" />
-          <Property Name="Value" Type="Double" Nullable="false" />
-          <Property Name="Year" Type="Int32" Nullable="false" />
-          <Property Name="AdditionalStartDate" Type="DateTime" Precision="3" />
-          <Property Name="AdditionalEndDate" Type="DateTime" Precision="3" />
-          <Property Name="DepreciationCategoryId" Type="Int32" />
+          <Property Type="Int32" Name="DepreciationId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="ArticleId" Nullable="false" />
+          <Property Type="Double" Name="Value" Nullable="false" />
+          <Property Type="Int32" Name="Year" Nullable="false" />
+          <Property Type="DateTime" Name="AdditionalStartDate" Precision="3" />
+          <Property Type="DateTime" Name="AdditionalEndDate" Precision="3" />
+          <Property Type="Int32" Name="DepreciationCategoryId" />
           <NavigationProperty Name="Article" Relationship="Data.Model.Diagram.FK_Depreciation_Article1" FromRole="Depreciation" ToRole="Article" />
           <NavigationProperty Name="DepreciationCategory" Relationship="Data.Model.Diagram.FK_Depreciation_DepreciationCategory" FromRole="Depreciation" ToRole="DepreciationCategory" />
         </EntityType>
@@ -549,10 +549,10 @@
           <Key>
             <PropertyRef Name="DepreciationCategoryId" />
           </Key>
-          <Property Name="DepreciationCategoryId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="Code" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="DepreciationSpan" Type="Double" />
+          <Property Type="Int32" Name="DepreciationCategoryId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Code" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Double" Name="DepreciationSpan" />
           <NavigationProperty Name="Articles" Relationship="Data.Model.Diagram.FK_Article_DepreciationCategory" FromRole="DepreciationCategory" ToRole="Article" />
           <NavigationProperty Name="Depreciations" Relationship="Data.Model.Diagram.FK_Depreciation_DepreciationCategory" FromRole="DepreciationCategory" ToRole="Depreciation" />
         </EntityType>
@@ -560,9 +560,9 @@
           <Key>
             <PropertyRef Name="FloorId" />
           </Key>
-          <Property Name="FloorId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="BuildingId" Type="Int32" Nullable="false" />
+          <Property Type="Int32" Name="FloorId" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="BuildingId" Nullable="false" />
           <NavigationProperty Name="Building" Relationship="Data.Model.Diagram.FK_Floor_Building" FromRole="Floor" ToRole="Building" />
           <NavigationProperty Name="Rooms" Relationship="Data.Model.Diagram.FK_Room_Floor" FromRole="Floor" ToRole="Room" />
         </EntityType>
@@ -570,42 +570,42 @@
           <Key>
             <PropertyRef Name="InsuranceCategoryId" />
           </Key>
-          <Property Name="InsuranceCategoryId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="Code" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="Description" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Type="Int32" Name="InsuranceCategoryId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Code" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Description" MaxLength="500" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Articles" Relationship="Data.Model.Diagram.FK_Article_InsuranceCategory" FromRole="InsuranceCategory" ToRole="Article" />
         </EntityType>
         <EntityType Name="Room">
           <Key>
             <PropertyRef Name="RoomId" />
           </Key>
-          <Property Name="RoomId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="FloorId" Type="Int32" Nullable="false" />
-          <Property Name="Code" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Type="Int32" Name="RoomId" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="FloorId" Nullable="false" />
+          <Property Type="String" Name="Code" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Articles" Relationship="Data.Model.Diagram.FK_Article_Room" FromRole="Room" ToRole="Article" />
           <NavigationProperty Name="ArticleGroups" Relationship="Data.Model.Diagram.FK_ArticleGroup_Room" FromRole="Room" ToRole="ArticleGroup" />
-          <NavigationProperty Name="Floor1" Relationship="Data.Model.Diagram.FK_Room_Floor" FromRole="Room" ToRole="Floor" />
+          <NavigationProperty Name="Floor" Relationship="Data.Model.Diagram.FK_Room_Floor" FromRole="Room" ToRole="Floor" />
           <NavigationProperty Name="AppUsers" Relationship="Data.Model.Diagram.AppUser2Room" FromRole="Room" ToRole="AppUser" />
         </EntityType>
         <EntityType Name="Supplier">
           <Key>
             <PropertyRef Name="SupplierId" />
           </Key>
-          <Property Name="SupplierId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Type="Int32" Name="SupplierId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="SupplierBranches" Relationship="Data.Model.Diagram.FK_SupplierBranch_Supplier" FromRole="Supplier" ToRole="SupplierBranch" />
         </EntityType>
         <EntityType Name="SupplierBranch">
           <Key>
             <PropertyRef Name="SupplierBranchId" />
           </Key>
-          <Property Name="SupplierBranchId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="Country" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="Place" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="ZipCode" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="SupplierId" Type="Int32" Nullable="false" />
+          <Property Type="Int32" Name="SupplierBranchId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Country" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Place" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ZipCode" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="SupplierId" Nullable="false" />
           <NavigationProperty Name="Articles" Relationship="Data.Model.Diagram.FK_Article_SupplierBranch" FromRole="SupplierBranch" ToRole="Article" />
           <NavigationProperty Name="Supplier" Relationship="Data.Model.Diagram.FK_SupplierBranch_Supplier" FromRole="SupplierBranch" ToRole="Supplier" />
         </EntityType>
@@ -613,15 +613,15 @@
           <Key>
             <PropertyRef Name="diagram_id" />
           </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Type="String" Name="name" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="principal_id" Nullable="false" />
+          <Property Type="Int32" Name="diagram_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="version" />
+          <Property Type="Binary" Name="definition" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <Association Name="FK_Article_ArticleCategory">
-          <End Role="ArticleCategory" Type="Data.Model.Diagram.ArticleCategory" Multiplicity="0..1" />
-          <End Role="Article" Type="Data.Model.Diagram.Article" Multiplicity="*" />
+          <End Type="Data.Model.Diagram.ArticleCategory" Role="ArticleCategory" Multiplicity="0..1" />
+          <End Type="Data.Model.Diagram.Article" Role="Article" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ArticleCategory">
               <PropertyRef Name="ArticleCategoryId" />
@@ -632,8 +632,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Article_ArticleGroup">
-          <End Role="ArticleGroup" Type="Data.Model.Diagram.ArticleGroup" Multiplicity="0..1" />
-          <End Role="Article" Type="Data.Model.Diagram.Article" Multiplicity="*" />
+          <End Type="Data.Model.Diagram.ArticleGroup" Role="ArticleGroup" Multiplicity="0..1" />
+          <End Type="Data.Model.Diagram.Article" Role="Article" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ArticleGroup">
               <PropertyRef Name="ArticleGroupId" />
@@ -644,8 +644,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Article_DepreciationCategory">
-          <End Role="DepreciationCategory" Type="Data.Model.Diagram.DepreciationCategory" Multiplicity="1" />
-          <End Role="Article" Type="Data.Model.Diagram.Article" Multiplicity="*" />
+          <End Type="Data.Model.Diagram.DepreciationCategory" Role="DepreciationCategory" Multiplicity="1" />
+          <End Type="Data.Model.Diagram.Article" Role="Article" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="DepreciationCategory">
               <PropertyRef Name="DepreciationCategoryId" />
@@ -656,8 +656,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Article_InsuranceCategory">
-          <End Role="InsuranceCategory" Type="Data.Model.Diagram.InsuranceCategory" Multiplicity="0..1" />
-          <End Role="Article" Type="Data.Model.Diagram.Article" Multiplicity="*" />
+          <End Type="Data.Model.Diagram.InsuranceCategory" Role="InsuranceCategory" Multiplicity="0..1" />
+          <End Type="Data.Model.Diagram.Article" Role="Article" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="InsuranceCategory">
               <PropertyRef Name="InsuranceCategoryId" />
@@ -668,8 +668,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Article_Room">
-          <End Role="Room" Type="Data.Model.Diagram.Room" Multiplicity="0..1" />
-          <End Role="Article" Type="Data.Model.Diagram.Article" Multiplicity="*" />
+          <End Type="Data.Model.Diagram.Room" Role="Room" Multiplicity="0..1" />
+          <End Type="Data.Model.Diagram.Article" Role="Article" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Room">
               <PropertyRef Name="RoomId" />
@@ -680,8 +680,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Article_SupplierBranch">
-          <End Role="SupplierBranch" Type="Data.Model.Diagram.SupplierBranch" Multiplicity="0..1" />
-          <End Role="Article" Type="Data.Model.Diagram.Article" Multiplicity="*" />
+          <End Type="Data.Model.Diagram.SupplierBranch" Role="SupplierBranch" Multiplicity="0..1" />
+          <End Type="Data.Model.Diagram.Article" Role="Article" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SupplierBranch">
               <PropertyRef Name="SupplierBranchId" />
@@ -692,8 +692,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Depreciation_Article1">
-          <End Role="Article" Type="Data.Model.Diagram.Article" Multiplicity="1" />
-          <End Role="Depreciation" Type="Data.Model.Diagram.Depreciation" Multiplicity="*" />
+          <End Type="Data.Model.Diagram.Article" Role="Article" Multiplicity="1" />
+          <End Type="Data.Model.Diagram.Depreciation" Role="Depreciation" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Article">
               <PropertyRef Name="ArticleId" />
@@ -704,8 +704,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ArticleGroup_Room">
-          <End Role="Room" Type="Data.Model.Diagram.Room" Multiplicity="1" />
-          <End Role="ArticleGroup" Type="Data.Model.Diagram.ArticleGroup" Multiplicity="*" />
+          <End Type="Data.Model.Diagram.Room" Role="Room" Multiplicity="1" />
+          <End Type="Data.Model.Diagram.ArticleGroup" Role="ArticleGroup" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Room">
               <PropertyRef Name="RoomId" />
@@ -716,8 +716,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Floor_Building">
-          <End Role="Building" Type="Data.Model.Diagram.Building" Multiplicity="1" />
-          <End Role="Floor" Type="Data.Model.Diagram.Floor" Multiplicity="*" />
+          <End Type="Data.Model.Diagram.Building" Role="Building" Multiplicity="1" />
+          <End Type="Data.Model.Diagram.Floor" Role="Floor" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Building">
               <PropertyRef Name="BuildingId" />
@@ -728,8 +728,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Depreciation_DepreciationCategory">
-          <End Role="DepreciationCategory" Type="Data.Model.Diagram.DepreciationCategory" Multiplicity="0..1" />
-          <End Role="Depreciation" Type="Data.Model.Diagram.Depreciation" Multiplicity="*" />
+          <End Type="Data.Model.Diagram.DepreciationCategory" Role="DepreciationCategory" Multiplicity="0..1" />
+          <End Type="Data.Model.Diagram.Depreciation" Role="Depreciation" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="DepreciationCategory">
               <PropertyRef Name="DepreciationCategoryId" />
@@ -740,8 +740,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Room_Floor">
-          <End Role="Floor" Type="Data.Model.Diagram.Floor" Multiplicity="1" />
-          <End Role="Room" Type="Data.Model.Diagram.Room" Multiplicity="*" />
+          <End Type="Data.Model.Diagram.Floor" Role="Floor" Multiplicity="1" />
+          <End Type="Data.Model.Diagram.Room" Role="Room" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Floor">
               <PropertyRef Name="FloorId" />
@@ -752,8 +752,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SupplierBranch_Supplier">
-          <End Role="Supplier" Type="Data.Model.Diagram.Supplier" Multiplicity="1" />
-          <End Role="SupplierBranch" Type="Data.Model.Diagram.SupplierBranch" Multiplicity="*" />
+          <End Type="Data.Model.Diagram.Supplier" Role="Supplier" Multiplicity="1" />
+          <End Type="Data.Model.Diagram.SupplierBranch" Role="SupplierBranch" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Supplier">
               <PropertyRef Name="SupplierId" />
@@ -764,8 +764,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="AppUser2Room">
-          <End Role="AppUser" Type="Data.Model.Diagram.AppUser" Multiplicity="*" />
-          <End Role="Room" Type="Data.Model.Diagram.Room" Multiplicity="*" />
+          <End Type="Data.Model.Diagram.AppUser" Role="AppUser" Multiplicity="*" />
+          <End Type="Data.Model.Diagram.Room" Role="Room" Multiplicity="*" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -776,152 +776,152 @@
           <EntitySetMapping Name="AppUsers">
             <EntityTypeMapping TypeName="Data.Model.Diagram.AppUser">
               <MappingFragment StoreEntitySet="AppUser">
-                <ScalarProperty Name="AppUserId" ColumnName="AppUserId" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Domain" ColumnName="Domain" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="UserRole" ColumnName="UserRole" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UserRole" ColumnName="UserRole" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Domain" ColumnName="Domain" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="AppUserId" ColumnName="AppUserId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Articles">
             <EntityTypeMapping TypeName="Data.Model.Diagram.Article">
               <MappingFragment StoreEntitySet="Article">
-                <ScalarProperty Name="ArticleId" ColumnName="ArticleId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Barcode" ColumnName="Barcode" />
-                <ScalarProperty Name="ArticleGroupId" ColumnName="ArticleGroupId" />
-                <ScalarProperty Name="SupplierBranchId" ColumnName="SupplierBranchId" />
-                <ScalarProperty Name="RoomId" ColumnName="RoomId" />
-                <ScalarProperty Name="AcquisitionDate" ColumnName="AcquisitionDate" />
-                <ScalarProperty Name="DepreciationCategoryId" ColumnName="DepreciationCategoryId" />
-                <ScalarProperty Name="ArticleCategoryId" ColumnName="ArticleCategoryId" />
-                <ScalarProperty Name="InsuranceCategoryId" ColumnName="InsuranceCategoryId" />
                 <ScalarProperty Name="OldBarcode" ColumnName="OldBarcode" />
+                <ScalarProperty Name="InsuranceCategoryId" ColumnName="InsuranceCategoryId" />
+                <ScalarProperty Name="ArticleCategoryId" ColumnName="ArticleCategoryId" />
+                <ScalarProperty Name="DepreciationCategoryId" ColumnName="DepreciationCategoryId" />
+                <ScalarProperty Name="AcquisitionDate" ColumnName="AcquisitionDate" />
+                <ScalarProperty Name="RoomId" ColumnName="RoomId" />
+                <ScalarProperty Name="SupplierBranchId" ColumnName="SupplierBranchId" />
+                <ScalarProperty Name="ArticleGroupId" ColumnName="ArticleGroupId" />
+                <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ArticleId" ColumnName="ArticleId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ArticleCategories">
             <EntityTypeMapping TypeName="Data.Model.Diagram.ArticleCategory">
               <MappingFragment StoreEntitySet="ArticleCategory">
-                <ScalarProperty Name="ArticleCategoryId" ColumnName="ArticleCategoryId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ArticleCategoryId" ColumnName="ArticleCategoryId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ArticleGroups">
             <EntityTypeMapping TypeName="Data.Model.Diagram.ArticleGroup">
               <MappingFragment StoreEntitySet="ArticleGroup">
-                <ScalarProperty Name="ArticleGroupId" ColumnName="ArticleGroupId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="RoomId" ColumnName="RoomId" />
                 <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+                <ScalarProperty Name="RoomId" ColumnName="RoomId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ArticleGroupId" ColumnName="ArticleGroupId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Buildings">
             <EntityTypeMapping TypeName="Data.Model.Diagram.Building">
               <MappingFragment StoreEntitySet="Building">
-                <ScalarProperty Name="BuildingId" ColumnName="BuildingId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="BuildingId" ColumnName="BuildingId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Depreciations">
             <EntityTypeMapping TypeName="Data.Model.Diagram.Depreciation">
               <MappingFragment StoreEntitySet="Depreciation">
-                <ScalarProperty Name="DepreciationId" ColumnName="DepreciationId" />
-                <ScalarProperty Name="ArticleId" ColumnName="ArticleId" />
-                <ScalarProperty Name="Value" ColumnName="Value" />
-                <ScalarProperty Name="Year" ColumnName="Year" />
-                <ScalarProperty Name="AdditionalStartDate" ColumnName="AdditionalStartDate" />
-                <ScalarProperty Name="AdditionalEndDate" ColumnName="AdditionalEndDate" />
                 <ScalarProperty Name="DepreciationCategoryId" ColumnName="DepreciationCategoryId" />
+                <ScalarProperty Name="AdditionalEndDate" ColumnName="AdditionalEndDate" />
+                <ScalarProperty Name="AdditionalStartDate" ColumnName="AdditionalStartDate" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="ArticleId" ColumnName="ArticleId" />
+                <ScalarProperty Name="DepreciationId" ColumnName="DepreciationId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DepreciationCategories">
             <EntityTypeMapping TypeName="Data.Model.Diagram.DepreciationCategory">
               <MappingFragment StoreEntitySet="DepreciationCategory">
-                <ScalarProperty Name="DepreciationCategoryId" ColumnName="DepreciationCategoryId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="DepreciationSpan" ColumnName="DepreciationSpan" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DepreciationCategoryId" ColumnName="DepreciationCategoryId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Floors">
             <EntityTypeMapping TypeName="Data.Model.Diagram.Floor">
               <MappingFragment StoreEntitySet="Floor">
-                <ScalarProperty Name="FloorId" ColumnName="FloorId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="BuildingId" ColumnName="BuildingId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="FloorId" ColumnName="FloorId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="InsuranceCategories">
             <EntityTypeMapping TypeName="Data.Model.Diagram.InsuranceCategory">
               <MappingFragment StoreEntitySet="InsuranceCategory">
-                <ScalarProperty Name="InsuranceCategoryId" ColumnName="InsuranceCategoryId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="InsuranceCategoryId" ColumnName="InsuranceCategoryId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Rooms">
             <EntityTypeMapping TypeName="Data.Model.Diagram.Room">
               <MappingFragment StoreEntitySet="Room">
-                <ScalarProperty Name="RoomId" ColumnName="RoomId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="FloorId" ColumnName="FloorId" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="FloorId" ColumnName="FloorId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="RoomId" ColumnName="RoomId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Suppliers">
             <EntityTypeMapping TypeName="Data.Model.Diagram.Supplier">
               <MappingFragment StoreEntitySet="Supplier">
-                <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SupplierBranches">
             <EntityTypeMapping TypeName="Data.Model.Diagram.SupplierBranch">
               <MappingFragment StoreEntitySet="SupplierBranch">
-                <ScalarProperty Name="SupplierBranchId" ColumnName="SupplierBranchId" />
-                <ScalarProperty Name="Country" ColumnName="Country" />
-                <ScalarProperty Name="Place" ColumnName="Place" />
-                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
                 <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="Place" ColumnName="Place" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="SupplierBranchId" ColumnName="SupplierBranchId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="Data.Model.Diagram.sysdiagram">
               <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <AssociationSetMapping Name="AppUser2Room" TypeName="Data.Model.Diagram.AppUser2Room" StoreEntitySet="AppUser2Room">
-            <EndProperty Name="AppUser">
-              <ScalarProperty Name="AppUserId" ColumnName="AppUserId" />
-            </EndProperty>
             <EndProperty Name="Room">
               <ScalarProperty Name="RoomId" ColumnName="RoomId" />
+            </EndProperty>
+            <EndProperty Name="AppUser">
+              <ScalarProperty Name="AppUserId" ColumnName="AppUserId" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>

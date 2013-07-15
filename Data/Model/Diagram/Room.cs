@@ -28,7 +28,7 @@ namespace Data.Model.Diagram
     
         public virtual ICollection<Article> Articles { get; set; }
         public virtual ICollection<ArticleGroup> ArticleGroups { get; set; }
-        public virtual Floor Floor1 { get; set; }
+        public virtual Floor Floor { get; set; }
         public virtual ICollection<AppUser> AppUsers { get; set; }
     }
 }

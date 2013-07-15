@@ -40,6 +40,7 @@ namespace Client.Site.Controls.RoomTree
             this.Text = text;
         }
 
+        public string Uid { get; set; }
         public int Id { get; set; }
         public int ParentId { get; set; }
         public object DataItem { get; set; }

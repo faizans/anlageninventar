@@ -23,5 +23,16 @@ namespace Data.Model.Diagram
             return ctx.Rooms;
         }
 
+        public Boolean HasArticles()
+        {
+            return this.Articles.Any();
+        }
+
+        public void Delete()
+        {
+            IP3AnlagenInventarEntities ctx = EntityFactory.Context;
+            ctx.Rooms.Remove(ctx.Rooms.Where(p => p.RoomId == this.RoomId).SingleOrDefault());
+        }
+
     }
 }

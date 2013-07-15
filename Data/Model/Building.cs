@@ -23,5 +23,35 @@ namespace Data.Model.Diagram
             return ctx.Buildings;
         }
 
+        public Boolean HasArticles()
+        {
+            if (this.Floors.Any())
+            {
+                
+                foreach (Floor floor in this.Floors)
+                {
+                    if (floor.HasArticles())
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        public void Delete()
+        {
+            IP3AnlagenInventarEntities ctx = EntityFactory.Context;
+            if (this.Floors.Any())
+            {
+                List<Floor> floors = new List<Floor>(this.Floors);
+                foreach (Floor floor in floors)
+                {
+                    floor.Delete();
+                }
+            }
+            ctx.Buildings.Remove(ctx.Buildings.Where(p => p.BuildingId == this.BuildingId).SingleOrDefault());
+        }
+
     }
 }

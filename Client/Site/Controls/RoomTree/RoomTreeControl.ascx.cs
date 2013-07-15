@@ -37,7 +37,8 @@ namespace Client.Site.Controls.RoomTree
                     CustomTreeNodeItem buildingNode = new CustomTreeNodeItem(building.BuildingId, -1, building.Name, building);
                     this.dataSource.Add(buildingNode);
 
-                    if(building.Floors.Any()){
+                    if (building.Floors.Any())
+                    {
                         foreach (Floor floor in building.Floors)
                         {
                             CustomTreeNodeItem floorNode = new CustomTreeNodeItem(floor.FloorId, building.BuildingId, floor.Name, floor);
@@ -208,6 +209,7 @@ namespace Client.Site.Controls.RoomTree
                 if (buildingToSave == null)
                 {
                     buildingToSave = new Building();
+                    buildingToSave.BuildingId = int.Parse("1" + Building.GetAll().Count());
                     EntityFactory.Context.Buildings.Add(buildingToSave);
                 }
                 buildingToSave.Name = this.txtNodeName.Text;
@@ -229,6 +231,7 @@ namespace Client.Site.Controls.RoomTree
                 if (floorToSave == null)
                 {
                     floorToSave = new Floor();
+                    floorToSave.FloorId = int.Parse("2" + Floor.GetAll().Count());
 
                     if (this.RadTreeView1.SelectedNode.ParentNode != null)
                     {
@@ -256,6 +259,7 @@ namespace Client.Site.Controls.RoomTree
                 if (roomToSave == null)
                 {
                     roomToSave = new Room();
+                    roomToSave.RoomId = int.Parse("3" + Room.GetAll().Count());
 
                     if (this.RadTreeView1.SelectedNode.ParentNode != null)
                     {
@@ -293,17 +297,44 @@ namespace Client.Site.Controls.RoomTree
                 if (dataItemType == typeof(Building).ToString())
                 {
                     //Delete object from context
-                    EntityFactory.Context.Buildings.Remove(EntityFactory.Context.Buildings.Where(p => p.BuildingId == id).SingleOrDefault());
+                    Building buildingToDelete = EntityFactory.Context.Buildings.Where(p => p.BuildingId == id).SingleOrDefault();
+                    if (buildingToDelete != null)
+                        if (!buildingToDelete.HasArticles())
+                        {
+                            buildingToDelete.Delete();
+                        }
+                        else
+                        {
+                            RadWindowManager1.RadAlert(String.Format("{0} kann nicht gelöscht werden, da Artikel dem Raum zugewiesen sind."), 300, 130, "Operation nicht möglich", "alertCallBackFn");
+                        }
                 }
                 else if (dataItemType == typeof(Floor).ToString())
                 {
                     //Delete object from context
-                    EntityFactory.Context.Floors.Remove(EntityFactory.Context.Floors.Where(d => d.FloorId == id).SingleOrDefault());
+                    Floor floorToDelete = EntityFactory.Context.Floors.Where(p => p.FloorId == id).SingleOrDefault();
+                    if (floorToDelete != null)
+                        if (!floorToDelete.HasArticles())
+                        {
+                            floorToDelete.Delete();
+                        }
+                        else
+                        {
+                            RadWindowManager1.RadAlert(String.Format("{0} kann nicht gelöscht werden, da Artikel dem Raum zugewiesen sind."), 300, 130, "Operation nicht möglich", "alertCallBackFn");
+                        }
                 }
                 else if (dataItemType == typeof(Room).ToString())
                 {
                     //Delete object from context
-                    EntityFactory.Context.Rooms.Remove(EntityFactory.Context.Rooms.Where(d => d.RoomId == id).SingleOrDefault());
+                    Room roomToDelete = EntityFactory.Context.Rooms.Where(p => p.RoomId == id).SingleOrDefault();
+                    if (roomToDelete != null)
+                        if (!roomToDelete.HasArticles())
+                        {
+                            roomToDelete.Delete();
+                        }
+                        else
+                        {
+                            RadWindowManager1.RadAlert(String.Format("{0} kann nicht gelöscht werden, da Artikel dem Raum zugewiesen sind."), 300, 130, "Operation nicht möglich", "alertCallBackFn");
+                        }
                 }
                 EntityFactory.Context.SaveChanges();
                 this.RadTreeView1.SelectedNode.Remove();

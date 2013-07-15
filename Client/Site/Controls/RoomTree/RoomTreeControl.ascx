@@ -32,6 +32,14 @@
             <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" />
         </div>
     </div>
+    <telerik:RadWindowManager ID="RadWindowManager1" runat="server">
+    </telerik:RadWindowManager>
+    <script>
+        function alertCallBackFn(arg) {
+
+        }
+
+    </script>
 
 </telerik:RadAjaxPanel>
 
