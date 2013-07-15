@@ -11,21 +11,44 @@
         <telerik:RadMenuItem runat="server" CssClass="MenuItem">
             <ItemTemplate>
                 <div>
-                   <a id="A1" href="~/Site/Administrator/CategoryList.aspx" runat="server"><span>Kategorien</span></a>
+                    <a id="A1" href="~/Site/Administrator/ArticleCategoryList.aspx" runat="server"><span>Kategorien</span></a>
+                </div>
+            </ItemTemplate>
+            <Items>
+                <telerik:RadMenuItem runat="server" CssClass="MenuItem">
+                    <ItemTemplate>
+                        <div>
+                            <a href="~/Site/Administrator/ArticleCategoryList.aspx" runat="server"><span>Artikel</span></a>
+                        </div>
+                    </ItemTemplate>
+                </telerik:RadMenuItem>
+                <telerik:RadMenuItem runat="server" CssClass="MenuItem">
+                    <ItemTemplate>
+                        <div>
+                            <a href="~/Site/Administrator/DepreciationCategoryList.aspx" runat="server"><span>Abschreibung</span></a>
+                        </div>
+                    </ItemTemplate>
+                </telerik:RadMenuItem>
+                 <telerik:RadMenuItem runat="server" CssClass="MenuItem">
+                    <ItemTemplate>
+                        <div>
+                            <a href="~/Site/Administrator/InsuranceCategoryList.aspx" runat="server"><span>Versicherung</span></a>
+                        </div>
+                    </ItemTemplate>
+                </telerik:RadMenuItem>
+            </Items>
+        </telerik:RadMenuItem>
+        <telerik:RadMenuItem runat="server" CssClass="MenuItem">
+            <ItemTemplate>
+                <div>
+                    <a id="A2" href="~/Site/Administrator/RoomList.aspx" runat="server"><span>Räume</span></a>
                 </div>
             </ItemTemplate>
         </telerik:RadMenuItem>
         <telerik:RadMenuItem runat="server" CssClass="MenuItem">
             <ItemTemplate>
                 <div>
-                   <a id="A2" href="~/Site/Administrator/RoomList.aspx" runat="server"><span>Lieferanten</span></a>
-                </div>
-            </ItemTemplate>
-        </telerik:RadMenuItem>
-        <telerik:RadMenuItem runat="server" CssClass="MenuItem">
-            <ItemTemplate>
-                <div>
-                   <a id="A3" href="~/Site/Administrator/SupplierList.aspx" runat="server"><span>Räume</span></a>
+                    <a id="A3" href="~/Site/Administrator/SupplierList.aspx" runat="server"><span>Lieferanten</span></a>
                 </div>
             </ItemTemplate>
         </telerik:RadMenuItem>

@@ -5,20 +5,17 @@
 }
 
     .CustomMenu ul{
-        background-color:transparent !important;
+        background-color:#205081 !important;
         border-style:none !important;
         background-image:none !important;
     }
 
 .MenuItem {
 
-    height:20px;
+    height:40px;
 
-    margin-top:5px;
     margin-left:10px;
     margin-right:10px;
-
-    background-color:#205081;
 
     cursor:pointer;
 }

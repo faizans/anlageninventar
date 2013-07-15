@@ -13,5 +13,21 @@ namespace Client.Site.Administrator
         {
 
         }
+
+        protected void rgCategories_ItemCommand(object sender, Telerik.Web.UI.GridCommandEventArgs e)
+        {
+            if (e.CommandName.ToLower() == "initinsert")
+            {
+                Response.Redirect("~/Site/Administrator/ManageSupplier.aspx");
+            }
+            else if (e.CommandName.ToLower() == "edit")
+            {
+                Response.Redirect("~/Site/Administrator/ManageSupplier.aspx?si=");
+            }
+            else if (e.CommandName.ToLower() == "delete")
+            {
+            }
+        }
+
     }
 }

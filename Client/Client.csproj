@@ -7,7 +7,7 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{05A08B99-914F-42D3-A044-FB6E032570C1}</ProjectGuid>
+    <ProjectGuid>{422175A7-B6C3-4B24-AD05-7FD8A787E834}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -39,14 +39,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Web.DynamicData" />
-    <Reference Include="System.Web.Entity" />
-    <Reference Include="System.Web.ApplicationServices" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Core" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
@@ -55,90 +53,158 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="AspNet.ScriptManager.jQuery">
+      <HintPath>..\packages\AspNet.ScriptManager.jQuery.1.7.1\lib\net45\AspNet.ScriptManager.jQuery.dll</HintPath>
+    </Reference>
+    <Reference Include="AspNet.ScriptManager.jQuery.UI.Combined">
+      <HintPath>..\packages\AspNet.ScriptManager.jQuery.UI.Combined.1.8.20\lib\net45\AspNet.ScriptManager.jQuery.UI.Combined.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ScriptManager.MSAjax, Version=4.5.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>..\packages\Microsoft.AspNet.ScriptManager.MSAjax.4.5.6\lib\net45\Microsoft.ScriptManager.MSAjax.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ScriptManager.WebForms, Version=4.5.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>..\packages\Microsoft.AspNet.ScriptManager.WebForms.4.5.6\lib\net45\Microsoft.ScriptManager.WebForms.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.0.0\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Providers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>..\packages\Microsoft.AspNet.Providers.Core.1.1\lib\net40\System.Web.Providers.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\DotNetOpenAuth.Core.4.0.3.12153\lib\net40-full\DotNetOpenAuth.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OAuth, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\DotNetOpenAuth.OAuth.Core.4.0.3.12153\lib\net40-full\DotNetOpenAuth.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OAuth.Consumer, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\DotNetOpenAuth.OAuth.Consumer.4.0.3.12153\lib\net40-full\DotNetOpenAuth.OAuth.Consumer.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OpenId, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\DotNetOpenAuth.OpenId.Core.4.0.3.12153\lib\net40-full\DotNetOpenAuth.OpenId.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OpenId.RelyingParty, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\DotNetOpenAuth.OpenId.RelyingParty.4.0.3.12153\lib\net40-full\DotNetOpenAuth.OpenId.RelyingParty.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.AspNet, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\DotNetOpenAuth.AspNet.4.0.3.12153\lib\net40-full\DotNetOpenAuth.AspNet.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Membership.OpenAuth, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>..\packages\Microsoft.AspNet.Membership.OpenAuth.1.0.0\lib\net45\Microsoft.AspNet.Membership.OpenAuth.dll</HintPath>
+    </Reference>
     <Reference Include="Telerik.Web.UI">
-      <HintPath>..\..\..\..\..\..\..\..\..\Program Files (x86)\Telerik\RadControls for ASP.NET AJAX Q2 2013\Bin45\Telerik.Web.UI.dll</HintPath>
+      <HintPath>..\lib\RCAJAX\2013.2.611.45.Trial\Telerik.Web.UI.dll</HintPath>
     </Reference>
     <Reference Include="Telerik.Web.UI.Skins">
-      <HintPath>..\..\..\..\..\..\..\..\..\Program Files (x86)\Telerik\RadControls for ASP.NET AJAX Q2 2013\Bin45\Telerik.Web.UI.Skins.dll</HintPath>
+      <HintPath>..\lib\RCAJAX\2013.2.611.45.Trial\Telerik.Web.UI.Skins.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.1.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.1.0\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Web.Optimization.WebForms">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.WebForms.1.0.0\lib\net45\Microsoft.AspNet.Web.Optimization.WebForms.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\RadCaptcha\0.wav" />
-    <Content Include="App_Data\RadCaptcha\1.wav" />
-    <Content Include="App_Data\RadCaptcha\2.wav" />
-    <Content Include="App_Data\RadCaptcha\3.wav" />
-    <Content Include="App_Data\RadCaptcha\4.wav" />
-    <Content Include="App_Data\RadCaptcha\5.wav" />
-    <Content Include="App_Data\RadCaptcha\6.wav" />
-    <Content Include="App_Data\RadCaptcha\7.wav" />
-    <Content Include="App_Data\RadCaptcha\8.wav" />
-    <Content Include="App_Data\RadCaptcha\9.wav" />
-    <Content Include="App_Data\RadCaptcha\A.wav" />
-    <Content Include="App_Data\RadCaptcha\B.wav" />
-    <Content Include="App_Data\RadCaptcha\C.wav" />
-    <Content Include="App_Data\RadCaptcha\D.wav" />
-    <Content Include="App_Data\RadCaptcha\E.wav" />
-    <Content Include="App_Data\RadCaptcha\F.wav" />
-    <Content Include="App_Data\RadCaptcha\G.wav" />
-    <Content Include="App_Data\RadCaptcha\H.wav" />
-    <Content Include="App_Data\RadCaptcha\I.wav" />
-    <Content Include="App_Data\RadCaptcha\J.wav" />
-    <Content Include="App_Data\RadCaptcha\K.wav" />
-    <Content Include="App_Data\RadCaptcha\L.wav" />
-    <Content Include="App_Data\RadCaptcha\M.wav" />
-    <Content Include="App_Data\RadCaptcha\N.wav" />
-    <Content Include="App_Data\RadCaptcha\O.wav" />
-    <Content Include="App_Data\RadCaptcha\P.wav" />
-    <Content Include="App_Data\RadCaptcha\Q.wav" />
-    <Content Include="App_Data\RadCaptcha\R.wav" />
-    <Content Include="App_Data\RadCaptcha\S.wav" />
-    <Content Include="App_Data\RadCaptcha\T.wav" />
-    <Content Include="App_Data\RadCaptcha\U.wav" />
-    <Content Include="App_Data\RadCaptcha\V.wav" />
-    <Content Include="App_Data\RadCaptcha\W.wav" />
-    <Content Include="App_Data\RadCaptcha\X.wav" />
-    <Content Include="App_Data\RadCaptcha\Y.wav" />
-    <Content Include="App_Data\RadCaptcha\Z.wav" />
-    <Content Include="default.aspx" />
-    <Content Include="Global.asax" />
+    <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Resources\Images\Logo\BSL-Logo.jpg" />
     <Content Include="Resources\Images\Logo\BSL-Logo.tif" />
+    <Content Include="Resources\Styles\Buttons.css" />
     <Content Include="Resources\Styles\Menu.css" />
     <Content Include="Resources\Styles\StandardMaster.css" />
+    <Content Include="Resources\Styles\SubmissionForms.css" />
+    <Content Include="Scripts\jquery-1.7.1.js" />
+    <Content Include="Scripts\jquery-1.7.1.min.js" />
+    <Content Include="Scripts\jquery-ui-1.8.20.js" />
+    <Content Include="Scripts\jquery-ui-1.8.20.min.js" />
+    <Content Include="Scripts\modernizr-2.5.3.js" />
+    <Content Include="Scripts\WebForms\DetailsView.js" />
+    <Content Include="Scripts\WebForms\Focus.js" />
+    <Content Include="Scripts\WebForms\GridView.js" />
+    <Content Include="Scripts\WebForms\Menu.js" />
+    <Content Include="Scripts\WebForms\MenuStandards.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjax.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxApplicationServices.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxComponentModel.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxCore.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxGlobalization.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxHistory.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxNetwork.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxSerialization.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxTimer.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxWebForms.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxWebServices.js" />
+    <Content Include="Scripts\WebForms\SmartNav.js" />
+    <Content Include="Scripts\WebForms\TreeView.js" />
+    <Content Include="Scripts\WebForms\WebForms.js" />
+    <Content Include="Scripts\WebForms\WebParts.js" />
+    <Content Include="Scripts\WebForms\WebUIValidation.js" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="Global.asax" />
+    <Content Include="Site\Administrator\ArticleCategoryList.aspx" />
     <Content Include="Site\Administrator\ArticleList.aspx" />
-    <Content Include="Site\Administrator\CategoryList.aspx" />
+    <Content Include="Site\Administrator\InsuranceCategoryList.aspx" />
+    <Content Include="Site\Administrator\ManageSupplier.aspx" />
+    <Content Include="Site\Administrator\ManageUser.aspx" />
     <Content Include="Site\Administrator\RoomList.aspx" />
     <Content Include="Site\Administrator\SupplierList.aspx" />
     <Content Include="Site\Administrator\UserList.aspx" />
     <Content Include="Site\Controls\Menu\MenuControl.ascx" />
+    <Content Include="Site\Controls\RoomTree\RoomTreeControl.ascx" />
     <Content Include="Web.config" />
+    <Content Include="SiteMaster\NoMenuMaster.Master" />
+    <Content Include="SiteMaster\StandardMaster.Master" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="default.aspx.cs">
-      <DependentUpon>default.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="default.aspx.designer.cs">
-      <DependentUpon>default.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SiteMaster\CustomMaster.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="SiteMaster\NoMenuMaster.Master.cs">
       <DependentUpon>NoMenuMaster.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="SiteMaster\NoMenuMaster.Master.designer.cs">
       <DependentUpon>NoMenuMaster.Master</DependentUpon>
     </Compile>
-    <Compile Include="SiteMaster\CustomMaster.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="SiteMaster\StandardMaster.Master.cs">
       <DependentUpon>StandardMaster.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="SiteMaster\StandardMaster.Master.designer.cs">
       <DependentUpon>StandardMaster.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Site\Administrator\ArticleCategoryList.aspx.cs">
+      <DependentUpon>ArticleCategoryList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site\Administrator\ArticleCategoryList.aspx.designer.cs">
+      <DependentUpon>ArticleCategoryList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Site\Administrator\ArticleList.aspx.cs">
       <DependentUpon>ArticleList.aspx</DependentUpon>
@@ -147,12 +213,26 @@
     <Compile Include="Site\Administrator\ArticleList.aspx.designer.cs">
       <DependentUpon>ArticleList.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Site\Administrator\CategoryList.aspx.cs">
-      <DependentUpon>CategoryList.aspx</DependentUpon>
+    <Compile Include="Site\Administrator\InsuranceCategoryList.aspx.cs">
+      <DependentUpon>InsuranceCategoryList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Site\Administrator\CategoryList.aspx.designer.cs">
-      <DependentUpon>CategoryList.aspx</DependentUpon>
+    <Compile Include="Site\Administrator\InsuranceCategoryList.aspx.designer.cs">
+      <DependentUpon>InsuranceCategoryList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Site\Administrator\ManageSupplier.aspx.cs">
+      <DependentUpon>ManageSupplier.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site\Administrator\ManageSupplier.aspx.designer.cs">
+      <DependentUpon>ManageSupplier.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Site\Administrator\ManageUser.aspx.cs">
+      <DependentUpon>ManageUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site\Administrator\ManageUser.aspx.designer.cs">
+      <DependentUpon>ManageUser.aspx</DependentUpon>
     </Compile>
     <Compile Include="Site\Administrator\RoomList.aspx.cs">
       <DependentUpon>RoomList.aspx</DependentUpon>
@@ -182,13 +262,22 @@
     <Compile Include="Site\Controls\Menu\MenuControl.ascx.designer.cs">
       <DependentUpon>MenuControl.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Site\Controls\RoomTree\CustomTreeNodeItem.cs" />
+    <Compile Include="Site\Controls\RoomTree\RoomTreeControl.ascx.cs">
+      <DependentUpon>RoomTreeControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site\Controls\RoomTree\RoomTreeControl.ascx.designer.cs">
+      <DependentUpon>RoomTreeControl.ascx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="SiteMaster\StandardMaster.Master" />
-    <Content Include="App_Data\RadSpell\de-DE.tdf" />
-    <Content Include="App_Data\RadSpell\en-US.tdf" />
-    <Content Include="App_Data\RadSpell\fr-FR.tdf" />
-    <Content Include="SiteMaster\NoMenuMaster.Master" />
+    <Folder Include="Resources\Images\Icons\" />
+    <Folder Include="Resources\Language\" />
+    <Folder Include="Site\Public\" />
+    <Folder Include="Site\User\" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -197,11 +286,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\Images\Icons\" />
-    <Folder Include="Resources\Language\" />
-    <Folder Include="Site\Public\" />
-    <Folder Include="Site\User\" />
-    <Folder Include="Util\" />
+    <ProjectReference Include="..\Data\Data.csproj">
+      <Project>{1f4b15c0-9a72-4edd-96a2-fe1635afbc22}</Project>
+      <Name>Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -218,7 +306,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>0</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:5495/</IISUrl>
+          <IISUrl>http://localhost:26114/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
@@ -226,7 +314,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
+      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

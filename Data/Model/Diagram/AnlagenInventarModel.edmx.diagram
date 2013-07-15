@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9166e394bcb641e8b30c78df4e0e4be7" Name="Diagram1">
+        <EntityTypeShape EntityType="Data.Model.Diagram.AppUser" Width="1.5" PointX="1.5" PointY="19.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Data.Model.Diagram.Article" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Data.Model.Diagram.ArticleCategory" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Data.Model.Diagram.ArticleGroup" Width="1.5" PointX="0.75" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Data.Model.Diagram.Building" Width="1.5" PointX="1.5" PointY="26.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Data.Model.Diagram.Depreciation" Width="1.5" PointX="5.25" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Data.Model.Diagram.DepreciationCategory" Width="1.5" PointX="0.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Data.Model.Diagram.Floor" Width="1.5" PointX="1.5" PointY="23.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Data.Model.Diagram.InsuranceCategory" Width="1.5" PointX="0.75" PointY="29" IsExpanded="true" />
+        <EntityTypeShape EntityType="Data.Model.Diagram.Room" Width="1.5" PointX="1.5" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Data.Model.Diagram.Supplier" Width="1.5" PointX="1.5" PointY="35.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Data.Model.Diagram.SupplierBranch" Width="1.5" PointX="0.75" PointY="31.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Data.Model.Diagram.sysdiagram" Width="1.5" PointX="5.75" PointY="5.75" IsExpanded="true" />
+        <AssociationConnector Association="Data.Model.Diagram.FK_Article_ArticleCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="Data.Model.Diagram.FK_Article_ArticleGroup" ManuallyRouted="false" />
+        <AssociationConnector Association="Data.Model.Diagram.FK_Article_DepreciationCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="Data.Model.Diagram.FK_Article_InsuranceCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="Data.Model.Diagram.FK_Article_Room" ManuallyRouted="false" />
+        <AssociationConnector Association="Data.Model.Diagram.FK_Article_SupplierBranch" ManuallyRouted="false" />
+        <AssociationConnector Association="Data.Model.Diagram.FK_Depreciation_Article1" ManuallyRouted="false" />
+        <AssociationConnector Association="Data.Model.Diagram.FK_ArticleGroup_Room" ManuallyRouted="false" />
+        <AssociationConnector Association="Data.Model.Diagram.FK_Floor_Building" ManuallyRouted="false" />
+        <AssociationConnector Association="Data.Model.Diagram.FK_Depreciation_DepreciationCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="Data.Model.Diagram.FK_Room_Floor" ManuallyRouted="false" />
+        <AssociationConnector Association="Data.Model.Diagram.FK_SupplierBranch_Supplier" ManuallyRouted="false" />
+        <AssociationConnector Association="Data.Model.Diagram.AppUser2Room" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

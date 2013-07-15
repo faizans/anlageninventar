@@ -10,6 +10,8 @@
     <title></title>
     <link rel="stylesheet" type="text/css" runat="server" href="~/Resources/Styles/Menu.css" />
     <link rel="stylesheet" type="text/css" runat="server" href="~/Resources/Styles/StandardMaster.css" />
+    <link rel="stylesheet" type="text/css" runat="server" href="~/Resources/Styles/Buttons.css" />
+    <link rel="stylesheet" type="text/css" runat="server" href="~/Resources/Styles/SubmissionForms.css" />
 </head>
 <body>
     <form id="form1" runat="server">

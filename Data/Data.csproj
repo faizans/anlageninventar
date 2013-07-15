@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{26A79B6B-1393-4AC0-B019-11C025A008F8}</ProjectGuid>
+    <ProjectGuid>{1F4B15C0-9A72-4EDD-96A2-FE1635AFBC22}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Data</RootNamespace>
@@ -46,84 +46,92 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\AnlageInventarModel.Context.cs">
+    <Compile Include="Model\ArticleCategory.cs" />
+    <Compile Include="Model\Building.cs" />
+    <Compile Include="Model\AppUser.cs" />
+    <Compile Include="Model\Diagram\AnlagenInventarModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>AnlageInventarModel.Context.tt</DependentUpon>
+      <DependentUpon>AnlagenInventarModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\AnlageInventarModel.cs">
+    <Compile Include="Model\Diagram\AnlagenInventarModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>AnlageInventarModel.tt</DependentUpon>
+      <DependentUpon>AnlagenInventarModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\AnlageInventarModel.Designer.cs">
+    <Compile Include="Model\Diagram\AnlagenInventarModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>AnlageInventarModel.edmx</DependentUpon>
+      <DependentUpon>AnlagenInventarModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Model\AppUser.cs">
-      <DependentUpon>AnlageInventarModel.tt</DependentUpon>
+    <Compile Include="Model\Diagram\AppUser.cs">
+      <DependentUpon>AnlagenInventarModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Article.cs">
-      <DependentUpon>AnlageInventarModel.tt</DependentUpon>
+    <Compile Include="Model\Diagram\Article.cs">
+      <DependentUpon>AnlagenInventarModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\ArticleCategory.cs">
-      <DependentUpon>AnlageInventarModel.tt</DependentUpon>
+    <Compile Include="Model\Diagram\ArticleCategory.cs">
+      <DependentUpon>AnlagenInventarModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\ArticleGroup.cs">
-      <DependentUpon>AnlageInventarModel.tt</DependentUpon>
+    <Compile Include="Model\Diagram\ArticleGroup.cs">
+      <DependentUpon>AnlagenInventarModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Building.cs">
-      <DependentUpon>AnlageInventarModel.tt</DependentUpon>
+    <Compile Include="Model\Diagram\Building.cs">
+      <DependentUpon>AnlagenInventarModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Depreciation.cs">
-      <DependentUpon>AnlageInventarModel.tt</DependentUpon>
+    <Compile Include="Model\Diagram\Depreciation.cs">
+      <DependentUpon>AnlagenInventarModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\DepreciationCategory.cs">
-      <DependentUpon>AnlageInventarModel.tt</DependentUpon>
+    <Compile Include="Model\Diagram\DepreciationCategory.cs">
+      <DependentUpon>AnlagenInventarModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\InsuranceCategory.cs">
-      <DependentUpon>AnlageInventarModel.tt</DependentUpon>
+    <Compile Include="Model\Diagram\Floor.cs">
+      <DependentUpon>AnlagenInventarModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Room.cs">
-      <DependentUpon>AnlageInventarModel.tt</DependentUpon>
+    <Compile Include="Model\Diagram\InsuranceCategory.cs">
+      <DependentUpon>AnlagenInventarModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Supplier.cs">
-      <DependentUpon>AnlageInventarModel.tt</DependentUpon>
+    <Compile Include="Model\Diagram\Room.cs">
+      <DependentUpon>AnlagenInventarModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\SupplierBranch.cs">
-      <DependentUpon>AnlageInventarModel.tt</DependentUpon>
+    <Compile Include="Model\Diagram\Supplier.cs">
+      <DependentUpon>AnlagenInventarModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\sysdiagram.cs">
-      <DependentUpon>AnlageInventarModel.tt</DependentUpon>
+    <Compile Include="Model\Diagram\SupplierBranch.cs">
+      <DependentUpon>AnlagenInventarModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Diagram\sysdiagram.cs">
+      <DependentUpon>AnlagenInventarModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\EntityFactory.cs" />
+    <Compile Include="Model\Floor.cs" />
+    <Compile Include="Model\InsuranceCategory.cs" />
+    <Compile Include="Model\IP3AnlagenInventarEntities.cs" />
+    <Compile Include="Model\Room.cs" />
+    <Compile Include="Model\Supplier.cs" />
+    <Compile Include="Model\SupplierBranch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Enums\" />
-    <Folder Include="Model\Classes\" />
-    <Folder Include="Util\" />
-  </ItemGroup>
-  <ItemGroup>
-    <EntityDeploy Include="Model\AnlageInventarModel.edmx">
+    <EntityDeploy Include="Model\Diagram\AnlagenInventarModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>AnlageInventarModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>AnlagenInventarModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
-    <None Include="Model\AnlageInventarModel.Context.tt">
+    <None Include="Model\Diagram\AnlagenInventarModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>AnlageInventarModel.edmx</DependentUpon>
-      <LastGenOutput>AnlageInventarModel.Context.cs</LastGenOutput>
+      <DependentUpon>AnlagenInventarModel.edmx</DependentUpon>
+      <LastGenOutput>AnlagenInventarModel.Context.cs</LastGenOutput>
     </None>
-    <None Include="Model\AnlageInventarModel.edmx.diagram">
-      <DependentUpon>AnlageInventarModel.edmx</DependentUpon>
+    <None Include="Model\Diagram\AnlagenInventarModel.edmx.diagram">
+      <DependentUpon>AnlagenInventarModel.edmx</DependentUpon>
     </None>
-    <None Include="Model\AnlageInventarModel.tt">
+    <None Include="Model\Diagram\AnlagenInventarModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>AnlageInventarModel.edmx</DependentUpon>
-      <LastGenOutput>AnlageInventarModel.cs</LastGenOutput>
+      <DependentUpon>AnlagenInventarModel.edmx</DependentUpon>
+      <LastGenOutput>AnlagenInventarModel.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
