@@ -1,0 +1,27 @@
+﻿.CustomMenu {
+    background-color:transparent !important;
+    border-style:none !important;
+    background-image:none !important;
+}
+
+    .CustomMenu ul{
+        background-color:#205081 !important;
+        border-style:none !important;
+        background-image:none !important;
+    }
+
+.MenuItem {
+
+    height:40px;
+
+    margin-left:10px;
+    margin-right:10px;
+
+    cursor:pointer;
+}
+
+    .MenuItem a {
+        color:white;
+        text-decoration:none;
+        font-size:18px;
+    }

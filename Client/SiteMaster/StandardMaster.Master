@@ -1,0 +1,36 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="StandardMaster.master.cs" Inherits="Client.SiteMaster.StandardMaster" %>
+
+<%@ Register Src="~/Site/Controls/Menu/MenuControl.ascx" TagPrefix="uc1" TagName="MenuControl" %>
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <link rel="stylesheet" type="text/css" runat="server" href="~/Resources/Styles/Menu.css" />
+    <link rel="stylesheet" type="text/css" runat="server" href="~/Resources/Styles/StandardMaster.css" />
+    <link rel="stylesheet" type="text/css" runat="server" href="~/Resources/Styles/Buttons.css" />
+    <link rel="stylesheet" type="text/css" runat="server" href="~/Resources/Styles/SubmissionForms.css" />
+</head>
+<body>
+    <form id="form1" runat="server">
+        <asp:ScriptManager ID="ScriptManager" runat="server"></asp:ScriptManager>
+        <div class="Wrapper_Div">
+            <div class="Header_Div">
+                <div class="Header_Logo_Div">
+                    <img runat="server" src="~/Resources/Images/Logo/BSL-Logo.jpg" />
+                </div>
+                <div class="Header_Menu_Div">
+                    <uc1:MenuControl runat="server" ID="MenuControl" />
+                </div>
+            </div>
+            <div class="Body_Div">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder" runat="server" />
+            </div>
+            <div class="Footer_Div">
+            </div>
+        </div>
+    </form>
+</body>
+</html>
