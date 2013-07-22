@@ -89,7 +89,6 @@
           <Property Name="UserName" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="IsAdmin" Type="bit" Nullable="false" />
           <Property Name="Password" Type="varchar" MaxLength="1000" />
-          <Property Name="UserRole" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="AppUser2Room">
@@ -383,15 +382,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <!--Errors Found During Generation:
-      warning 6013: The table/view 'IP3AnlagenInventar.dbo.CompanyData' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-      
-      <EntityType Name="CompanyData">
-        <Property Name="Title" Type="varchar" MaxLength="100" />
-        <Property Name="Address" Type="varchar" MaxLength="50" />
-        <Property Name="PostalCode" Type="varchar" MaxLength="50" />
-        <Property Name="Place" Type="varchar" MaxLength="50" />
-      </EntityType>-->
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -475,7 +465,6 @@
           <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Type="Boolean" Name="IsAdmin" Nullable="false" />
           <Property Type="String" Name="Password" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="UserRole" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Type="Boolean" Name="IsActive" Nullable="false" />
           <NavigationProperty Name="Rooms" Relationship="Data.Model.Diagram.AppUser2Room" FromRole="AppUser" ToRole="Room" />
         </EntityType>
@@ -777,7 +766,6 @@
             <EntityTypeMapping TypeName="Data.Model.Diagram.AppUser">
               <MappingFragment StoreEntitySet="AppUser">
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="UserRole" ColumnName="UserRole" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />

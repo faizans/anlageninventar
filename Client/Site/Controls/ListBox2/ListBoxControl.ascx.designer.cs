@@ -7,36 +7,36 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Client.Site.Administrator {
+namespace Client.Site.Controls.ListBox2 {
     
     
-    public partial class UserList {
+    public partial class ListBoxControl {
         
         /// <summary>
-        /// pnAjax control.
+        /// ListBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadAjaxPanel pnAjax;
+        protected global::Telerik.Web.UI.RadListBox ListBox;
         
         /// <summary>
-        /// rgUsers control.
+        /// btnAdd control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadGrid rgUsers;
+        protected global::Telerik.Web.UI.RadButton btnAdd;
         
         /// <summary>
-        /// DataSource control.
+        /// btnRemove control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.EntityDataSource DataSource;
+        protected global::Telerik.Web.UI.RadButton btnRemove;
     }
 }

@@ -10,7 +10,7 @@
 namespace Client.Site.Administrator {
     
     
-    public partial class ManageSupplier {
+    public partial class ManageDepreciationCategory {
         
         /// <summary>
         /// RadAjaxPanel1 control.
@@ -76,13 +76,13 @@ namespace Client.Site.Administrator {
         protected global::System.Web.UI.WebControls.Label Label4;
         
         /// <summary>
-        /// rtbBranchPlace control.
+        /// rtbValue control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadTextBox rtbBranchPlace;
+        protected global::Telerik.Web.UI.RadTextBox rtbValue;
         
         /// <summary>
         /// Label5 control.
@@ -94,13 +94,13 @@ namespace Client.Site.Administrator {
         protected global::System.Web.UI.WebControls.Label Label5;
         
         /// <summary>
-        /// rtbBranchPlz control.
+        /// rtbYear control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadTextBox rtbBranchPlz;
+        protected global::Telerik.Web.UI.RadTextBox rtbYear;
         
         /// <summary>
         /// btnBack control.

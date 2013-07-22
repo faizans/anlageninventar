@@ -8,7 +8,7 @@ using Telerik.Web.UI;
 
 namespace Client.Site.Administrator
 {
-    public partial class SupplierList : System.Web.UI.Page
+    public partial class DepreciationCategoryList : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -19,11 +19,11 @@ namespace Client.Site.Administrator
         {
             if (e.CommandName.ToLower() == "initinsert")
             {
-                Response.Redirect("~/Site/Administrator/ManageSupplier.aspx");
+                Response.Redirect("~/Site/Administrator/ManageDepreciationCategory.aspx");
             }
             else if (e.CommandName.ToLower() == "edit")
             {
-                Response.Redirect("~/Site/Administrator/ManageSupplier.aspx?si=" + (e.Item as GridDataItem)["SupplierId"].Text);
+                Response.Redirect("~/Site/Administrator/ManageDepreciationCategory.aspx?ci=" + (e.Item as GridDataItem)["DepreciationCategoryId"].Text);
             }
             else if (e.CommandName.ToLower() == "delete")
             {

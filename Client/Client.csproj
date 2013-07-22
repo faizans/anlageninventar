@@ -165,13 +165,15 @@
     <Content Include="Global.asax" />
     <Content Include="Site\Administrator\ArticleCategoryList.aspx" />
     <Content Include="Site\Administrator\ArticleList.aspx" />
+    <Content Include="Site\Administrator\ManageDepreciationCategory.aspx" />
+    <Content Include="Site\Administrator\DepreciationCategoryList.aspx" />
     <Content Include="Site\Administrator\InsuranceCategoryList.aspx" />
-    <Content Include="Site\Administrator\ManageSupplier.aspx" />
     <Content Include="Site\Administrator\ManageUser.aspx" />
     <Content Include="Site\Administrator\RoomList.aspx" />
     <Content Include="Site\Administrator\SupplierList.aspx" />
+    <Content Include="Site\Administrator\ManageSupplier.aspx" />
     <Content Include="Site\Administrator\UserList.aspx" />
-    <Content Include="Site\Controls\ListBox\ListBoxControl.ascx" />
+    <Content Include="Site\Controls\ListBox2\ListBoxControl.ascx" />
     <Content Include="Site\Controls\Menu\MenuControl.ascx" />
     <Content Include="Site\Controls\RoomTree\RoomTreeControl.ascx" />
     <Content Include="Web.config" />
@@ -214,19 +216,26 @@
     <Compile Include="Site\Administrator\ArticleList.aspx.designer.cs">
       <DependentUpon>ArticleList.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Site\Administrator\ManageDepreciationCategory.aspx.cs">
+      <DependentUpon>ManageDepreciationCategory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site\Administrator\ManageDepreciationCategory.aspx.designer.cs">
+      <DependentUpon>ManageDepreciationCategory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Site\Administrator\DepreciationCategoryList.aspx.cs">
+      <DependentUpon>DepreciationCategoryList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site\Administrator\DepreciationCategoryList.aspx.designer.cs">
+      <DependentUpon>DepreciationCategoryList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Site\Administrator\InsuranceCategoryList.aspx.cs">
       <DependentUpon>InsuranceCategoryList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Site\Administrator\InsuranceCategoryList.aspx.designer.cs">
       <DependentUpon>InsuranceCategoryList.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Site\Administrator\ManageSupplier.aspx.cs">
-      <DependentUpon>ManageSupplier.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Site\Administrator\ManageSupplier.aspx.designer.cs">
-      <DependentUpon>ManageSupplier.aspx</DependentUpon>
     </Compile>
     <Compile Include="Site\Administrator\ManageUser.aspx.cs">
       <DependentUpon>ManageUser.aspx</DependentUpon>
@@ -249,6 +258,13 @@
     <Compile Include="Site\Administrator\SupplierList.aspx.designer.cs">
       <DependentUpon>SupplierList.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Site\Administrator\ManageSupplier.aspx.cs">
+      <DependentUpon>ManageSupplier.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site\Administrator\ManageSupplier.aspx.designer.cs">
+      <DependentUpon>ManageSupplier.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Site\Administrator\UserList.aspx.cs">
       <DependentUpon>UserList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -256,15 +272,15 @@
     <Compile Include="Site\Administrator\UserList.aspx.designer.cs">
       <DependentUpon>UserList.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Site\Controls\ListBox\ListBoxControl.ascx.cs">
+    <Compile Include="Site\Controls\ListBox2\ListBoxControl.ascx.cs">
       <DependentUpon>ListBoxControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Site\Controls\ListBox\ListBoxControl.ascx.designer.cs">
+    <Compile Include="Site\Controls\ListBox2\ListBoxControl.ascx.designer.cs">
       <DependentUpon>ListBoxControl.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Site\Controls\ListBox\ListBoxItem.cs" />
-    <Compile Include="Site\Controls\ListBox\ListBoxItemEventArgs.cs" />
+    <Compile Include="Site\Controls\ListBox2\ListBoxItem.cs" />
+    <Compile Include="Site\Controls\ListBox2\ListBoxItemEventArgs.cs" />
     <Compile Include="Site\Controls\Menu\MenuControl.ascx.cs">
       <DependentUpon>MenuControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

@@ -1,5 +1,4 @@
-﻿
-using Client.Site.Controls.ListBox;
+﻿using Client.Site.Controls.ListBox2;
 using Data.Model;
 using Data.Model.Diagram;
 using System;
@@ -8,36 +7,45 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Telerik.Web.UI;
 
 namespace Client.Site.Administrator
 {
     public partial class ManageSupplier : System.Web.UI.Page
     {
 
-        #region Properties
-
-        private Supplier supplier;
-        private SupplierBranch selectedBranch;
-
-        #endregion
-
         protected void Page_Load(object sender, EventArgs e)
         {
             loadPage();
         }
 
+        #region Properties
+
+        private Supplier supplier
+        {
+            get {
+                return Session["Supplier"] as Supplier;
+            }
+            set {
+                Session["Supplier"] = value;
+            }
+        }
+
+        #endregion
+
+        #region Initialisation
+
         private void loadPage()
         {
-            getParameters();
             if (!IsPostBack)
             {
+                getParameters();
                 bindSupplierData();
             }
         }
 
         private void getParameters()
         {
+            this.supplier = null;
             if (Request.QueryString["si"] != null && Request.QueryString["si"] != "")
             {
                 int supplierId = int.Parse(Request.QueryString["si"]);
@@ -53,115 +61,86 @@ namespace Client.Site.Administrator
 
                 if (this.supplier.SupplierBranches.Any())
                 {
-                    this.ListBoxControl.DataSource = this.supplier.SupplierBranches.Select(s => new ListBoxItem(s.ZipCode + " - " + s.Place, s.SupplierBranchId.ToString(), s)).ToList();
+                    this.ListBoxControl.ListItems = this.supplier.SupplierBranches.Select(s => new ListBoxItem(s.ZipCode + " " + s.Place, s.SupplierBranchId.ToString(), s)).ToList();
+                    this.ListBoxControl.DataSource = this.ListBoxControl.ListItems;
                 }
-            }
-        }
-
-        private void updateBranch()
-        {
-            if (this.selectedBranch != null)
-            {
-                this.rtbBranchPlace.Text = this.selectedBranch.Place;
-                this.rtbBranchPlz.Text = this.selectedBranch.ZipCode;
             }
             else
             {
-                this.rtbBranchPlace.Text = null;
-                this.rtbBranchPlz.Text = null;
+                this.supplier = new Supplier();
+                EntityFactory.Context.Suppliers.Add(supplier);
+            }
+        }
+
+        #endregion
+
+        /// <summary>
+        /// Get the removed items and delete them after saving
+        /// </summary>
+        private void handleSupplicerBranchesToDelete()
+        {
+            if (this.ListBoxControl.ItemsToDelete.Any())
+            {
+                foreach (ListBoxItem listboxItemToDelete in this.ListBoxControl.ItemsToDelete)
+                {
+                    if (!listboxItemToDelete.Value.Contains("-"))
+                    {
+                        SupplierBranch itemToDelete = SupplierBranch.GetById(int.Parse(listboxItemToDelete.Value));
+                        this.supplier.SupplierBranches.Remove(itemToDelete);
+                        itemToDelete.Delete();
+                    }
+                }
+                this.ListBoxControl.ItemsToDelete = null;
             }
         }
 
         private void save()
         {
+            handleSupplicerBranchesToDelete();
             this.supplier.Name = this.rtbName.Text;
-
-            //Do the supplier branches stuff
-            this.supplier.SupplierBranches = getSupplierBranchesToSave();
-            this.handleSupplicerBranchesToDelete();
-
-            //Save context
             EntityFactory.Context.SaveChanges();
-        }
-
-        private void handleSupplicerBranchesToDelete()
-        {
-            if (this.ListBoxControl.ItemsToDelete.Any()) {
-                foreach (RadListBoxItem listboxItemToDelete in this.ListBoxControl.ItemsToDelete)
-                {
-                    SupplierBranch itemToDelete = SupplierBranch.GetById(int.Parse(listboxItemToDelete.Value));
-                    itemToDelete.Delete();
-                }
-            }
-        }
-
-        private List<SupplierBranch> getSupplierBranchesToSave()
-        {
-            List<RadListBoxItem> listBoxItems = this.ListBoxControl.GetItems();
-            List<SupplierBranch> supplierBranchesToSave = new List<SupplierBranch>();
-            if (listBoxItems.Any())
-            {
-                foreach (RadListBoxItem listBoxItem in listBoxItems)
-                {
-                    int supplierBranchId;
-                    bool result = Int32.TryParse(listBoxItem.Value, out supplierBranchId);
-                    SupplierBranch branchToSave;
-                    if (result)
-                    {
-                        branchToSave = SupplierBranch.GetById(supplierBranchId);
-                        if (branchToSave == null)
-                        {
-                            branchToSave = new SupplierBranch();
-                            EntityFactory.Context.SupplierBranches.Add(branchToSave);
-                        }
-                    }
-                    else
-                    {
-                        branchToSave = new SupplierBranch();
-                        EntityFactory.Context.SupplierBranches.Add(branchToSave);
-                    }
-
-                    supplierBranchesToSave.Add(branchToSave);
-                }
-            }
-            return supplierBranchesToSave;
         }
 
         #region Events
 
-        protected void ListBoxControl_NewItemListBoxItemAdded(object sender, EventArgs e)
+        protected void ListBoxControl_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.rtbBranchPlace.Focus();
-        }
-
-        protected void ListBoxControl_SelectedListBoxItemChanged(object sender, EventArgs e)
-        {
-            this.selectedBranch = null;
-            RadListBoxItem currentItem = (e as ListBoxItemEventArgs).Item;
-            if (currentItem.Value != null)
+            ListBoxItemEventArgs eventArgs = e as ListBoxItemEventArgs;
+            if (eventArgs.Item != null && eventArgs.Item.DataItem != null)
             {
-                int supplierBranchId;
-                bool result = Int32.TryParse(currentItem.Value, out supplierBranchId);
-                if (result)
-                {
-                    SupplierBranch supplierBranch = SupplierBranch.GetById(supplierBranchId);
-                    this.selectedBranch = supplierBranch;
-                }
+                SupplierBranch selectedBranch = eventArgs.Item.DataItem as SupplierBranch;
+                this.rtbBranchPlace.Text = selectedBranch.Place;
+                this.rtbBranchPlz.Text = selectedBranch.ZipCode;
             }
-            updateBranch();
         }
 
-        protected void rtbBranchPlace_TextChanged(object sender, EventArgs e)
+        protected void ListBoxControl_AddNewItem(object sender, EventArgs e)
         {
-            updateListBoxItem();
+            ListBoxItemEventArgs eventArgs = e as ListBoxItemEventArgs;
+            if (eventArgs.Item != null)
+            {
+                SupplierBranch selectedBranch = eventArgs.Item.DataItem as SupplierBranch;
+                if (selectedBranch == null || SupplierBranch.GetById(selectedBranch.SupplierBranchId) == null)
+                {
+                    selectedBranch = new SupplierBranch();
+                    this.ListBoxControl.SelectedListBoxItem.DataItem = selectedBranch;
+                    this.supplier.SupplierBranches.Add(selectedBranch);
+                }
+                else { 
+                }
+                this.rtbBranchPlace.Text = selectedBranch.Place;
+                this.rtbBranchPlz.Text = selectedBranch.ZipCode;
+            }
         }
 
-        public void updateListBoxItem()
+        protected void ListBoxControl_ItemRemove(object sender, EventArgs e)
         {
-            this.ListBoxControl.SelectedItem.Text = this.rtbBranchPlz.Text + " - " + this.rtbBranchPlace.Text;
-            //Get data item if null create new save attributes
+            ListBoxItemEventArgs eventArgs = e as ListBoxItemEventArgs;
+            this.rtbBranchPlace.Text = null;
+            this.rtbBranchPlz.Text = null;
         }
 
+        #region FormEvents
 
         protected void btnBack_Click(object sender, EventArgs e)
         {
@@ -171,9 +150,22 @@ namespace Client.Site.Administrator
         protected void btnSave_Click(object sender, EventArgs e)
         {
             save();
+            Response.Redirect("~/Site/Administrator/SupplierList.aspx");
+        }
+
+        protected void rtbBranchPlz_TextChanged(object sender, EventArgs e)
+        {
+            if (this.ListBoxControl.SelectedListBoxItem != null && this.ListBoxControl.SelectedListBoxItem.DataItem != null)
+            {
+                SupplierBranch selectedBranch = this.ListBoxControl.SelectedListBoxItem.DataItem as SupplierBranch;
+                selectedBranch.Place = this.rtbBranchPlace.Text;
+                selectedBranch.ZipCode = this.rtbBranchPlz.Text;
+                this.ListBoxControl.SelectedItem.Text = this.rtbBranchPlz.Text + " " + this.rtbBranchPlace.Text;
+            }
         }
 
         #endregion
 
+        #endregion
     }
 }

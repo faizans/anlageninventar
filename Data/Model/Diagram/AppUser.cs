@@ -27,7 +27,6 @@ namespace Data.Model.Diagram
         public string UserName { get; set; }
         public bool IsAdmin { get; set; }
         public string Password { get; set; }
-        public string UserRole { get; set; }
         public bool IsActive { get; set; }
     
         public virtual ICollection<Room> Rooms { get; set; }

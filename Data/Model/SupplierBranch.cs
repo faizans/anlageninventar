@@ -14,6 +14,12 @@ namespace Data.Model.Diagram
             return ctx.SupplierBranches.Where(c => c.SupplierBranchId == id).SingleOrDefault();
         }
 
+        public static SupplierBranch GetByPlaceAndZipCode(string place, string zipcode, int supplierId)
+        {
+            IP3AnlagenInventarEntities ctx = EntityFactory.Context;
+            return ctx.SupplierBranches.Where(c => c.Place == place && c.ZipCode == zipcode && c.SupplierId == supplierId).SingleOrDefault();
+        }
+
         public static IEnumerable<SupplierBranch> GetAll()
         {
             IP3AnlagenInventarEntities ctx = EntityFactory.Context;
