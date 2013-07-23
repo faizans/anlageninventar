@@ -8,26 +8,20 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace Client.Site.Administrator
-{
-    public partial class ManageDepreciationCategory : System.Web.UI.Page
-    {
+namespace Client.Site.Administrator {
+    public partial class ManageDepreciationCategory : System.Web.UI.Page {
 
-        protected void Page_Load(object sender, EventArgs e)
-        {
+        protected void Page_Load(object sender, EventArgs e) {
             loadPage();
         }
 
         #region Properties
 
-        private DepreciationCategory depreciationCategory
-        {
-            get
-            {
+        private DepreciationCategory depreciationCategory {
+            get {
                 return Session["DepreciationCategory"] as DepreciationCategory;
             }
-            set
-            {
+            set {
                 Session["DepreciationCategory"] = value;
             }
         }
@@ -36,38 +30,32 @@ namespace Client.Site.Administrator
 
         #region Initialisation
 
-        private void loadPage()
-        {
-            if (!IsPostBack)
-            {
+        private void loadPage() {
+            if (!IsPostBack) {
+                this.ListBoxControl.ItemsToDelete = null;
+                this.ListBoxControl.ListItems = null;
                 getParameters();
                 bindData();
             }
         }
 
-        private void getParameters()
-        {
-            if (Request.QueryString["ci"] != null && Request.QueryString["ci"] != "")
-            {
+        private void getParameters() {
+            this.depreciationCategory = null;
+            if (Request.QueryString["ci"] != null && Request.QueryString["ci"] != "") {
                 int categoryId = int.Parse(Request.QueryString["ci"]);
                 this.depreciationCategory = DepreciationCategory.GetById(categoryId);
             }
         }
 
-        private void bindData()
-        {
-            if (this.depreciationCategory != null)
-            {
+        private void bindData() {
+            if (this.depreciationCategory != null) {
                 this.rtbName.Text = this.depreciationCategory.Name;
 
-                if (this.depreciationCategory.Depreciations.Any())
-                {
-                    this.ListBoxControl.ListItems = this.depreciationCategory.Depreciations.Select(s => new ListBoxItem(s.Value + " " + s.Year, s.DepreciationCategoryId.ToString(), s)).ToList();
+                if (this.depreciationCategory.Depreciations.Any()) {
+                    this.ListBoxControl.ListItems = this.depreciationCategory.Depreciations.Select(s => new ListBoxItem(s.AdditionalStartDate.Value.Year.ToString() + " " + s.AdditionalEndDate.Value.Year.ToString(), s.DepreciationId.ToString(), s)).ToList();
                     this.ListBoxControl.DataSource = this.ListBoxControl.ListItems;
                 }
-            }
-            else
-            {
+            } else {
                 this.depreciationCategory = new DepreciationCategory();
                 EntityFactory.Context.DepreciationCategories.Add(depreciationCategory);
             }
@@ -78,14 +66,10 @@ namespace Client.Site.Administrator
         /// <summary>
         /// Get the removed items and delete them after saving
         /// </summary>
-        private void handleItemsToDelete()
-        {
-            if (this.ListBoxControl.ItemsToDelete.Any())
-            {
-                foreach (ListBoxItem listboxItemToDelete in this.ListBoxControl.ItemsToDelete)
-                {
-                    if (!listboxItemToDelete.Value.Contains("-"))
-                    {
+        private void handleItemsToDelete() {
+            if (this.ListBoxControl.ItemsToDelete.Any()) {
+                foreach (ListBoxItem listboxItemToDelete in this.ListBoxControl.ItemsToDelete) {
+                    if (!listboxItemToDelete.Value.Contains("-")) {
                         Depreciation itemToDelete = Depreciation.GetById(int.Parse(listboxItemToDelete.Value));
                         this.depreciationCategory.Depreciations.Remove(itemToDelete);
                         itemToDelete.Delete();
@@ -95,8 +79,7 @@ namespace Client.Site.Administrator
             }
         }
 
-        private void save()
-        {
+        private void save() {
             handleItemsToDelete();
             this.depreciationCategory.Name = this.rtbName.Text;
             EntityFactory.Context.SaveChanges();
@@ -104,60 +87,57 @@ namespace Client.Site.Administrator
 
         #region Events
 
-        protected void ListBoxControl_SelectedIndexChanged(object sender, EventArgs e)
-        {
+        protected void ListBoxControl_SelectedIndexChanged(object sender, EventArgs e) {
             ListBoxItemEventArgs eventArgs = e as ListBoxItemEventArgs;
-            if (eventArgs.Item != null && eventArgs.Item.DataItem != null)
-            {
+            if (eventArgs.Item != null && eventArgs.Item.DataItem != null) {
                 Depreciation depreciation = eventArgs.Item.DataItem as Depreciation;
-                this.rtbValue.Text = depreciation.Value.ToString();
-                this.rtbYear.Text = depreciation.Year.ToString();
+                this.rtbFromYear.Text = depreciation.AdditionalStartDate.HasValue ? depreciation.AdditionalStartDate.Value.Year.ToString() : "";
+                this.rtbToYear.Text = depreciation.AdditionalEndDate.HasValue ? depreciation.AdditionalEndDate.Value.Year.ToString() : "";
             }
         }
 
-        protected void ListBoxControl_AddNewItem(object sender, EventArgs e)
-        {
+        protected void ListBoxControl_AddNewItem(object sender, EventArgs e) {
             ListBoxItemEventArgs eventArgs = e as ListBoxItemEventArgs;
-            if (eventArgs.Item != null)
-            {
+            if (eventArgs.Item != null) {
                 Depreciation selectedDepreciation = eventArgs.Item.DataItem as Depreciation;
-                if (Depreciation.GetById(selectedDepreciation.DepreciationId) == null)
-                {
+                if (selectedDepreciation == null || Depreciation.GetById(selectedDepreciation.DepreciationId) == null) {
+                    selectedDepreciation = new Depreciation();
+                    this.ListBoxControl.SelectedListBoxItem.DataItem = selectedDepreciation;
                     this.depreciationCategory.Depreciations.Add(selectedDepreciation);
+                } else {
                 }
-                this.rtbValue.Text = selectedDepreciation.Value.ToString();
-                this.rtbYear.Text = selectedDepreciation.Year.ToString();
+                this.rtbFromYear.Text = selectedDepreciation.AdditionalStartDate.HasValue ? selectedDepreciation.AdditionalStartDate.Value.Year.ToString() : "";
+                this.rtbToYear.Text = selectedDepreciation.AdditionalEndDate.HasValue ? selectedDepreciation.AdditionalEndDate.Value.Year.ToString() : "";
             }
         }
 
-        protected void ListBoxControl_ItemRemove(object sender, EventArgs e)
-        {
+        protected void ListBoxControl_ItemRemove(object sender, EventArgs e) {
             ListBoxItemEventArgs eventArgs = e as ListBoxItemEventArgs;
-            this.rtbValue.Text = null;
-            this.rtbYear.Text = null;
+            this.rtbFromYear.Text = null;
+            this.rtbToYear.Text = null;
         }
 
         #region FormEvents
 
-        protected void btnBack_Click(object sender, EventArgs e)
-        {
+        protected void btnBack_Click(object sender, EventArgs e) {
             Response.Redirect("~/Site/Administrator/DepreciationCategoryList.aspx");
         }
 
-        protected void btnSave_Click(object sender, EventArgs e)
-        {
+        protected void btnSave_Click(object sender, EventArgs e) {
             save();
             Response.Redirect("~/Site/Administrator/DepreciationCategoryList.aspx");
         }
 
-        protected void rtbValue_TextChanged(object sender, EventArgs e)
-        {
-            if (this.ListBoxControl.SelectedListBoxItem != null && this.ListBoxControl.SelectedListBoxItem.DataItem != null)
-            {
+        protected void rtbFromYear_TextChanged(object sender, EventArgs e) {
+            if (this.ListBoxControl.SelectedListBoxItem != null && this.ListBoxControl.SelectedListBoxItem.DataItem != null) {
                 Depreciation selectedDepreciation = this.ListBoxControl.SelectedListBoxItem.DataItem as Depreciation;
-                selectedDepreciation.Value = int.Parse(this.rtbValue.Text);
-                selectedDepreciation.Year = int.Parse(this.rtbYear.Text);
-                this.ListBoxControl.SelectedItem.Text = this.rtbValue.Text + " " + this.rtbYear.Text;
+                if (this.rtbFromYear.Text.Count() == 4) {
+                    selectedDepreciation.AdditionalStartDate = new DateTime(int.Parse(this.rtbFromYear.Text), 1, 1);
+                }
+                if (this.rtbToYear.Text.Count() == 4) {
+                    selectedDepreciation.AdditionalEndDate = new DateTime(int.Parse(this.rtbToYear.Text), 12, 31);
+                }
+                this.ListBoxControl.SelectedItem.Text = this.rtbFromYear.Text + " " + this.rtbToYear.Text;
             }
         }
 

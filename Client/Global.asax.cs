@@ -56,7 +56,7 @@ namespace Client
                 loggedUser = AppUser.GetByUserNameAndDomain(userName, userDomain);
 
                 //If User is set, user is loggedin
-                if (loggedUser != null && loggedUser.UserName.Length > 0 && loggedUser.IsActive)
+                if (loggedUser != null && loggedUser.UserName.Length > 0 && loggedUser.IsActive && loggedUser.IsAdmin)
                 {
                     loggedIn = true;
                     role = loggedUser.IsAdmin ? UserRole.Administrator.ToString() : UserRole.User.ToString();

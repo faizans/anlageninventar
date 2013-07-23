@@ -13,7 +13,6 @@ namespace Client.Site.Controls.ListBox2
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
         }
 
         #region Properties
@@ -30,7 +29,7 @@ namespace Client.Site.Controls.ListBox2
             }
             set
             {
-                Session["ItemsToDelete"] = null;
+                Session["ItemsToDelete"] = value;
             }
         }
 
@@ -55,8 +54,10 @@ namespace Client.Site.Controls.ListBox2
             {
                 if (this.ListBox.SelectedItem != null) {
                     return this.ListItems.Where(i => i.Value == this.ListBox.SelectedItem.Value).SingleOrDefault();
+                } else {
+                    return this.ListItems.ElementAt(this.ListItems.Count - 1);
                 }
-                return null;
+
             }
         }
 
@@ -67,8 +68,9 @@ namespace Client.Site.Controls.ListBox2
                 if (this.ListBox.SelectedItem != null)
                 {
                     return this.ListBox.SelectedItem;
+                } else {
+                    return this.ListBox.Items.ElementAt(0);
                 }
-                return null;
             }
         }
 
@@ -91,8 +93,6 @@ namespace Client.Site.Controls.ListBox2
             this.ListItems.Add(newItem);
             this.ListBox.Items.Insert(0,newItem);
 
-            this.ListBox.Items.ElementAt(0).Selected = true;
-
             if (AddNewItem != null)
             {
                 ListBoxItemEventArgs listBoxItemArgs = new ListBoxItemEventArgs();
@@ -105,7 +105,6 @@ namespace Client.Site.Controls.ListBox2
         protected void btnRemove_Click(object sender, EventArgs e)
         {
             ListBoxItem itemToRemove = this.SelectedListBoxItem;
-            SupplierBranch supplierBranchToDelete = SupplierBranch.GetById((itemToRemove.DataItem as SupplierBranch).SupplierBranchId);
             this.ItemsToDelete.Add(itemToRemove);
             this.ListItems.Remove(itemToRemove);
             this.ListBox.Items.Remove(this.ListBox.SelectedItem);

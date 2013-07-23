@@ -76,13 +76,13 @@ namespace Client.Site.Administrator {
         protected global::System.Web.UI.WebControls.Label Label4;
         
         /// <summary>
-        /// rtbValue control.
+        /// rtbFromYear control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadTextBox rtbValue;
+        protected global::Telerik.Web.UI.RadNumericTextBox rtbFromYear;
         
         /// <summary>
         /// Label5 control.
@@ -94,13 +94,13 @@ namespace Client.Site.Administrator {
         protected global::System.Web.UI.WebControls.Label Label5;
         
         /// <summary>
-        /// rtbYear control.
+        /// rtbToYear control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadTextBox rtbYear;
+        protected global::Telerik.Web.UI.RadNumericTextBox rtbToYear;
         
         /// <summary>
         /// btnBack control.

@@ -15,9 +15,9 @@ namespace Data.Model.Diagram
     public partial class Depreciation
     {
         public int DepreciationId { get; set; }
-        public int ArticleId { get; set; }
-        public double Value { get; set; }
-        public int Year { get; set; }
+        public Nullable<int> ArticleId { get; set; }
+        public Nullable<double> Value { get; set; }
+        public Nullable<int> Year { get; set; }
         public Nullable<System.DateTime> AdditionalStartDate { get; set; }
         public Nullable<System.DateTime> AdditionalEndDate { get; set; }
         public Nullable<int> DepreciationCategoryId { get; set; }

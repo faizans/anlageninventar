@@ -3,7 +3,7 @@
 <%@ Register Src="~/Site/Controls/ListBox2/ListBoxControl.ascx" TagPrefix="uc1" TagName="ListBoxControl" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
-    <telerik:RadAjaxPanel ID="RadAjaxPanel1" runat="server" Width="300px">
+    <telerik:RadAjaxPanel ID="RadAjaxPanel1" runat="server">
         <div class="content_input_form">
             <!-- Name -->
             <div class="input_form_row">
@@ -23,16 +23,16 @@
                 </div>
             </div>
             <div class="input_form_row">
-                <asp:Label ID="Label4" runat="server" Text="Wert" CssClass="element_label"></asp:Label>
-                <telerik:RadTextBox ID="rtbValue" runat="server" Width="300px" ReadOnly="false"
-                    OnTextChanged="rtbValue_TextChanged" AutoPostBack="true">
-                </telerik:RadTextBox>
+                <asp:Label ID="Label4" runat="server" Text="Von" CssClass="element_label"></asp:Label>
+                <telerik:RadNumericTextBox ID="rtbFromYear" runat="server" OnTextChanged="rtbFromYear_TextChanged" AutoPostBack="true">
+                    <NumberFormat GroupSeparator="" DecimalDigits="0" /> 
+                </telerik:RadNumericTextBox>
             </div>
             <div class="input_form_row">
-                <asp:Label ID="Label5" runat="server" Text="Jahre" CssClass="element_label"></asp:Label>
-                <telerik:RadTextBox ID="rtbYear" runat="server" Width="300px" ReadOnly="false"
-                    OnTextChanged="rtbValue_TextChanged" AutoPostBack="true">
-                </telerik:RadTextBox>
+                <asp:Label ID="Label5" runat="server" Text="Bis" CssClass="element_label"></asp:Label>
+                <telerik:RadNumericTextBox ID="rtbToYear" runat="server" OnTextChanged="rtbFromYear_TextChanged" AutoPostBack="true">
+                    <NumberFormat GroupSeparator="" DecimalDigits="0" /> 
+                </telerik:RadNumericTextBox>
             </div>
         </div>
         <div class="input_interaction_row">

@@ -146,9 +146,9 @@
             <PropertyRef Name="DepreciationId" />
           </Key>
           <Property Name="DepreciationId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="ArticleId" Type="int" Nullable="false" />
-          <Property Name="Value" Type="float" Nullable="false" />
-          <Property Name="Year" Type="int" Nullable="false" />
+          <Property Name="ArticleId" Type="int" />
+          <Property Name="Value" Type="float" />
+          <Property Name="Year" Type="int" />
           <Property Name="AdditionalStartDate" Type="datetime" />
           <Property Name="AdditionalEndDate" Type="datetime" />
           <Property Name="DepreciationCategoryId" Type="int" />
@@ -324,7 +324,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Depreciation_Article1">
-          <End Role="Article" Type="Data.Model.Diagram.Store.Article" Multiplicity="1" />
+          <End Role="Article" Type="Data.Model.Diagram.Store.Article" Multiplicity="0..1" />
           <End Role="Depreciation" Type="Data.Model.Diagram.Store.Depreciation" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Article">
@@ -467,8 +467,8 @@
           <Property Type="Boolean" Name="IsAdmin" Nullable="false" />
           <Property Type="String" Name="Password" MaxLength="1000" FixedLength="false" Unicode="false" />
           <Property Type="Boolean" Name="IsActive" Nullable="false" />
-          <NavigationProperty Name="Rooms" Relationship="Data.Model.Diagram.AppUser2Room" FromRole="AppUser" ToRole="Room" />
           <Property Type="Boolean" Name="IsAdAccount" Nullable="false" />
+          <NavigationProperty Name="Rooms" Relationship="Data.Model.Diagram.AppUser2Room" FromRole="AppUser" ToRole="Room" />
         </EntityType>
         <EntityType Name="Article">
           <Key>
@@ -527,9 +527,9 @@
             <PropertyRef Name="DepreciationId" />
           </Key>
           <Property Type="Int32" Name="DepreciationId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="ArticleId" Nullable="false" />
-          <Property Type="Double" Name="Value" Nullable="false" />
-          <Property Type="Int32" Name="Year" Nullable="false" />
+          <Property Type="Int32" Name="ArticleId" />
+          <Property Type="Double" Name="Value" />
+          <Property Type="Int32" Name="Year" />
           <Property Type="DateTime" Name="AdditionalStartDate" Precision="3" />
           <Property Type="DateTime" Name="AdditionalEndDate" Precision="3" />
           <Property Type="Int32" Name="DepreciationCategoryId" />
@@ -683,7 +683,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Depreciation_Article1">
-          <End Type="Data.Model.Diagram.Article" Role="Article" Multiplicity="1" />
+          <End Type="Data.Model.Diagram.Article" Role="Article" Multiplicity="0..1" />
           <End Type="Data.Model.Diagram.Depreciation" Role="Depreciation" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Article">

@@ -149,7 +149,7 @@ namespace Client.Site.Controls.RoomTree
                 {
                     Room selectedRoom = Room.GetByName(this.txtNodeName.Text);
                     this.ResponsibleAttribute.Visible = true;
-                    this.UserSearchBox.Text = selectedRoom != null ? selectedRoom.Name : "";
+                    this.UserSearchBox.Text = selectedRoom != null ? selectedRoom.AppUsers.Any() ? selectedRoom.AppUsers.ElementAt(0).Email : "" : "";
                 }
                 else
                 {
