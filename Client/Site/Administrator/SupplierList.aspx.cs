@@ -1,4 +1,6 @@
 ﻿using Client.SiteMaster;
+using Data.Model;
+using Data.Model.Diagram;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +16,9 @@ namespace Client.Site.Administrator
         protected void Page_Load(object sender, EventArgs e)
         {
             SiteMaster.StandardMaster.InfoText = "Lieferanten - Verwaltung";
+            if (!IsPostBack) {
+                bindData();
+            }
         }
 
         public CustomMaster SiteMaster {
@@ -21,6 +26,11 @@ namespace Client.Site.Administrator
                 CustomMaster mm = (CustomMaster)Page.Master;
                 return mm;
             }
+        }
+
+        private void bindData() {
+            this.rgSupplierlist.DataSource = Supplier.GetAll().ToList();
+            this.rgSupplierlist.DataBind();
         }
 
         protected void rgCategories_ItemCommand(object sender, Telerik.Web.UI.GridCommandEventArgs e)
@@ -35,7 +45,16 @@ namespace Client.Site.Administrator
             }
             else if (e.CommandName.ToLower() == "delete")
             {
-
+                Supplier supplierToDelete = Supplier.GetById(int.Parse((e.Item as GridDataItem)["SupplierId"].Text));
+                if (supplierToDelete != null) {
+                    if (supplierToDelete.HasArticles()) {
+                        RadWindowManager1.RadAlert(String.Format("{0} kann nicht gelöscht werden, da Lieferant mit Artikeln verknüpft ist.", supplierToDelete.Name), 300, 130, "Operation nicht möglich", "alertCallBackFn");
+                    } else {
+                        supplierToDelete.Delete();
+                        EntityFactory.Context.SaveChanges();
+                        bindData();
+                    }
+                }
             }
         }
 

@@ -84,6 +84,12 @@ namespace Client.Site.Controls.ListBox2
 
         #endregion
 
+        public void Remove(ListBoxItem itemToRemove) {
+            this.ItemsToDelete.Add(itemToRemove);
+            this.ListItems.Remove(itemToRemove);
+            this.ListBox.Items.Remove(this.ListBox.SelectedItem);
+        }
+
         #region Events
 
         public event EventHandler AddNewItem;
@@ -105,9 +111,6 @@ namespace Client.Site.Controls.ListBox2
         protected void btnRemove_Click(object sender, EventArgs e)
         {
             ListBoxItem itemToRemove = this.SelectedListBoxItem;
-            this.ItemsToDelete.Add(itemToRemove);
-            this.ListItems.Remove(itemToRemove);
-            this.ListBox.Items.Remove(this.ListBox.SelectedItem);
 
             if (ItemRemove != null)
             {

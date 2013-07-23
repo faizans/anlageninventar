@@ -113,8 +113,22 @@ namespace Client.Site.Administrator {
 
         protected void ListBoxControl_ItemRemove(object sender, EventArgs e) {
             ListBoxItemEventArgs eventArgs = e as ListBoxItemEventArgs;
-            this.rtbFromYear.Text = null;
-            this.rtbToYear.Text = null;
+            if (eventArgs != null && eventArgs.Item != null) {
+                Depreciation depreciationToRemove = eventArgs.Item.DataItem as Depreciation;
+                if (depreciationToRemove != null) {
+                    if (depreciationToRemove.HasArticles()) {
+                        RadWindowManager1.RadAlert(String.Format("Abschreibung kann nicht gelöscht werden, da Abschreibung von Artikeln verwendet wird."), 300, 130, "Operation nicht möglich", "alertCallBackFn");
+                    } else {
+                        this.ListBoxControl.Remove(eventArgs.Item);
+                        this.rtbFromYear.Text = null;
+                        this.rtbToYear.Text = null;
+                    }
+                } else {
+                    this.ListBoxControl.Remove(eventArgs.Item);
+                    this.rtbFromYear.Text = null;
+                    this.rtbToYear.Text = null;
+                }
+            } 
         }
 
         #region FormEvents

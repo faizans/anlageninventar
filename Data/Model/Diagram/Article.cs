@@ -26,17 +26,17 @@ namespace Data.Model.Diagram
         public Nullable<int> SupplierBranchId { get; set; }
         public Nullable<int> RoomId { get; set; }
         public Nullable<System.DateTime> AcquisitionDate { get; set; }
-        public int DepreciationCategoryId { get; set; }
         public Nullable<int> ArticleCategoryId { get; set; }
         public Nullable<int> InsuranceCategoryId { get; set; }
         public string OldBarcode { get; set; }
+        public int DepreciationId { get; set; }
     
         public virtual ArticleCategory ArticleCategory { get; set; }
         public virtual ArticleGroup ArticleGroup { get; set; }
-        public virtual DepreciationCategory DepreciationCategory { get; set; }
         public virtual InsuranceCategory InsuranceCategory { get; set; }
         public virtual Room Room { get; set; }
         public virtual SupplierBranch SupplierBranch { get; set; }
         public virtual ICollection<Depreciation> Depreciations { get; set; }
+        public virtual Depreciation Depreciation { get; set; }
     }
 }

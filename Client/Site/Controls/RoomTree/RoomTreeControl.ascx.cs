@@ -278,10 +278,7 @@ namespace Client.Site.Controls.RoomTree
                 AppUser responsibleUser = AppUser.GetByEmail(this.UserSearchBox.Text);
                 if (responsibleUser != null)
                 {
-                    if (roomToSave.AppUsers.Where(a => a.AppUserId == responsibleUser.AppUserId).Any())
-                    {
-                        roomToSave.AppUsers.Remove(roomToSave.AppUsers.Where(a => a.AppUserId == responsibleUser.AppUserId).SingleOrDefault());
-                    }
+                    roomToSave.AppUsers.Clear();
                     roomToSave.AppUsers.Add(responsibleUser);
                 }
                 EntityFactory.Context.SaveChanges();

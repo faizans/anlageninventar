@@ -36,6 +36,11 @@ namespace Data.Model.Diagram
             return ctx.AppUsers.Where(a => a.Email == this.Email).SingleOrDefault();
         }
 
+        public void Delete() {
+            IP3AnlagenInventarEntities ctx = EntityFactory.Context;
+            ctx.AppUsers.Remove(ctx.AppUsers.Where(p => p.AppUserId == this.AppUserId).SingleOrDefault());
+        }
+
         #endregion
 
         #region Authorization Methods

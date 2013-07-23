@@ -27,5 +27,13 @@
 
         </telerik:RadGrid>
     </telerik:RadAjaxPanel>
+    <telerik:RadWindowManager ID="RadWindowManager1" runat="server">
+    </telerik:RadWindowManager>
+    <script>
+        function alertCallBackFn(arg) {
+
+        }
+
+    </script>
     <asp:EntityDataSource ID="DataSource" runat="server" ConnectionString="name=IP3AnlagenInventarEntities" DefaultContainerName="IP3AnlagenInventarEntities" EnableDelete="True" EnableFlattening="False" EnableInsert="True" EnableUpdate="True" EntitySetName="AppUsers"></asp:EntityDataSource>
 </asp:Content>

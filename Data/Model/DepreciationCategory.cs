@@ -10,6 +10,12 @@ namespace Data.Model.Diagram
 {
     public partial class DepreciationCategory
     {
+
+        public static IEnumerable<DepreciationCategory> GetAll() {
+            IP3AnlagenInventarEntities ctx = EntityFactory.Context;
+            return ctx.DepreciationCategories;
+        }
+
         public static DepreciationCategory GetById(int id)
         {
             IP3AnlagenInventarEntities ctx = EntityFactory.Context;
@@ -17,11 +23,28 @@ namespace Data.Model.Diagram
         }
 
         #region Public methods
+
+        public Boolean HasArticles() {
+            if (this.Depreciations.Any()) {
+                foreach (Depreciation depreciation in this.Depreciations) {
+                    if (depreciation.HasArticles()) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
         public void Delete()
         {
             IP3AnlagenInventarEntities ctx = EntityFactory.Context;
-            ctx.DepreciationCategories.Remove(ctx.DepreciationCategories.Where(c => c.DepreciationCategoryId == this.DepreciationCategoryId).SingleOrDefault());
-            ctx.SaveChanges();
+            if (this.Depreciations.Any()) {
+                List<Depreciation> depreciations = new List<Depreciation>(this.Depreciations);
+                foreach (Depreciation depreciation in depreciations) {
+                    depreciation.Delete();
+                }
+            }
+            ctx.DepreciationCategories.Remove(ctx.DepreciationCategories.Where(p => p.DepreciationCategoryId == this.DepreciationCategoryId).SingleOrDefault());
         }
         #endregion
     }

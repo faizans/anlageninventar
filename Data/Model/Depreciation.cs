@@ -17,12 +17,18 @@ namespace Data.Model.Diagram
         }
 
         #region Public methods
+
         public void Delete()
         {
             IP3AnlagenInventarEntities ctx = EntityFactory.Context;
             ctx.Depreciations.Remove(ctx.Depreciations.Where(c => c.DepreciationId == this.DepreciationId).SingleOrDefault());
             ctx.SaveChanges();
         }
+
+        public Boolean HasArticles() {
+            return this.Articles.Any();
+        }
+
         #endregion
     }
 }

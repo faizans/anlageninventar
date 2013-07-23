@@ -17,6 +17,11 @@ namespace Data.Model.Diagram
         }
 
         #region Public methods
+
+        public Boolean HasArticles() {
+            return this.Articles.Any();
+        }
+
         public void Delete()
         {
             IP3AnlagenInventarEntities ctx = EntityFactory.Context;

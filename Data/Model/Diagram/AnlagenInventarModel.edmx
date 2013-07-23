@@ -36,8 +36,8 @@
             <End Role="ArticleGroup" EntitySet="ArticleGroup" />
             <End Role="Article" EntitySet="Article" />
           </AssociationSet>
-          <AssociationSet Name="FK_Article_DepreciationCategory" Association="Data.Model.Diagram.Store.FK_Article_DepreciationCategory">
-            <End Role="DepreciationCategory" EntitySet="DepreciationCategory" />
+          <AssociationSet Name="FK_Article_Depreciation" Association="Data.Model.Diagram.Store.FK_Article_Depreciation">
+            <End Role="Depreciation" EntitySet="Depreciation" />
             <End Role="Article" EntitySet="Article" />
           </AssociationSet>
           <AssociationSet Name="FK_Article_InsuranceCategory" Association="Data.Model.Diagram.Store.FK_Article_InsuranceCategory">
@@ -56,7 +56,7 @@
             <End Role="Room" EntitySet="Room" />
             <End Role="ArticleGroup" EntitySet="ArticleGroup" />
           </AssociationSet>
-          <AssociationSet Name="FK_Depreciation_Article1" Association="Data.Model.Diagram.Store.FK_Depreciation_Article1">
+          <AssociationSet Name="FK_Depreciation_Article" Association="Data.Model.Diagram.Store.FK_Depreciation_Article">
             <End Role="Article" EntitySet="Article" />
             <End Role="Depreciation" EntitySet="Depreciation" />
           </AssociationSet>
@@ -111,7 +111,7 @@
           <Property Name="SupplierBranchId" Type="int" />
           <Property Name="RoomId" Type="int" />
           <Property Name="AcquisitionDate" Type="datetime" />
-          <Property Name="DepreciationCategoryId" Type="int" Nullable="false" />
+          <Property Name="DepreciationId" Type="int" Nullable="false" />
           <Property Name="ArticleCategoryId" Type="int" />
           <Property Name="InsuranceCategoryId" Type="int" />
           <Property Name="OldBarcode" Type="varchar" MaxLength="50" />
@@ -146,12 +146,12 @@
             <PropertyRef Name="DepreciationId" />
           </Key>
           <Property Name="DepreciationId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="ArticleId" Type="int" />
           <Property Name="Value" Type="float" />
           <Property Name="Year" Type="int" />
           <Property Name="AdditionalStartDate" Type="datetime" />
           <Property Name="AdditionalEndDate" Type="datetime" />
           <Property Name="DepreciationCategoryId" Type="int" />
+          <Property Name="ArticleId" Type="int" />
         </EntityType>
         <EntityType Name="DepreciationCategory">
           <Key>
@@ -263,15 +263,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Article_DepreciationCategory">
-          <End Role="DepreciationCategory" Type="Data.Model.Diagram.Store.DepreciationCategory" Multiplicity="1" />
+        <Association Name="FK_Article_Depreciation">
+          <End Role="Depreciation" Type="Data.Model.Diagram.Store.Depreciation" Multiplicity="1" />
           <End Role="Article" Type="Data.Model.Diagram.Store.Article" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="DepreciationCategory">
-              <PropertyRef Name="DepreciationCategoryId" />
+            <Principal Role="Depreciation">
+              <PropertyRef Name="DepreciationId" />
             </Principal>
             <Dependent Role="Article">
-              <PropertyRef Name="DepreciationCategoryId" />
+              <PropertyRef Name="DepreciationId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -323,7 +323,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Depreciation_Article1">
+        <Association Name="FK_Depreciation_Article">
           <End Role="Article" Type="Data.Model.Diagram.Store.Article" Multiplicity="0..1" />
           <End Role="Depreciation" Type="Data.Model.Diagram.Store.Depreciation" Multiplicity="*" />
           <ReferentialConstraint>
@@ -409,10 +409,6 @@
             <End Role="ArticleGroup" EntitySet="ArticleGroups" />
             <End Role="Article" EntitySet="Articles" />
           </AssociationSet>
-          <AssociationSet Name="FK_Article_DepreciationCategory" Association="Data.Model.Diagram.FK_Article_DepreciationCategory">
-            <End Role="DepreciationCategory" EntitySet="DepreciationCategories" />
-            <End Role="Article" EntitySet="Articles" />
-          </AssociationSet>
           <AssociationSet Name="FK_Article_InsuranceCategory" Association="Data.Model.Diagram.FK_Article_InsuranceCategory">
             <End Role="InsuranceCategory" EntitySet="InsuranceCategories" />
             <End Role="Article" EntitySet="Articles" />
@@ -453,6 +449,10 @@
             <End Role="AppUser" EntitySet="AppUsers" />
             <End Role="Room" EntitySet="Rooms" />
           </AssociationSet>
+          <AssociationSet Name="FK_Article_Depreciation" Association="Data.Model.Diagram.FK_Article_Depreciation">
+            <End Role="Depreciation" EntitySet="Depreciations" />
+            <End Role="Article" EntitySet="Articles" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="AppUser">
           <Key>
@@ -481,17 +481,17 @@
           <Property Type="Int32" Name="SupplierBranchId" />
           <Property Type="Int32" Name="RoomId" />
           <Property Type="DateTime" Name="AcquisitionDate" Precision="3" />
-          <Property Type="Int32" Name="DepreciationCategoryId" Nullable="false" />
           <Property Type="Int32" Name="ArticleCategoryId" />
           <Property Type="Int32" Name="InsuranceCategoryId" />
           <Property Type="String" Name="OldBarcode" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="ArticleCategory" Relationship="Data.Model.Diagram.FK_Article_ArticleCategory" FromRole="Article" ToRole="ArticleCategory" />
           <NavigationProperty Name="ArticleGroup" Relationship="Data.Model.Diagram.FK_Article_ArticleGroup" FromRole="Article" ToRole="ArticleGroup" />
-          <NavigationProperty Name="DepreciationCategory" Relationship="Data.Model.Diagram.FK_Article_DepreciationCategory" FromRole="Article" ToRole="DepreciationCategory" />
           <NavigationProperty Name="InsuranceCategory" Relationship="Data.Model.Diagram.FK_Article_InsuranceCategory" FromRole="Article" ToRole="InsuranceCategory" />
           <NavigationProperty Name="Room" Relationship="Data.Model.Diagram.FK_Article_Room" FromRole="Article" ToRole="Room" />
           <NavigationProperty Name="SupplierBranch" Relationship="Data.Model.Diagram.FK_Article_SupplierBranch" FromRole="Article" ToRole="SupplierBranch" />
           <NavigationProperty Name="Depreciations" Relationship="Data.Model.Diagram.FK_Depreciation_Article1" FromRole="Article" ToRole="Depreciation" />
+          <Property Type="Int32" Name="DepreciationId" Nullable="false" />
+          <NavigationProperty Name="Depreciation" Relationship="Data.Model.Diagram.FK_Article_Depreciation" FromRole="Article" ToRole="Depreciation" />
         </EntityType>
         <EntityType Name="ArticleCategory">
           <Key>
@@ -535,6 +535,7 @@
           <Property Type="Int32" Name="DepreciationCategoryId" />
           <NavigationProperty Name="Article" Relationship="Data.Model.Diagram.FK_Depreciation_Article1" FromRole="Depreciation" ToRole="Article" />
           <NavigationProperty Name="DepreciationCategory" Relationship="Data.Model.Diagram.FK_Depreciation_DepreciationCategory" FromRole="Depreciation" ToRole="DepreciationCategory" />
+          <NavigationProperty Name="Articles" Relationship="Data.Model.Diagram.FK_Article_Depreciation" FromRole="Depreciation" ToRole="Article" />
         </EntityType>
         <EntityType Name="DepreciationCategory">
           <Key>
@@ -544,7 +545,6 @@
           <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="Code" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Type="Double" Name="DepreciationSpan" />
-          <NavigationProperty Name="Articles" Relationship="Data.Model.Diagram.FK_Article_DepreciationCategory" FromRole="DepreciationCategory" ToRole="Article" />
           <NavigationProperty Name="Depreciations" Relationship="Data.Model.Diagram.FK_Depreciation_DepreciationCategory" FromRole="DepreciationCategory" ToRole="Depreciation" />
         </EntityType>
         <EntityType Name="Floor">
@@ -631,18 +631,6 @@
             </Principal>
             <Dependent Role="Article">
               <PropertyRef Name="ArticleGroupId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Article_DepreciationCategory">
-          <End Type="Data.Model.Diagram.DepreciationCategory" Role="DepreciationCategory" Multiplicity="1" />
-          <End Type="Data.Model.Diagram.Article" Role="Article" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DepreciationCategory">
-              <PropertyRef Name="DepreciationCategoryId" />
-            </Principal>
-            <Dependent Role="Article">
-              <PropertyRef Name="DepreciationCategoryId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -758,6 +746,18 @@
           <End Type="Data.Model.Diagram.AppUser" Role="AppUser" Multiplicity="*" />
           <End Type="Data.Model.Diagram.Room" Role="Room" Multiplicity="*" />
         </Association>
+        <Association Name="FK_Article_Depreciation">
+          <End Type="Data.Model.Diagram.Depreciation" Role="Depreciation" Multiplicity="1" />
+          <End Type="Data.Model.Diagram.Article" Role="Article" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Depreciation">
+              <PropertyRef Name="DepreciationId" />
+            </Principal>
+            <Dependent Role="Article">
+              <PropertyRef Name="DepreciationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -783,10 +783,10 @@
           <EntitySetMapping Name="Articles">
             <EntityTypeMapping TypeName="Data.Model.Diagram.Article">
               <MappingFragment StoreEntitySet="Article">
+                <ScalarProperty Name="DepreciationId" ColumnName="DepreciationId" />
                 <ScalarProperty Name="OldBarcode" ColumnName="OldBarcode" />
                 <ScalarProperty Name="InsuranceCategoryId" ColumnName="InsuranceCategoryId" />
                 <ScalarProperty Name="ArticleCategoryId" ColumnName="ArticleCategoryId" />
-                <ScalarProperty Name="DepreciationCategoryId" ColumnName="DepreciationCategoryId" />
                 <ScalarProperty Name="AcquisitionDate" ColumnName="AcquisitionDate" />
                 <ScalarProperty Name="RoomId" ColumnName="RoomId" />
                 <ScalarProperty Name="SupplierBranchId" ColumnName="SupplierBranchId" />

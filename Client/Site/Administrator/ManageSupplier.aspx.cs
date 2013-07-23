@@ -112,8 +112,22 @@ namespace Client.Site.Administrator {
 
         protected void ListBoxControl_ItemRemove(object sender, EventArgs e) {
             ListBoxItemEventArgs eventArgs = e as ListBoxItemEventArgs;
-            this.rtbBranchPlace.Text = null;
-            this.rtbBranchPlz.Text = null;
+            if (eventArgs != null && eventArgs.Item != null) {
+                SupplierBranch supplierBranchToRemove = eventArgs.Item.DataItem as SupplierBranch;
+                if (supplierBranchToRemove != null) {
+                    if (supplierBranchToRemove.HasArticles()) {
+                        RadWindowManager1.RadAlert(String.Format("Standort kann nicht gelöscht werden, da Standort von Artikeln verwendet wird."), 300, 130, "Operation nicht möglich", "alertCallBackFn");
+                    } else {
+                        this.ListBoxControl.Remove(eventArgs.Item);
+                        this.rtbBranchPlace.Text = null;
+                        this.rtbBranchPlz.Text = null;
+                    }
+                } else {
+                    this.ListBoxControl.Remove(eventArgs.Item);
+                    this.rtbBranchPlace.Text = null;
+                    this.rtbBranchPlz.Text = null;
+                }
+            } 
         }
 
         #region FormEvents

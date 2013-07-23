@@ -26,10 +26,17 @@ namespace Data.Model.Diagram
             return ctx.SupplierBranches;
         }
 
-        public void Delete()
-        {
+        #region Public methods
+
+        public Boolean HasArticles() {
+            return this.Articles.Any();
+        }
+
+        public void Delete() {
             EntityFactory.Context.SupplierBranches.Remove(EntityFactory.Context.SupplierBranches.Where(s => s.SupplierBranchId == this.SupplierBranchId).SingleOrDefault());
         }
+
+        #endregion
 
     }
 }

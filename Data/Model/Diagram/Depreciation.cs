@@ -14,6 +14,11 @@ namespace Data.Model.Diagram
     
     public partial class Depreciation
     {
+        public Depreciation()
+        {
+            this.Articles = new HashSet<Article>();
+        }
+    
         public int DepreciationId { get; set; }
         public Nullable<int> ArticleId { get; set; }
         public Nullable<double> Value { get; set; }
@@ -24,5 +29,6 @@ namespace Data.Model.Diagram
     
         public virtual Article Article { get; set; }
         public virtual DepreciationCategory DepreciationCategory { get; set; }
+        public virtual ICollection<Article> Articles { get; set; }
     }
 }

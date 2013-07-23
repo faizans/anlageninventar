@@ -16,7 +16,6 @@ namespace Data.Model.Diagram
     {
         public DepreciationCategory()
         {
-            this.Articles = new HashSet<Article>();
             this.Depreciations = new HashSet<Depreciation>();
         }
     
@@ -25,7 +24,6 @@ namespace Data.Model.Diagram
         public string Code { get; set; }
         public Nullable<double> DepreciationSpan { get; set; }
     
-        public virtual ICollection<Article> Articles { get; set; }
         public virtual ICollection<Depreciation> Depreciations { get; set; }
     }
 }

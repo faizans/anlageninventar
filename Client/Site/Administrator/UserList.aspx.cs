@@ -1,4 +1,6 @@
 ﻿using Client.SiteMaster;
+using Data.Model;
+using Data.Model.Diagram;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +37,15 @@ namespace Client.Site.Administrator
             }
             else if (e.CommandName.ToLower() == "delete")
             {
+                AppUser userToDelete = AppUser.GetById(int.Parse((e.Item as GridDataItem)["AppUserId"].Text));
+                if (userToDelete != null) {
+                    if (userToDelete.Rooms.Any()) {
+                        RadWindowManager1.RadAlert(String.Format("{0} kann nicht gelöscht werden, da Benutzer für Raum zuständig ist.", userToDelete.Email), 300, 130, "Operation nicht möglich", "alertCallBackFn");
+                    } else {
+                        userToDelete.Delete();
+                        EntityFactory.Context.SaveChanges();
+                    }
+                }
             }
         }
     }
