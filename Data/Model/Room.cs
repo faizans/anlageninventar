@@ -17,6 +17,12 @@ namespace Data.Model.Diagram
             return ctx.Rooms.Where(c => c.RoomId == id).SingleOrDefault();
         }
 
+        public static Room GetByName(string name)
+        {
+            IP3AnlagenInventarEntities ctx = EntityFactory.Context;
+            return ctx.Rooms.Where(c => c.Name == name).SingleOrDefault();
+        }
+
         public static IEnumerable<Room> GetAll()
         {
             IP3AnlagenInventarEntities ctx = EntityFactory.Context;

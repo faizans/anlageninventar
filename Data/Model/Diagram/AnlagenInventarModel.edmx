@@ -90,6 +90,7 @@
           <Property Name="IsAdmin" Type="bit" Nullable="false" />
           <Property Name="Password" Type="varchar" MaxLength="1000" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsAdAccount" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="AppUser2Room">
           <Key>
@@ -467,6 +468,7 @@
           <Property Type="String" Name="Password" MaxLength="1000" FixedLength="false" Unicode="false" />
           <Property Type="Boolean" Name="IsActive" Nullable="false" />
           <NavigationProperty Name="Rooms" Relationship="Data.Model.Diagram.AppUser2Room" FromRole="AppUser" ToRole="Room" />
+          <Property Type="Boolean" Name="IsAdAccount" Nullable="false" />
         </EntityType>
         <EntityType Name="Article">
           <Key>
@@ -765,6 +767,7 @@
           <EntitySetMapping Name="AppUsers">
             <EntityTypeMapping TypeName="Data.Model.Diagram.AppUser">
               <MappingFragment StoreEntitySet="AppUser">
+                <ScalarProperty Name="IsAdAccount" ColumnName="IsAdAccount" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />

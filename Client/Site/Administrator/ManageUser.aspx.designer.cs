@@ -22,6 +22,24 @@ namespace Client.Site.Administrator {
         protected global::Telerik.Web.UI.RadAjaxPanel pnAjax;
         
         /// <summary>
+        /// Label9 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label9;
+        
+        /// <summary>
+        /// UserSearchBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Client.Site.Controls.UserSearchControl.UserSearchBox UserSearchBox;
+        
+        /// <summary>
         /// Label1 control.
         /// </summary>
         /// <remarks>

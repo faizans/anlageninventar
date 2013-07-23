@@ -1,4 +1,5 @@
-﻿using Data.Model;
+﻿using Client.Site.Controls.UserSearchControl;
+using Data.Model;
 using Data.Model.Diagram;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ namespace Client.Site.Administrator
     {
 
         private AppUser appUser;
+        private bool isAdAccount = false;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -26,7 +28,7 @@ namespace Client.Site.Administrator
             getParameters();
             if (!IsPostBack)
             {
-                bindSupplierData();
+                bindSupplierData(this.appUser);
             }
         }
 
@@ -36,21 +38,36 @@ namespace Client.Site.Administrator
             {
                 int appUserId = int.Parse(Request.QueryString["ui"]);
                 this.appUser = AppUser.GetById(appUserId);
+                if (appUser != null)
+                {
+                    this.UserSearchBox.Enabled = false;
+                    this.isAdAccount = appUser.IsAdAccount;
+                }
             }
         }
 
-        private void bindSupplierData()
+        private void bindSupplierData(AppUser appUser)
         {
-            if (this.appUser != null)
+            if (appUser != null)
             {
-                this.rtbFirstNAme.Text = this.appUser.FirstName;
-                this.rtbLastName.Text = this.appUser.LastName;
-                this.rtbDomain.Text = this.appUser.Domain;
-                this.rtbUsername.Text = this.appUser.UserName;
-                this.rtbEmail.Text = this.appUser.Email;
-                this.rtbPasswort.Text = this.appUser.Password;
-                this.chbIsActive.Checked = this.appUser.IsActive;
-                this.chbIsAdmin.Checked = this.appUser.IsAdmin;
+                this.rtbFirstNAme.Text = appUser.FirstName;
+                this.rtbLastName.Text = appUser.LastName;
+                this.rtbDomain.Text = appUser.Domain;
+                this.rtbUsername.Text = appUser.UserName;
+                this.rtbEmail.Text = appUser.Email;
+                this.rtbPasswort.Text = appUser.Password;
+                this.chbIsActive.Checked = appUser.IsActive;
+                this.chbIsAdmin.Checked = appUser.IsAdmin;
+
+                if (this.isAdAccount)
+                {
+                    this.rtbFirstNAme.Enabled = false;
+                    this.rtbLastName.Enabled = false;
+                    this.rtbDomain.Enabled = false;
+                    this.rtbUsername.Enabled = false;
+                    this.rtbEmail.Enabled = false;
+                    this.rtbPasswort.Enabled = false;
+                }
             }
         }
 
@@ -59,6 +76,7 @@ namespace Client.Site.Administrator
             if (this.appUser == null)
             {
                 this.appUser = new AppUser();
+                this.appUser.IsAdAccount = this.isAdAccount;
                 EntityFactory.Context.AppUsers.Add(this.appUser);
             }
 
@@ -78,6 +96,19 @@ namespace Client.Site.Administrator
         #endregion
 
         #region Events
+
+        protected void UserSearchBox_UserSearchBoxIndexChanged(object sender, EventArgs e)
+        {
+            this.isAdAccount = false;
+
+            UserSearchBoxEventArgs userEvent = e as UserSearchBoxEventArgs;
+
+            if (userEvent != null && userEvent.SelectedUser != null)
+            {
+                this.isAdAccount = true;
+                bindSupplierData(userEvent.SelectedUser);
+            }
+        }
 
         protected void btnBack_Click(object sender, EventArgs e)
         {

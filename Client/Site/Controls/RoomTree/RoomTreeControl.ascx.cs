@@ -147,7 +147,9 @@ namespace Client.Site.Controls.RoomTree
                 //Additional form for room
                 if (dataItemType == typeof(Room).ToString())
                 {
+                    Room selectedRoom = Room.GetByName(this.txtNodeName.Text);
                     this.ResponsibleAttribute.Visible = true;
+                    this.UserSearchBox.Text = selectedRoom != null ? selectedRoom.Name : "";
                 }
                 else
                 {
@@ -273,7 +275,7 @@ namespace Client.Site.Controls.RoomTree
                 }
 
                 roomToSave.Name = this.txtNodeName.Text;
-                AppUser responsibleUser = AppUser.GetByUserName(this.rcbResponsible.Text);
+                AppUser responsibleUser = AppUser.GetByEmail(this.UserSearchBox.Text);
                 if (responsibleUser != null)
                 {
                     if (roomToSave.AppUsers.Where(a => a.AppUserId == responsibleUser.AppUserId).Any())

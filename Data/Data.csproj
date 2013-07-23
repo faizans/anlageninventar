@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enum\Enum.cs" />
     <Compile Include="Model\ArticleCategory.cs" />
     <Compile Include="Model\Building.cs" />
     <Compile Include="Model\AppUser.cs" />

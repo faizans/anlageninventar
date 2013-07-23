@@ -1,4 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="RoomTreeControl.ascx.cs" Inherits="Client.Site.Controls.RoomTree.RoomTreeControl" %>
+<%@ Register Src="~/Site/Controls/UserSearchControl/UserSearchBox.ascx" TagPrefix="uc1" TagName="UserSearchBox" %>
+
 <telerik:RadAjaxPanel ID="RadAjaxPanel1" runat="server">
 
     <div style="margin-bottom: 20px;">
@@ -19,13 +21,13 @@
         <div id="Div1" class="content_input_form" runat="server">
             <div class="input_form_row">
                 <asp:Label ID="Label0" runat="server" Text="Name" CssClass="element_label"></asp:Label>
-                <telerik:RadTextBox ID="txtNodeName" runat="server"></telerik:RadTextBox>
+                <telerik:RadTextBox ID="txtNodeName" runat="server" Width="200px"></telerik:RadTextBox>
             </div>
         </div>
         <div class="content_input_form" runat="server" id="ResponsibleAttribute" visible="false">
             <div class="input_form_row">
                 <asp:Label ID="Label1" runat="server" Text="Verantwortlich" CssClass="element_label"></asp:Label>
-                <telerik:RadComboBox ID="rcbResponsible" runat="server"></telerik:RadComboBox>
+                <uc1:UserSearchBox runat="server" ID="UserSearchBox" Width="200px" MinimumInput="3"/>
             </div>
         </div>
         <div class="input_interaction_row">

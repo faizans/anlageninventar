@@ -1,7 +1,15 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteMaster/NoMenuMaster.Master" AutoEventWireup="true" CodeBehind="ManageUser.aspx.cs" Inherits="Client.Site.Administrator.ManageUser" %>
+
+<%@ Register Src="~/Site/Controls/UserSearchControl/UserSearchBox.ascx" TagPrefix="uc1" TagName="UserSearchBox" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
     <telerik:RadAjaxPanel ID="pnAjax" runat="server">
         <div class="content_input_form">
+            <!-- ADUSer -->
+            <div class="input_form_row">
+                <asp:Label ID="Label9" runat="server" Text="AD Benutzer" CssClass="element_label"></asp:Label>
+                <uc1:UserSearchBox runat="server" ID="UserSearchBox"  Width="300px" MinimumInput="3" OnUserSearchBoxIndexChanged="UserSearchBox_UserSearchBoxIndexChanged" />
+            </div>
             <!-- FirstName -->
             <div class="input_form_row">
                 <asp:Label ID="Label1" runat="server" Text="Vorname" CssClass="element_label"></asp:Label>
