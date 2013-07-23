@@ -1,0 +1,2 @@
+Raum löschen nach neu erstellen
+Verwantwortlichen zufügen - wird manchmal überschrieben

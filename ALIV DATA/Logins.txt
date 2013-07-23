@@ -1,0 +1,9 @@
+VPN:
+USER: 		inventar
+PASSWORD:	13-FH_projects
+(212.117.97.226:8443)
+
+Server:
+NAME:		SRV-INVENTAR (192.168.10.10)
+USER:		Administrator
+paSSWORD:	fh_project13

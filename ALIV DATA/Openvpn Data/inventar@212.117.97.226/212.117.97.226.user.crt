@@ -1,0 +1,78 @@
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number:
+            de:45:13:c9:ec:d9:bc:13
+        Signature Algorithm: sha1WithRSAEncryption
+        Issuer: C=ch, L=Lenzburg, O=Berufsschule Lenzburg, CN=Berufsschule Lenzburg VPN CA/emailAddress=firewall@bslenzburg.ch
+        Validity
+            Not Before: Jul 22 08:03:42 2013 GMT
+            Not After : Oct 26 11:51:26 2034 GMT
+        Subject: C=ch, L=Lenzburg, O=Berufsschule Lenzburg, CN=inventar
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                Public-Key: (2048 bit)
+                Modulus:
+                    00:c2:45:24:56:e3:73:b3:8f:03:4f:1b:11:ab:65:
+                    9e:49:95:02:19:9d:ee:92:59:27:aa:ca:26:23:84:
+                    2b:22:78:30:4f:53:26:f7:74:2b:07:f8:ad:b4:28:
+                    86:8d:00:f4:4e:6a:bd:b0:37:c2:48:8c:89:42:05:
+                    66:c7:bc:55:1b:7c:d7:37:98:e1:92:78:3b:38:ab:
+                    74:e4:53:b1:ad:44:14:ea:84:0e:26:5f:83:3d:df:
+                    61:dc:d6:72:4b:41:2f:7b:af:69:62:44:0b:39:a3:
+                    cc:24:92:81:99:26:3d:55:a1:04:2a:a1:e6:46:05:
+                    93:95:03:81:e8:5d:aa:53:7b:0f:d6:6f:3d:3a:6c:
+                    db:4b:b3:13:89:f7:55:de:0e:8e:15:94:d1:0e:79:
+                    8a:3d:f2:b8:5b:4d:40:f4:ed:df:1a:46:d0:02:d6:
+                    ff:ff:7c:2a:f5:06:e5:46:fa:fe:78:63:a6:4b:39:
+                    da:eb:47:27:65:99:3a:dc:fa:7e:56:ee:eb:b3:be:
+                    e9:e7:6b:97:09:27:cc:af:67:de:c6:36:9a:4f:1c:
+                    4f:94:b2:a9:7f:6a:49:f9:72:79:79:f6:6b:b7:86:
+                    e7:5b:c9:6f:11:24:42:b7:88:44:00:6f:ab:78:b1:
+                    87:1a:73:a8:22:92:c6:21:4f:27:6d:f8:a2:ca:99:
+                    6f:11
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            X509v3 Subject Key Identifier: 
+                DE:20:38:FD:3F:66:56:73:54:1D:45:48:E1:68:B7:14:A2:E2:5C:8F
+            X509v3 Authority Key Identifier: 
+                keyid:ED:57:9B:38:3F:BE:58:08:4D:C4:04:66:15:8F:E6:65:1F:29:5B:E0
+                DirName:/C=ch/L=Lenzburg/O=Berufsschule Lenzburg/CN=Berufsschule Lenzburg VPN CA/emailAddress=firewall@bslenzburg.ch
+                serial:DE:45:13:C9:EC:D9:BB:77
+
+            X509v3 Basic Constraints: 
+                CA:FALSE
+            X509v3 Key Usage: 
+                Digital Signature, Non Repudiation, Key Encipherment
+    Signature Algorithm: sha1WithRSAEncryption
+        08:93:4d:17:7a:44:95:aa:28:c7:c9:4c:a5:86:96:27:8f:54:
+        2b:4d:b5:da:59:cf:a2:9f:03:31:bd:1e:0d:0e:79:a7:f2:d7:
+        19:25:5e:4b:b4:d9:91:7a:13:58:0a:75:12:05:6f:17:d2:f1:
+        36:9c:d0:87:cc:ef:db:0c:87:ce:4b:16:22:83:f0:bd:59:b4:
+        38:61:0d:72:78:2d:e6:37:9f:d1:c1:44:0c:84:e3:3f:65:82:
+        7d:0a:d5:c9:d5:8c:27:ca:11:a0:8b:30:8c:df:ec:7f:fe:82:
+        2f:74:8f:3d:b9:dd:b8:f8:9d:4e:50:a7:ce:e3:fe:1b:e5:0b:
+        cf:ea
+-----BEGIN CERTIFICATE-----
+MIID5jCCA0+gAwIBAgIJAN5FE8ns2bwTMA0GCSqGSIb3DQEBBQUAMIGOMQswCQYD
+VQQGEwJjaDERMA8GA1UEBxMITGVuemJ1cmcxHjAcBgNVBAoTFUJlcnVmc3NjaHVs
+ZSBMZW56YnVyZzElMCMGA1UEAxMcQmVydWZzc2NodWxlIExlbnpidXJnIFZQTiBD
+QTElMCMGCSqGSIb3DQEJARYWZmlyZXdhbGxAYnNsZW56YnVyZy5jaDAeFw0xMzA3
+MjIwODAzNDJaFw0zNDEwMjYxMTUxMjZaMFMxCzAJBgNVBAYTAmNoMREwDwYDVQQH
+DAhMZW56YnVyZzEeMBwGA1UECgwVQmVydWZzc2NodWxlIExlbnpidXJnMREwDwYD
+VQQDDAhpbnZlbnRhcjCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMJF
+JFbjc7OPA08bEatlnkmVAhmd7pJZJ6rKJiOEKyJ4ME9TJvd0Kwf4rbQoho0A9E5q
+vbA3wkiMiUIFZse8VRt81zeY4ZJ4OzirdORTsa1EFOqEDiZfgz3fYdzWcktBL3uv
+aWJECzmjzCSSgZkmPVWhBCqh5kYFk5UDgehdqlN7D9ZvPTps20uzE4n3Vd4OjhWU
+0Q55ij3yuFtNQPTt3xpG0ALW//98KvUG5Ub6/nhjpks52utHJ2WZOtz6flbu67O+
+6edrlwknzK9n3sY2mk8cT5SyqX9qSflyeXn2a7eG51vJbxEkQreIRABvq3ixhxpz
+qCKSxiFPJ234osqZbxECAwEAAaOCAQAwgf0wHQYDVR0OBBYEFN4gOP0/ZlZzVB1F
+SOFotxSi4lyPMIHDBgNVHSMEgbswgbiAFO1Xmzg/vlgITcQEZhWP5mUfKVvgoYGU
+pIGRMIGOMQswCQYDVQQGEwJjaDERMA8GA1UEBxMITGVuemJ1cmcxHjAcBgNVBAoT
+FUJlcnVmc3NjaHVsZSBMZW56YnVyZzElMCMGA1UEAxMcQmVydWZzc2NodWxlIExl
+bnpidXJnIFZQTiBDQTElMCMGCSqGSIb3DQEJARYWZmlyZXdhbGxAYnNsZW56YnVy
+Zy5jaIIJAN5FE8ns2bt3MAkGA1UdEwQCMAAwCwYDVR0PBAQDAgXgMA0GCSqGSIb3
+DQEBBQUAA4GBAAiTTRd6RJWqKMfJTKWGliePVCtNtdpZz6KfAzG9Hg0Oeafy1xkl
+Xku02ZF6E1gKdRIFbxfS8Tac0IfM79sMh85LFiKD8L1ZtDhhDXJ4LeY3n9HBRAyE
+4z9lgn0K1cnVjCfKEaCLMIzf7H/+gi90jz253bj4nU5Qp87j/hvlC8/q
+-----END CERTIFICATE-----

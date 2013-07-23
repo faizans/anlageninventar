@@ -1,0 +1,16 @@
+ONLY RELATED TO EMANUEL MISTRETTA
+
+Bugs:
+1. Delete Room after creating and saving a new one.				2h
+2. OnSelectedIndexChanged on ListBoxControl -> changes other items text		1h
+->(enablePageMethods call pagemethod on keyup)
+3. Assign Responsible person to room						2h
+
+Todo:
+1. Implement Secure Delete functions (Check if children are set to object)	2h	
+2. Articlemanagement								2h
+3. Report									10h
+4. Filteroptions on each grid							2h
+5. Login as other people							1h
+6. Print grids									1h
+7. Export grids									1h

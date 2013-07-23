@@ -1,0 +1,59 @@
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number:
+            de:45:13:c9:ec:d9:bb:77
+        Signature Algorithm: md5WithRSAEncryption
+        Issuer: C=ch, L=Lenzburg, O=Berufsschule Lenzburg, CN=Berufsschule Lenzburg VPN CA/emailAddress=firewall@bslenzburg.ch
+        Validity
+            Not Before: Jun 11 11:51:59 2007 GMT
+            Not After : Oct 26 11:51:59 2034 GMT
+        Subject: C=ch, L=Lenzburg, O=Berufsschule Lenzburg, CN=Berufsschule Lenzburg VPN CA/emailAddress=firewall@bslenzburg.ch
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+            RSA Public Key: (1024 bit)
+                Modulus (1024 bit):
+                    00:b2:21:ba:9a:5f:bc:7a:ce:e4:e3:ec:8c:94:06:
+                    71:8f:33:25:23:84:fc:d9:ef:75:9a:f4:fb:cd:47:
+                    48:ed:b7:3e:0c:53:84:5e:c2:a3:1c:65:e4:ed:f4:
+                    a4:c5:72:82:43:96:70:47:07:17:68:ec:25:3b:43:
+                    13:ad:2d:56:bc:da:54:04:f2:51:26:5d:17:52:91:
+                    71:12:c2:d9:a3:e2:08:ae:c4:55:7f:08:ee:41:ea:
+                    9a:f4:6c:2b:fc:e5:10:fc:9c:8d:85:b3:86:e5:3a:
+                    d1:b2:8b:f9:01:85:66:32:7c:47:c5:c6:68:60:e9:
+                    c0:37:b7:49:4d:45:62:2d:93
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            X509v3 Subject Key Identifier: 
+                ED:57:9B:38:3F:BE:58:08:4D:C4:04:66:15:8F:E6:65:1F:29:5B:E0
+            X509v3 Basic Constraints: 
+                CA:TRUE
+            X509v3 Subject Alternative Name: 
+                IP Address:127.0.0.1
+    Signature Algorithm: md5WithRSAEncryption
+        22:28:37:ef:2b:0f:a3:db:e7:d2:db:01:c4:7d:83:ce:e1:bd:
+        dd:cb:db:6e:f6:8e:a3:8c:c6:bf:53:ee:64:56:f3:a3:3f:89:
+        a2:a5:53:a8:bb:fa:c4:73:27:b3:ec:da:56:98:f6:78:06:38:
+        14:97:1f:4d:9c:5e:1a:92:8b:36:60:9a:53:89:47:d6:83:6d:
+        66:8e:c8:6d:98:cd:36:57:4e:ed:32:45:37:ff:65:a9:58:47:
+        a8:1c:fc:22:9c:b7:8b:df:b2:00:0f:c3:7a:0b:05:b9:12:b2:
+        9a:2a:c0:91:d4:5e:4f:70:57:5f:2d:c9:76:0e:18:c2:3f:a6:
+        ff:ea
+-----BEGIN CERTIFICATE-----
+MIIC3DCCAkWgAwIBAgIJAN5FE8ns2bt3MA0GCSqGSIb3DQEBBAUAMIGOMQswCQYD
+VQQGEwJjaDERMA8GA1UEBxMITGVuemJ1cmcxHjAcBgNVBAoTFUJlcnVmc3NjaHVs
+ZSBMZW56YnVyZzElMCMGA1UEAxMcQmVydWZzc2NodWxlIExlbnpidXJnIFZQTiBD
+QTElMCMGCSqGSIb3DQEJARYWZmlyZXdhbGxAYnNsZW56YnVyZy5jaDAeFw0wNzA2
+MTExMTUxNTlaFw0zNDEwMjYxMTUxNTlaMIGOMQswCQYDVQQGEwJjaDERMA8GA1UE
+BxMITGVuemJ1cmcxHjAcBgNVBAoTFUJlcnVmc3NjaHVsZSBMZW56YnVyZzElMCMG
+A1UEAxMcQmVydWZzc2NodWxlIExlbnpidXJnIFZQTiBDQTElMCMGCSqGSIb3DQEJ
+ARYWZmlyZXdhbGxAYnNsZW56YnVyZy5jaDCBnzANBgkqhkiG9w0BAQEFAAOBjQAw
+gYkCgYEAsiG6ml+8es7k4+yMlAZxjzMlI4T82e91mvT7zUdI7bc+DFOEXsKjHGXk
+7fSkxXKCQ5ZwRwcXaOwlO0MTrS1WvNpUBPJRJl0XUpFxEsLZo+IIrsRVfwjuQeqa
+9Gwr/OUQ/JyNhbOG5TrRsov5AYVmMnxHxcZoYOnAN7dJTUViLZMCAwEAAaNAMD4w
+HQYDVR0OBBYEFO1Xmzg/vlgITcQEZhWP5mUfKVvgMAwGA1UdEwQFMAMBAf8wDwYD
+VR0RBAgwBocEfwAAATANBgkqhkiG9w0BAQQFAAOBgQAiKDfvKw+j2+fS2wHEfYPO
+4b3dy9tu9o6jjMa/U+5kVvOjP4mipVOou/rEcyez7NpWmPZ4BjgUlx9NnF4akos2
+YJpTiUfWg21mjshtmM02V07tMkU3/2WpWEeoHPwinLeL37IAD8N6CwW5ErKaKsCR
+1F5PcFdfLcl2DhjCP6b/6g==
+-----END CERTIFICATE-----
