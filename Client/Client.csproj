@@ -179,6 +179,7 @@
     <Content Include="Site\Administrator\UserList.aspx" />
     <Content Include="Site\Controls\ListBox2\ListBoxControl.ascx" />
     <Content Include="Site\Controls\Menu\MenuControl.ascx" />
+    <Content Include="Site\Controls\RoomTree2\RoomTreeControl.ascx" />
     <Content Include="Site\Controls\RoomTree\RoomTreeControl.ascx" />
     <Content Include="Site\Controls\UserSearchControl\UserSearchBox.ascx" />
     <Content Include="Web.config">
@@ -302,6 +303,14 @@
     <Compile Include="Site\Controls\Menu\MenuControl.ascx.designer.cs">
       <DependentUpon>MenuControl.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Site\Controls\RoomTree2\RoomTreeControl.ascx.cs">
+      <DependentUpon>RoomTreeControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site\Controls\RoomTree2\RoomTreeControl.ascx.designer.cs">
+      <DependentUpon>RoomTreeControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Site\Controls\RoomTree2\RoomTreeItem.cs" />
     <Compile Include="Site\Controls\RoomTree\CustomTreeNodeItem.cs" />
     <Compile Include="Site\Controls\RoomTree\RoomTreeControl.ascx.cs">
       <DependentUpon>RoomTreeControl.ascx</DependentUpon>
@@ -365,7 +374,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
+      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

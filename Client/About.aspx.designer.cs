@@ -13,12 +13,12 @@ namespace Client {
     public partial class About {
         
         /// <summary>
-        /// UserSearchBox control.
+        /// RoomTreeControl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Client.Site.Controls.UserSearchControl.UserSearchBox UserSearchBox;
+        protected global::Client.Site.Controls.RoomTree2.RoomTreeControl RoomTreeControl;
     }
 }

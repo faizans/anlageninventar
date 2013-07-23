@@ -12,7 +12,9 @@ namespace Client
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack) {
+                this.RoomTreeControl.RoomTreeItems = null;
+            }
         }
 
         public CustomMaster SiteMaster
