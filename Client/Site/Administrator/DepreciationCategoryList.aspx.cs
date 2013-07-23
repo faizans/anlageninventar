@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Client.SiteMaster;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,7 +13,14 @@ namespace Client.Site.Administrator
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            SiteMaster.StandardMaster.InfoText = "Abschreibungskategorien - Verwaltung";
+        }
 
+        public CustomMaster SiteMaster {
+            get {
+                CustomMaster mm = (CustomMaster)Page.Master;
+                return mm;
+            }
         }
 
         protected void rgCategories_ItemCommand(object sender, Telerik.Web.UI.GridCommandEventArgs e)

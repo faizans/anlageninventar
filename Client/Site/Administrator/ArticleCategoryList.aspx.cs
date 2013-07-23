@@ -1,4 +1,5 @@
-﻿using Data.Model;
+﻿using Client.SiteMaster;
+using Data.Model;
 using Data.Model.Diagram;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,14 @@ using Telerik.Web.UI;
 namespace Client.Site.Administrator {
     public partial class ArticleCategoryList : System.Web.UI.Page {
         protected void Page_Load(object sender, EventArgs e) {
+            SiteMaster.StandardMaster.InfoText = "Artikelkategorie-Verwaltung";
+        }
 
+        public CustomMaster SiteMaster {
+            get {
+                CustomMaster mm = (CustomMaster)Page.Master;
+                return mm;
+            }
         }
 
         #region Events

@@ -32,5 +32,11 @@ namespace Client.SiteMaster
                 return Session[SessionName.LoggedUser.ToString()] as AppUser;
             }
         }
+
+        public StandardMaster StandardMaster {
+            get {
+                return Page.Master as StandardMaster;
+            }
+        }
     }
 }

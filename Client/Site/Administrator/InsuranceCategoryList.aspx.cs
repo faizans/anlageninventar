@@ -1,4 +1,5 @@
-﻿using Data.Model;
+﻿using Client.SiteMaster;
+using Data.Model;
 using Data.Model.Diagram;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,14 @@ namespace Client.Site.Administrator
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            SiteMaster.StandardMaster.InfoText = "Versicherungskategorien - Verwaltung";
+        }
 
+        public CustomMaster SiteMaster {
+            get {
+                CustomMaster mm = (CustomMaster)Page.Master;
+                return mm;
+            }
         }
 
         protected void rgCategories_ItemCommand(object sender, Telerik.Web.UI.GridCommandEventArgs e)

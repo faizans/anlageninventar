@@ -1,4 +1,5 @@
 ﻿
+using Client.SiteMaster;
 using Data.Model;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,14 @@ namespace Client.Site.Administrator
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-           
+            SiteMaster.StandardMaster.InfoText = "Lagerräume - Verwaltung";
+        }
+
+        public CustomMaster SiteMaster {
+            get {
+                CustomMaster mm = (CustomMaster)Page.Master;
+                return mm;
+            }
         }
     }
 }

@@ -13,5 +13,11 @@ namespace Client.SiteMaster
         {
 
         }
+
+        public String InfoText {
+            set {
+                this.lblInfoText.Text = value;
+            }
+        }
     }
 }

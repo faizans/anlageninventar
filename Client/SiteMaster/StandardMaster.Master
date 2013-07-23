@@ -19,11 +19,14 @@
         <div class="Wrapper_Div">
             <div class="Header_Div">
                 <div class="Header_Logo_Div">
-                    <img runat="server" src="~/Resources/Images/Logo/BSL-Logo.jpg" />
+                    <%--<img runat="server" src="~/Resources/Images/Logo/BSL-Logo.jpg" />--%>
                 </div>
                 <div class="Header_Menu_Div">
                     <uc1:MenuControl runat="server" ID="MenuControl" />
                 </div>
+            </div>
+            <div class="Title_Div">
+                <asp:Label ID="lblInfoText" runat="server" Text=""></asp:Label>
             </div>
             <div class="Body_Div">
                 <asp:ContentPlaceHolder ID="ContentPlaceHolder" runat="server" />
