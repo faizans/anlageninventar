@@ -1,20 +1,16 @@
 ONLY RELATED TO EMANUEL MISTRETTA
 
 Bugs:
-1. Delete Room after creating and saving a new one.				2h	DONE
-2. OnSelectedIndexChanged on ListBoxControl -> changes other items text		1h	DONE
-3. Assign Responsible person to room						2h	DONE
-4. Refresh grids after delete							30min	DONE
-->DepreciationCategory and Supplier
-5. BuildingTree -> duplicated ids on saving new stockwerk			1h	DoNE
+1. Bind rooms to right floor							2h	DONE
+2. Delete rooms									2h
 
 Todo:
 1. Implement Secure Delete functions (Check if children are set to object)	2h
 	-> Articles	
-2. Articlemanagement								4h
+2. Articlemanagement								4h	DONE
 3. Report									10h
-4. Filteroptions on each grid							2h
+4. Filteroptions on articlemgmt							2h	DONE
 5. Login as other people							1h
 6. Print grids									1h
 7. Export grids									1h
-8. Copy Articles from to another room						2h
+8. Copy Articles from to another room						2h	DONE

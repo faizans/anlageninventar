@@ -84,6 +84,8 @@ namespace Client.Site.Controls.RoomTree {
             IEnumerable<Building> buildings = Building.GetAll();
             if (buildings.Any()) {
                 int buildingId = 10000000;
+                int floorId = 2000000;
+                int roomId = 3000000;
                 foreach (Building building in buildings) {
                     RoomTreeItem buildingItem = new RoomTreeItem(buildingId, -1, building.Name, building.BuildingId.ToString(), building);
                     //
@@ -92,7 +94,6 @@ namespace Client.Site.Controls.RoomTree {
                     //Floors
                     IEnumerable<Floor> floors = building.Floors;
                     if (floors.Any()) {
-                        int floorId = 2000000;
                         foreach (Floor floor in floors) {
                             RoomTreeItem floorItem = new RoomTreeItem(floorId, buildingId, floor.Name, floor.FloorId.ToString(), floor);
                             //
@@ -101,7 +102,6 @@ namespace Client.Site.Controls.RoomTree {
                             //Rooms
                             IEnumerable<Room> rooms = floor.Rooms;
                             if (rooms.Any()) {
-                                int roomId = 3000000;
                                 foreach (Room room in rooms) {
                                     RoomTreeItem roomItem = new RoomTreeItem(roomId, floorId, room.Name, room.RoomId.ToString(), room);
                                     //

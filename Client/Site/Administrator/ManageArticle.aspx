@@ -16,7 +16,7 @@
             <div class="input_form_row">
                 <asp:Label ID="Label3" runat="server" Text="Anzahl" CssClass="element_label"></asp:Label>
                 <telerik:RadNumericTextBox ID="rtbAmount" runat="server" Width="300px"
-                    OnTextChanged="rtbAmount_TextChanged" AutoPostBack="true">
+                    OnTextChanged="rtbAmount_TextChanged" AutoPostBack="true" CausesValidation="false">
                 </telerik:RadNumericTextBox>
                 <asp:RequiredFieldValidator ID="rfvAmount" runat="server" ErrorMessage="Eingabe benötigt." ControlToValidate="rtbAmount" Display="Dynamic" />
             </div>
@@ -25,7 +25,6 @@
             <div class="input_form_row">
                 <asp:Label ID="Label2" runat="server" Text="Barcode" CssClass="element_label"></asp:Label>
                 <telerik:RadTextBox ID="rtbBarcode" runat="server" Width="300px" ReadOnly="false"></telerik:RadTextBox>
-                <asp:RequiredFieldValidator ID="rfvBarcode" runat="server" ErrorMessage="Eingabe benötigt." ControlToValidate="rtbBarcode" Display="Dynamic" />
             </div>
 
             <asp:Panel runat="server" ID="GroupPanel" Visible="false">
@@ -59,13 +58,41 @@
                  <asp:RequiredFieldValidator ID="rfvDate" runat="server" ErrorMessage="Eingabe benötigt." ControlToValidate="rdpAcquisitionDate" Display="Dynamic" />
             </div>
 
+             <!-- Building -->
+            <div class="input_form_row">
+                <asp:Label ID="Label17" runat="server" Text="Gebäude" CssClass="element_label"></asp:Label>
+                <telerik:RadComboBox ID="rcbBuilding" runat="server" Width="300px"
+                    DataValueField="BuildingId" DataTextField="Name"
+                    OnSelectedIndexChanged="rcbBuilding_SelectedIndexChanged" AutoPostBack="true" CausesValidation="false"
+                    EmptyMessage="- Bitte auswählen -">
+                </telerik:RadComboBox>
+            </div>
+            <!-- Floor -->
+            <div class="input_form_row">
+                <asp:Label ID="Label18" runat="server" Text="Stockwerk" CssClass="element_label"></asp:Label>
+                <telerik:RadComboBox ID="rcbFloor" runat="server" Width="300px"
+                    DataValueField="FloorId" DataTextField="Name"
+                    OnSelectedIndexChanged="rcbFloor_SelectedIndexChanged" AutoPostBack="true" CausesValidation="false"
+                    EmptyMessage="- Bitte auswählen -">
+                </telerik:RadComboBox>
+            </div>
+            <!-- Room -->
+            <div class="input_form_row">
+                <asp:Label ID="Label19" runat="server" Text="Raum" CssClass="element_label"></asp:Label>
+                <telerik:RadComboBox ID="rcbRoom" runat="server" Width="300px"
+                    DataValueField="RoomId" DataTextField="Name" CausesValidation="false"
+                    EmptyMessage="- Bitte auswählen -">
+                </telerik:RadComboBox>
+                <asp:RequiredFieldValidator ID="rfvRoom" runat="server" ErrorMessage="Eingabe benötigt." ControlToValidate="rcbRoom" Display="Dynamic" />
+            </div>
+
             <!-- Supplier -->
             <div class="input_form_row">
                 <asp:Label ID="Label15" runat="server" Text="Lieferant" CssClass="element_label"></asp:Label>
                 <telerik:RadComboBox ID="rcbSupplier" runat="server" Width="300px"
                     DataValueField="SupplierId" DataTextField="Name"
-                    OnSelectedIndexChanged="rcbLieferant_SelectedIndexChanged" AutoPostBack="true"
-                    EmptyMessage="- Bitte auswählen -">
+                    OnSelectedIndexChanged="rcbLieferant_SelectedIndexChanged" AutoPostBack="true" CausesValidation="false"
+                    EmptyMessage="- Bitte auswählen -" >
                 </telerik:RadComboBox>
             </div>
 
@@ -73,7 +100,7 @@
             <div class="input_form_row">
                 <asp:Label ID="Label16" runat="server" Text="Standort" CssClass="element_label"></asp:Label>
                 <telerik:RadComboBox ID="rcbSupplierBranch" runat="server" Width="300px"
-                    DataValueField="SupplierBranchId" DataTextField="Name"
+                    DataValueField="SupplierBranchId" DataTextField="Name" CausesValidation="false"
                     EmptyMessage="- Bitte auswählen -">
                 </telerik:RadComboBox>
             </div>
@@ -82,7 +109,7 @@
             <div class="input_form_row">
                 <asp:Label ID="Label9" runat="server" Text="Aritkelkategorie" CssClass="element_label"></asp:Label>
                 <telerik:RadComboBox ID="rcbArticleCategory" runat="server" Width="300px"
-                    DataValueField="ArticleCategoryId" DataTextField="Name"
+                    DataValueField="ArticleCategoryId" DataTextField="Name" CausesValidation="false"
                     EmptyMessage="- Bitte auswählen -">
                 </telerik:RadComboBox>
             </div>
@@ -91,7 +118,7 @@
             <div class="input_form_row">
                 <asp:Label ID="Label10" runat="server" Text="Versicherungskategorie" CssClass="element_label"></asp:Label>
                 <telerik:RadComboBox ID="rcbInsuranceCategory" runat="server" Width="300px"
-                    DataValueField="InsuranceCategoryId" DataTextField="Name"
+                    DataValueField="InsuranceCategoryId" DataTextField="Name" CausesValidation="false"
                     EmptyMessage="- Bitte auswählen -">
                 </telerik:RadComboBox>
             </div>
@@ -101,7 +128,7 @@
                 <asp:Label ID="Label11" runat="server" Text="Abschreibungskategorie" CssClass="element_label"></asp:Label>
                 <telerik:RadComboBox ID="rcbDepreciationCategory" runat="server" Width="300px"
                     DataValueField="DepreciationCategoryId" DataTextField="Name"
-                    OnSelectedIndexChanged="rcbDepreciationCategory_SelectedIndexChanged" AutoPostBack="true"
+                    OnSelectedIndexChanged="rcbDepreciationCategory_SelectedIndexChanged" AutoPostBack="true" CausesValidation="false"
                     EmptyMessage="- Bitte auswählen -">
                 </telerik:RadComboBox>
             </div>
@@ -109,37 +136,9 @@
             <div class="input_form_row">
                 <asp:Label ID="Label12" runat="server" Text="Interval" CssClass="element_label"></asp:Label>
                 <telerik:RadComboBox ID="rcbDepreciationInterval" runat="server" Width="300px"
-                    DataValueField="DepreciationId" DataTextField="Name"
+                    DataValueField="DepreciationId" DataTextField="Name" CausesValidation="false"
                     EmptyMessage="- Bitte auswählen -">
                 </telerik:RadComboBox>
-            </div>
-
-            <!-- Building -->
-            <div class="input_form_row">
-                <asp:Label ID="Label17" runat="server" Text="Gebäude" CssClass="element_label"></asp:Label>
-                <telerik:RadComboBox ID="rcbBuilding" runat="server" Width="300px"
-                    DataValueField="BuildingId" DataTextField="Name"
-                    OnSelectedIndexChanged="rcbBuilding_SelectedIndexChanged" AutoPostBack="true"
-                    EmptyMessage="- Bitte auswählen -">
-                </telerik:RadComboBox>
-            </div>
-            <!-- Floor -->
-            <div class="input_form_row">
-                <asp:Label ID="Label18" runat="server" Text="Stockwerk" CssClass="element_label"></asp:Label>
-                <telerik:RadComboBox ID="rcbFloor" runat="server" Width="300px"
-                    DataValueField="FloorId" DataTextField="Name"
-                    OnSelectedIndexChanged="rcbFloor_SelectedIndexChanged" AutoPostBack="true"
-                    EmptyMessage="- Bitte auswählen -">
-                </telerik:RadComboBox>
-            </div>
-            <!-- Room -->
-            <div class="input_form_row">
-                <asp:Label ID="Label19" runat="server" Text="Raum" CssClass="element_label"></asp:Label>
-                <telerik:RadComboBox ID="rcbRoom" runat="server" Width="300px"
-                    DataValueField="RoomId" DataTextField="Name"
-                    EmptyMessage="- Bitte auswählen -">
-                </telerik:RadComboBox>
-                <asp:RequiredFieldValidator ID="rfvRoom" runat="server" ErrorMessage="Eingabe benötigt." ControlToValidate="rcbRoom" Display="Dynamic" />
             </div>
 
             <!-- Old Barcode -->
@@ -157,7 +156,7 @@
             <!-- IsAvailable -->
             <div class="input_form_row">
                 <asp:Label ID="Label7" runat="server" Text="Ist vorhanden" CssClass="element_label"></asp:Label>
-                <asp:CheckBox ID="chbIsAvailable" runat="server" />
+                <asp:CheckBox ID="chbIsAvailable" runat="server" CausesValidation="false"/>
             </div>
 
         </div>

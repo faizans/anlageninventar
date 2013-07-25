@@ -40,6 +40,10 @@ namespace Client.Site.Administrator {
                             if (articleToMove != null) {
                                 articleToMove.Room = this.selectedTargetRoom;
                             }
+                            if (articleToMove.ArticleGroup != null
+                                && !articleToMove.ArticleGroup.Articles.Where(a => !a.IsDeleted && a.Room.Name != this.selectedTargetRoom.Name).Any()) {
+                                    articleToMove.ArticleGroup.Room = this.selectedTargetRoom;
+                            }
                         }
                     }
                 }

@@ -16,7 +16,7 @@
                 <CommandItemTemplate>
                     <div style="padding: 5px;">
                         <telerik:RadButton ID="btnNew" runat="server" CommandName="InitInsert" Text="Neuer Artikel" />
-                        <telerik:RadButton ID="btnDeleteSelection" runat="server" Text="Löschen" CommandName="DeleteSelection" OnClientClicking="OnClientClicking"/>
+                        <telerik:RadButton ID="btnDeleteSelection" runat="server" Text="Löschen" CommandName="DeleteSelection" OnClientClicking="OnClientClicking" />
 
                         <telerik:RadComboBox ID="rcbTargetRoom" runat="server" Label="Verschiebe nach:"
                             DataSourceID="RoomDataSource" DataValueField="RoomId" DataTextField="RoomPath" EmptyMessage="- Raum wählen -"
@@ -54,16 +54,17 @@
 
         </telerik:RadGrid>
         <asp:SqlDataSource ID="GridSource" runat="server" ConnectionString='<%$ ConnectionStrings:IP3AnlagenInventarConnectionString %>' SelectCommand="
-            SELECT        dbo.Article.ArticleId, dbo.Article.Name, dbo.Article.Value, dbo.Article.Amount, dbo.Article.Barcode, dbo.Article.OldBarcode, dbo.Article.ArticleGroupId, 
-                dbo.Article.SupplierBranchId, dbo.Article.RoomId, dbo.Article.AcquisitionDate, dbo.Article.DepreciationId, dbo.Article.ArticleCategoryId, 
-                dbo.Article.InsuranceCategoryId, dbo.Article.Comment, dbo.Article.IsAvailable, dbo.Article.IsDeleted, dbo.ArticleGroup.Name AS GroupName, 
-                dbo.Room.Name AS RoomName
-            FROM            dbo.Article INNER JOIN
-                dbo.Room ON dbo.Article.RoomId = dbo.Room.RoomId LEFT OUTER JOIN
-                dbo.ArticleGroup ON dbo.Room.RoomId = dbo.ArticleGroup.RoomId AND dbo.Article.ArticleGroupId = dbo.ArticleGroup.ArticleGroupId
-            WHERE        (dbo.Article.IsDeleted = 'false')">
-
-        </asp:SqlDataSource>
+                    SELECT        dbo.ArticleGroup.Name AS GroupName, dbo.Building.Name + '/' + dbo.Floor.Name + '/' + dbo.Room.Name AS RoomName, dbo.Article.ArticleId, dbo.Article.Name, 
+                         dbo.Article.Value, dbo.Article.Amount, dbo.Article.Barcode, dbo.Article.OldBarcode, dbo.Article.ArticleGroupId, dbo.Article.SupplierBranchId, dbo.Article.RoomId, 
+                         dbo.Article.AcquisitionDate, dbo.Article.DepreciationId, dbo.Article.ArticleCategoryId, dbo.Article.InsuranceCategoryId, dbo.Article.Comment, dbo.Article.IsAvailable, 
+                         dbo.Article.IsDeleted
+                    FROM            dbo.Floor INNER JOIN
+                         dbo.Room ON dbo.Floor.FloorId = dbo.Room.FloorId INNER JOIN
+                         dbo.Building ON dbo.Floor.BuildingId = dbo.Building.BuildingId FULL OUTER JOIN
+                         dbo.ArticleGroup RIGHT OUTER JOIN
+                         dbo.Article ON dbo.ArticleGroup.ArticleGroupId = dbo.Article.ArticleGroupId ON dbo.Room.RoomId = dbo.Article.RoomId
+                    WHERE        (dbo.Article.IsDeleted = 'false')
+            "></asp:SqlDataSource>
         <asp:EntityDataSource ID="RoomDataSource" runat="server"
             ConnectionString="name=IP3AnlagenInventarEntities"
             DefaultContainerName="IP3AnlagenInventarEntities"

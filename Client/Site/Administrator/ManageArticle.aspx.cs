@@ -128,8 +128,8 @@ namespace Client.Site.Administrator
             {
                 //Do barcode preperations
                 String groupBarCode = this.rtbGroupBarcode.Text;
-                String barCodeCounterPart = groupBarCode != null ? groupBarCode.Split('.')[groupBarCode.Split('.').Length - 1] : null;
-                int barCode = barCodeCounterPart!=null ? int.Parse(barCodeCounterPart) : -1;
+                String barCodeCounterPart = groupBarCode != "" && groupBarCode != null ? groupBarCode.Split('.')[groupBarCode.Split('.').Length - 1] : null;
+                int barCode = barCodeCounterPart!="" && barCodeCounterPart != null ? int.Parse(barCodeCounterPart) : -1;
                 int barCodeDigits = barCode > -1 ? barCode.ToString().Length:-1;
 
                 ArticleGroup group = null;
