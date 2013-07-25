@@ -139,50 +139,58 @@ namespace Client.Site.Administrator
                     group.Name = this.rtbGroupName.Text;
                     group.Barcode = this.rtbBarcode.Text;
                     group.RoomId = int.Parse(this.rcbRoom.SelectedItem.Value);
-                }
 
-                //If amount is bigger than 1 create entites regarding to amount.
-                for (int i = 1; i <= this.rtbAmount.Value; i++) {
-                    this.article = new Article();
-                    this.article.Barcode = this.rtbBarcode.Text;
-                    this.article.Name = this.rtbName.Text;
-                    this.article.AcquisitionDate = this.rdpAcquisitionDate.SelectedDate;
-                    this.article.Amount = 1;
-                    this.article.Value = this.rtbPrice.Value / this.rtbAmount.Value; //Price / Amount = price per unit
-                    this.article.Comment = this.rtbComment.Text;
-                    this.article.IsAvailable = this.chbIsAvailable.Checked;
-                    this.article.OldBarcode = this.rtbOldBarcode.Text;
 
-                    if (this.rcbArticleCategory.SelectedItem != null)
-                        this.article.ArticleCategoryId = int.Parse(this.rcbArticleCategory.SelectedItem.Value);
+                    //If amount is bigger than 1 create entites regarding to amount.
+                    for (int i = 1; i <= this.rtbAmount.Value; i++) {
+                        this.article = new Article();
 
-                    if(this.rcbDepreciationInterval.SelectedItem!=null)
-                        this.article.DepreciationId = int.Parse(this.rcbDepreciationInterval.SelectedItem.Value);
+                        setData(this.article);
 
-                    if (this.rcbInsuranceCategory.SelectedItem != null)
-                        this.article.InsuranceCategoryId = int.Parse(this.rcbInsuranceCategory.SelectedItem.Value);
+                        if (group != null) {
+                            this.article.ArticleGroup = group;
+                            barCode++;
+                            //Handle Barcode
+                            String newBarCodeEnd = barCodeCounterPart.Remove(barCodeDigits.ToString().Length - 1, barCode.ToString().Length) + barCode;
+                            this.article.Barcode = groupBarCode.Remove((groupBarCode.Length) - (barCodeCounterPart.Length), barCodeCounterPart.Length)
+                                + newBarCodeEnd;
+                        }
 
-                    if (this.rcbSupplierBranch.SelectedItem != null)
-                        this.article.SupplierBranchId = int.Parse(this.rcbSupplierBranch.SelectedItem.Value);
-
-                    if (this.rcbRoom.SelectedItem != null)
-                        this.article.RoomId = int.Parse(this.rcbRoom.SelectedItem.Value);
-
-                    if (group != null) {
-                        this.article.ArticleGroup = group;
-                        barCode++;
-                        //Handle Barcode
-                        String newBarCodeEnd = barCodeCounterPart.Remove(barCodeDigits.ToString().Length - 1, barCode.ToString().Length) + barCode;
-                        this.article.Barcode = groupBarCode.Remove((groupBarCode.Length) - (barCodeCounterPart.Length), barCodeCounterPart.Length)
-                            + newBarCodeEnd;
+                        EntityFactory.Context.Articles.Add(this.article);
                     }
-
-                    EntityFactory.Context.Articles.Add(this.article);
-                }
+                } 
+            } else {
+                setData(this.article);
             }
 
             EntityFactory.Context.SaveChanges();
             Response.Redirect("~/Site/Administrator/ArticleList.aspx");
+        }
+
+        private void setData(Article article) {
+            this.article.Barcode = this.rtbBarcode.Text;
+            this.article.Name = this.rtbName.Text;
+            this.article.AcquisitionDate = this.rdpAcquisitionDate.SelectedDate;
+            this.article.Amount = 1;
+            this.article.Value = this.rtbPrice.Value / this.rtbAmount.Value; //Price / Amount = price per unit
+            this.article.Comment = this.rtbComment.Text;
+            this.article.IsAvailable = this.chbIsAvailable.Checked;
+            this.article.OldBarcode = this.rtbOldBarcode.Text;
+
+            if (this.rcbArticleCategory.SelectedItem != null)
+                this.article.ArticleCategoryId = int.Parse(this.rcbArticleCategory.SelectedItem.Value);
+
+            if (this.rcbDepreciationInterval.SelectedItem != null)
+                this.article.DepreciationId = int.Parse(this.rcbDepreciationInterval.SelectedItem.Value);
+
+            if (this.rcbInsuranceCategory.SelectedItem != null)
+                this.article.InsuranceCategoryId = int.Parse(this.rcbInsuranceCategory.SelectedItem.Value);
+
+            if (this.rcbSupplierBranch.SelectedItem != null)
+                this.article.SupplierBranchId = int.Parse(this.rcbSupplierBranch.SelectedItem.Value);
+
+            if (this.rcbRoom.SelectedItem != null)
+                this.article.RoomId = int.Parse(this.rcbRoom.SelectedItem.Value);
         }
 
         #endregion
