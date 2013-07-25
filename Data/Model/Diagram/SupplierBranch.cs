@@ -24,6 +24,7 @@ namespace Data.Model.Diagram
         public string Place { get; set; }
         public string ZipCode { get; set; }
         public int SupplierId { get; set; }
+        public string Comment { get; set; }
     
         public virtual ICollection<Article> Articles { get; set; }
         public virtual Supplier Supplier { get; set; }

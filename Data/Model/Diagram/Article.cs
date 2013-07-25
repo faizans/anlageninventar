@@ -34,6 +34,7 @@ namespace Data.Model.Diagram
         public Nullable<int> InsuranceCategoryId { get; set; }
         public string Comment { get; set; }
         public Nullable<bool> IsAvailable { get; set; }
+        public bool IsDeleted { get; set; }
     
         public virtual ArticleCategory ArticleCategory { get; set; }
         public virtual ArticleGroup ArticleGroup { get; set; }

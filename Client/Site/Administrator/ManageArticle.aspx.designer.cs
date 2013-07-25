@@ -40,6 +40,15 @@ namespace Client.Site.Administrator {
         protected global::Telerik.Web.UI.RadTextBox rtbName;
         
         /// <summary>
+        /// rfvName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvName;
+        
+        /// <summary>
         /// Label3 control.
         /// </summary>
         /// <remarks>
@@ -58,6 +67,15 @@ namespace Client.Site.Administrator {
         protected global::Telerik.Web.UI.RadNumericTextBox rtbAmount;
         
         /// <summary>
+        /// rfvAmount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvAmount;
+        
+        /// <summary>
         /// Label2 control.
         /// </summary>
         /// <remarks>
@@ -74,6 +92,15 @@ namespace Client.Site.Administrator {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Telerik.Web.UI.RadTextBox rtbBarcode;
+        
+        /// <summary>
+        /// rfvBarcode control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvBarcode;
         
         /// <summary>
         /// GroupPanel control.
@@ -139,6 +166,15 @@ namespace Client.Site.Administrator {
         protected global::Telerik.Web.UI.RadNumericTextBox rtbPrice;
         
         /// <summary>
+        /// rfvPrice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvPrice;
+        
+        /// <summary>
         /// Label5 control.
         /// </summary>
         /// <remarks>
@@ -155,6 +191,15 @@ namespace Client.Site.Administrator {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Telerik.Web.UI.RadDatePicker rdpAcquisitionDate;
+        
+        /// <summary>
+        /// rfvDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvDate;
         
         /// <summary>
         /// Label15 control.
@@ -317,6 +362,15 @@ namespace Client.Site.Administrator {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Telerik.Web.UI.RadComboBox rcbRoom;
+        
+        /// <summary>
+        /// rfvRoom control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvRoom;
         
         /// <summary>
         /// Label13 control.

@@ -9,20 +9,23 @@
             <div class="input_form_row">
                 <asp:Label ID="Label1" runat="server" Text="Name" CssClass="element_label"></asp:Label>
                 <telerik:RadTextBox ID="rtbName" runat="server" Width="300px" ReadOnly="false"></telerik:RadTextBox>
+                <asp:RequiredFieldValidator ID="rfvName" runat="server" ErrorMessage="Eingabe benötigt." ControlToValidate="rtbName" Display="Dynamic"/>
             </div>
 
             <!-- Amount -->
             <div class="input_form_row">
-                <asp:Label ID="Label3" runat="server" Text="Amount" CssClass="element_label"></asp:Label>
+                <asp:Label ID="Label3" runat="server" Text="Anzahl" CssClass="element_label"></asp:Label>
                 <telerik:RadNumericTextBox ID="rtbAmount" runat="server" Width="300px"
                     OnTextChanged="rtbAmount_TextChanged" AutoPostBack="true">
                 </telerik:RadNumericTextBox>
+                <asp:RequiredFieldValidator ID="rfvAmount" runat="server" ErrorMessage="Eingabe benötigt." ControlToValidate="rtbAmount" Display="Dynamic" />
             </div>
 
             <!-- Barcode -->
             <div class="input_form_row">
                 <asp:Label ID="Label2" runat="server" Text="Barcode" CssClass="element_label"></asp:Label>
                 <telerik:RadTextBox ID="rtbBarcode" runat="server" Width="300px" ReadOnly="false"></telerik:RadTextBox>
+                <asp:RequiredFieldValidator ID="rfvBarcode" runat="server" ErrorMessage="Eingabe benötigt." ControlToValidate="rtbBarcode" Display="Dynamic" />
             </div>
 
             <asp:Panel runat="server" ID="GroupPanel" Visible="false">
@@ -43,6 +46,7 @@
             <div class="input_form_row">
                 <asp:Label ID="Label4" runat="server" Text="Preis" CssClass="element_label"></asp:Label>
                 <telerik:RadNumericTextBox ID="rtbPrice" runat="server" Width="300px"></telerik:RadNumericTextBox>
+                <asp:RequiredFieldValidator ID="rfvPrice" runat="server" ErrorMessage="Eingabe benötigt." ControlToValidate="rtbPrice" Display="Dynamic" />
             </div>
 
             <!-- AcquisitionDate -->
@@ -52,6 +56,7 @@
                     <Calendar ID="Calendar1" RangeMinDate="1900-01-01" runat="server">
                     </Calendar>
                 </telerik:RadDatePicker>
+                 <asp:RequiredFieldValidator ID="rfvDate" runat="server" ErrorMessage="Eingabe benötigt." ControlToValidate="rdpAcquisitionDate" Display="Dynamic" />
             </div>
 
             <!-- Supplier -->
@@ -134,6 +139,7 @@
                     DataValueField="RoomId" DataTextField="Name"
                     EmptyMessage="- Bitte auswählen -">
                 </telerik:RadComboBox>
+                <asp:RequiredFieldValidator ID="rfvRoom" runat="server" ErrorMessage="Eingabe benötigt." ControlToValidate="rcbRoom" Display="Dynamic" />
             </div>
 
             <!-- Old Barcode -->
@@ -157,7 +163,7 @@
         </div>
         <div class="input_interaction_row">
             <asp:Button ID="btnBack" runat="server" Text="Zurück" OnClick="btnBack_Click" CausesValidation="false" />
-            <asp:Button ID="btnSave" runat="server" Text="Speichern" OnClick="btnSave_Click" />
+            <asp:Button ID="btnSave" runat="server" Text="Speichern" OnClick="btnSave_Click" CausesValidation="true"/>
         </div>
     </telerik:RadAjaxPanel>
 </asp:Content>

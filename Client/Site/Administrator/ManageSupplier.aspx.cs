@@ -93,6 +93,7 @@ namespace Client.Site.Administrator {
                 SupplierBranch selectedBranch = eventArgs.Item.DataItem as SupplierBranch;
                 this.rtbBranchPlace.Text = selectedBranch.Place;
                 this.rtbBranchPlz.Text = selectedBranch.ZipCode;
+                this.rtbComment.Text = selectedBranch.Comment;
             } else {
                 enableBranchForms(false);
             }
@@ -102,6 +103,7 @@ namespace Client.Site.Administrator {
             this.btnApply.Enabled = enabled;
             this.rtbBranchPlace.Enabled = enabled;
             this.rtbBranchPlz.Enabled = enabled;
+            this.rtbComment.Enabled = enabled;
         }
 
         protected void ListBoxControl_AddNewItem(object sender, EventArgs e) {
@@ -116,6 +118,7 @@ namespace Client.Site.Administrator {
                 }
                 this.rtbBranchPlace.Text = selectedBranch.Place;
                 this.rtbBranchPlz.Text = selectedBranch.ZipCode;
+                this.rtbComment.Text = selectedBranch.Comment;
             }
         }
 
@@ -130,12 +133,14 @@ namespace Client.Site.Administrator {
                         this.ListBoxControl.Remove(eventArgs.Item);
                         this.rtbBranchPlace.Text = null;
                         this.rtbBranchPlz.Text = null;
+                        this.rtbComment.Text = null;
                         this.enableBranchForms(false);
                     }
                 } else {
                     this.ListBoxControl.Remove(eventArgs.Item);
                     this.rtbBranchPlace.Text = null;
                     this.rtbBranchPlz.Text = null;
+                    this.rtbComment.Text = null;
                     this.enableBranchForms(false);
                 }
             } 
@@ -157,6 +162,7 @@ namespace Client.Site.Administrator {
                 SupplierBranch selectedBranch = this.ListBoxControl.SelectedListBoxItem.DataItem as SupplierBranch;
                 selectedBranch.Place = this.rtbBranchPlace.Text;
                 selectedBranch.ZipCode = this.rtbBranchPlz.Text;
+                selectedBranch.Comment = this.rtbComment.Text;
                 this.ListBoxControl.SelectedItem.Text = this.rtbBranchPlz.Text + " " + this.rtbBranchPlace.Text;
             }
         }

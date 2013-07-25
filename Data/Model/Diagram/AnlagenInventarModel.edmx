@@ -119,6 +119,7 @@
           <Property Name="InsuranceCategoryId" Type="int" />
           <Property Name="Comment" Type="varchar" MaxLength="2000" />
           <Property Name="IsAvailable" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="ArticleCategory">
           <Key>
@@ -209,6 +210,7 @@
           <Property Name="Place" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="ZipCode" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="SupplierId" Type="int" Nullable="false" />
+          <Property Name="Comment" Type="varchar" MaxLength="2000" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -501,6 +503,7 @@
           <NavigationProperty Name="Room" Relationship="Data.Model.Diagram.FK_Article_Room" FromRole="Article" ToRole="Room" />
           <NavigationProperty Name="SupplierBranch" Relationship="Data.Model.Diagram.FK_Article_SupplierBranch" FromRole="Article" ToRole="SupplierBranch" />
           <NavigationProperty Name="Depreciations" Relationship="Data.Model.Diagram.FK_Depreciation_Article" FromRole="Article" ToRole="Depreciation" />
+          <Property Type="Boolean" Name="IsDeleted" Nullable="false" />
         </EntityType>
         <EntityType Name="ArticleCategory">
           <Key>
@@ -609,6 +612,7 @@
           <Property Type="Int32" Name="SupplierId" Nullable="false" />
           <NavigationProperty Name="Articles" Relationship="Data.Model.Diagram.FK_Article_SupplierBranch" FromRole="SupplierBranch" ToRole="Article" />
           <NavigationProperty Name="Supplier" Relationship="Data.Model.Diagram.FK_SupplierBranch_Supplier" FromRole="SupplierBranch" ToRole="Supplier" />
+          <Property Type="String" Name="Comment" MaxLength="2000" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -793,6 +797,7 @@
           <EntitySetMapping Name="Articles">
             <EntityTypeMapping TypeName="Data.Model.Diagram.Article">
               <MappingFragment StoreEntitySet="Article">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="IsAvailable" ColumnName="IsAvailable" />
                 <ScalarProperty Name="Comment" ColumnName="Comment" />
                 <ScalarProperty Name="InsuranceCategoryId" ColumnName="InsuranceCategoryId" />
@@ -903,6 +908,7 @@
           <EntitySetMapping Name="SupplierBranches">
             <EntityTypeMapping TypeName="Data.Model.Diagram.SupplierBranch">
               <MappingFragment StoreEntitySet="SupplierBranch">
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
                 <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
                 <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
                 <ScalarProperty Name="Place" ColumnName="Place" />

@@ -153,11 +153,20 @@ namespace Client.Site.Administrator
                     this.article.IsAvailable = this.chbIsAvailable.Checked;
                     this.article.OldBarcode = this.rtbOldBarcode.Text;
 
-                    this.article.ArticleCategoryId = int.Parse(this.rcbArticleCategory.SelectedItem.Value);
-                    this.article.DepreciationId = int.Parse(this.rcbDepreciationInterval.SelectedItem.Value);
-                    this.article.InsuranceCategoryId = int.Parse(this.rcbInsuranceCategory.SelectedItem.Value);
-                    this.article.SupplierBranchId = int.Parse(this.rcbSupplierBranch.SelectedItem.Value);
-                    this.article.RoomId = int.Parse(this.rcbRoom.SelectedItem.Value);
+                    if (this.rcbArticleCategory.SelectedItem != null)
+                        this.article.ArticleCategoryId = int.Parse(this.rcbArticleCategory.SelectedItem.Value);
+
+                    if(this.rcbDepreciationInterval.SelectedItem!=null)
+                        this.article.DepreciationId = int.Parse(this.rcbDepreciationInterval.SelectedItem.Value);
+
+                    if (this.rcbInsuranceCategory.SelectedItem != null)
+                        this.article.InsuranceCategoryId = int.Parse(this.rcbInsuranceCategory.SelectedItem.Value);
+
+                    if (this.rcbSupplierBranch.SelectedItem != null)
+                        this.article.SupplierBranchId = int.Parse(this.rcbSupplierBranch.SelectedItem.Value);
+
+                    if (this.rcbRoom.SelectedItem != null)
+                        this.article.RoomId = int.Parse(this.rcbRoom.SelectedItem.Value);
 
                     if (group != null) {
                         this.article.ArticleGroup = group;

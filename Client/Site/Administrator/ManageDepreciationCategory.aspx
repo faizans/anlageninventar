@@ -9,6 +9,8 @@
             <div class="input_form_row">
                 <asp:Label ID="Label1" runat="server" Text="Name" CssClass="element_label"></asp:Label>
                 <telerik:RadTextBox ID="rtbName" runat="server" Width="300px" ReadOnly="false"></telerik:RadTextBox>
+                <asp:RequiredFieldValidator ID="rfvName" runat="server" ErrorMessage="Eingabe benötigt." ControlToValidate="rtbName" Display="Dynamic" />
+
             </div>
             <div class="input_form_row">
                 <asp:Label ID="Label2" runat="server" Text="" CssClass="element_label"></asp:Label>
@@ -25,13 +27,13 @@
             <div class="input_form_row">
                 <asp:Label ID="Label4" runat="server" Text="Von" CssClass="element_label"></asp:Label>
                 <telerik:RadNumericTextBox ID="rtbFromYear" runat="server" Enabled="false">
-                    <NumberFormat GroupSeparator="" DecimalDigits="0" /> 
+                    <NumberFormat GroupSeparator="" DecimalDigits="0" />
                 </telerik:RadNumericTextBox>
             </div>
             <div class="input_form_row">
                 <asp:Label ID="Label5" runat="server" Text="Bis" CssClass="element_label"></asp:Label>
-                <telerik:RadNumericTextBox ID="rtbToYear" runat="server"  Enabled="false">
-                    <NumberFormat GroupSeparator="" DecimalDigits="0" /> 
+                <telerik:RadNumericTextBox ID="rtbToYear" runat="server" Enabled="false">
+                    <NumberFormat GroupSeparator="" DecimalDigits="0" />
                 </telerik:RadNumericTextBox>
             </div>
             <div class="input_form_row">

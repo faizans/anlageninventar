@@ -10,6 +10,7 @@ namespace Data.Model.Diagram
 {
     public partial class Article
     {
+
         public static Article GetById(int id)
         {
             IP3AnlagenInventarEntities ctx = EntityFactory.Context;
@@ -23,10 +24,17 @@ namespace Data.Model.Diagram
         }
 
         public Boolean IsDepreciated() {
-            throw new Exception("Not implemented yet");
+            //throw new Exception("Not implemented yet");
+            return true;
         }
 
         public void Delete() {
+            IP3AnlagenInventarEntities ctx = EntityFactory.Context;
+            //TODO delete group if this was last item
+            ctx.Articles.Where(p => p.ArticleId == this.ArticleId).SingleOrDefault().IsDeleted = true;
+        }
+
+        public void DeletePhysically() {
             IP3AnlagenInventarEntities ctx = EntityFactory.Context;
             //TODO delete group if this was last item
             ctx.Articles.Remove(ctx.Articles.Where(p => p.ArticleId == this.ArticleId).SingleOrDefault());

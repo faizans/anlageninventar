@@ -7,18 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Data.Model.Diagram
-{
-    public partial class Room
-    {
-        public static Room GetById(int id)
-        {
+namespace Data.Model.Diagram {
+    public partial class Room {
+        public String RoomPath {
+            get {
+                Floor parent = Floor.GetById(this.FloorId);
+                return parent.Building.Name + "/" + parent.Name + "/" + this.Name;
+            }
+        }
+
+        public static Room GetById(int id) {
             IP3AnlagenInventarEntities ctx = EntityFactory.Context;
             return ctx.Rooms.Where(c => c.RoomId == id).SingleOrDefault();
         }
 
-        public static Room GetByName(string name)
-        {
+        public static Room GetByName(string name) {
             IP3AnlagenInventarEntities ctx = EntityFactory.Context;
             return ctx.Rooms.Where(c => c.Name == name).SingleOrDefault();
         }
@@ -28,19 +31,16 @@ namespace Data.Model.Diagram
             return ctx.Rooms.Where(c => c.Name == name && c.FloorId == floorId).SingleOrDefault();
         }
 
-        public static IEnumerable<Room> GetAll()
-        {
+        public static IEnumerable<Room> GetAll() {
             IP3AnlagenInventarEntities ctx = EntityFactory.Context;
             return ctx.Rooms;
         }
 
-        public Boolean HasArticles()
-        {
+        public Boolean HasArticles() {
             return this.Articles.Any();
         }
 
-        public void Delete()
-        {
+        public void Delete() {
             IP3AnlagenInventarEntities ctx = EntityFactory.Context;
             ctx.Rooms.Remove(ctx.Rooms.Where(p => p.RoomId == this.RoomId).SingleOrDefault());
         }
