@@ -16,6 +16,9 @@ namespace Client.Site.Administrator
         protected void Page_Load(object sender, EventArgs e)
         {
             SiteMaster.StandardMaster.InfoText = "Lagerräume - Verwaltung";
+            if (!IsPostBack) {
+                this.RoomTreeControl.RoomTreeItems = null;
+            }
         }
 
         public CustomMaster SiteMaster {

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using Telerik.Web.UI;
 
-namespace Client.Site.Controls.RoomTree2
+namespace Client.Site.Controls.RoomTree
 {
     public class RoomTreeItem : RadTreeNode
     {
@@ -15,17 +15,25 @@ namespace Client.Site.Controls.RoomTree2
 
         }
 
+        public RoomTreeItem(String text, String value, object dataItem) {
+            this.Text = text;
+            this.Value = value;
+            this.DataItem = dataItem;
+        }
+
         public RoomTreeItem(int itemId, int parentId, String text, String value, object dataItem)
         {
             this.Id = itemId;
             this.ParentId = parentId;
             this.Text = text;
+            this.Value = value;
             this.DataItem = dataItem;
         }
 
         public RoomTreeItem(String text)
         {
             this.Id = -1;
+            this.Value = null;
             this.ParentId = 0;
             this.Text = text;
             this.IsRoot = true;
@@ -36,7 +44,7 @@ namespace Client.Site.Controls.RoomTree2
             this.Id = itemId;
             this.ParentId = parentId;
             this.DataItem = dataItem;
-            this.IsRoot = IsRoot;
+            this.Value = value;
             this.Text = text;
         }
 

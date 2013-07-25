@@ -8,6 +8,12 @@ namespace Data.Model.Diagram
 {
     public partial class SupplierBranch
     {
+        public String Name {
+            get {
+                return this.ZipCode + " - " + this.Place;
+            }
+        }
+
         public static SupplierBranch GetById(int id)
         {
             IP3AnlagenInventarEntities ctx = EntityFactory.Context;

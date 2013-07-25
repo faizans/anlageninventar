@@ -169,6 +169,7 @@
     <Content Include="Global.asax" />
     <Content Include="Site\Administrator\ArticleCategoryList.aspx" />
     <Content Include="Site\Administrator\ArticleList.aspx" />
+    <Content Include="Site\Administrator\ManageArticle.aspx" />
     <Content Include="Site\Administrator\ManageDepreciationCategory.aspx" />
     <Content Include="Site\Administrator\DepreciationCategoryList.aspx" />
     <Content Include="Site\Administrator\InsuranceCategoryList.aspx" />
@@ -179,7 +180,6 @@
     <Content Include="Site\Administrator\UserList.aspx" />
     <Content Include="Site\Controls\ListBox2\ListBoxControl.ascx" />
     <Content Include="Site\Controls\Menu\MenuControl.ascx" />
-    <Content Include="Site\Controls\RoomTree2\RoomTreeControl.ascx" />
     <Content Include="Site\Controls\RoomTree\RoomTreeControl.ascx" />
     <Content Include="Site\Controls\UserSearchControl\UserSearchBox.ascx" />
     <Content Include="Web.config">
@@ -230,6 +230,13 @@
     </Compile>
     <Compile Include="Site\Administrator\ArticleList.aspx.designer.cs">
       <DependentUpon>ArticleList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Site\Administrator\ManageArticle.aspx.cs">
+      <DependentUpon>ManageArticle.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site\Administrator\ManageArticle.aspx.designer.cs">
+      <DependentUpon>ManageArticle.aspx</DependentUpon>
     </Compile>
     <Compile Include="Site\Administrator\ManageDepreciationCategory.aspx.cs">
       <DependentUpon>ManageDepreciationCategory.aspx</DependentUpon>
@@ -303,15 +310,6 @@
     <Compile Include="Site\Controls\Menu\MenuControl.ascx.designer.cs">
       <DependentUpon>MenuControl.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Site\Controls\RoomTree2\RoomTreeControl.ascx.cs">
-      <DependentUpon>RoomTreeControl.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Site\Controls\RoomTree2\RoomTreeControl.ascx.designer.cs">
-      <DependentUpon>RoomTreeControl.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="Site\Controls\RoomTree2\RoomTreeItem.cs" />
-    <Compile Include="Site\Controls\RoomTree\CustomTreeNodeItem.cs" />
     <Compile Include="Site\Controls\RoomTree\RoomTreeControl.ascx.cs">
       <DependentUpon>RoomTreeControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -319,6 +317,7 @@
     <Compile Include="Site\Controls\RoomTree\RoomTreeControl.ascx.designer.cs">
       <DependentUpon>RoomTreeControl.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Site\Controls\RoomTree\RoomTreeItem.cs" />
     <Compile Include="Site\Controls\UserSearchControl\UserSearchBox.ascx.cs">
       <DependentUpon>UserSearchBox.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

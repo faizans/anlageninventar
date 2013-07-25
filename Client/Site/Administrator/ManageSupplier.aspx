@@ -24,15 +24,16 @@
             </div>
             <div class="input_form_row">
                 <asp:Label ID="Label4" runat="server" Text="Ort" CssClass="element_label"></asp:Label>
-                <telerik:RadTextBox ID="rtbBranchPlace" runat="server" Width="300px" ReadOnly="false"
-                    OnTextChanged="rtbBranchPlz_TextChanged" AutoPostBack="true">
+                <telerik:RadTextBox ID="rtbBranchPlace" runat="server" Width="300px" Enabled="false">
                 </telerik:RadTextBox>
             </div>
             <div class="input_form_row">
                 <asp:Label ID="Label5" runat="server" Text="PLZ" CssClass="element_label"></asp:Label>
-                <telerik:RadTextBox ID="rtbBranchPlz" runat="server" Width="300px" ReadOnly="false"
-                    OnTextChanged="rtbBranchPlz_TextChanged" AutoPostBack="true">
+                <telerik:RadTextBox ID="rtbBranchPlz" runat="server" Width="300px" Enabled="false">
                 </telerik:RadTextBox>
+            </div>
+            <div class="input_form_row">
+                <asp:Button ID="btnApply" runat="server" Text="Übernehmen" OnClick="btnApply_Click" CausesValidation="false" Enabled="false"/>
             </div>
         </div>
         <div class="input_interaction_row">

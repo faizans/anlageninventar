@@ -15,7 +15,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <asp:ScriptManager ID="ScriptManager" runat="server"></asp:ScriptManager>
+        <asp:ScriptManager ID="ScriptManager" runat="server" EnablePageMethods="true"></asp:ScriptManager>
         <div class="Wrapper_Div">
             <div class="Header_Div">
                 <div class="Header_Logo_Div">

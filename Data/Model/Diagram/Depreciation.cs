@@ -20,15 +20,15 @@ namespace Data.Model.Diagram
         }
     
         public int DepreciationId { get; set; }
-        public Nullable<int> ArticleId { get; set; }
         public Nullable<double> Value { get; set; }
         public Nullable<int> Year { get; set; }
         public Nullable<System.DateTime> AdditionalStartDate { get; set; }
         public Nullable<System.DateTime> AdditionalEndDate { get; set; }
         public Nullable<int> DepreciationCategoryId { get; set; }
+        public Nullable<int> ArticleId { get; set; }
     
+        public virtual ICollection<Article> Articles { get; set; }
         public virtual Article Article { get; set; }
         public virtual DepreciationCategory DepreciationCategory { get; set; }
-        public virtual ICollection<Article> Articles { get; set; }
     }
 }

@@ -1,13 +1,12 @@
 ONLY RELATED TO EMANUEL MISTRETTA
 
 Bugs:
-1. Delete Room after creating and saving a new one.				2h
-2. OnSelectedIndexChanged on ListBoxControl -> changes other items text		1h
-->(enablePageMethods call pagemethod on keyup)
-3. Assign Responsible person to room						2h
+1. Delete Room after creating and saving a new one.				2h	DONE
+2. OnSelectedIndexChanged on ListBoxControl -> changes other items text		1h	DONE
+3. Assign Responsible person to room						2h	DONE
 4. Refresh grids after delete							30min	DONE
 ->DepreciationCategory and Supplier
-5. BuildingTree -> duplicated ids on saving new stockwerk			1h
+5. BuildingTree -> duplicated ids on saving new stockwerk			1h	DoNE
 
 Todo:
 1. Implement Secure Delete functions (Check if children are set to object)	2h

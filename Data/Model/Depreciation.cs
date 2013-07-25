@@ -10,6 +10,16 @@ namespace Data.Model.Diagram
 {
     public partial class Depreciation
     {
+
+        public String Name {
+            get {
+                if (this.AdditionalStartDate.HasValue && this.AdditionalEndDate.HasValue) {
+                    return this.AdditionalStartDate.Value.Year + " - " + this.AdditionalEndDate.Value.Year;
+                }
+                return null;
+            }
+        }
+
         public static Depreciation GetById(int id)
         {
             IP3AnlagenInventarEntities ctx = EntityFactory.Context;

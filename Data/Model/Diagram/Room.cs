@@ -25,6 +25,7 @@ namespace Data.Model.Diagram
         public string Name { get; set; }
         public int FloorId { get; set; }
         public string Code { get; set; }
+        public string ResponsiblePerson { get; set; }
     
         public virtual ICollection<Article> Articles { get; set; }
         public virtual ICollection<ArticleGroup> ArticleGroups { get; set; }

@@ -1,0 +1,250 @@
+﻿using Client.Site.Controls.UserSearchControl;
+using Data.Model;
+using Data.Model.Diagram;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace Client.Site.Administrator
+{
+    public partial class ManageArticle : System.Web.UI.Page
+    {
+
+        private Article article;
+
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            loadPage();
+        }
+
+        #region Initialisation
+
+        private void loadPage()
+        {
+            getParameters();
+            if (!IsPostBack)
+            {
+                bindDataSource();
+                bindEntityData(this.article);
+            }
+        }
+
+        private void getParameters()
+        {
+            if (Request.QueryString["ai"] != null && Request.QueryString["ai"] != "")
+            {
+                int articleId = int.Parse(Request.QueryString["ai"]);
+                this.article = Article.GetById(articleId);
+            }
+        }
+
+        private void bindDataSource() {
+            //ArticleCategory
+            this.rcbArticleCategory.DataSource = ArticleCategory.GetAll().ToList();
+            this.rcbArticleCategory.DataBind();
+
+            //InsuranceCategory
+            this.rcbInsuranceCategory.DataSource = InsuranceCategory.GetAll().ToList();
+            this.rcbInsuranceCategory.DataBind();
+
+            //DepreciationCategory
+            List<DepreciationCategory> depreciationCategories = DepreciationCategory.GetAll().ToList();
+            this.rcbDepreciationCategory.DataSource = depreciationCategories;
+            this.rcbDepreciationCategory.DataBind();
+
+            //Supplier
+            this.rcbSupplier.DataSource = Supplier.GetAll().ToList();
+            this.rcbSupplier.DataBind();
+
+            //Building 
+            this.rcbBuilding.DataSource = Building.GetAll().ToList();
+            this.rcbBuilding.DataBind();
+        }
+
+        private void bindEntityData(Article article)
+        {
+            if (article != null)
+            {
+                //TExtboxes
+                this.rtbName.Text = article.Name;
+                this.rtbBarcode.Text = article.Barcode;
+                this.rtbOldBarcode.Text = article.OldBarcode;
+                this.rtbAmount.Value = 1;
+                this.rtbAmount.Enabled = false;
+                this.rtbComment.Text = article.Comment;
+
+                if (this.article.ArticleGroup != null) {
+                    this.rtbGroupBarcode.Text = article.ArticleGroup.Barcode;
+                    this.rtbGroupName.Text = article.ArticleGroup.Name;
+                }
+
+                this.rtbPrice.Value = article.Value;
+                this.rdpAcquisitionDate.SelectedDate = article.AcquisitionDate;
+
+                //ArticleCategory
+                if (article.ArticleCategory != null) {
+                    this.rcbArticleCategory.Items.Where(i => i.Text == article.ArticleCategory.Name).SingleOrDefault().Selected = true;
+                }
+                //INsuranceCategory
+                if (article.InsuranceCategory != null) {
+                    this.rcbInsuranceCategory.Items.Where(i => i.Text == article.InsuranceCategory.Name).SingleOrDefault().Selected = true;
+                }
+                //DepreciationCategory and depreciation
+                if (article.Depreciation != null) {
+                    this.rcbDepreciationCategory.Items.Where(i => i.Text == article.Depreciation.DepreciationCategory.Name).SingleOrDefault().Selected = true;
+                    bindDepreciationData(this.rcbDepreciationCategory.SelectedItem.Value);
+                    if (this.rcbDepreciationInterval.Items.Any()) {
+                        this.rcbDepreciationInterval.Items.Where(i => i.Text == article.Depreciation.Name).SingleOrDefault().Selected = true;
+                    }
+                }
+                //Supplier and Supplierbranch
+                if (article.SupplierBranch != null) {
+                    this.rcbSupplier.Items.Where(i => i.Text == article.SupplierBranch.Supplier.Name).SingleOrDefault().Selected = true;
+                    bindSupplierBranchData(this.rcbSupplier.SelectedItem.Value);
+                    if (this.rcbSupplierBranch.Items.Any()) {
+                        this.rcbSupplierBranch.Items.Where(i => i.Text == article.SupplierBranch.Name).SingleOrDefault().Selected = true;
+                    }
+                }
+                //Building, Floor and Room
+                if (article.Room != null) {
+                    this.rcbBuilding.Items.Where(i => i.Text == article.Room.Floor.Building.Name).SingleOrDefault().Selected = true;
+                    bindFloorData(this.rcbBuilding.SelectedItem.Value);
+                    this.rcbFloor.Items.Where(i => i.Text == article.Room.Floor.Name).SingleOrDefault().Selected = true;
+                    bindRoomData(this.rcbFloor.SelectedItem.Value);
+                    this.rcbRoom.Items.Where(i => i.Text == article.Room.Name).SingleOrDefault().Selected = true;
+                }
+
+                //Checkboxes
+                this.chbIsAvailable.Checked = article.IsAvailable.Value;
+            }
+        }
+
+        private void save()
+        {
+            if (this.article == null)
+            {
+                //Do barcode preperations
+                String groupBarCode = this.rtbGroupBarcode.Text;
+                String barCodeCounterPart = groupBarCode != null ? groupBarCode.Split('.')[groupBarCode.Split('.').Length - 1] : null;
+                int barCode = barCodeCounterPart!=null ? int.Parse(barCodeCounterPart) : -1;
+                int barCodeDigits = barCode > -1 ? barCode.ToString().Length:-1;
+
+                ArticleGroup group = null;
+                //if amount is bigger than 1 -> Create article group
+                if (rtbAmount.Value > 1) {
+                    group = new ArticleGroup();
+                    group.Name = this.rtbGroupName.Text;
+                    group.Barcode = this.rtbBarcode.Text;
+                    group.RoomId = int.Parse(this.rcbRoom.SelectedItem.Value);
+                }
+
+                //If amount is bigger than 1 create entites regarding to amount.
+                for (int i = 1; i <= this.rtbAmount.Value; i++) {
+                    this.article = new Article();
+                    this.article.Barcode = this.rtbBarcode.Text;
+                    this.article.Name = this.rtbName.Text;
+                    this.article.AcquisitionDate = this.rdpAcquisitionDate.SelectedDate;
+                    this.article.Amount = 1;
+                    this.article.Value = this.rtbPrice.Value / this.rtbAmount.Value; //Price / Amount = price per unit
+                    this.article.Comment = this.rtbComment.Text;
+                    this.article.IsAvailable = this.chbIsAvailable.Checked;
+                    this.article.OldBarcode = this.rtbOldBarcode.Text;
+
+                    this.article.ArticleCategoryId = int.Parse(this.rcbArticleCategory.SelectedItem.Value);
+                    this.article.DepreciationId = int.Parse(this.rcbDepreciationInterval.SelectedItem.Value);
+                    this.article.InsuranceCategoryId = int.Parse(this.rcbInsuranceCategory.SelectedItem.Value);
+                    this.article.SupplierBranchId = int.Parse(this.rcbSupplierBranch.SelectedItem.Value);
+                    this.article.RoomId = int.Parse(this.rcbRoom.SelectedItem.Value);
+
+                    if (group != null) {
+                        this.article.ArticleGroup = group;
+                        barCode++;
+                        //Handle Barcode
+                        String newBarCodeEnd = barCodeCounterPart.Remove(barCodeDigits.ToString().Length - 1, barCode.ToString().Length) + barCode;
+                        this.article.Barcode = groupBarCode.Remove((groupBarCode.Length) - (barCodeCounterPart.Length), barCodeCounterPart.Length)
+                            + newBarCodeEnd;
+                    }
+
+                    EntityFactory.Context.Articles.Add(this.article);
+                }
+            }
+
+            EntityFactory.Context.SaveChanges();
+            Response.Redirect("~/Site/Administrator/ArticleList.aspx");
+        }
+
+        #endregion
+
+        #region Events
+
+        protected void rtbAmount_TextChanged(object sender, EventArgs e) {
+            if (this.rtbAmount.Value > 1) {
+                this.GroupPanel.Visible = true;
+                this.rtbBarcode.Text = null;
+                this.rtbBarcode.Enabled = false;
+            } else {
+                this.GroupPanel.Visible = false;
+                this.rtbBarcode.Enabled = true;
+            }
+        }
+
+        protected void rcbDepreciationCategory_SelectedIndexChanged(object sender, Telerik.Web.UI.RadComboBoxSelectedIndexChangedEventArgs e) {
+            bindDepreciationData(e.Value);
+        }
+
+        private void bindDepreciationData(string id) {
+            int depreciationCategoryId = int.Parse(id);
+            DepreciationCategory dc = DepreciationCategory.GetById(depreciationCategoryId);
+            this.rcbDepreciationInterval.DataSource = dc.Depreciations.ToList();
+            this.rcbDepreciationInterval.DataBind();
+        }
+
+        protected void rcbLieferant_SelectedIndexChanged(object sender, Telerik.Web.UI.RadComboBoxSelectedIndexChangedEventArgs e) {
+            bindSupplierBranchData(e.Value);
+        }
+
+        private void bindSupplierBranchData(string id) {
+            int supplierBranchId = int.Parse(id);
+            Supplier sb = Supplier.GetById(supplierBranchId);
+            this.rcbSupplierBranch.DataSource = sb.SupplierBranches.ToList();
+            this.rcbSupplierBranch.DataBind();
+        }
+
+        protected void rcbBuilding_SelectedIndexChanged(object sender, Telerik.Web.UI.RadComboBoxSelectedIndexChangedEventArgs e) {
+            bindFloorData(e.Value);
+        }
+
+        private void bindFloorData(string id) {
+            int buildingId = int.Parse(id);
+            Building building = Building.GetById(buildingId);
+            this.rcbFloor.DataSource = building.Floors.ToList();
+            this.rcbFloor.DataBind();
+        }
+
+        protected void rcbFloor_SelectedIndexChanged(object sender, Telerik.Web.UI.RadComboBoxSelectedIndexChangedEventArgs e) {
+            bindRoomData(e.Value);
+        }
+
+        private void bindRoomData(string id) {
+            int floorId = int.Parse(id);
+            Floor floor = Floor.GetById(floorId);
+            this.rcbRoom.DataSource = floor.Rooms.ToList();
+            this.rcbRoom.DataBind();
+        }
+
+        protected void btnBack_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Site/Administrator/ArticleList.aspx");
+        }
+
+        protected void btnSave_Click(object sender, EventArgs e)
+        {
+            save();
+        }
+
+        #endregion
+    }
+}

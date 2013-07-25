@@ -10,14 +10,13 @@
         <telerik:RadButton ID="btnDelete" runat="server" Text="Delete" OnClick="btnDelete_Click" Enabled="false"></telerik:RadButton>
     </div>
 
-    <div style="float: left; height: 300px; width: 300px; border: 1px solid black; padding: 10px; background-color:white;">
+    <div style="float: left; height: 300px; width: 300px; border: 1px solid black; padding: 10px; background-color: white;">
         <telerik:RadTreeView ID="RadTreeView1" runat="server" DataFieldID="Id" DataFieldParentID="ParentId" DataTextField="Text"
             OnNodeClick="RadTreeView1_NodeClick" OnNodeDataBound="RadTreeView1_NodeDataBound">
-            
         </telerik:RadTreeView>
     </div>
 
-    <div style="float: left; height: 300px; width: 300px; border: 1px solid black; margin-left: 20px; padding: 10px; background-color:white;" runat="server"  id="EditForm" visible="false">
+    <div style="float: left; height: 300px; width: 300px; border: 1px solid black; margin-left: 20px; padding: 10px; background-color: white;" runat="server" id="EditForm" visible="false">
         <div id="Div1" class="content_input_form" runat="server">
             <div class="input_form_row">
                 <asp:Label ID="Label0" runat="server" Text="Name" CssClass="element_label"></asp:Label>
@@ -27,7 +26,7 @@
         <div class="content_input_form" runat="server" id="ResponsibleAttribute" visible="false">
             <div class="input_form_row">
                 <asp:Label ID="Label1" runat="server" Text="Verantwortlich" CssClass="element_label"></asp:Label>
-                <uc1:UserSearchBox runat="server" ID="UserSearchBox" Width="200px" MinimumInput="3"/>
+                <uc1:UserSearchBox runat="server" ID="UserSearchBox" Width="200px" MinimumInput="3" />
             </div>
         </div>
         <div class="input_interaction_row">

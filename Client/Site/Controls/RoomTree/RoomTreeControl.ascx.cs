@@ -11,150 +11,169 @@ using Telerik.Web.UI;
 using Data.Model.Diagram;
 using Data.Model;
 
-namespace Client.Site.Controls.RoomTree
-{
-    public partial class RoomTreeControl : System.Web.UI.UserControl
-    {
+namespace Client.Site.Controls.RoomTree {
+    public partial class RoomTreeControl : System.Web.UI.UserControl {
 
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            if (!IsPostBack)
-            {
+        protected void Page_Load(object sender, EventArgs e) {
+            if (!IsPostBack) {
                 initDataSource();
             }
         }
 
-        private void initDataSource()
-        {
-            CustomTreeNodeItem rootNode = new CustomTreeNodeItem("Gebäude");
-            this.DataSource.Add(rootNode);
-
-            IEnumerable<Building> buildings = Building.GetAll();
-            if (buildings.Any())
-            {
-                foreach (Building building in buildings)
-                {
-                    CustomTreeNodeItem buildingNode = new CustomTreeNodeItem(building.BuildingId, -1, building.Name, building);
-                    this.dataSource.Add(buildingNode);
-
-                    if (building.Floors.Any())
-                    {
-                        foreach (Floor floor in building.Floors)
-                        {
-                            CustomTreeNodeItem floorNode = new CustomTreeNodeItem(floor.FloorId, building.BuildingId, floor.Name, floor);
-                            this.dataSource.Add(floorNode);
-
-                            if (floor.Rooms.Any())
-                            {
-                                foreach (Room room in floor.Rooms)
-                                {
-                                    CustomTreeNodeItem roomNode = new CustomTreeNodeItem(room.RoomId, floor.FloorId, room.Name, room);
-                                    this.dataSource.Add(roomNode);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            this.RadTreeView1.DataSource = this.dataSource;
-            this.RadTreeView1.DataBind();
-        }
-
         #region Properties
 
-        private List<RadTreeNode> dataSource;
-        public List<RadTreeNode> DataSource
-        {
-            get
-            {
-                if (dataSource == null)
-                {
-                    dataSource = new List<RadTreeNode>();
+        /// <summary>
+        /// Return the selected item from the session list, containing dataitem.
+        /// Item is returned by value AND type of dataitem, because items of different types can have same id.
+        /// </summary>
+        public RoomTreeItem SelectedRoomTreeItem {
+            get {
+                if (this.SelectedItem != null) {
+                    return this.RoomTreeItems.Where(i => i.Value == this.SelectedItem.Value 
+                        && (i.DataItem == null || 
+                            (i.DataItem != null
+                                && this.SelectedItem.Attributes["DataType"] == ObjectContext.GetObjectType(i.DataItem.GetType()).ToString())))
+                                    .SingleOrDefault();
                 }
-                return this.dataSource;
+                return null;
             }
-            set
-            {
-                this.dataSource = value;
+        }
+
+        public List<RoomTreeItem> DataSource {
+            set {
+                this.RadTreeView1.DataSource = value;
+                this.RadTreeView1.DataBind();
+            }
+        }
+
+        public List<RoomTreeItem> RoomTreeItems {
+            get {
+                if (Session["RoomTreeItems"] == null) {
+                    Session["RoomTreeItems"] = new List<RoomTreeItem>();
+                }
+                return Session["RoomTreeItems"] as List<RoomTreeItem>;
+            }
+            set {
+                Session["RoomTreeItems"] = value;
+            }
+        }
+
+        public RadTreeNode SelectedItem {
+            get {
+                if (Session["SelectedItem"] == null) {
+                    return null;
+                }
+                return Session["SelectedItem"] as RadTreeNode;
+            }
+            set {
+                Session["SelectedItem"] = value;
             }
         }
 
         #endregion
 
         /// <summary>
-        /// Change visibility of buttons regarding selected node
+        /// Create Treestructured Datasource out of the entity objects
         /// </summary>
-        private void toggleButtons()
-        {
+        private void initDataSource() {
+            RoomTreeItem rootItem = new RoomTreeItem("Gebäude");
+            //
+            this.RoomTreeItems.Add(rootItem);
 
-            String dataItemType = this.RadTreeView1.SelectedNode.Attributes["DataItemType"];
-            bool isRoot = this.RadTreeView1.SelectedNode.Attributes["IsRoot"] != null ? Boolean.Parse(this.RadTreeView1.SelectedNode.Attributes["IsRoot"]) : false;
+            //Buildings
+            IEnumerable<Building> buildings = Building.GetAll();
+            if (buildings.Any()) {
+                int buildingId = 10000000;
+                foreach (Building building in buildings) {
+                    RoomTreeItem buildingItem = new RoomTreeItem(buildingId, -1, building.Name, building.BuildingId.ToString(), building);
+                    //
+                    this.RoomTreeItems.Add(buildingItem);
 
-            if (this.RadTreeView1.SelectedNode != null)
-            {
-                if (isRoot)
-                {
-                    toggleButtons(true, false, false, false);
-                }
-                else if (dataItemType == typeof(Building).ToString())
-                {
-                    toggleButtons(false, true, false, true);
-                }
-                else if (dataItemType == typeof(Floor).ToString())
-                {
-                    toggleButtons(false, false, true, true);
-                }
-                else if (dataItemType == typeof(Room).ToString())
-                {
-                    toggleButtons(false, false,false, true);
+                    //Floors
+                    IEnumerable<Floor> floors = building.Floors;
+                    if (floors.Any()) {
+                        int floorId = 2000000;
+                        foreach (Floor floor in floors) {
+                            RoomTreeItem floorItem = new RoomTreeItem(floorId, buildingId, floor.Name, floor.FloorId.ToString(), floor);
+                            //
+                            this.RoomTreeItems.Add(floorItem);
+
+                            //Rooms
+                            IEnumerable<Room> rooms = floor.Rooms;
+                            if (rooms.Any()) {
+                                int roomId = 3000000;
+                                foreach (Room room in rooms) {
+                                    RoomTreeItem roomItem = new RoomTreeItem(roomId, floorId, room.Name, room.RoomId.ToString(), room);
+                                    //
+                                    this.RoomTreeItems.Add(roomItem);
+                                    roomId++;
+                                }
+                            }
+                            floorId++;
+                        }
+                    }
+                    buildingId++;
                 }
             }
-            else
-            {
+            this.DataSource = RoomTreeItems;
+        }
+
+        #region EditForm
+
+        /// <summary>
+        /// Change visibility of buttons regarding selected node
+        /// </summary>
+        private void toggleButtons() {
+
+            if (this.SelectedRoomTreeItem != null) {
+                String dataItemType = this.SelectedRoomTreeItem.DataItem != null ?
+                                            ObjectContext.GetObjectType(this.SelectedRoomTreeItem.DataItem.GetType()).ToString() : null;
+                if (this.SelectedRoomTreeItem.IsRoot) {
+                    toggleButtons(true, false, false, false);
+                } else if (dataItemType == typeof(Building).ToString()) {
+                    toggleButtons(false, true, false, true);
+                } else if (dataItemType == typeof(Floor).ToString()) {
+                    toggleButtons(false, false, true, true);
+                } else if (dataItemType == typeof(Room).ToString()) {
+                    toggleButtons(false, false, false, true);
+                }
+            } else {
                 toggleButtons(false, false, false, false);
             }
         }
 
-        private void toggleButtons(bool enableBuilding, bool enableFloor, bool enableRoom, bool enableDelete)
-        {
+        private void toggleButtons(bool enableBuilding, bool enableFloor, bool enableRoom, bool enableDelete) {
             this.btnAddBuilding.Enabled = enableBuilding;
             this.btnAddFloor.Enabled = enableFloor;
             this.btnAddRoom.Enabled = enableRoom;
             this.btnDelete.Enabled = enableDelete;
         }
 
-        #region EditForm
-
         /// <summary>
         /// Update the form on the right side to edit node information
         /// </summary>
-        private void updateEditForm()
-        {
+        private void updateEditForm() {
+            if (this.SelectedItem != null && this.SelectedItem.Value != ""
+                && this.SelectedRoomTreeItem != null && this.SelectedRoomTreeItem.DataItem != null) {
 
-            bool isRoot = this.RadTreeView1.SelectedNode.Attributes["IsRoot"] != null ? Boolean.Parse(this.RadTreeView1.SelectedNode.Attributes["IsRoot"]) : false;
-            String dataItemType = this.RadTreeView1.SelectedNode.Attributes["DataItemType"];
+                if (this.SelectedRoomTreeItem.IsRoot) {
+                    this.EditForm.Visible = false;
+                } else {
+                    this.EditForm.Visible = true;
+                    this.txtNodeName.Text = this.RadTreeView1.SelectedNode.Text;
 
-            if (isRoot)
-            {
+                    //Additional form for room
+                    if (ObjectContext.GetObjectType(this.SelectedRoomTreeItem.DataItem.GetType()) == typeof(Room)) {
+                        Room selectedRoom = this.SelectedRoomTreeItem.DataItem as Room;
+                        this.ResponsibleAttribute.Visible = true;
+                        this.UserSearchBox.Text = selectedRoom.ResponsiblePerson;
+                    } else {
+                        this.ResponsibleAttribute.Visible = false;
+                    }
+                }
+            } else {
                 this.EditForm.Visible = false;
-            }
-            else
-            {
-                this.EditForm.Visible = true;
-                this.txtNodeName.Text = this.RadTreeView1.SelectedNode.Text;
-
-                //Additional form for room
-                if (dataItemType == typeof(Room).ToString())
-                {
-                    Room selectedRoom = Room.GetByName(this.txtNodeName.Text);
-                    this.ResponsibleAttribute.Visible = true;
-                    this.UserSearchBox.Text = selectedRoom != null ? selectedRoom.AppUsers.Any() ? selectedRoom.AppUsers.ElementAt(0).Email : "" : "";
-                }
-                else
-                {
-                    this.ResponsibleAttribute.Visible = false;
-                }
+                this.txtNodeName.Text = null;
             }
         }
 
@@ -162,198 +181,133 @@ namespace Client.Site.Controls.RoomTree
 
         #region Events
 
-        protected void RadTreeView1_NodeClick(object sender, RadTreeNodeEventArgs e)
-        {
+        #region Tree
+
+        protected void RadTreeView1_NodeClick(object sender, RadTreeNodeEventArgs e) {
+            this.SelectedItem = e.Node;
             toggleButtons();
             e.Node.Expanded = true;
             this.updateEditForm();
         }
 
-        protected void RadTreeView1_NodeDataBound(object sender, RadTreeNodeEventArgs e)
-        {
-            if (e.Node.DataItem != null && e.Node.DataItem.GetType() == typeof(CustomTreeNodeItem))
-            {
-                CustomTreeNodeItem nodeItem = e.Node.DataItem as CustomTreeNodeItem;
-                nodeItem.AddAttributesTo(e.Node);
+        #endregion
+
+        #region EditForm
+
+        protected void btnSave_Click(object sender, EventArgs e) {
+            if (this.txtNodeName.Text.Any() && this.SelectedRoomTreeItem != null) {
+
+                if (ObjectContext.GetObjectType(this.SelectedRoomTreeItem.DataItem.GetType()) == typeof(Building)) {
+                    Building selectedBuilding = this.SelectedRoomTreeItem.DataItem as Building;
+                    if (this.SelectedRoomTreeItem.Value.Contains("-")) {
+                        EntityFactory.Context.Buildings.Add(selectedBuilding);
+                    }
+                    selectedBuilding.Name = this.txtNodeName.Text;
+
+                } else if (ObjectContext.GetObjectType(this.SelectedRoomTreeItem.DataItem.GetType()) == typeof(Floor)) {
+                    Floor selectedFloor = this.SelectedRoomTreeItem.DataItem as Floor;
+                    if (this.SelectedRoomTreeItem.Value.Contains("-")) {
+                        selectedFloor.Building = this.RoomTreeItems.Where(i => i.Value == this.SelectedRoomTreeItem.ParentNode.Value
+                                                                            && ObjectContext.GetObjectType(i.DataItem.GetType()) == typeof(Building)).SingleOrDefault().DataItem as Building;
+                        EntityFactory.Context.Floors.Add(selectedFloor);
+                    }
+                    selectedFloor.Name = this.txtNodeName.Text;
+                } else if (ObjectContext.GetObjectType(this.SelectedRoomTreeItem.DataItem.GetType()) == typeof(Room)) {
+                    Room selectedRoom = this.SelectedRoomTreeItem.DataItem as Room;
+                    if (this.SelectedRoomTreeItem.Value.Contains("-")) {
+                        selectedRoom.Floor = this.RoomTreeItems.Where(i => i.Value == this.SelectedRoomTreeItem.ParentNode.Value 
+                                                                            && ObjectContext.GetObjectType(i.DataItem.GetType()) == typeof(Floor)).SingleOrDefault().DataItem as Floor;
+                        EntityFactory.Context.Rooms.Add(selectedRoom);
+                    }
+                    selectedRoom.Name = this.txtNodeName.Text;
+                    selectedRoom.ResponsiblePerson = this.UserSearchBox.Text;
+                }
+                this.RadTreeView1.SelectedNode.Text = this.txtNodeName.Text;
+                EntityFactory.Context.SaveChanges();
+                this.SelectedItem = this.RadTreeView1.SelectedNode;
+                toggleButtons();
             }
         }
 
-        private void addNewNode(Type type)
-        {
-            RadTreeNode newNode = new RadTreeNode("");
-            newNode.Attributes["DataItemType"] = type.ToString();
+        #endregion
+
+        #region Buttons
+
+        protected void btnDelete_Click(object sender, EventArgs e) {
+            if (this.SelectedRoomTreeItem != null) {
+                if (ObjectContext.GetObjectType(this.SelectedRoomTreeItem.DataItem.GetType()) == typeof(Building)) {
+                    Building buildingToDelete = this.SelectedRoomTreeItem.DataItem as Building;
+                    if (!buildingToDelete.HasArticles()) {
+                        buildingToDelete.Delete();
+                        EntityFactory.Context.SaveChanges();
+                        this.RadTreeView1.SelectedNode.Remove();
+                        this.SelectedItem = null;
+                    } else {
+                        RadWindowManager1.RadAlert(String.Format("{0} kann nicht gelöscht werden, da Artikel dem Gebäude zugewiesen sind.",buildingToDelete.Name), 300, 130, "Operation nicht möglich", "alertCallBackFn");
+                    }
+                } else if (ObjectContext.GetObjectType(this.SelectedRoomTreeItem.DataItem.GetType()) == typeof(Floor)) {
+                    Floor floorToDelete = this.SelectedRoomTreeItem.DataItem as Floor;
+                    if (!floorToDelete.HasArticles()) {
+                       floorToDelete.Delete();
+                       EntityFactory.Context.SaveChanges();
+                       this.RadTreeView1.SelectedNode.Remove();
+                       this.SelectedItem = null;
+                    } else {
+                        RadWindowManager1.RadAlert(String.Format("{0} kann nicht gelöscht werden, da Artikel dem Stockwerk zugewiesen sind.",floorToDelete.Name), 300, 130, "Operation nicht möglich", "alertCallBackFn");
+                    }
+                } else if (ObjectContext.GetObjectType(this.SelectedRoomTreeItem.DataItem.GetType()) == typeof(Room)) {
+                    Room roomToDelete = this.SelectedRoomTreeItem.DataItem as Room;
+                    if (!roomToDelete.HasArticles()) {
+                        roomToDelete.Delete();
+                        EntityFactory.Context.SaveChanges();
+                        this.RadTreeView1.SelectedNode.Remove();
+                        this.SelectedItem = null;
+                    } else {
+                        RadWindowManager1.RadAlert(String.Format("{0} kann nicht gelöscht werden, da Artikel dem Raum zugewiesen sind.", roomToDelete.Name), 300, 130, "Operation nicht möglich", "alertCallBackFn");
+                    }
+                }
+                updateEditForm();
+            }
+        }
+
+        protected void btnAddBuilding_Click(object sender, EventArgs e) {
+            addNewNode(new Building());
+        }
+
+        protected void btnAddFloor_Click(object sender, EventArgs e) {
+            addNewNode(new Floor());
+        }
+
+        protected void btnAddRoom_Click(object sender, EventArgs e) {
+            addNewNode(new Room());
+        }
+
+        private void addNewNode(object dataItem) {
+            RoomTreeItem newNode = new RoomTreeItem();
+            newNode.DataItem = dataItem;
+            newNode.Attributes["DataType"] = ObjectContext.GetObjectType(dataItem.GetType()).ToString();
+            newNode.Value = Guid.NewGuid().ToString();
             newNode.Selected = true;
+
+            this.SelectedItem = newNode;
             this.RadTreeView1.SelectedNode.Nodes.Add(newNode);
+            this.RoomTreeItems.Add(newNode);
+
             this.updateEditForm();
             this.txtNodeName.Focus();
         }
 
-        protected void btnSave_Click(object sender, EventArgs e)
-        {
+        #endregion
 
-            //Remove Node if selection changed after creating node without saving
-            if (this.RadTreeView1.SelectedNode != null && this.RadTreeView1.SelectedNode.Text == null)
-            {
-                this.RadTreeView1.SelectedNode.Remove();
+        protected void RadTreeView1_NodeDataBound(object sender, RadTreeNodeEventArgs e) {
+            if (e.Node.DataItem != null && e.Node.DataItem.GetType() == typeof(RoomTreeItem)) {
+                RoomTreeItem roomTreeNodeItem = e.Node.DataItem as RoomTreeItem;
+                e.Node.Value = roomTreeNodeItem.Value;
+                e.Node.Attributes["IsRoot"] = roomTreeNodeItem.IsRoot.ToString();
+                if (roomTreeNodeItem.DataItem != null) {
+                    e.Node.Attributes["DataType"] = ObjectContext.GetObjectType(roomTreeNodeItem.DataItem.GetType()).ToString();
+                }
             }
-
-            String dataItemType = this.RadTreeView1.SelectedNode.Attributes["DataItemType"];
-            String id = this.RadTreeView1.SelectedNode.Attributes["Id"];
-
-            if (dataItemType == typeof(Building).ToString())
-            {
-
-                Building buildingToSave = null;
-                if (id != null)
-                {
-                    buildingToSave = Building.GetById(int.Parse(id));
-                }
-                if (buildingToSave == null)
-                {
-                    buildingToSave = new Building();
-                    buildingToSave.BuildingId = int.Parse("1" + Building.GetAll().Count());
-                    EntityFactory.Context.Buildings.Add(buildingToSave);
-                }
-                buildingToSave.Name = this.txtNodeName.Text;
-
-                EntityFactory.Context.SaveChanges();
-
-                this.RadTreeView1.SelectedNode.Text = this.txtNodeName.Text;
-                this.RadTreeView1.SelectedNode.Attributes["Id"] = buildingToSave.BuildingId.ToString();
-
-            }
-            else if (dataItemType == typeof(Floor).ToString())
-            {
-
-                Floor floorToSave = null;
-                if (id != null)
-                {
-                    floorToSave = Floor.GetById(int.Parse(id));
-                }
-                if (floorToSave == null)
-                {
-                    floorToSave = new Floor();
-                    floorToSave.FloorId = int.Parse("2" + Floor.GetAll().Count());
-
-                    if (this.RadTreeView1.SelectedNode.ParentNode != null)
-                    {
-                        floorToSave.BuildingId = int.Parse(this.RadTreeView1.SelectedNode.ParentNode.Attributes["Id"]);
-                    }
-
-                    EntityFactory.Context.Floors.Add(floorToSave);
-
-                    this.RadTreeView1.SelectedNode.Text = this.txtNodeName.Text;
-                    this.RadTreeView1.SelectedNode.Attributes["Id"] = floorToSave.FloorId.ToString();
-                }
-
-                floorToSave.Name = this.txtNodeName.Text;
-
-                EntityFactory.Context.SaveChanges();
-            }
-            else if (dataItemType == typeof(Room).ToString())
-            {
-
-                Room roomToSave = null;
-                if (id != null)
-                {
-                    roomToSave = Room.GetById(int.Parse(id));
-                }
-                if (roomToSave == null)
-                {
-                    roomToSave = new Room();
-                    roomToSave.RoomId = int.Parse("3" + Room.GetAll().Count());
-
-                    if (this.RadTreeView1.SelectedNode.ParentNode != null)
-                    {
-                        roomToSave.FloorId = int.Parse(this.RadTreeView1.SelectedNode.ParentNode.Attributes["Id"]);
-                    }
-
-                    EntityFactory.Context.Rooms.Add(roomToSave);
-
-                    this.RadTreeView1.SelectedNode.Text = this.txtNodeName.Text;
-                    this.RadTreeView1.SelectedNode.Attributes["Id"] = roomToSave.FloorId.ToString();
-                }
-
-                roomToSave.Name = this.txtNodeName.Text;
-                AppUser responsibleUser = AppUser.GetByEmail(this.UserSearchBox.Text);
-                if (responsibleUser != null)
-                {
-                    roomToSave.AppUsers.Clear();
-                    roomToSave.AppUsers.Add(responsibleUser);
-                }
-                EntityFactory.Context.SaveChanges();
-            }
-        }
-
-        protected void btnDelete_Click(object sender, EventArgs e)
-        {
-            String dataItemType = this.RadTreeView1.SelectedNode.Attributes["DataItemType"];
-            String idString = this.RadTreeView1.SelectedNode.Attributes["Id"];
-
-            if (idString != null)
-            {
-                int id = int.Parse(idString);
-                if (dataItemType == typeof(Building).ToString())
-                {
-                    //Delete object from context
-                    Building buildingToDelete = EntityFactory.Context.Buildings.Where(p => p.BuildingId == id).SingleOrDefault();
-                    if (buildingToDelete != null)
-                        if (!buildingToDelete.HasArticles())
-                        {
-                            buildingToDelete.Delete();
-                        }
-                        else
-                        {
-                            RadWindowManager1.RadAlert(String.Format("{0} kann nicht gelöscht werden, da Artikel dem Raum zugewiesen sind."), 300, 130, "Operation nicht möglich", "alertCallBackFn");
-                        }
-                }
-                else if (dataItemType == typeof(Floor).ToString())
-                {
-                    //Delete object from context
-                    Floor floorToDelete = EntityFactory.Context.Floors.Where(p => p.FloorId == id).SingleOrDefault();
-                    if (floorToDelete != null)
-                        if (!floorToDelete.HasArticles())
-                        {
-                            floorToDelete.Delete();
-                        }
-                        else
-                        {
-                            RadWindowManager1.RadAlert(String.Format("{0} kann nicht gelöscht werden, da Artikel dem Raum zugewiesen sind."), 300, 130, "Operation nicht möglich", "alertCallBackFn");
-                        }
-                }
-                else if (dataItemType == typeof(Room).ToString())
-                {
-                    //Delete object from context
-                    Room roomToDelete = EntityFactory.Context.Rooms.Where(p => p.RoomId == id).SingleOrDefault();
-                    if (roomToDelete != null)
-                        if (!roomToDelete.HasArticles())
-                        {
-                            roomToDelete.Delete();
-                        }
-                        else
-                        {
-                            RadWindowManager1.RadAlert(String.Format("{0} kann nicht gelöscht werden, da Artikel dem Raum zugewiesen sind."), 300, 130, "Operation nicht möglich", "alertCallBackFn");
-                        }
-                }
-                EntityFactory.Context.SaveChanges();
-                this.RadTreeView1.SelectedNode.Remove();
-                this.EditForm.Visible = false;
-            }
-        }
-
-        protected void btnAddBuilding_Click(object sender, EventArgs e)
-        {
-            addNewNode(ObjectContext.GetObjectType(typeof(Building)));
-        }
-
-        protected void btnAddFloor_Click(object sender, EventArgs e)
-        {
-            addNewNode(ObjectContext.GetObjectType(typeof(Floor)));
-        }
-
-        protected void btnAddRoom_Click(object sender, EventArgs e)
-        {
-            addNewNode(ObjectContext.GetObjectType(typeof(Room)));
         }
 
         #endregion

@@ -19,6 +19,6 @@ namespace Client {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Client.Site.Controls.RoomTree2.RoomTreeControl RoomTreeControl;
+        protected global::Client.Site.Controls.RoomTree.RoomTreeControl RoomTreeControl;
     }
 }

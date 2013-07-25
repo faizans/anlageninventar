@@ -10,6 +10,12 @@ namespace Data.Model.Diagram
 {
     public partial class ArticleCategory
     {
+
+        public static IEnumerable<ArticleCategory> GetAll() {
+            IP3AnlagenInventarEntities ctx = EntityFactory.Context;
+            return ctx.ArticleCategories;
+        }
+
         public static ArticleCategory GetById(int id)
         {
             IP3AnlagenInventarEntities ctx = EntityFactory.Context;

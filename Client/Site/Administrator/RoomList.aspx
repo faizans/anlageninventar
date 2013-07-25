@@ -3,5 +3,5 @@
 <%@ Register Src="~/Site/Controls/RoomTree/RoomTreeControl.ascx" TagPrefix="uc1" TagName="RoomTreeControl" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
-    <uc1:RoomTreeControl runat="server" id="RoomTreeControl" />
+    <uc1:RoomTreeControl runat="server" ID="RoomTreeControl" />
 </asp:Content>

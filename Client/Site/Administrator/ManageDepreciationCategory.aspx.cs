@@ -90,10 +90,19 @@ namespace Client.Site.Administrator {
         protected void ListBoxControl_SelectedIndexChanged(object sender, EventArgs e) {
             ListBoxItemEventArgs eventArgs = e as ListBoxItemEventArgs;
             if (eventArgs.Item != null && eventArgs.Item.DataItem != null) {
+                enableDepreciationForms(true);
                 Depreciation depreciation = eventArgs.Item.DataItem as Depreciation;
                 this.rtbFromYear.Text = depreciation.AdditionalStartDate.HasValue ? depreciation.AdditionalStartDate.Value.Year.ToString() : "";
                 this.rtbToYear.Text = depreciation.AdditionalEndDate.HasValue ? depreciation.AdditionalEndDate.Value.Year.ToString() : "";
+            } else {
+                enableDepreciationForms(false);
             }
+        }
+
+        private void enableDepreciationForms(Boolean enabled) {
+            this.btnApply.Enabled = enabled;
+            this.rtbFromYear.Enabled = enabled;
+            this.rtbToYear.Enabled = enabled;
         }
 
         protected void ListBoxControl_AddNewItem(object sender, EventArgs e) {
@@ -122,11 +131,13 @@ namespace Client.Site.Administrator {
                         this.ListBoxControl.Remove(eventArgs.Item);
                         this.rtbFromYear.Text = null;
                         this.rtbToYear.Text = null;
+                        this.enableDepreciationForms(false);
                     }
                 } else {
                     this.ListBoxControl.Remove(eventArgs.Item);
                     this.rtbFromYear.Text = null;
                     this.rtbToYear.Text = null;
+                    this.enableDepreciationForms(false);
                 }
             } 
         }
@@ -142,7 +153,11 @@ namespace Client.Site.Administrator {
             Response.Redirect("~/Site/Administrator/DepreciationCategoryList.aspx");
         }
 
-        protected void rtbFromYear_TextChanged(object sender, EventArgs e) {
+        protected void btnApply_Click(object sender, EventArgs e) {
+            updateItem();
+        }
+
+        private void updateItem() {
             if (this.ListBoxControl.SelectedListBoxItem != null && this.ListBoxControl.SelectedListBoxItem.DataItem != null) {
                 Depreciation selectedDepreciation = this.ListBoxControl.SelectedListBoxItem.DataItem as Depreciation;
                 if (this.rtbFromYear.Text.Count() == 4) {
@@ -156,6 +171,7 @@ namespace Client.Site.Administrator {
         }
 
         #endregion
+
 
         #endregion
     }

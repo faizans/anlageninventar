@@ -89,10 +89,19 @@ namespace Client.Site.Administrator {
         protected void ListBoxControl_SelectedIndexChanged(object sender, EventArgs e) {
             ListBoxItemEventArgs eventArgs = e as ListBoxItemEventArgs;
             if (eventArgs.Item != null && eventArgs.Item.DataItem != null) {
+                enableBranchForms(true);
                 SupplierBranch selectedBranch = eventArgs.Item.DataItem as SupplierBranch;
                 this.rtbBranchPlace.Text = selectedBranch.Place;
                 this.rtbBranchPlz.Text = selectedBranch.ZipCode;
+            } else {
+                enableBranchForms(false);
             }
+        }
+
+        private void enableBranchForms(Boolean enabled) {
+            this.btnApply.Enabled = enabled;
+            this.rtbBranchPlace.Enabled = enabled;
+            this.rtbBranchPlz.Enabled = enabled;
         }
 
         protected void ListBoxControl_AddNewItem(object sender, EventArgs e) {
@@ -121,11 +130,13 @@ namespace Client.Site.Administrator {
                         this.ListBoxControl.Remove(eventArgs.Item);
                         this.rtbBranchPlace.Text = null;
                         this.rtbBranchPlz.Text = null;
+                        this.enableBranchForms(false);
                     }
                 } else {
                     this.ListBoxControl.Remove(eventArgs.Item);
                     this.rtbBranchPlace.Text = null;
                     this.rtbBranchPlz.Text = null;
+                    this.enableBranchForms(false);
                 }
             } 
         }
@@ -141,13 +152,17 @@ namespace Client.Site.Administrator {
             Response.Redirect("~/Site/Administrator/SupplierList.aspx");
         }
 
-        protected void rtbBranchPlz_TextChanged(object sender, EventArgs e) {
+        public void UpdateItem() {
             if (this.ListBoxControl.SelectedListBoxItem != null && this.ListBoxControl.SelectedListBoxItem.DataItem != null) {
                 SupplierBranch selectedBranch = this.ListBoxControl.SelectedListBoxItem.DataItem as SupplierBranch;
                 selectedBranch.Place = this.rtbBranchPlace.Text;
                 selectedBranch.ZipCode = this.rtbBranchPlz.Text;
                 this.ListBoxControl.SelectedItem.Text = this.rtbBranchPlz.Text + " " + this.rtbBranchPlace.Text;
             }
+        }
+
+        protected void btnApply_Click(object sender, EventArgs e) {
+            UpdateItem();
         }
 
         #endregion

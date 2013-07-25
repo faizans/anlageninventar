@@ -50,6 +50,7 @@
     <Compile Include="Model\ArticleCategory.cs" />
     <Compile Include="Model\Building.cs" />
     <Compile Include="Model\AppUser.cs" />
+    <Compile Include="Model\Article.cs" />
     <Compile Include="Model\Depreciation.cs" />
     <Compile Include="Model\DepreciationCategory.cs" />
     <Compile Include="Model\Diagram\AnlagenInventarModel.Context.cs">

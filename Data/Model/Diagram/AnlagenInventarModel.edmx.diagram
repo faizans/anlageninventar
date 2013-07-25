@@ -5,32 +5,32 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="9166e394bcb641e8b30c78df4e0e4be7" Name="Diagram1">
-        <EntityTypeShape EntityType="Data.Model.Diagram.AppUser" Width="1.5" PointX="4.4116180131265983" PointY="6.3785100906987253" />
-        <EntityTypeShape EntityType="Data.Model.Diagram.Article" Width="1.5" PointX="6.625" PointY="20" />
-        <EntityTypeShape EntityType="Data.Model.Diagram.ArticleCategory" Width="1.5" PointX="9.5822452202356629" PointY="28.160468904376248" />
-        <EntityTypeShape EntityType="Data.Model.Diagram.ArticleGroup" Width="1.5" PointX="2.1021053372426448" PointY="5.8779408214045414" />
-        <EntityTypeShape EntityType="Data.Model.Diagram.Building" Width="1.5" PointX="10.5" PointY="18.625" />
-        <EntityTypeShape EntityType="Data.Model.Diagram.Depreciation" Width="1.5" PointX="3.6973861696652071" PointY="29.250655411393687" />
-        <EntityTypeShape EntityType="Data.Model.Diagram.DepreciationCategory" Width="1.5" PointX="1.1299376846896194" PointY="16.592853136636712" />
-        <EntityTypeShape EntityType="Data.Model.Diagram.Floor" Width="1.5" PointX="1.1090672486969584" PointY="9.9114929632802919" />
-        <EntityTypeShape EntityType="Data.Model.Diagram.InsuranceCategory" Width="1.5" PointX="4.7782542988556695" PointY="15.964221186919241" />
-        <EntityTypeShape EntityType="Data.Model.Diagram.Room" Width="1.5" PointX="8.6593318100363632" PointY="30.302461504145739" />
-        <EntityTypeShape EntityType="Data.Model.Diagram.Supplier" Width="1.5" PointX="10.864221190504834" PointY="0.29334858073543224" />
-        <EntityTypeShape EntityType="Data.Model.Diagram.SupplierBranch" Width="1.5" PointX="4.768981069684485" PointY="16.654496111280515" />
-        <EntityTypeShape EntityType="Data.Model.Diagram.sysdiagram" Width="1.5" PointX="4.0277582965920482" PointY="1.7822802075102366" />
+        <EntityTypeShape EntityType="Data.Model.Diagram.AppUser" Width="1.5" PointX="3.6600217128452019" PointY="15.92772062864514" />
+        <EntityTypeShape EntityType="Data.Model.Diagram.Article" Width="1.5" PointX="11.647786633878848" PointY="21.81267901780674" />
+        <EntityTypeShape EntityType="Data.Model.Diagram.ArticleCategory" Width="1.5" PointX="7.5260999982832466" PointY="31.307665258323617" />
+        <EntityTypeShape EntityType="Data.Model.Diagram.ArticleGroup" Width="1.5" PointX="3.4845616628809655" PointY="13.490871703946437" />
+        <EntityTypeShape EntityType="Data.Model.Diagram.Building" Width="1.5" PointX="9.6671460483535867" PointY="6.8823384674649395" />
+        <EntityTypeShape EntityType="Data.Model.Diagram.Depreciation" Width="1.5" PointX="4.8070822287383876" PointY="1.3994427329858032" />
+        <EntityTypeShape EntityType="Data.Model.Diagram.DepreciationCategory" Width="1.5" PointX="11.129772701826774" PointY="4.5201875141450145" />
+        <EntityTypeShape EntityType="Data.Model.Diagram.Floor" Width="1.5" PointX="0.25428750750342732" PointY="25.121083122268825" />
+        <EntityTypeShape EntityType="Data.Model.Diagram.InsuranceCategory" Width="1.5" PointX="2.5560095061343207" PointY="10.162348722183308" />
+        <EntityTypeShape EntityType="Data.Model.Diagram.Room" Width="1.5" PointX="10.558985854759341" PointY="7.2829020504294437" />
+        <EntityTypeShape EntityType="Data.Model.Diagram.Supplier" Width="1.5" PointX="7.1208452224362855" PointY="12.72590409811861" />
+        <EntityTypeShape EntityType="Data.Model.Diagram.SupplierBranch" Width="1.5" PointX="11.927491061355681" PointY="21.503655086040336" />
+        <EntityTypeShape EntityType="Data.Model.Diagram.sysdiagram" Width="1.5" PointX="2.4935832985181285" PointY="17.209172599580686" />
         <AssociationConnector Association="Data.Model.Diagram.FK_Article_ArticleCategory" />
         <AssociationConnector Association="Data.Model.Diagram.FK_Article_ArticleGroup" />
+        <AssociationConnector Association="Data.Model.Diagram.FK_Article_Depreciation" />
         <AssociationConnector Association="Data.Model.Diagram.FK_Article_InsuranceCategory" />
         <AssociationConnector Association="Data.Model.Diagram.FK_Article_Room" />
         <AssociationConnector Association="Data.Model.Diagram.FK_Article_SupplierBranch" />
-        <AssociationConnector Association="Data.Model.Diagram.FK_Depreciation_Article1" />
+        <AssociationConnector Association="Data.Model.Diagram.FK_Depreciation_Article" />
         <AssociationConnector Association="Data.Model.Diagram.FK_ArticleGroup_Room" />
         <AssociationConnector Association="Data.Model.Diagram.FK_Floor_Building" />
         <AssociationConnector Association="Data.Model.Diagram.FK_Depreciation_DepreciationCategory" />
         <AssociationConnector Association="Data.Model.Diagram.FK_Room_Floor" />
         <AssociationConnector Association="Data.Model.Diagram.FK_SupplierBranch_Supplier" />
         <AssociationConnector Association="Data.Model.Diagram.AppUser2Room" />
-        <AssociationConnector Association="Data.Model.Diagram.FK_Article_Depreciation" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
