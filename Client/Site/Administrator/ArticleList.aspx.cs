@@ -12,6 +12,7 @@ using System.Web.UI.WebControls;
 using Telerik.Web.UI;
 using System.Linq.Dynamic;
 using System.Data;
+using Client.Site.Controls.CustomGrids;
 
 namespace Client.Site.Administrator {
     public partial class ArticleList : System.Web.UI.Page {
@@ -27,52 +28,6 @@ namespace Client.Site.Administrator {
                 CustomMaster mm = (CustomMaster)Page.Master;
                 return mm;
             }
-        }
-
-        private List<Article> GetReportItems() {
-            List<Article> reportSource = new List<Article>();
-            if (!this.rgArticles.MasterTableView.FilterExpression.Any()) {
-                reportSource = Article.GetAvailable().ToList();
-            } else {
-                //Get the filter expression
-                String filter = this.rgArticles.MasterTableView.FilterExpression;
-
-                //HAndle speical chars
-                filter = filter.Replace("[", "");
-                filter = filter.Replace("]", "");
-                filter = filter.Replace("(", "");
-                filter = filter.Replace(")", "");
-                filter = filter.Replace("%", "");
-                filter = filter.Replace("'", "\"");
-
-                //Handle expressions
-                if (filter.Contains("AND")) {
-                    foreach (String queryPart in filter.Split("AND".ToCharArray())) {
-                        filter = handleArguments(filter, queryPart);
-                    }
-                } else {
-                    filter = handleArguments(filter, filter);
-                }
-
-                reportSource = Article.GetAvailable().AsQueryable().Where(filter).ToList();
-
-                if (rgArticles.MasterTableView.GetItems(GridItemType.TFoot).Any()) {
-                    GridDataItem dataItem = rgArticles.MasterTableView.GetItems(GridItemType.TFoot)[0] as GridDataItem;
-                    Article article = new Article();
-                    article.Name = "Total:";
-                    article.Value = double.Parse(dataItem["Value"].Text);
-                    reportSource.Add(article);
-                }
-            }
-            return reportSource;
-        }
-
-        private String handleArguments(String filter, String queryPart) {
-            if (queryPart.Contains("LIKE")) {
-                String[] qparams = queryPart.Split("LIKE".ToCharArray());
-                filter = filter.Replace(queryPart, " " + qparams[0] + ".Contains(" + qparams[4] + ")");
-            }
-            return filter;
         }
 
         #region Events
@@ -180,43 +135,22 @@ namespace Client.Site.Administrator {
         }
 
         protected void btnExportToExcel_Click(object sender, ImageClickEventArgs e) {
-            //ConfigureExport();
-            //rgArticles.ExportSettings.Excel.Format = GridExcelExportFormat.Biff;
-            //rgArticles.MasterTableView.ExportToExcel();
-
-            this.SiteMaster.ExportItems = GetReportItems();
-            this.Context.Session["ExportItems"] = GetReportItems();
+            this.SiteMaster.ExportItems = GridHelper.GetReportItems(this.rgArticles);
             Response.Redirect("~/Site/Provider/ExcelProvider.ashx");
         }
 
         #endregion
 
         #region ExportSettings
-        public void ConfigureExport() {
-            rgArticles.ExportSettings.ExportOnlyData = true;
-            rgArticles.ExportSettings.IgnorePaging = true;
-            rgArticles.ExportSettings.OpenInNewWindow = false;
-            rgArticles.ExportSettings.UseItemStyles = false;
-        }
 
         protected void btnReport_Click(object sender, ImageClickEventArgs e) {
-            this.SiteMaster.ReportDataSource = GetReportItems();
+            this.SiteMaster.ReportDataSource = GridHelper.GetReportItems(this.rgArticles);
             Response.Redirect("~/Site/Administrator/ReportView.aspx");
         }
         #endregion
 
         protected void rgArticles_Init(object sender, EventArgs e) {
-            GridFilterMenu menu = rgArticles.FilterMenu;
-            int i = 0;
-
-            while (i < menu.Items.Count) {
-                if (menu.Items[i].Text == "StartsWith" || menu.Items[i].Text == "EndsWith" || menu.Items[i].Text == "Between"
-                 || menu.Items[i].Text == "NotBetween" || menu.Items[i].Text == "IsEmpty" || menu.Items[i].Text == "NotIsEmpty" || menu.Items[i].Text == "IsNull" || menu.Items[i].Text == "NotIsNull") {
-                    menu.Items.RemoveAt(i);
-                } else {
-                    i++;
-                }
-            }
+            GridHelper.ClearFilter(this.rgArticles);
         }
 
 

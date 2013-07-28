@@ -40,6 +40,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Core" />
@@ -132,6 +135,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ExcelTemplates\ExportColumnNames.xlsx" />
+    <Content Include="ExcelTemplates\ReportTemplate.xls" />
+    <Content Include="ExcelTemplates\web.config" />
     <None Include="Properties\PublishProfiles\BSL_SRV-Inventar_192.168.10.10.pubxml" />
     <Content Include="Resources\Styles\main.css">
       <DependentUpon>main.scss</DependentUpon>
@@ -221,9 +227,11 @@
     <Content Include="Site\Administrator\DepreciationCategoryList.aspx" />
     <Content Include="Site\Administrator\InsuranceCategoryList.aspx" />
     <Content Include="Site\Administrator\ManageUser.aspx" />
+    <Content Include="Site\Administrator\ReportView.aspx" />
     <Content Include="Site\Administrator\RoomList.aspx" />
     <Content Include="Site\Administrator\SupplierList.aspx" />
     <Content Include="Site\Administrator\ManageSupplier.aspx" />
+    <Content Include="Site\Administrator\UploadTemplate.aspx" />
     <Content Include="Site\Administrator\UserList.aspx" />
     <Content Include="Site\Controls\ListBox2\ListBoxControl.ascx" />
     <Content Include="Site\Controls\Menu\MenuControl.ascx" />
@@ -280,6 +288,7 @@
     </Compile>
     <Compile Include="Site\Administrator\CategoryList.aspx.cs">
       <DependentUpon>CategoryList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Site\Administrator\CategoryList.aspx.designer.cs">
       <DependentUpon>CategoryList.aspx</DependentUpon>
@@ -319,6 +328,13 @@
     <Compile Include="Site\Administrator\ManageUser.aspx.designer.cs">
       <DependentUpon>ManageUser.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Site\Administrator\ReportView.aspx.cs">
+      <DependentUpon>ReportView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site\Administrator\ReportView.aspx.designer.cs">
+      <DependentUpon>ReportView.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Site\Administrator\RoomList.aspx.cs">
       <DependentUpon>RoomList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -340,6 +356,13 @@
     <Compile Include="Site\Administrator\ManageSupplier.aspx.designer.cs">
       <DependentUpon>ManageSupplier.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Site\Administrator\UploadTemplate.aspx.cs">
+      <DependentUpon>UploadTemplate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site\Administrator\UploadTemplate.aspx.designer.cs">
+      <DependentUpon>UploadTemplate.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Site\Administrator\UserList.aspx.cs">
       <DependentUpon>UserList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -347,6 +370,7 @@
     <Compile Include="Site\Administrator\UserList.aspx.designer.cs">
       <DependentUpon>UserList.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Site\Controls\CustomGrids\GridHelper.cs" />
     <Compile Include="Site\Controls\ListBox2\ListBoxControl.ascx.cs">
       <DependentUpon>ListBoxControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -379,18 +403,22 @@
       <DependentUpon>UserSearchBox.ascx</DependentUpon>
     </Compile>
     <Compile Include="Site\Controls\UserSearchControl\UserSearchBoxEventArgs.cs" />
+    <Compile Include="Site\Provider\ExcelProvider.ashx.cs">
+      <DependentUpon>ExcelProvider.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Util\AdLookup.cs" />
     <Compile Include="Util\Constants.cs" />
     <Compile Include="Util\Dynamic.cs" />
     <Compile Include="Util\EnumObjectFactory.cs" />
+    <Compile Include="Util\ExcelExporter.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\Images\Icons\" />
     <Folder Include="Resources\Language\" />
     <Folder Include="Site\Public\" />
     <Folder Include="Site\User\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Site\Provider\ExcelProvider.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -427,7 +455,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
+      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

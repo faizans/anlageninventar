@@ -9,6 +9,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Telerik.Web.UI;
 using System.Linq.Dynamic;
+using Client.Site.Controls.CustomGrids;
 
 namespace Client.Site.Administrator {
     public partial class ReportView : System.Web.UI.Page {
@@ -32,71 +33,16 @@ namespace Client.Site.Administrator {
             this.rgReport.DataBind();
         }
 
-        private List<Article> GetReportItems() {
-            List<Article> reportSource = new List<Article>();
-            if (!this.rgReport.MasterTableView.FilterExpression.Any()) {
-                reportSource = Article.GetAvailable().ToList();
-            } else {
-                //Get the filter expression
-                String filter = this.rgReport.MasterTableView.FilterExpression;
-
-                //HAndle speical chars
-                filter = filter.Replace("[", "");
-                filter = filter.Replace("]", "");
-                filter = filter.Replace("(", "");
-                filter = filter.Replace(")", "");
-                filter = filter.Replace("%", "");
-                filter = filter.Replace("'", "\"");
-
-                //Handle expressions
-                if (filter.Contains("AND")) {
-                    foreach (String queryPart in filter.Split("AND".ToCharArray())) {
-                        filter = handleArguments(filter, queryPart);
-                    }
-                } else {
-                    filter = handleArguments(filter, filter);
-                }
-
-                reportSource = Article.GetAvailable().AsQueryable().Where(filter).ToList();
-
-                if (rgReport.MasterTableView.GetItems(GridItemType.TFoot).Any()) {
-                    GridFooterItem dataItem = rgReport.MasterTableView.GetItems(GridItemType.Footer)[0] as GridFooterItem;
-                    Article article = new Article();
-                    article.Name = "Total:";
-                    article.Value = double.Parse(dataItem["Value"].Text);
-                    reportSource.Add(article);
-                }
-            }
-            return reportSource;
-        }
-
-        private String handleArguments(String filter, String queryPart) {
-            if (queryPart.Contains("LIKE")) {
-                String[] qparams = queryPart.Split("LIKE".ToCharArray());
-                filter = filter.Replace(queryPart, " " + qparams[0] + ".Contains(" + qparams[4] + ")");
-            }
-            return filter;
-        }
-
+        
         #region Events
 
         protected void btnExportToExcel_Click(object sender, ImageClickEventArgs e) {
-            this.SiteMaster.ExportItems = GetReportItems();
-            this.Context.Session["ExportItems"] = GetReportItems();
+            this.SiteMaster.ExportItems = GridHelper.GetReportItems(this.rgReport);
             Response.Redirect("~/Site/Provider/ExcelProvider.ashx");
         }
 
         protected void rgReport_Init(object sender, EventArgs e) {
-            GridFilterMenu menu = rgReport.FilterMenu;
-            int i = 0;
-
-            while (i < menu.Items.Count) {
-                if (menu.Items[i].Text == "NotContains" || menu.Items[i].Text == "StartsWith" || menu.Items[i].Text == "EndsWith" || menu.Items[i].Text == "Between"
-                 || menu.Items[i].Text == "NotBetween" || menu.Items[i].Text == "IsEmpty" || menu.Items[i].Text == "NotIsEmpty" || menu.Items[i].Text == "IsNull" || menu.Items[i].Text == "NotIsNull") {
-                    menu.Items.RemoveAt(i);
-                }
-                i++;
-            }
+            GridHelper.ClearFilter(this.rgReport);
         }
 
         protected void rgReport_DataBound(object sender, EventArgs e) {

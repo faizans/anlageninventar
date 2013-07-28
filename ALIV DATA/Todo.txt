@@ -1,6 +1,7 @@
 ONLY RELATED TO EMANUEL MISTRETTA
 
 Bugs:
+1. Filter DepreciationValue (Not entity property)
 
 Todo:
 1. Implement Secure Delete functions (Check if children are set to object)	2h
@@ -16,3 +17,5 @@ Todo:
 	On setting filters, FilterExpression will be created -> (Name) Like what ever as SQL statement.
 	This will executed then and retrieve filtereddatasource.
 	This way you can print all items plus you don't need to convert them.
+9. Login form
+10.Reverse deleted objects
