@@ -4,11 +4,14 @@ using Data.Model;
 using Data.Model.Diagram;
 using System;
 using System.Collections.Generic;
+using System.Data.Linq;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Telerik.Web.UI;
+using System.Linq.Dynamic;
+using System.Data;
 
 namespace Client.Site.Administrator {
     public partial class ArticleList : System.Web.UI.Page {
@@ -31,21 +34,45 @@ namespace Client.Site.Administrator {
             if (!this.rgArticles.MasterTableView.FilterExpression.Any()) {
                 reportSource = Article.GetAvailable().ToList();
             } else {
+                //Get the filter expression
+                String filter = this.rgArticles.MasterTableView.FilterExpression;
 
-                foreach (GridDataItem dataItem in rgArticles.MasterTableView.Items) {
-                    if (dataItem.ItemType == GridItemType.Item || dataItem.ItemType == GridItemType.AlternatingItem) {
-                        int articleId = int.Parse(dataItem["ArticleId"].Text);
-                        Article article = (this.rgArticles.DataSource as List<Article>).Where(i=>i.ArticleId == articleId).SingleOrDefault();//Article.GetById(int.Parse(dataItem["ArticleId"].Text));
-                        reportSource.Add(article);
-                    } else if (dataItem.ItemType == GridItemType.Footer) {
-                        Article article = new Article();
-                        article.Name = "Total:";
-                        article.Value = double.Parse(dataItem["Value"].Text);
-                        reportSource.Add(article);
+                //HAndle speical chars
+                filter = filter.Replace("[", "");
+                filter = filter.Replace("]", "");
+                filter = filter.Replace("(", "");
+                filter = filter.Replace(")", "");
+                filter = filter.Replace("%", "");
+                filter = filter.Replace("'", "\"");
+
+                //Handle expressions
+                if (filter.Contains("AND")) {
+                    foreach (String queryPart in filter.Split("AND".ToCharArray())) {
+                        filter = handleArguments(filter, queryPart);
                     }
+                } else {
+                    filter = handleArguments(filter, filter);
+                }
+
+                reportSource = Article.GetAvailable().AsQueryable().Where(filter).ToList();
+
+                if (rgArticles.MasterTableView.GetItems(GridItemType.TFoot).Any()) {
+                    GridDataItem dataItem = rgArticles.MasterTableView.GetItems(GridItemType.TFoot)[0] as GridDataItem;
+                    Article article = new Article();
+                    article.Name = "Total:";
+                    article.Value = double.Parse(dataItem["Value"].Text);
+                    reportSource.Add(article);
                 }
             }
             return reportSource;
+        }
+
+        private String handleArguments(String filter, String queryPart) {
+            if (queryPart.Contains("LIKE")) {
+                String[] qparams = queryPart.Split("LIKE".ToCharArray());
+                filter = filter.Replace(queryPart, " " + qparams[0] + ".Contains(" + qparams[4] + ")");
+            }
+            return filter;
         }
 
         #region Events
@@ -173,10 +200,24 @@ namespace Client.Site.Administrator {
         }
 
         protected void btnReport_Click(object sender, ImageClickEventArgs e) {
-            this.SiteMaster.ReportDataSource = GetReportItems() ;
+            this.SiteMaster.ReportDataSource = GetReportItems();
             Response.Redirect("~/Site/Administrator/ReportView.aspx");
         }
         #endregion
+
+        protected void rgArticles_Init(object sender, EventArgs e) {
+            GridFilterMenu menu = rgArticles.FilterMenu;
+            int i = 0;
+
+            while (i < menu.Items.Count) {
+                if (menu.Items[i].Text == "StartsWith" || menu.Items[i].Text == "EndsWith" || menu.Items[i].Text == "Between"
+                 || menu.Items[i].Text == "NotBetween" || menu.Items[i].Text == "IsEmpty" || menu.Items[i].Text == "NotIsEmpty" || menu.Items[i].Text == "IsNull" || menu.Items[i].Text == "NotIsNull") {
+                    menu.Items.RemoveAt(i);
+                } else {
+                    i++;
+                }
+            }
+        }
 
 
     }

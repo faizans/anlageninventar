@@ -14,14 +14,14 @@
     </telerik:RadAjaxManager>
 
 
-    <telerik:RadGrid ID="rgArticles" runat="server" AutoGenerateEditColumn="True" CellSpacing="0" GridLines="None" Skin="Silk"
+    <telerik:RadGrid ID="rgArticles" runat="server" AutoGenerateEditColumn="True" CellSpacing="0" GridLines="None" Skin="Silk" OnInit="rgArticles_Init"
         AllowPaging="True" AllowSorting="True" AllowFilteringByColumn="true" ShowStatusBar="true" Height="580px" ClientSettings-DataBinding-EnableCaching="true"
         OnItemCommand="rgArticles_ItemCommand" DataSourceID="GridSource" AllowMultiRowSelection="True" OnPreRender="rgArticles_PreRender" OnItemCreated="rgArticles_ItemCreated">
 
         <PagerStyle Visible="true"></PagerStyle>
 
         <ClientSettings>
-            <Scrolling  AllowScroll="True" EnableVirtualScrollPaging="True" UseStaticHeaders="True"
+            <Scrolling  AllowScroll="True" EnableVirtualScrollPaging="False" UseStaticHeaders="True"
                 SaveScrollPosition="True"></Scrolling>
         </ClientSettings>
 
@@ -76,11 +76,11 @@
                 <telerik:GridNumericColumn DataField="DepreciationValue" HeaderText="Abschreibung" SortExpression="DepreciationValue" UniqueName="DepreciationValue" FilterControlAltText="Filter DepreciationValue column" 
                     DataFormatString="{0:##,##0.00}" FilterControlWidth="80px">
                 </telerik:GridNumericColumn>
-                <telerik:GridBoundColumn DataField="Group.Name" HeaderText="Gruppe" SortExpression="GroupName" UniqueName="GroupName" FilterControlAltText="Filter GroupName column">
+                <telerik:GridBoundColumn DataField="ArticlGroup.Name" HeaderText="Gruppe" SortExpression="ArticlGroup.Name" UniqueName="ArticlGroup.Name" FilterControlAltText="Filter ArticlGroup.Name column">
                 </telerik:GridBoundColumn>
-                <telerik:GridBoundColumn DataField="SupplierBranch.Supplier.Name" HeaderText="Lieferant" SortExpression="SupplierName" UniqueName="SupplierName" FilterControlAltText="Filter SupplierName column">
+                <telerik:GridBoundColumn DataField="SupplierBranch.Supplier.Name" HeaderText="Lieferant" SortExpression="SupplierBranch.Supplier" UniqueName="SupplierBranch.Supplier" FilterControlAltText="Filter SupplierBranch.Supplier column">
                 </telerik:GridBoundColumn>
-                <telerik:GridBoundColumn DataField="Room.Name" HeaderText="Raum" SortExpression="RoomName" UniqueName="RoomName" FilterControlAltText="Filter RoomName column">
+                <telerik:GridBoundColumn DataField="Room.Name" HeaderText="Raum" SortExpression="Room.Name" UniqueName="Room.Name" FilterControlAltText="Filter Room.Name column">
                 </telerik:GridBoundColumn>
             </Columns>
         </MasterTableView>

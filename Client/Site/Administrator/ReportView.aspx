@@ -14,7 +14,7 @@
     </telerik:RadAjaxManager>
 
     <telerik:RadGrid ID="rgReport" runat="server" AutoGenerateEditColumn="False"  CellSpacing="0" GridLines="None" Skin="Silk"
-        AllowPaging="False" AllowSorting="True" AllowFilteringByColumn="true" ShowStatusBar="true" OnDataBound="rgReport_DataBound">
+        AllowPaging="False" AllowSorting="True" AllowFilteringByColumn="true" ShowStatusBar="true" OnDataBound="rgReport_DataBound" OnInit="rgReport_Init">
 
         <ClientSettings>
             <Scrolling AllowScroll="True" UseStaticHeaders="True"></Scrolling>
