@@ -141,11 +141,13 @@
     <None Include="Properties\PublishProfiles\BSL_SRV-Inventar_192.168.10.10.pubxml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="About.aspx" />
+    <Content Include="Resources\Images\Icons\ExcelLogo.png" />
     <Content Include="Resources\Images\Icons\ExcelBiff.png" />
     <Content Include="Resources\Images\Logo\BSL-Logo.jpg" />
     <Content Include="Resources\Images\Logo\BSL-Logo.tif" />
     <Content Include="Resources\Images\Icons\Report1.png" />
     <Content Include="Resources\Styles\Buttons.css" />
+    <Content Include="Resources\Styles\main.css" />
     <Content Include="Resources\Styles\Menu.css" />
     <Content Include="Resources\Styles\StandardMaster.css" />
     <Content Include="Resources\Styles\SubmissionForms.css" />

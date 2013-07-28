@@ -11,5 +11,9 @@ namespace Client.Util {
         public static String ldapPassword = ConfigurationManager.AppSettings.Get("LDAP_PASSWORD");
 
         public static string AUTHORIZATION_COOKIE_NAME = "AUTHORIZATION_COOKIE";
+
+        public static string EXCEL_TEMPLATE_NAME = "ReportTemplate.xls";
+        public static string EXCEL_EXPORT_NAME = "ExcelReport.xls";
+        public static string EXCEL_TEMPLATE_FOLDER = "~/ExcelTemplates/";
     }
 }

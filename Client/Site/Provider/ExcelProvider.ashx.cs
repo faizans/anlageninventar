@@ -16,7 +16,7 @@ namespace Client.Site.Provider {
         public void ProcessRequest(HttpContext context) {
             List<Article> ExportItems = context.Session["ExportItems"] as List<Article>;
             if (ExportItems.Any()) {
-                String path = context.Server.MapPath("~/ExcelTemplates") + "\\ReportTemplate.xls";
+                String path = context.Server.MapPath(Constants.EXCEL_TEMPLATE_FOLDER) + Constants.EXCEL_TEMPLATE_NAME;
                 ExcelExporter exporter = new ExcelExporter(path);
                 exporter.DataSource = ExportItems;
                 exporter.DataBind();

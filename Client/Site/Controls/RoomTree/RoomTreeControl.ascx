@@ -31,7 +31,7 @@
             </div>
         </div>
         <div class="input_interaction_row">
-            <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" />
+            <telerik:RadButton ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" />
         </div>
     </div>
 </telerik:RadAjaxPanel>

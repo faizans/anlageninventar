@@ -13,13 +13,13 @@ namespace Client.Site.Administrator {
     public partial class UploadTemplate {
         
         /// <summary>
-        /// pnAjax control.
+        /// pnlContent control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadAjaxPanel pnAjax;
+        protected global::System.Web.UI.WebControls.Panel pnlContent;
         
         /// <summary>
         /// Label1 control.
@@ -47,5 +47,14 @@ namespace Client.Site.Administrator {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Telerik.Web.UI.RadAsyncUpload rauExcelTemplate;
+        
+        /// <summary>
+        /// btnUpload control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadButton btnUpload;
     }
 }

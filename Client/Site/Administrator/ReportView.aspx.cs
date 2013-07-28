@@ -31,14 +31,31 @@ namespace Client.Site.Administrator {
             this.rgReport.DataBind();
         }
 
-        #region Events
+        private List<Article> GetReportItems() {
+            List<Article> reportSource = new List<Article>();
+            foreach (GridDataItem dataItem in rgReport.MasterTableView.Items) {
+                if (dataItem.ItemType == GridItemType.Item || dataItem.ItemType == GridItemType.AlternatingItem) {
+                    Article article = Article.GetById(int.Parse(dataItem["ArticleId"].Text));
+                    reportSource.Add(article);
+                } 
+            }
 
-        protected void rgArticles_ItemCommand(object sender, GridCommandEventArgs e) {
+            GridFooterItem footerItem = rgReport.MasterTableView.GetItems(GridItemType.Footer).ElementAt(0) as GridFooterItem;
+            Article fakeArticle = new Article();
+            fakeArticle.Name = "Total:";
+            fakeArticle.Value= double.Parse(footerItem["Value"].Text);
 
+            reportSource.Add(fakeArticle);
+
+            return reportSource;
         }
 
-        protected void btnExportToExcel_Click(object sender, ImageClickEventArgs e) {
+        #region Events
 
+        protected void btnExportToExcel_Click(object sender, ImageClickEventArgs e) {
+            this.SiteMaster.ExportItems = GetReportItems();
+            this.Context.Session["ExportItems"] = GetReportItems();
+            Response.Redirect("~/Site/Provider/ExcelProvider.ashx");
         }
 
         #endregion
@@ -49,13 +66,5 @@ namespace Client.Site.Administrator {
             footerItem["Value"].Text = total.ToString();
             footerItem["Name"].Text = "Total:";
         }
-
-        /*
-        * FILTER IDEA
-        * DEFINE TABLE IN DATABASE IN WICH YOU CAN SAY WHICH FIELDS SHOULD BE FILTERED BY WHICH DATA
-        * ON MENUITEM CLICK LOAD THE FIELDVALUE AND FILTER DATASOURCE BY THIS FIELDVALUE
-        * OVERGIVE DATASOURCE TO REPORTVIEW AND DISABLE FILTERING
-        */
-
     }
 }

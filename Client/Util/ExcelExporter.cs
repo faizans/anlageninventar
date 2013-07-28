@@ -14,7 +14,7 @@ namespace Client.Util {
         Worksheet oWorksheet;
 
         public String TempFile { get; set; }
-        private string fileName = "TestExport.xls";
+        private string fileName = Constants.EXCEL_EXPORT_NAME;
         public String FileName {
             get {
                 return this.fileName;
@@ -164,7 +164,7 @@ namespace Client.Util {
                         oWorksheet.Cells[depreciationValueRowIndex++, depreciationValueCellIndex] = article.Depreciation != null ? article.DepreciationValue.HasValue ? article.DepreciationValue.Value.ToString() : "" : "";
                 }
 
-                applyStyles();
+                //applyStyles();
 
                 this.oWorkbook.Save();
 

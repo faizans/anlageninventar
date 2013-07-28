@@ -161,8 +161,8 @@
 
         </div>
         <div class="input_interaction_row">
-            <asp:Button ID="btnBack" runat="server" Text="Zurück" OnClick="btnBack_Click" CausesValidation="false" />
-            <asp:Button ID="btnSave" runat="server" Text="Speichern" OnClick="btnSave_Click" CausesValidation="true"/>
+            <telerik:RadButton ID="btnBack" runat="server" Text="Zurück" OnClick="btnBack_Click" CausesValidation="false" />
+            <telerik:RadButton ID="btnSave" runat="server" Text="Speichern" OnClick="btnSave_Click" CausesValidation="true"/>
         </div>
     </telerik:RadAjaxPanel>
 </asp:Content>

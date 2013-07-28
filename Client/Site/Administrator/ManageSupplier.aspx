@@ -39,12 +39,12 @@
                 </telerik:RadTextBox>
             </div>
             <div class="input_form_row">
-                <asp:Button ID="btnApply" runat="server" Text="Übernehmen" OnClick="btnApply_Click" CausesValidation="false" Enabled="false"/>
+                <telerik:RadButton ID="btnApply" runat="server" Text="Übernehmen" OnClick="btnApply_Click" CausesValidation="false" Enabled="false"/>
             </div>
         </div>
         <div class="input_interaction_row">
-            <asp:Button ID="btnBack" runat="server" Text="Back" OnClick="btnBack_Click" CausesValidation="false" />
-            <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" />
+            <telerik:RadButton ID="btnBack" runat="server" Text="Back" OnClick="btnBack_Click" CausesValidation="false" />
+            <telerik:RadButton ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" />
         </div>
     </telerik:RadAjaxPanel>
     <telerik:RadWindowManager ID="RadWindowManager1" runat="server">

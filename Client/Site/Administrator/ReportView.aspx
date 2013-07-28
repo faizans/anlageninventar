@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteMaster/StandardMaster.Master" AutoEventWireup="true" CodeBehind="ReportView.aspx.cs" Inherits="Client.Site.Administrator.ReportView" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteMaster/StandardMaster.Master" EnableEventValidation="false" AutoEventWireup="true" CodeBehind="ReportView.aspx.cs" Inherits="Client.Site.Administrator.ReportView" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
 
@@ -22,7 +22,8 @@
 
         <ExportSettings HideStructureColumns="true" />
 
-        <MasterTableView DataKeyNames="ArticleId" AutoGenerateColumns="False" AllowFilteringByColumn="true" ShowFooter="true" CssClass="MasterTableViewNoHeight">
+        <MasterTableView DataKeyNames="ArticleId" AutoGenerateColumns="False" AllowFilteringByColumn="true" ShowFooter="true" 
+            CssClass="MasterTableViewNoHeight" CommandItemDisplay="Top">
 
             <CommandItemTemplate>
                 <div style="padding: 5px;">

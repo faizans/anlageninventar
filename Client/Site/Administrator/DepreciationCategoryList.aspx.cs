@@ -16,9 +16,7 @@ namespace Client.Site.Administrator
         protected void Page_Load(object sender, EventArgs e)
         {
             SiteMaster.StandardMaster.InfoText = "Abschreibungskategorien - Verwaltung";
-            if (!IsPostBack) {
-                bindData();
-            }
+            bindData();
         }
 
         public CustomMaster SiteMaster {

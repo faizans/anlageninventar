@@ -190,7 +190,7 @@ namespace Client.Site.Administrator {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnBack;
+        protected global::Telerik.Web.UI.RadButton btnBack;
         
         /// <summary>
         /// btnSave control.
@@ -199,6 +199,6 @@ namespace Client.Site.Administrator {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSave;
+        protected global::Telerik.Web.UI.RadButton btnSave;
     }
 }
