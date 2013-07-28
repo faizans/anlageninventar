@@ -40,6 +40,12 @@ namespace Data.Model.Diagram {
             return this.Articles.Any();
         }
 
+        public IEnumerable<Article> AvailableArticles {
+            get {
+                return this.Articles.Where(a => !a.IsDeleted);
+            }
+        }
+
         public void Delete() {
             IP3AnlagenInventarEntities ctx = EntityFactory.Context;
             ctx.Rooms.Remove(ctx.Rooms.Where(p => p.RoomId == this.RoomId).SingleOrDefault());

@@ -1,4 +1,5 @@
 ﻿using Client.SiteMaster;
+using Client.Util;
 using Data.Model;
 using Data.Model.Diagram;
 using System;
@@ -25,6 +26,22 @@ namespace Client.Site.Administrator {
             }
         }
 
+        private List<Article> GetReportItems() {
+            List<Article> reportSource = new List<Article>();
+            foreach (GridDataItem dataItem in rgArticles.MasterTableView.Items) {
+                if (dataItem.ItemType == GridItemType.Item || dataItem.ItemType == GridItemType.AlternatingItem) {
+                    Article article = Article.GetById(int.Parse(dataItem["ArticleId"].Text));
+                    reportSource.Add(article);
+                } else if (dataItem.ItemType == GridItemType.Footer) {
+                    Article article = new Article();
+                    article.Name = "Total:";
+                    article.Value = double.Parse(dataItem["Value"].Text);
+                    reportSource.Add(article);
+                }
+            }
+            return reportSource;
+        }
+
         #region Events
 
         protected void rgArticles_ItemCommand(object sender, GridCommandEventArgs e) {
@@ -42,7 +59,7 @@ namespace Client.Site.Administrator {
                             }
                             if (articleToMove.ArticleGroup != null
                                 && !articleToMove.ArticleGroup.Articles.Where(a => !a.IsDeleted && a.Room.Name != this.selectedTargetRoom.Name).Any()) {
-                                    articleToMove.ArticleGroup.Room = this.selectedTargetRoom;
+                                articleToMove.ArticleGroup.Room = this.selectedTargetRoom;
                             }
                         }
                     }
@@ -109,7 +126,9 @@ namespace Client.Site.Administrator {
         protected void rgArticles_PreRender(object sender, EventArgs e) {
             if (rgArticles.MasterTableView.GetItems(GridItemType.Header).Any()) {
                 GridHeaderItem headerItem = rgArticles.MasterTableView.GetItems(GridItemType.Header)[0] as GridHeaderItem;
-                (headerItem.FindControl("chbHeaderSelection") as CheckBox).Checked = rgArticles.SelectedItems.Count == rgArticles.Items.Count;
+                if ((headerItem.FindControl("chbHeaderSelection") as CheckBox) != null) {
+                    (headerItem.FindControl("chbHeaderSelection") as CheckBox).Checked = rgArticles.SelectedItems.Count == rgArticles.Items.Count;
+                }
             }
         }
 
@@ -127,6 +146,30 @@ namespace Client.Site.Administrator {
             this.selectedTargetRoom = Room.GetById(int.Parse(e.Value));
         }
 
+        protected void btnExportToExcel_Click(object sender, ImageClickEventArgs e) {
+            //ConfigureExport();
+            //rgArticles.ExportSettings.Excel.Format = GridExcelExportFormat.Biff;
+            //rgArticles.MasterTableView.ExportToExcel();
+
+            this.SiteMaster.ExportItems = GetReportItems();
+            this.Context.Session["ExportItems"] = GetReportItems();
+            Response.Redirect("~/Site/Provider/ExcelProvider.ashx");
+        }
+
+        #endregion
+
+        #region ExportSettings
+        public void ConfigureExport() {
+            rgArticles.ExportSettings.ExportOnlyData = true;
+            rgArticles.ExportSettings.IgnorePaging = true;
+            rgArticles.ExportSettings.OpenInNewWindow = false;
+            rgArticles.ExportSettings.UseItemStyles = false;
+        }
+
+        protected void btnReport_Click(object sender, ImageClickEventArgs e) {
+            this.SiteMaster.ReportDataSource = GetReportItems() ;
+            Response.Redirect("~/Site/Administrator/ReportView.aspx");
+        }
         #endregion
 
     }

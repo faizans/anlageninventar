@@ -27,6 +27,8 @@
                     <telerik:GridBoundColumn DataField="UserName" HeaderText="UserName" SortExpression="UserName" UniqueName="UserName" FilterControlAltText="Filter UserName column">
                     </telerik:GridBoundColumn>
                     <telerik:GridCheckBoxColumn DataField="IsAdmin" HeaderText="IsAdmin" SortExpression="IsAdmin" UniqueName="IsAdmin" DataType="System.Boolean" FilterControlAltText="Filter IsAdmin column"></telerik:GridCheckBoxColumn>
+                    <telerik:GridButtonColumn UniqueName="btnLogin" ButtonType="LinkButton" CommandName="Login" ButtonCssClass="GridEventButton" ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Right" Text="Login">
+                     </telerik:GridButtonColumn>
                 </Columns>
             </MasterTableView>
 
@@ -37,6 +39,18 @@
     <script>
         function alertCallBackFn(arg) {
 
+        }
+
+        function OnDelete(sender, args) {
+            var callBackFunction = Function.createDelegate(sender, function (argument) {
+                if (argument) {
+                    this.click();
+                }
+            });
+
+            var text = "Sind Sie sicher dass Sie den User entfernen wollen?";
+            radconfirm(text, callBackFunction, 300, 100, null, "Löschen");
+            args.set_cancel(true);
         }
 
     </script>

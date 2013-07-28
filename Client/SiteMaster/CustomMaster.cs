@@ -31,6 +31,35 @@ namespace Client.SiteMaster
                 }
                 return Session[SessionName.LoggedUser.ToString()] as AppUser;
             }
+            set {
+                Session[SessionName.LoggedUser.ToString()] = value;
+            }
+        }
+
+        public List<Article> ReportDataSource {
+            get {
+                if (Session["ReportItems"] == null) {
+                    Session["ReportItems"] = new List<Article>();
+                }
+                return Session["ReportItems"] as List<Article>;
+            }
+            set {
+                Session["ReportItems"] = null;
+                Session["ReportItems"] = value;
+            }
+        }
+
+        public List<Article> ExportItems {
+            get {
+                if (Session["ExportItems"] == null) {
+                    Session["ExportItems"] = new List<Article>();
+                }
+                return Session["ExportItems"] as List<Article>;
+            }
+            set {
+                Session["ExportItems"] = null;
+                Session["ExportItems"] = value;
+            }
         }
 
         public StandardMaster StandardMaster {

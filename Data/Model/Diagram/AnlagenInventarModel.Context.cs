@@ -38,5 +38,6 @@ namespace Data.Model.Diagram
         public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<SupplierBranch> SupplierBranches { get; set; }
         public DbSet<sysdiagram> sysdiagrams { get; set; }
+        public DbSet<FilterField> FilterFields { get; set; }
     }
 }

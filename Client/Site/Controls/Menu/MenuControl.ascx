@@ -4,35 +4,35 @@
         <telerik:RadMenuItem runat="server" CssClass="MenuItem">
             <ItemTemplate>
                 <div>
-                    <a href="~/Site/Administrator/ArticleList.aspx" runat="server"><span>Artikel</span></a>
+                    <asp:LinkButton ID="lbArticles" PostBackUrl="~/Site/Administrator/ArticleList.aspx" runat="server">Artikel</asp:LinkButton>
                 </div>
             </ItemTemplate>
         </telerik:RadMenuItem>
         <telerik:RadMenuItem runat="server" CssClass="MenuItem">
             <ItemTemplate>
                 <div>
-                    <a id="A1" href="~/Site/Administrator/ArticleCategoryList.aspx" runat="server"><span>Kategorien</span></a>
+                    <asp:LinkButton ID="lbArticleCategories" PostBackUrl="~/Site/Administrator/ArticleCategoryList.aspx" runat="server">Kategorien</asp:LinkButton>
                 </div>
             </ItemTemplate>
             <Items>
                 <telerik:RadMenuItem runat="server" CssClass="MenuItem">
                     <ItemTemplate>
                         <div>
-                            <a href="~/Site/Administrator/ArticleCategoryList.aspx" runat="server"><span>Artikel</span></a>
+                             <asp:LinkButton ID="lbArticleCategories" PostBackUrl="~/Site/Administrator/ArticleCategoryList.aspx" runat="server">Artikel</asp:LinkButton>
                         </div>
                     </ItemTemplate>
                 </telerik:RadMenuItem>
                 <telerik:RadMenuItem runat="server" CssClass="MenuItem">
                     <ItemTemplate>
                         <div>
-                            <a href="~/Site/Administrator/DepreciationCategoryList.aspx" runat="server"><span>Abschreibung</span></a>
+                            <asp:LinkButton ID="lbArticleCategories" PostBackUrl="~/Site/Administrator/DepreciationCategoryList.aspx" runat="server">Abschreibung</asp:LinkButton>
                         </div>
                     </ItemTemplate>
                 </telerik:RadMenuItem>
                  <telerik:RadMenuItem runat="server" CssClass="MenuItem">
                     <ItemTemplate>
                         <div>
-                            <a href="~/Site/Administrator/InsuranceCategoryList.aspx" runat="server"><span>Versicherung</span></a>
+                            <asp:LinkButton ID="lbArticleCategories" PostBackUrl="~/Site/Administrator/InsuranceCategoryList.aspx" runat="server">Versicherung</asp:LinkButton>
                         </div>
                     </ItemTemplate>
                 </telerik:RadMenuItem>
@@ -41,23 +41,47 @@
         <telerik:RadMenuItem runat="server" CssClass="MenuItem">
             <ItemTemplate>
                 <div>
-                    <a id="A2" href="~/Site/Administrator/RoomList.aspx" runat="server"><span>Räume</span></a>
+                    <asp:LinkButton ID="lbArticleCategories" PostBackUrl="~/Site/Administrator/RoomList.aspx" runat="server">Räume</asp:LinkButton>
                 </div>
             </ItemTemplate>
         </telerik:RadMenuItem>
         <telerik:RadMenuItem runat="server" CssClass="MenuItem">
             <ItemTemplate>
                 <div>
-                    <a id="A3" href="~/Site/Administrator/SupplierList.aspx" runat="server"><span>Lieferanten</span></a>
+                    <asp:LinkButton ID="lbArticleCategories" PostBackUrl="~/Site/Administrator/SupplierList.aspx" runat="server">Lieferanten</asp:LinkButton>
                 </div>
             </ItemTemplate>
         </telerik:RadMenuItem>
         <telerik:RadMenuItem runat="server" CssClass="MenuItem">
             <ItemTemplate>
                 <div>
-                    <a id="A4" href="~/Site/Administrator/UserList.aspx" runat="server"><span>Benutzer</span></a>
+                    <asp:LinkButton ID="lbArticleCategories" PostBackUrl="~/Site/Administrator/UserList.aspx" runat="server">Benutzer</asp:LinkButton>
                 </div>
             </ItemTemplate>
+        </telerik:RadMenuItem>
+
+        <telerik:RadMenuItem Value="ReportItem" runat="server" CssClass="MenuItem">
+            <ItemTemplate>
+                <div>
+                    <asp:LinkButton ID="lbReports"  runat="server">Reports</asp:LinkButton>
+                </div>
+            </ItemTemplate>
+            <Items>
+                <telerik:RadMenuItem runat="server" CssClass="MenuItem">
+                    <ItemTemplate>
+                        <div>
+                             <asp:LinkButton ID="lbAllReport" runat="server" CommandName="AllArticles" OnClick="lbMenuItemClicked">Alle Artikel</asp:LinkButton>
+                        </div>
+                    </ItemTemplate>
+                </telerik:RadMenuItem>
+                 <telerik:RadMenuItem runat="server" CssClass="MenuItem">
+                    <ItemTemplate>
+                        <div>
+                             <asp:LinkButton ID="lbDeletedArticles" runat="server" CommandName="DeletedArticles" OnClick="lbMenuItemClicked">Gelöschte Artikel</asp:LinkButton>
+                        </div>
+                    </ItemTemplate>
+                </telerik:RadMenuItem>
+            </Items>
         </telerik:RadMenuItem>
     </Items>
 </telerik:RadMenu>

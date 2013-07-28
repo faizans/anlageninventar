@@ -7,12 +7,13 @@
         <telerik:RadButton ID="btnAddBuilding" runat="server" Text="Neues Gebäude" OnClick="btnAddBuilding_Click" Enabled="false"></telerik:RadButton>
         <telerik:RadButton ID="btnAddFloor" runat="server" Text="Neuer Stock" OnClick="btnAddFloor_Click" Enabled="false"></telerik:RadButton>
         <telerik:RadButton ID="btnAddRoom" runat="server" Text="Neuer Raum" OnClick="btnAddRoom_Click" Enabled="false"></telerik:RadButton>
+        <telerik:RadButton ID="btnReport" runat="server" Text="Report" OnClick="btnReport_Click" Enabled="false"></telerik:RadButton>
         <telerik:RadButton ID="btnDelete" runat="server" Text="Delete" OnClick="btnDelete_Click" Enabled="false"></telerik:RadButton>
     </div>
 
     <div style="float: left; height: 300px; width: 300px; border: 1px solid black; padding: 10px; background-color: white;">
         <telerik:RadTreeView ID="RadTreeView1" runat="server" DataFieldID="Id" DataFieldParentID="ParentId" DataTextField="Text"
-            OnNodeClick="RadTreeView1_NodeClick" OnNodeDataBound="RadTreeView1_NodeDataBound">
+            OnNodeClick="RadTreeView1_NodeClick" OnNodeDataBound="RadTreeView1_NodeDataBound" CheckBoxes="true" OnNodeCheck="RadTreeView1_NodeCheck">
         </telerik:RadTreeView>
     </div>
 
@@ -33,14 +34,13 @@
             <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" />
         </div>
     </div>
-    <telerik:RadWindowManager ID="RadWindowManager1" runat="server">
-    </telerik:RadWindowManager>
-    <script>
-        function alertCallBackFn(arg) {
-
-        }
-
-    </script>
-
 </telerik:RadAjaxPanel>
+<telerik:RadWindowManager ID="RadWindowManager1" runat="server">
+</telerik:RadWindowManager>
+<script>
+    function alertCallBackFn(arg) {
+
+    }
+
+</script>
 

@@ -137,7 +137,7 @@ namespace Client.Site.Administrator
                 if (rtbAmount.Value > 1) {
                     group = new ArticleGroup();
                     group.Name = this.rtbGroupName.Text;
-                    group.Barcode = this.rtbBarcode.Text;
+                    group.Barcode = this.rtbGroupBarcode.Text;
                     group.RoomId = int.Parse(this.rcbRoom.SelectedItem.Value);
 
 

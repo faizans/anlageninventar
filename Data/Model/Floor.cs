@@ -38,19 +38,29 @@ namespace Data.Model.Diagram
             return false;
         }
 
-        public void Delete()
-        {
+        public List<Article> Articles {
+            get {
+                List<Article> articles = new List<Article>();
+                if (this.Rooms.Any()) {
+                    foreach (Room room in this.Rooms) {
+                        if (room.AvailableArticles.Any()) {
+                            articles.AddRange(room.AvailableArticles);
+                        }
+                    }
+                }
+                return articles;
+            }
+        }
+
+        public void Delete() {
             IP3AnlagenInventarEntities ctx = EntityFactory.Context;
-            if (this.Rooms.Any())
-            {
+            if (this.Rooms.Any()) {
                 List<Room> rooms = new List<Room>(this.Rooms);
-                foreach (Room room in rooms)
-                {
+                foreach (Room room in rooms) {
                     room.Delete();
                 }
             }
             ctx.Floors.Remove(ctx.Floors.Where(p => p.FloorId == this.FloorId).SingleOrDefault());
         }
-
     }
 }

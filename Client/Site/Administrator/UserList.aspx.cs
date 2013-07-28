@@ -46,6 +46,10 @@ namespace Client.Site.Administrator
                         EntityFactory.Context.SaveChanges();
                     }
                 }
+            } else if (e.CommandName.ToLower() == "login") {
+                AppUser userToLogin = AppUser.GetById(int.Parse((e.Item as GridDataItem)["AppUserId"].Text));
+                this.SiteMaster.User = userToLogin;
+                Response.Redirect(Request.RawUrl);
             }
         }
     }

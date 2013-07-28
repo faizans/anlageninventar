@@ -89,6 +89,9 @@
     <Compile Include="Model\Diagram\DepreciationCategory.cs">
       <DependentUpon>AnlagenInventarModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Diagram\FilterField.cs">
+      <DependentUpon>AnlagenInventarModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\Diagram\Floor.cs">
       <DependentUpon>AnlagenInventarModel.tt</DependentUpon>
     </Compile>

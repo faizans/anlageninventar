@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="9166e394bcb641e8b30c78df4e0e4be7" Name="Diagram1">
+      <Diagram DiagramId="9166e394bcb641e8b30c78df4e0e4be7" Name="Diagram1" ZoomLevel="64">
         <EntityTypeShape EntityType="Data.Model.Diagram.AppUser" Width="1.5" PointX="3.6600217128452019" PointY="15.92772062864514" />
         <EntityTypeShape EntityType="Data.Model.Diagram.Article" Width="1.5" PointX="11.647786633878848" PointY="21.81267901780674" />
         <EntityTypeShape EntityType="Data.Model.Diagram.ArticleCategory" Width="1.5" PointX="7.5260999982832466" PointY="31.307665258323617" />
@@ -31,6 +31,7 @@
         <AssociationConnector Association="Data.Model.Diagram.FK_Room_Floor" />
         <AssociationConnector Association="Data.Model.Diagram.FK_SupplierBranch_Supplier" />
         <AssociationConnector Association="Data.Model.Diagram.AppUser2Room" />
+        <EntityTypeShape EntityType="Data.Model.Diagram.FilterField" Width="1.5" PointX="2.5006999087057542" PointY="20.161594385356452" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

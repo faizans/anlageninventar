@@ -14,6 +14,7 @@
           <EntitySet Name="Building" EntityType="Data.Model.Diagram.Store.Building" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Depreciation" EntityType="Data.Model.Diagram.Store.Depreciation" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="DepreciationCategory" EntityType="Data.Model.Diagram.Store.DepreciationCategory" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="FilterField" EntityType="Data.Model.Diagram.Store.FilterField" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Floor" EntityType="Data.Model.Diagram.Store.Floor" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="InsuranceCategory" EntityType="Data.Model.Diagram.Store.InsuranceCategory" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Room" EntityType="Data.Model.Diagram.Store.Room" store:Type="Tables" Schema="dbo" />
@@ -166,6 +167,15 @@
           <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="Code" Type="varchar" MaxLength="50" />
           <Property Name="DepreciationSpan" Type="float" />
+        </EntityType>
+        <EntityType Name="FilterField">
+          <Key>
+            <PropertyRef Name="FilterFieldId" />
+          </Key>
+          <Property Name="FilterFieldId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="200" />
+          <Property Name="Value" Type="varchar" MaxLength="200" />
+          <Property Name="PredefinedFilterId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Floor">
           <Key>
@@ -460,6 +470,7 @@
             <End Role="AppUser" EntitySet="AppUsers" />
             <End Role="Room" EntitySet="Rooms" />
           </AssociationSet>
+          <EntitySet Name="FilterFields" EntityType="Data.Model.Diagram.FilterField" />
         </EntityContainer>
         <EntityType Name="AppUser">
           <Key>
@@ -772,6 +783,15 @@
           <End Type="Data.Model.Diagram.AppUser" Role="AppUser" Multiplicity="*" />
           <End Type="Data.Model.Diagram.Room" Role="Room" Multiplicity="*" />
         </Association>
+        <EntityType Name="FilterField">
+          <Key>
+            <PropertyRef Name="FilterFieldId" />
+          </Key>
+          <Property Type="Int32" Name="FilterFieldId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Value" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="PredefinedFilterId" Nullable="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -936,6 +956,16 @@
               <ScalarProperty Name="AppUserId" ColumnName="AppUserId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="FilterFields">
+            <EntityTypeMapping TypeName="Data.Model.Diagram.FilterField">
+              <MappingFragment StoreEntitySet="FilterField">
+                <ScalarProperty Name="PredefinedFilterId" ColumnName="PredefinedFilterId" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="FilterFieldId" ColumnName="FilterFieldId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

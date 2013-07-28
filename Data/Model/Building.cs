@@ -53,5 +53,18 @@ namespace Data.Model.Diagram
             ctx.Buildings.Remove(ctx.Buildings.Where(p => p.BuildingId == this.BuildingId).SingleOrDefault());
         }
 
+        public List<Article> Articles {
+            get {
+                List<Article> articles = new List<Article>();
+                if (this.Floors.Any()) {
+                    foreach (Floor floor in this.Floors) {
+                        if (floor.Articles.Any()) {
+                            articles.AddRange(floor.Articles);
+                        }
+                    }
+                }
+                return articles;
+            }
+        }
     }
 }

@@ -8,8 +8,25 @@ using System.Threading.Tasks;
 
 namespace Data.Model.Diagram
 {
-    public partial class Article
-    {
+    public partial class Article {
+
+        #region Properties
+
+        public double? DepreciationValue {
+            get {
+                if (this.Depreciation != null) {
+                    int depSpan = this.Depreciation.AdditionalEndDate.Value.Year -this.Depreciation.AdditionalStartDate.Value.Year;
+                    int currentSpan = DateTime.Now.Year - this.Depreciation.AdditionalStartDate.Value.Year;
+                    if (currentSpan <= depSpan) {
+                        return (this.Value / depSpan) * (depSpan - currentSpan);
+                    }
+                    return null;
+                }
+                return null;
+            }
+        }
+
+        #endregion
 
         public static Article GetById(int id)
         {
@@ -21,6 +38,16 @@ namespace Data.Model.Diagram
         {
             IP3AnlagenInventarEntities ctx = EntityFactory.Context;
             return ctx.Articles;
+        }
+
+        public static IEnumerable<Article> GetDeleted() {
+            IP3AnlagenInventarEntities ctx = EntityFactory.Context;
+            return ctx.Articles.Where(a => a.IsDeleted) ;
+        }
+
+        public static IEnumerable<Article> GetAvailable() {
+            IP3AnlagenInventarEntities ctx = EntityFactory.Context;
+            return ctx.Articles.Where(a => !a.IsDeleted);
         }
 
         public Boolean IsDepreciated() {
