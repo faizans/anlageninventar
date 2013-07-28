@@ -1,0 +1,31 @@
+// Variables
+// Mixins
+// Rules
+
+$menu-height: 30px !default;
+$menu-bg-color: #205081;
+
+.CustomMenu {
+  background-color: transparent !important;
+  border-style: none !important;
+  background-image: none !important;
+
+  ul {
+    background-color: $menu-bg-color !important;
+    border-style: none !important;
+    background-image: none !important;
+
+    .MenuItem {
+      height: $menu-height;
+      margin-left: 10px;
+      margin-right: 10px;
+      cursor: pointer;
+
+      a {
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
+      }
+    }
+  }
+}

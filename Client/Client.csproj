@@ -14,11 +14,12 @@
     <RootNamespace>Client</RootNamespace>
     <AssemblyName>Client</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <IsCompassProject>True</IsCompassProject>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -131,6 +132,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\PublishProfiles\BSL_SRV-Inventar_192.168.10.10.pubxml" />
+    <Content Include="Resources\Styles\main.css">
+      <DependentUpon>main.scss</DependentUpon>
+    </Content>
+    <Content Include="Resources\Styles\main.scss" />
+    <Content Include="Resources\Styles\components\_buttons.scss" />
+    <Content Include="Resources\Styles\components\_forms.scss" />
+    <Content Include="Resources\Styles\components\_layout.scss" />
+    <Content Include="Resources\Styles\components\_menu.scss" />
+    <Content Include="Resources\Styles\components\_zen.scss" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="About.aspx" />
     <Content Include="Resources\Images\Logo\BSL-Logo.jpg" />
@@ -182,6 +192,9 @@
     <Content Include="Site\Controls\Menu\MenuControl.ascx" />
     <Content Include="Site\Controls\RoomTree\RoomTreeControl.ascx" />
     <Content Include="Site\Controls\UserSearchControl\UserSearchBox.ascx" />
+    <Content Include="stylesheets\ie.css" />
+    <Content Include="stylesheets\print.css" />
+    <Content Include="stylesheets\screen.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -333,6 +346,7 @@
   <ItemGroup>
     <Folder Include="Resources\Images\Icons\" />
     <Folder Include="Resources\Language\" />
+    <Folder Include="Resources\Styles\settings\" />
     <Folder Include="Site\Public\" />
     <Folder Include="Site\User\" />
   </ItemGroup>
@@ -365,7 +379,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>12140</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/ALIV</IISUrl>
+          <IISUrl>http://localhost:26114/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
@@ -373,7 +387,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
+      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

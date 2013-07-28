@@ -1,0 +1,6 @@
+// Variables
+// Mixins
+@mixin zen-padding($base-padding: 5px) {
+  padding: $base-padding;
+}
+// Rules

@@ -4,10 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
-      <link id="Link1" rel="stylesheet" type="text/css" runat="server" href="~/Resources/Styles/Menu.css" />
-    <link id="Link2" rel="stylesheet" type="text/css" runat="server" href="~/Resources/Styles/StandardMaster.css" />
-    <link id="Link3" rel="stylesheet" type="text/css" runat="server" href="~/Resources/Styles/Buttons.css" />
-    <link id="Link4" rel="stylesheet" type="text/css" runat="server" href="~/Resources/Styles/SubmissionForms.css" />
+    <link href="~/Resources/Styles/main.css" rel="stylesheet" />
 </head>
 <body>
     <form id="form1" runat="server">
