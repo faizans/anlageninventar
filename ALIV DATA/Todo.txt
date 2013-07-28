@@ -6,9 +6,13 @@ Todo:
 1. Implement Secure Delete functions (Check if children are set to object)	2h
 	-> Articles	DONE
 	-> User	
-3. Report									10h (Optional)
-5. Login as other people							1h	DONE
-6. Print grids									1h	
-7. Export grids									1h	DONE
-8. Copy Articles from to another room						2h	DONE
-9. Test depreciation with export to EXCEL
+6. Print grids									1h
+7. Create all reports								5h
+8. Create own filter control:
+	Why?: The grids are really slow with loading and you can only print the visible items.
+	Since you need to virtually load/paging to speed up the grids you need to retrieve manually the filtered datasource from db
+
+	How?: Textboxes which are the filters where you can enter data.
+	On setting filters, FilterExpression will be created -> (Name) Like what ever as SQL statement.
+	This will executed then and retrieve filtereddatasource.
+	This way you can print all items plus you don't need to convert them.

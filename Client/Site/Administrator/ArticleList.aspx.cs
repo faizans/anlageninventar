@@ -28,15 +28,21 @@ namespace Client.Site.Administrator {
 
         private List<Article> GetReportItems() {
             List<Article> reportSource = new List<Article>();
-            foreach (GridDataItem dataItem in rgArticles.MasterTableView.Items) {
-                if (dataItem.ItemType == GridItemType.Item || dataItem.ItemType == GridItemType.AlternatingItem) {
-                    Article article = Article.GetById(int.Parse(dataItem["ArticleId"].Text));
-                    reportSource.Add(article);
-                } else if (dataItem.ItemType == GridItemType.Footer) {
-                    Article article = new Article();
-                    article.Name = "Total:";
-                    article.Value = double.Parse(dataItem["Value"].Text);
-                    reportSource.Add(article);
+            if (!this.rgArticles.MasterTableView.FilterExpression.Any()) {
+                reportSource = Article.GetAvailable().ToList();
+            } else {
+
+                foreach (GridDataItem dataItem in rgArticles.MasterTableView.Items) {
+                    if (dataItem.ItemType == GridItemType.Item || dataItem.ItemType == GridItemType.AlternatingItem) {
+                        int articleId = int.Parse(dataItem["ArticleId"].Text);
+                        Article article = (this.rgArticles.DataSource as List<Article>).Where(i=>i.ArticleId == articleId).SingleOrDefault();//Article.GetById(int.Parse(dataItem["ArticleId"].Text));
+                        reportSource.Add(article);
+                    } else if (dataItem.ItemType == GridItemType.Footer) {
+                        Article article = new Article();
+                        article.Name = "Total:";
+                        article.Value = double.Parse(dataItem["Value"].Text);
+                        reportSource.Add(article);
+                    }
                 }
             }
             return reportSource;
@@ -171,6 +177,7 @@ namespace Client.Site.Administrator {
             Response.Redirect("~/Site/Administrator/ReportView.aspx");
         }
         #endregion
+
 
     }
 }

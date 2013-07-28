@@ -22,19 +22,23 @@ namespace Client.Site.Provider {
                 exporter.DataBind();
 
                 FileInfo file = new FileInfo(exporter.TempFile);
-                if (file.Exists) {
-                    BinaryReader fs = new BinaryReader(file.OpenRead());
-                    context.Response.ClearContent();
-                    context.Response.Clear();
-                    context.Response.AddHeader("Content-Disposition", "attachment; filename=" + exporter.FileName);
-                    context.Response.AddHeader("Content-Length", file.Length.ToString());
-                    context.Response.ContentType = "application/octet-stream";
-                    byte[] bite = fs.ReadBytes((int)file.Length);
-                    fs.Close();
-                    context.Response.BinaryWrite(bite);
-                    context.Response.Flush();
-                } else {
-                    context.Response.Write("This file does not exist.");
+                try {
+                    if (file.Exists) {
+                        BinaryReader fs = new BinaryReader(file.OpenRead());
+                        context.Response.ClearContent();
+                        context.Response.Clear();
+                        context.Response.AddHeader("Content-Disposition", "attachment; filename=" + exporter.FileName);
+                        context.Response.AddHeader("Content-Length", file.Length.ToString());
+                        context.Response.ContentType = "application/octet-stream";
+                        byte[] bite = fs.ReadBytes((int)file.Length);
+                        fs.Close();
+                        context.Response.BinaryWrite(bite);
+                        context.Response.Flush();
+                    } else {
+                        context.Response.Write("This file does not exist.");
+                    }
+                } catch (Exception e) {
+                    context.Response.Write(e.Message);
                 }
 
             }

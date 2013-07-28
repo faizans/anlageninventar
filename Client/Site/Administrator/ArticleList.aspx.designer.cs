@@ -37,7 +37,7 @@ namespace Client.Site.Administrator {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource GridSource;
+        protected global::System.Web.UI.WebControls.ObjectDataSource GridSource;
         
         /// <summary>
         /// RoomDataSource control.
