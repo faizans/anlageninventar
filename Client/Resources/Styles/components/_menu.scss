@@ -1,30 +1,59 @@
 // Variables
+
+$menu-min-height: 20px !default;
+$menu-bg-color: #205081 !default;
+$menu-link-font-size: 20px;
+
 // Mixins
+
 // Rules
 
-$menu-height: 30px !default;
-$menu-bg-color: #205081;
+.Header_Div {
+  @include zen-padding-top(1);
+  @include zen-padding-bottom(1);
 
-.CustomMenu {
-  background-color: transparent !important;
-  border-style: none !important;
-  background-image: none !important;
+  //width: 100%;
+  overflow: auto;
+  background-color: $menu-bg-color;
 
-  ul {
-    background-color: $menu-bg-color !important;
-    border-style: none !important;
-    background-image: none !important;
+  .Header_Logo_Div {
 
-    .MenuItem {
-      height: $menu-height;
-      margin-left: 10px;
-      margin-right: 10px;
-      cursor: pointer;
+    @include zen-margin('left');
 
-      a {
-        color: white;
-        text-decoration: none;
-        font-size: 18px;
+    img {
+    }
+  }
+
+  .Header_Menu_Div {
+    float: left;
+    margin-left: 20px;
+
+    .CustomMenu {
+      background-color: $menu-bg-color;
+
+      ul.rmRootGroup.rmHorizontal {
+        background-color: transparent;
+        height: 100%;
+        border: none;
+        background-image: none;
+
+        li.MenuItem {
+
+          @include zen-margin('left');
+          @include zen-margin('right');
+
+          cursor: pointer;
+
+          .rmText {
+            padding: 0;
+          }
+
+          a {
+            color: white;
+            text-decoration: none;
+            font-size: $menu-link-font-size;
+          }
+        }
       }
     }
   }
