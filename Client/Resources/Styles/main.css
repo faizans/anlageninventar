@@ -30,8 +30,6 @@ body {
   padding-bottom: 10px;
   height: 20px;
   background-color: #205081; }
-  .Header_Div .Header_Logo_Div {
-    margin-left: 10px; }
   .Header_Div .Header_Menu_Div {
     float: left;
     margin-left: 20px; }
@@ -41,7 +39,8 @@ body {
         background-color: transparent;
         height: 100%;
         border: none;
-        background-image: none; }
+        background-image: none;
+        font-size: 18px; }
         .Header_Div .Header_Menu_Div .RadMenu.RadMenu_Default.CustomMenu ul.rmRootGroup.rmHorizontal li.MenuItem {
           padding-left: 10px;
           padding-right: 10px;
@@ -53,15 +52,18 @@ body {
             text-decoration: none; }
           .Header_Div .Header_Menu_Div .RadMenu.RadMenu_Default.CustomMenu ul.rmRootGroup.rmHorizontal li.MenuItem .rmText {
             padding: 0; }
-          .Header_Div .Header_Menu_Div .RadMenu.RadMenu_Default.CustomMenu ul.rmRootGroup.rmHorizontal li.MenuItem .rmSlide {
+          .Header_Div .Header_Menu_Div .RadMenu.RadMenu_Default.CustomMenu ul.rmRootGroup.rmHorizontal li.MenuItem div.rmSlide {
             background-color: transparent !important;
-            background: none !important; }
-            .Header_Div .Header_Menu_Div .RadMenu.RadMenu_Default.CustomMenu ul.rmRootGroup.rmHorizontal li.MenuItem .rmSlide .rmVertical.rmGroup {
+            background: none !important;
+            width: auto !important;
+            font-size: 16px; }
+            .Header_Div .Header_Menu_Div .RadMenu.RadMenu_Default.CustomMenu ul.rmRootGroup.rmHorizontal li.MenuItem div.rmSlide ul.rmVertical.rmGroup {
               background: none;
               background-color: #205081;
-              border: none; }
-              .Header_Div .Header_Menu_Div .RadMenu.RadMenu_Default.CustomMenu ul.rmRootGroup.rmHorizontal li.MenuItem .rmSlide .rmVertical.rmGroup .MenuItem {
-                width: auto; }
+              border: none;
+              widows: 100% !important; }
+              .Header_Div .Header_Menu_Div .RadMenu.RadMenu_Default.CustomMenu ul.rmRootGroup.rmHorizontal li.MenuItem div.rmSlide ul.rmVertical.rmGroup > li.MenuItem {
+                width: 100% !important; }
 
 /* Input Forms
 ---------------------------------------------------------------------*/
