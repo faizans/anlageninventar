@@ -1,8 +1,9 @@
 // Variables
 
-$menu-min-height: 20px !default;
+$menu-height: 20px !default;
 $menu-bg-color: #205081 !default;
-$menu-link-font-size: 20px;
+$menu-font-size: 18px;
+$menu-font-vertical-size: 16px;
 
 // Mixins
 
@@ -12,13 +13,11 @@ $menu-link-font-size: 20px;
   @include zen-padding-top(1);
   @include zen-padding-bottom(1);
 
-  //width: 100%;
-  overflow: auto;
+  height: $menu-height;
   background-color: $menu-bg-color;
 
   .Header_Logo_Div {
-
-    @include zen-margin('left');
+    // TODO: Style logo
 
     img {
     }
@@ -28,7 +27,7 @@ $menu-link-font-size: 20px;
     float: left;
     margin-left: 20px;
 
-    .CustomMenu {
+    .RadMenu.RadMenu_Default.CustomMenu {
       background-color: $menu-bg-color;
 
       ul.rmRootGroup.rmHorizontal {
@@ -36,22 +35,51 @@ $menu-link-font-size: 20px;
         height: 100%;
         border: none;
         background-image: none;
+        font-size: $menu-font-size;
 
         li.MenuItem {
 
-          @include zen-margin('left');
-          @include zen-margin('right');
+          @include zen-padding('left');
+          @include zen-padding('right');
 
           cursor: pointer;
 
-          .rmText {
-            padding: 0;
+          &:hover {
+            background-color: lightblue;
           }
 
           a {
             color: white;
-            text-decoration: none;
-            font-size: $menu-link-font-size;
+            text-decoration: none;;
+          }
+
+          .rmText {
+            padding: 0;
+
+            &.rmExpanded {
+            }
+          }
+
+          div.rmSlide {
+            background-color: transparent !important;
+            background: none !important;
+            width: auto !important;
+            font-size: $menu-font-vertical-size;
+
+            ul.rmVertical.rmGroup {
+              background:none;
+              background-color: $menu-bg-color;
+              border: none;
+              widows: 100% !important;
+
+              > li.MenuItem {
+                width: 100% !important;
+
+                div {
+
+                }
+              }
+            }
           }
         }
       }

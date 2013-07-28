@@ -14,11 +14,12 @@
     <RootNamespace>Client</RootNamespace>
     <AssemblyName>Client</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <IsCompassProject>True</IsCompassProject>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -39,12 +40,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </Reference>
-    <Reference Include="Microsoft.Office.Tools.Excel, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Core" />
@@ -137,16 +132,53 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ExcelTemplates\ExportColumnNames.xlsx" />
-    <Content Include="ExcelTemplates\ReportTemplate.xls" />
     <None Include="Properties\PublishProfiles\BSL_SRV-Inventar_192.168.10.10.pubxml" />
+    <Content Include="Resources\Styles\main.css">
+      <DependentUpon>main.scss</DependentUpon>
+    </Content>
+    <Content Include="Resources\Styles\main.scss">
+      <Compile>True</Compile>
+      <Minify>True</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>True</DebugInfo>
+    </Content>
+    <Content Include="Resources\Styles\components\_buttons.scss">
+      <Compile>False</Compile>
+      <Minify>True</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>True</DebugInfo>
+    </Content>
+    <Content Include="Resources\Styles\components\_forms.scss">
+      <Compile>False</Compile>
+      <Minify>True</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>True</DebugInfo>
+    </Content>
+    <Content Include="Resources\Styles\components\_layout.scss">
+      <Compile>False</Compile>
+      <Minify>True</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>True</DebugInfo>
+    </Content>
+    <Content Include="Resources\Styles\components\_menu.scss">
+      <Compile>False</Compile>
+      <Minify>True</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>True</DebugInfo>
+    </Content>
+    <Content Include="Resources\Styles\components\_zen.scss">
+      <Compile>False</Compile>
+      <Minify>True</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>True</DebugInfo>
+    </Content>
+    <Content Include="Resources\Styles\settings\_base-colors.scss" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="About.aspx" />
     <Content Include="Resources\Images\Icons\ExcelLogo.png" />
     <Content Include="Resources\Images\Icons\ExcelBiff.png" />
     <Content Include="Resources\Images\Logo\BSL-Logo.jpg" />
     <Content Include="Resources\Images\Logo\BSL-Logo.tif" />
-    <Content Include="Resources\Images\Icons\Report1.png" />
     <Content Include="Resources\Styles\Buttons.css" />
     <Content Include="Resources\Styles\main.css" />
     <Content Include="Resources\Styles\Menu.css" />
@@ -183,7 +215,7 @@
     <Content Include="Global.asax" />
     <Content Include="Site\Administrator\ArticleCategoryList.aspx" />
     <Content Include="Site\Administrator\ArticleList.aspx" />
-    <Content Include="Site\Administrator\ReportView.aspx" />
+    <Content Include="Site\Administrator\CategoryList.aspx" />
     <Content Include="Site\Administrator\ManageArticle.aspx" />
     <Content Include="Site\Administrator\ManageDepreciationCategory.aspx" />
     <Content Include="Site\Administrator\DepreciationCategoryList.aspx" />
@@ -192,9 +224,7 @@
     <Content Include="Site\Administrator\RoomList.aspx" />
     <Content Include="Site\Administrator\SupplierList.aspx" />
     <Content Include="Site\Administrator\ManageSupplier.aspx" />
-    <Content Include="Site\Administrator\UploadTemplate.aspx" />
     <Content Include="Site\Administrator\UserList.aspx" />
-    <Content Include="Site\Controls\CustomGrids\ArticleGrid.ascx" />
     <Content Include="Site\Controls\ListBox2\ListBoxControl.ascx" />
     <Content Include="Site\Controls\Menu\MenuControl.ascx" />
     <Content Include="Site\Controls\RoomTree\RoomTreeControl.ascx" />
@@ -248,12 +278,11 @@
     <Compile Include="Site\Administrator\ArticleList.aspx.designer.cs">
       <DependentUpon>ArticleList.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Site\Administrator\ReportView.aspx.cs">
-      <DependentUpon>ReportView.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
+    <Compile Include="Site\Administrator\CategoryList.aspx.cs">
+      <DependentUpon>CategoryList.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Site\Administrator\ReportView.aspx.designer.cs">
-      <DependentUpon>ReportView.aspx</DependentUpon>
+    <Compile Include="Site\Administrator\CategoryList.aspx.designer.cs">
+      <DependentUpon>CategoryList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Site\Administrator\ManageArticle.aspx.cs">
       <DependentUpon>ManageArticle.aspx</DependentUpon>
@@ -311,25 +340,12 @@
     <Compile Include="Site\Administrator\ManageSupplier.aspx.designer.cs">
       <DependentUpon>ManageSupplier.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Site\Administrator\UploadTemplate.aspx.cs">
-      <DependentUpon>UploadTemplate.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Site\Administrator\UploadTemplate.aspx.designer.cs">
-      <DependentUpon>UploadTemplate.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Site\Administrator\UserList.aspx.cs">
       <DependentUpon>UserList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Site\Administrator\UserList.aspx.designer.cs">
       <DependentUpon>UserList.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Site\Controls\CustomGrids\ArticleGrid.ascx.cs">
-      <DependentUpon>ArticleGrid.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="Site\Controls\CustomGrids\ArticleGrid.ascx.designer.cs">
-      <DependentUpon>ArticleGrid.ascx</DependentUpon>
     </Compile>
     <Compile Include="Site\Controls\ListBox2\ListBoxControl.ascx.cs">
       <DependentUpon>ListBoxControl.ascx</DependentUpon>
@@ -363,22 +379,18 @@
       <DependentUpon>UserSearchBox.ascx</DependentUpon>
     </Compile>
     <Compile Include="Site\Controls\UserSearchControl\UserSearchBoxEventArgs.cs" />
-    <Compile Include="Site\Provider\ExcelProvider.ashx.cs">
-      <DependentUpon>ExcelProvider.ashx</DependentUpon>
-    </Compile>
     <Compile Include="Util\AdLookup.cs" />
     <Compile Include="Util\Constants.cs" />
     <Compile Include="Util\Dynamic.cs" />
     <Compile Include="Util\EnumObjectFactory.cs" />
-    <Compile Include="Util\ExcelExporter.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Resources\Images\Icons\" />
     <Folder Include="Resources\Language\" />
     <Folder Include="Site\Public\" />
     <Folder Include="Site\User\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Site\Provider\ExcelProvider.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -407,7 +419,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>12140</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/ALIV</IISUrl>
+          <IISUrl>http://localhost:26114/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
