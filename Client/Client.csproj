@@ -370,7 +370,7 @@
     <Compile Include="Site\Administrator\UserList.aspx.designer.cs">
       <DependentUpon>UserList.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Site\Controls\CustomGrids\GridHelper.cs" />
+    <Compile Include="Site\Controls\CustomGrids\ArticleGridHelper.cs" />
     <Compile Include="Site\Controls\ListBox2\ListBoxControl.ascx.cs">
       <DependentUpon>ListBoxControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

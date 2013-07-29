@@ -37,12 +37,12 @@ namespace Client.Site.Administrator {
         #region Events
 
         protected void btnExportToExcel_Click(object sender, ImageClickEventArgs e) {
-            this.SiteMaster.ExportItems = GridHelper.GetReportItems(this.rgReport);
+            this.SiteMaster.ExportItems = ArticleGridHelper.GetReportItems(this.rgReport);
             Response.Redirect("~/Site/Provider/ExcelProvider.ashx");
         }
 
         protected void rgReport_Init(object sender, EventArgs e) {
-            GridHelper.ClearFilter(this.rgReport);
+            ArticleGridHelper.ClearFilter(this.rgReport);
         }
 
         protected void rgReport_DataBound(object sender, EventArgs e) {

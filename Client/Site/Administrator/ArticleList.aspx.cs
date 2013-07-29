@@ -135,7 +135,7 @@ namespace Client.Site.Administrator {
         }
 
         protected void btnExportToExcel_Click(object sender, ImageClickEventArgs e) {
-            this.SiteMaster.ExportItems = GridHelper.GetReportItems(this.rgArticles);
+            this.SiteMaster.ExportItems = ArticleGridHelper.GetReportItems(this.rgArticles);
             Response.Redirect("~/Site/Provider/ExcelProvider.ashx");
         }
 
@@ -144,13 +144,13 @@ namespace Client.Site.Administrator {
         #region ExportSettings
 
         protected void btnReport_Click(object sender, ImageClickEventArgs e) {
-            this.SiteMaster.ReportDataSource = GridHelper.GetReportItems(this.rgArticles);
+            this.SiteMaster.ReportDataSource = ArticleGridHelper.GetReportItems(this.rgArticles);
             Response.Redirect("~/Site/Administrator/ReportView.aspx");
         }
         #endregion
 
         protected void rgArticles_Init(object sender, EventArgs e) {
-            GridHelper.ClearFilter(this.rgArticles);
+            ArticleGridHelper.ClearFilter(this.rgArticles);
         }
 
 

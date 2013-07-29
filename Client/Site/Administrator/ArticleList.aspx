@@ -76,7 +76,7 @@
                 <telerik:GridNumericColumn DataField="DepreciationValue" HeaderText="Abschreibung" SortExpression="DepreciationValue" UniqueName="DepreciationValue" FilterControlAltText="Filter DepreciationValue column" 
                     DataFormatString="{0:##,##0.00}" FilterControlWidth="80px">
                 </telerik:GridNumericColumn>
-                <telerik:GridBoundColumn DataField="ArticlGroup.Name" HeaderText="Gruppe" SortExpression="ArticlGroup.Name" UniqueName="ArticlGroup.Name" FilterControlAltText="Filter ArticlGroup.Name column">
+                <telerik:GridBoundColumn DataField="ArticleGroup.Name" HeaderText="Gruppe" SortExpression="ArticleGroup.Name" UniqueName="ArticleGroup.Name" FilterControlAltText="Filter ArticleGroup.Name column">
                 </telerik:GridBoundColumn>
                 <telerik:GridBoundColumn DataField="SupplierBranch.Supplier.Name" HeaderText="Lieferant" SortExpression="SupplierBranch.Supplier" UniqueName="SupplierBranch.Supplier" FilterControlAltText="Filter SupplierBranch.Supplier column">
                 </telerik:GridBoundColumn>
