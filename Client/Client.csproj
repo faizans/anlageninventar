@@ -14,7 +14,7 @@
     <RootNamespace>Client</RootNamespace>
     <AssemblyName>Client</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -135,6 +135,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="default.aspx" />
     <Content Include="ExcelTemplates\ExportColumnNames.xlsx" />
     <Content Include="ExcelTemplates\ReportTemplate.xls" />
     <Content Include="ExcelTemplates\web.config" />
@@ -222,6 +223,7 @@
     <Content Include="Site\Administrator\ArticleCategoryList.aspx" />
     <Content Include="Site\Administrator\ArticleList.aspx" />
     <Content Include="Site\Administrator\CategoryList.aspx" />
+    <Content Include="Site\Administrator\DeletedArticleList.aspx" />
     <Content Include="Site\Administrator\ManageArticle.aspx" />
     <Content Include="Site\Administrator\ManageDepreciationCategory.aspx" />
     <Content Include="Site\Administrator\DepreciationCategoryList.aspx" />
@@ -237,6 +239,7 @@
     <Content Include="Site\Controls\Menu\MenuControl.ascx" />
     <Content Include="Site\Controls\RoomTree\RoomTreeControl.ascx" />
     <Content Include="Site\Controls\UserSearchControl\UserSearchBox.ascx" />
+    <Content Include="Site\Login\Login.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -250,6 +253,13 @@
     </Compile>
     <Compile Include="About.aspx.designer.cs">
       <DependentUpon>About.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -292,6 +302,13 @@
     </Compile>
     <Compile Include="Site\Administrator\CategoryList.aspx.designer.cs">
       <DependentUpon>CategoryList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Site\Administrator\DeletedArticleList.aspx.cs">
+      <DependentUpon>DeletedArticleList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site\Administrator\DeletedArticleList.aspx.designer.cs">
+      <DependentUpon>DeletedArticleList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Site\Administrator\ManageArticle.aspx.cs">
       <DependentUpon>ManageArticle.aspx</DependentUpon>
@@ -403,6 +420,13 @@
       <DependentUpon>UserSearchBox.ascx</DependentUpon>
     </Compile>
     <Compile Include="Site\Controls\UserSearchControl\UserSearchBoxEventArgs.cs" />
+    <Compile Include="Site\Login\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site\Login\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Site\Provider\ExcelProvider.ashx.cs">
       <DependentUpon>ExcelProvider.ashx</DependentUpon>
     </Compile>
@@ -447,7 +471,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>12140</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:26114/</IISUrl>
+          <IISUrl>http://localhost/ALIV</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
@@ -455,7 +479,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
+      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

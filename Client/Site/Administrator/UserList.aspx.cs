@@ -1,4 +1,5 @@
 ﻿using Client.SiteMaster;
+using Client.Util;
 using Data.Model;
 using Data.Model.Diagram;
 using System;
@@ -15,6 +16,12 @@ namespace Client.Site.Administrator
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            //Check if the set user is allowed to access
+            if (this.SiteMaster.User == null || !this.SiteMaster.User.IsAdmin || !this.SiteMaster.User.IsActive) {
+                Response.Redirect(Constants.AUTHORIZATION_MANUALLY_LOGIN);
+            }
+
             SiteMaster.StandardMaster.InfoText = "Benutzer - Verwaltung";
         }
 
@@ -49,7 +56,8 @@ namespace Client.Site.Administrator
             } else if (e.CommandName.ToLower() == "login") {
                 AppUser userToLogin = AppUser.GetById(int.Parse((e.Item as GridDataItem)["AppUserId"].Text));
                 this.SiteMaster.User = userToLogin;
-                Response.Redirect(Request.RawUrl);
+
+                RadWindowManager1.RadAlert(String.Format("Sie agieren nun als {0}", (userToLogin.FirstName + " " + userToLogin.LastName)), 300, 130, "Benutzer wechseln", "alertCallBackFn");
             }
         }
     }

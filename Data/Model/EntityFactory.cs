@@ -11,6 +11,7 @@ namespace Data.Model
     public class EntityFactory
     {
         private static IP3AnlagenInventarEntities context;
+        private static Boolean requiresManualLogin = false;
 
         public static IP3AnlagenInventarEntities Context
         {
@@ -36,6 +37,15 @@ namespace Data.Model
                 return context;
             }
             set { }
+        }
+
+        public static Boolean RequiresManualLogin{
+            get {
+                return requiresManualLogin;
+            }
+            set {
+                requiresManualLogin = value;
+            }
         }
 
     }

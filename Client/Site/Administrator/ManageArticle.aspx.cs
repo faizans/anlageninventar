@@ -1,4 +1,6 @@
 ﻿using Client.Site.Controls.UserSearchControl;
+using Client.SiteMaster;
+using Client.Util;
 using Data.Model;
 using Data.Model.Diagram;
 using System;
@@ -15,9 +17,20 @@ namespace Client.Site.Administrator
 
         private Article article;
 
-        protected void Page_Load(object sender, EventArgs e)
-        {
+        protected void Page_Load(object sender, EventArgs e) {
+            //Check if the set user is allowed to access
+            if (this.SiteMaster.User == null || !this.SiteMaster.User.IsAdmin || !this.SiteMaster.User.IsActive) {
+                Response.Redirect(Constants.AUTHORIZATION_MANUALLY_LOGIN);
+            }
+
             loadPage();
+        }
+
+        public CustomMaster SiteMaster {
+            get {
+                CustomMaster mm = (CustomMaster)Page.Master;
+                return mm;
+            }
         }
 
         #region Initialisation

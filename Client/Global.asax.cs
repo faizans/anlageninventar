@@ -36,11 +36,22 @@ namespace Client
 
         }
 
+        /// <summary>
+        /// This all is a bit of cheating.
+        /// First the auth cookie is requested. if its not set check for the manual login required.
+        /// If the manual login is required a auth ticket will be set. This allows us to access the login page even without beeing logged in through the window auth process.
+        /// 
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="e"></param>
         protected void WindowsAuthentication_OnAuthenticate(Object source, WindowsAuthenticationEventArgs e)
         {
-
-            if (Request.Cookies.Get(Constants.AUTHORIZATION_COOKIE_NAME) != null)
+            if (Request.Cookies.Get(Constants.AUTHORIZATION_COOKIE_NAME) != null) {
                 return;
+            } else if (EntityFactory.RequiresManualLogin) {
+                SetUpAuthenticationTicket(null, null, Response);
+                return;
+            }
 
             bool loggedIn = false;
             String strUserIdentity = e.Identity.Name;
@@ -60,9 +71,8 @@ namespace Client
                 {
                     loggedIn = true;
                     role = loggedUser.IsAdmin ? UserRole.Administrator.ToString() : UserRole.User.ToString();
+                    EntityFactory.Context.LoggedUser = loggedUser;
                 }
-
-                EntityFactory.Context.LoggedUser = loggedUser;
             }
 
             ////Create cookie for user if he is logged in
@@ -70,20 +80,27 @@ namespace Client
             {
                 try
                 {
-                    FormsAuthenticationTicket formsAuthTicket = new FormsAuthenticationTicket(1, strUserIdentity, DateTime.Now, DateTime.Now.AddMinutes(20), false, role);
-                    String strEncryptedTicket = FormsAuthentication.Encrypt(formsAuthTicket);
-                    HttpCookie httpCook = new HttpCookie(Constants.AUTHORIZATION_COOKIE_NAME, strEncryptedTicket);
-                    Response.Cookies.Add(httpCook);
+                    SetUpAuthenticationTicket(strUserIdentity, role, Response);
                 }
                 catch (Exception ex)
                 {
-
+                    throw new Exception(ex.Message);
                 }
             }
             else
             {
                 HttpContext.Current.User = null;
+                EntityFactory.RequiresManualLogin = true;
+                EntityFactory.Context.LoggedUser = null;
+                Response.Redirect(Constants.AUTHORIZATION_MANUALLY_LOGIN);
             }
+        }
+
+        public static void SetUpAuthenticationTicket(String identity, String role, HttpResponse Response) {
+            FormsAuthenticationTicket formsAuthTicket = new FormsAuthenticationTicket(1, identity, DateTime.Now, DateTime.Now.AddMinutes(20), false, role);
+            String strEncryptedTicket = FormsAuthentication.Encrypt(formsAuthTicket);
+            HttpCookie httpCook = new HttpCookie(Constants.AUTHORIZATION_COOKIE_NAME, strEncryptedTicket);
+            Response.Cookies.Add(httpCook);
         }
     }
 }

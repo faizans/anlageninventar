@@ -15,7 +15,7 @@ using System.Data;
 using Client.Site.Controls.CustomGrids;
 
 namespace Client.Site.Administrator {
-    public partial class ArticleList : System.Web.UI.Page {
+    public partial class DeletedArticleList : System.Web.UI.Page {
 
         private Room selectedTargetRoom = null;
 
@@ -26,7 +26,7 @@ namespace Client.Site.Administrator {
                 Response.Redirect(Constants.AUTHORIZATION_MANUALLY_LOGIN);
             }
 
-            SiteMaster.StandardMaster.InfoText = "Artikel - Verwaltung";
+            SiteMaster.StandardMaster.InfoText = "Gelöschte Artikel - Verwaltung";
         }
 
         public CustomMaster SiteMaster {
@@ -39,21 +39,13 @@ namespace Client.Site.Administrator {
         #region Events
 
         protected void rgArticles_ItemCommand(object sender, GridCommandEventArgs e) {
-            if (e.CommandName.ToLower() == "initinsert") {
-                Response.Redirect("~/Site/Administrator/ManageArticle.aspx");
-            } else if (e.CommandName.ToLower() == "edit") {
-                Response.Redirect("~/Site/Administrator/ManageArticle.aspx?ai=" + (e.Item as GridDataItem)["ArticleId"].Text);
-            } else if (e.CommandName.ToLower() == "moveselection" && this.selectedTargetRoom != null) {
+            if (e.CommandName.ToLower() == "reverseselection") {
                 foreach (GridDataItem dataItem in rgArticles.MasterTableView.Items) {
                     if ((dataItem.FindControl("chbSelection") as CheckBox).Checked) {
                         if (dataItem.ItemType == GridItemType.Item || dataItem.ItemType == GridItemType.AlternatingItem) {
-                            Article articleToMove = Article.GetById(int.Parse(dataItem["ArticleId"].Text));
-                            if (articleToMove != null) {
-                                articleToMove.Room = this.selectedTargetRoom;
-                            }
-                            if (articleToMove.ArticleGroup != null
-                                && !articleToMove.ArticleGroup.Articles.Where(a => !a.IsDeleted && a.Room.Name != this.selectedTargetRoom.Name).Any()) {
-                                articleToMove.ArticleGroup.Room = this.selectedTargetRoom;
+                            Article articleToReverse = Article.GetById(int.Parse(dataItem["ArticleId"].Text));
+                            if (articleToReverse != null) {
+                                articleToReverse.IsDeleted = false;
                             }
                         }
                     }
@@ -61,37 +53,19 @@ namespace Client.Site.Administrator {
                 EntityFactory.Context.SaveChanges();
                 rgArticles.Rebind();
 
-            } else if (e.CommandName.ToLower() == "delete") {
-                deleteArticle(int.Parse((e.Item as GridDataItem)["ArticleId"].Text));
-            } else if (e.CommandName.ToLower() == "deleteselection") {
+            } else if (e.CommandName.ToLower() == "reallydelete") {
                 foreach (GridDataItem dataItem in rgArticles.MasterTableView.Items) {
                     if ((dataItem.FindControl("chbSelection") as CheckBox).Checked) {
                         if (dataItem.ItemType == GridItemType.Item || dataItem.ItemType == GridItemType.AlternatingItem) {
                             Article articleToDelete = Article.GetById(int.Parse(dataItem["ArticleId"].Text));
                             if (articleToDelete != null) {
-                                if (!articleToDelete.IsDepreciated()) {
-                                    articleToDelete.Delete();
-                                } else {
-                                    //TODO Generate alert which tells that not all were deleted
-                                }
+                                articleToDelete.DeletePhysically();
                             }
                         }
                     }
                 }
                 EntityFactory.Context.SaveChanges();
                 rgArticles.Rebind();
-            }
-        }
-
-        private void deleteArticle(int id) {
-            Article articleToDelete = Article.GetById(id);
-            if (articleToDelete != null) {
-                if (!articleToDelete.IsDepreciated()) {
-                    RadWindowManager1.RadAlert(String.Format("{0} kann nicht gelöscht werden, da der Artikel noch nicht Abgeschrieben wurde.", articleToDelete.Name), 300, 130, "Operation nicht möglich", "alertCallBackFn");
-                } else {
-                    articleToDelete.Delete();
-                    EntityFactory.Context.SaveChanges();
-                }
             }
         }
 
@@ -140,25 +114,7 @@ namespace Client.Site.Administrator {
             this.selectedTargetRoom = Room.GetById(int.Parse(e.Value));
         }
 
-        protected void btnExportToExcel_Click(object sender, ImageClickEventArgs e) {
-            this.SiteMaster.ExportItems = ArticleGridHelper.GetReportItems(this.rgArticles, Article.GetAvailable().ToList(),false);
-            Response.Redirect("~/Site/Provider/ExcelProvider.ashx");
-        }
-
         #endregion
-
-        #region ExportSettings
-
-        protected void btnReport_Click(object sender, ImageClickEventArgs e) {
-            this.SiteMaster.ReportDataSource = ArticleGridHelper.GetReportItems(this.rgArticles, Article.GetAvailable().ToList(),false);
-            Response.Redirect("~/Site/Administrator/ReportView.aspx");
-        }
-        #endregion
-
-        protected void rgArticles_Init(object sender, EventArgs e) {
-            ArticleGridHelper.ClearFilter(this.rgArticles);
-        }
-
 
     }
 }

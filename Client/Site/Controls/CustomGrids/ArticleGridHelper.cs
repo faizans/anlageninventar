@@ -11,14 +11,12 @@ namespace Client.Site.Controls.CustomGrids {
 
         public String[] NonEntityFields = { "DepreciationValue", "RoomPath" };
 
-        public static List<Article> GetReportItems(RadGrid rgGrid) {
+        public static List<Article> GetReportItems(RadGrid rgGrid, List<Article> reportSource, Boolean HasFooter) {
 
             ArticleGridHelper gridHelper = new ArticleGridHelper();
 
-            List<Article> reportSource = new List<Article>();
-
             if (!rgGrid.MasterTableView.FilterExpression.Any()) {
-                reportSource = Article.GetAvailable().ToList();
+
             } else {
                 //Get the filter expression
                 String filterExpression = rgGrid.MasterTableView.FilterExpression;
@@ -85,13 +83,15 @@ namespace Client.Site.Controls.CustomGrids {
                     }
                 }
             }
-
-            if (rgGrid.MasterTableView.GetItems(GridItemType.TFoot).Any()) {
-                GridDataItem dataItem = rgGrid.MasterTableView.GetItems(GridItemType.TFoot)[0] as GridDataItem;
-                Article article = new Article();
-                article.Name = "Total:";
-                article.Value = double.Parse(dataItem["Value"].Text);
-                reportSource.Add(article);
+            if (HasFooter) {
+                if (rgGrid.MasterTableView.GetItems(GridItemType.Footer) != null) {
+                    GridFooterItem dataItem = rgGrid.MasterTableView.GetItems(GridItemType.Footer)[0] as GridFooterItem;
+                    Article article = new Article();
+                    article.Name = "Total:";
+                    article.Value = double.Parse(dataItem["Value"].Text);
+                    article.DepreciationValue = double.Parse(dataItem["DepreciationValue"].Text);
+                    reportSource.Add(article);
+                }
             }
 
             return reportSource;

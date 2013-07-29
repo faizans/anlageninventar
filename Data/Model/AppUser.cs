@@ -97,6 +97,11 @@ namespace Data.Model.Diagram
         {
             IP3AnlagenInventarEntities ctx = EntityFactory.Context;
             return ctx.AppUsers.Where(c => c.UserName == username).SingleOrDefault();
+        }
+
+        public static AppUser GetByManualLogin(string username, string password) {
+            IP3AnlagenInventarEntities ctx = EntityFactory.Context;
+            return ctx.AppUsers.Where(c => c.UserName == username && c.Password == password).SingleOrDefault();
 
         }
 

@@ -161,7 +161,7 @@ namespace Client.Util {
                         oWorksheet.Cells[roomPathRowIndex++, roomPathCellIndex] = article.Room != null ? article.Room.RoomPath : "";
                     //Depreciation.Value
                     if (depreciationValueCellIndex > 0)
-                        oWorksheet.Cells[depreciationValueRowIndex++, depreciationValueCellIndex] = article.Depreciation != null ? article.DepreciationValue.HasValue ? article.DepreciationValue.Value.ToString() : "" : "";
+                        oWorksheet.Cells[depreciationValueRowIndex++, depreciationValueCellIndex] = article.DepreciationValue.HasValue ? article.DepreciationValue.Value.ToString() : "";
                 }
 
                 //applyStyles();

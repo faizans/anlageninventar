@@ -17,16 +17,18 @@ namespace Client.SiteMaster
         {
             get
             {
+                //Check if session is set with user
                 if (Session[SessionName.LoggedUser.ToString()] == null)
                 {
+                    //Check if user is set in context
                     if (EntityFactory.Context.LoggedUser != null)
                     {
                         Session[SessionName.LoggedUser.ToString()] = EntityFactory.Context.LoggedUser;
                     }
                     else
                     {
-                        EntityFactory.Context.LoggedUser = AppUser.GetByLogin(Page.User.Identity, HttpContext.Current.User.Identity.Name);
-                        Session[SessionName.LoggedUser.ToString()] = EntityFactory.Context.LoggedUser;
+                        //EntityFactory.Context.LoggedUser = AppUser.GetByLogin(Page.User.Identity, HttpContext.Current.User.Identity.Name);
+                        //Session[SessionName.LoggedUser.ToString()] = EntityFactory.Context.LoggedUser;
                     }
                 }
                 return Session[SessionName.LoggedUser.ToString()] as AppUser;

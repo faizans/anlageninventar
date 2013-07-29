@@ -11,6 +11,9 @@ namespace Client.Util {
         public static String ldapPassword = ConfigurationManager.AppSettings.Get("LDAP_PASSWORD");
 
         public static string AUTHORIZATION_COOKIE_NAME = "AUTHORIZATION_COOKIE";
+        public static string AUTHORIZATION_MANUALLY_LOGIN = "~/Site/Login/Login.aspx";
+
+        public static string DEFAULT_PAGE = "~/default.aspx";
 
         public static string EXCEL_TEMPLATE_NAME = "ReportTemplate.xls";
         public static string EXCEL_EXPORT_NAME = "ExcelReport.xls";

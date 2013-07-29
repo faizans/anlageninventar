@@ -7,6 +7,22 @@
                     <asp:LinkButton ID="lbArticles" PostBackUrl="~/Site/Administrator/ArticleList.aspx" runat="server">Artikel</asp:LinkButton>
                 </div>
             </ItemTemplate>
+            <Items>
+                <telerik:RadMenuItem runat="server" CssClass="MenuItem">
+                    <ItemTemplate>
+                        <div>
+                            <asp:LinkButton ID="lbArticles2" PostBackUrl="~/Site/Administrator/ArticleList.aspx" runat="server">Artikel</asp:LinkButton>
+                        </div>
+                    </ItemTemplate>
+                </telerik:RadMenuItem>
+                 <telerik:RadMenuItem runat="server" CssClass="MenuItem">
+                    <ItemTemplate>
+                        <div>
+                            <asp:LinkButton ID="lbDeletedArticles" PostBackUrl="~/Site/Administrator/DeletedArticleList.aspx" runat="server">Gelöschte Artikel</asp:LinkButton>
+                        </div>
+                    </ItemTemplate>
+                </telerik:RadMenuItem>
+            </Items>
         </telerik:RadMenuItem>
         <telerik:RadMenuItem runat="server" CssClass="MenuItem">
             <ItemTemplate>
