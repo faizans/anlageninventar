@@ -31,4 +31,9 @@ $zen-spacing-unit: 10px;
   @include zen-padding('bottom', $unit);
 }
 
+@mixin zen-hover($color: lightblue) {
+  &:hover {
+    background-color: lightblue;
+  }
+}
 // Rules

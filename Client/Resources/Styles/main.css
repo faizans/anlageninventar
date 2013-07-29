@@ -41,29 +41,39 @@ body {
         border: none;
         background-image: none;
         font-size: 18px; }
-        .Header_Div .Header_Menu_Div .RadMenu.RadMenu_Default.CustomMenu ul.rmRootGroup.rmHorizontal li.MenuItem {
+        .Header_Div .Header_Menu_Div .RadMenu.RadMenu_Default.CustomMenu ul.rmRootGroup.rmHorizontal > li.MenuItem {
+          margin-left: 10px;
+          margin-right: 10px;
           padding-left: 10px;
           padding-right: 10px;
           cursor: pointer; }
-          .Header_Div .Header_Menu_Div .RadMenu.RadMenu_Default.CustomMenu ul.rmRootGroup.rmHorizontal li.MenuItem:hover {
+          .Header_Div .Header_Menu_Div .RadMenu.RadMenu_Default.CustomMenu ul.rmRootGroup.rmHorizontal > li.MenuItem:hover {
             background-color: lightblue; }
-          .Header_Div .Header_Menu_Div .RadMenu.RadMenu_Default.CustomMenu ul.rmRootGroup.rmHorizontal li.MenuItem a {
+          .Header_Div .Header_Menu_Div .RadMenu.RadMenu_Default.CustomMenu ul.rmRootGroup.rmHorizontal > li.MenuItem a {
             color: white;
             text-decoration: none; }
-          .Header_Div .Header_Menu_Div .RadMenu.RadMenu_Default.CustomMenu ul.rmRootGroup.rmHorizontal li.MenuItem .rmText {
+          .Header_Div .Header_Menu_Div .RadMenu.RadMenu_Default.CustomMenu ul.rmRootGroup.rmHorizontal > li.MenuItem .rmText {
             padding: 0; }
-          .Header_Div .Header_Menu_Div .RadMenu.RadMenu_Default.CustomMenu ul.rmRootGroup.rmHorizontal li.MenuItem div.rmSlide {
+          .Header_Div .Header_Menu_Div .RadMenu.RadMenu_Default.CustomMenu ul.rmRootGroup.rmHorizontal > li.MenuItem div.rmSlide {
             background-color: transparent !important;
             background: none !important;
-            width: auto !important;
-            font-size: 16px; }
-            .Header_Div .Header_Menu_Div .RadMenu.RadMenu_Default.CustomMenu ul.rmRootGroup.rmHorizontal li.MenuItem div.rmSlide ul.rmVertical.rmGroup {
+            width: 250px !important;
+            font-size: 16px;
+            margin-top: 1px !important;
+            margin-left: 0.5pt !important; }
+            .Header_Div .Header_Menu_Div .RadMenu.RadMenu_Default.CustomMenu ul.rmRootGroup.rmHorizontal > li.MenuItem div.rmSlide ul.rmVertical.rmGroup {
               background: none;
               background-color: #205081;
-              border: none;
-              widows: 100% !important; }
-              .Header_Div .Header_Menu_Div .RadMenu.RadMenu_Default.CustomMenu ul.rmRootGroup.rmHorizontal li.MenuItem div.rmSlide ul.rmVertical.rmGroup > li.MenuItem {
-                width: 100% !important; }
+              border: none; }
+              .Header_Div .Header_Menu_Div .RadMenu.RadMenu_Default.CustomMenu ul.rmRootGroup.rmHorizontal > li.MenuItem div.rmSlide ul.rmVertical.rmGroup > li.MenuItem {
+                padding-left: 10px;
+                padding-right: 10px;
+                padding-top: 5px;
+                padding-bottom: 5px; }
+                .Header_Div .Header_Menu_Div .RadMenu.RadMenu_Default.CustomMenu ul.rmRootGroup.rmHorizontal > li.MenuItem div.rmSlide ul.rmVertical.rmGroup > li.MenuItem .rmText {
+                  margin: 0 !important; }
+                .Header_Div .Header_Menu_Div .RadMenu.RadMenu_Default.CustomMenu ul.rmRootGroup.rmHorizontal > li.MenuItem div.rmSlide ul.rmVertical.rmGroup > li.MenuItem:hover {
+                  background-color: lightblue; }
 
 /* Input Forms
 ---------------------------------------------------------------------*/
