@@ -22,6 +22,8 @@
                     </telerik:GridBoundColumn>
                     <telerik:GridBoundColumn DataField="Name" HeaderText="Name" SortExpression="Name" UniqueName="Name" FilterControlAltText="Filter Name column">
                     </telerik:GridBoundColumn>
+                    <telerik:GridCheckBoxColumn DataField="IsDefault" HeaderText="Standard" SortExpression="IsDefault" UniqueName="IsDefault" FilterControlAltText="Filter IsDefault column">
+                    </telerik:GridCheckBoxColumn>
                 </Columns>
             </MasterTableView>
 

@@ -17,6 +17,20 @@ namespace Client.Site.Administrator {
             if (this.SiteMaster.User == null || !this.SiteMaster.User.IsAdmin || !this.SiteMaster.User.IsActive) {
                 Response.Redirect(Constants.AUTHORIZATION_MANUALLY_LOGIN);
             }
+            if (!IsPostBack)
+                bindData();
+        }
+
+        public RadListBoxItem SelectedItem {
+            get {
+                if (Session["SelectedTemplateItem"] != null) {
+                    return Session["SelectedTemplateItem"] as RadListBoxItem;
+                }
+                return null;
+            }
+            set {
+                Session["SelectedTemplateItem"] = value;
+            }
         }
 
         public CustomMaster SiteMaster {
@@ -26,9 +40,22 @@ namespace Client.Site.Administrator {
             }
         }
 
+        private void bindData() {
+            this.rlbTemplates.DataSource = ExcelExporter.GetTemplateFiles(Server) ;
+            this.rlbTemplates.DataBind();
+        }
+
         protected void btnUpload_Click(object sender, EventArgs e) {
             foreach (UploadedFile f in rauExcelTemplate.UploadedFiles) {
-                f.SaveAs(Path.Combine(Server.MapPath(Constants.EXCEL_TEMPLATE_FOLDER), Constants.EXCEL_TEMPLATE_NAME));
+                f.SaveAs(Path.Combine(Server.MapPath(Constants.EXCEL_TEMPLATE_FOLDER), f.GetName()));
+            }
+            bindData();
+        }
+
+        protected void rlbTemplates_Deleting(object sender, RadListBoxDeletingEventArgs e) {
+            if (this.rlbTemplates.SelectedItem != null) {
+                FileInfo fileToDelete = new FileInfo(this.rlbTemplates.SelectedItem.Value);
+                fileToDelete.Delete();
             }
         }
     }

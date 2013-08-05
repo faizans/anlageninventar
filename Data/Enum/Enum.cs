@@ -14,6 +14,9 @@ namespace Data.Enum
 
     public enum SessionName
     {
-        LoggedUser
+        LoggedUser,
+        ExportItems,
+        ReportYear,
+        SelectedTemplate
     }
 }

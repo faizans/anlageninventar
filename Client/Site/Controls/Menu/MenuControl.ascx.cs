@@ -25,6 +25,7 @@ namespace Client.Site.Controls.Menu {
 
         protected void lbMenuItemClicked(object sender, EventArgs e) {
             LinkButton menuItem = (LinkButton)sender;
+
             switch (menuItem.CommandName) {
                 case "DeletedArticles":
                     this.SiteMaster.ReportDataSource = Article.GetDeleted().ToList();
@@ -32,7 +33,11 @@ namespace Client.Site.Controls.Menu {
                 case "AllArticles":
                     this.SiteMaster.ReportDataSource = Article.GetAvailable().ToList();
                     break;
+                case "RoomChecklist":
+                    this.SiteMaster.ReportDataSource = Article.GetAllSortedByUsers();
+                    break;
             }
+
             Response.Redirect("~/Site/Administrator/ReportView.aspx");
         }
 

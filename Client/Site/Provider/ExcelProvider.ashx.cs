@@ -1,4 +1,5 @@
 ﻿using Client.Util;
+using Data.Enum;
 using Data.Model.Diagram;
 using System;
 using System.Collections.Generic;
@@ -14,14 +15,18 @@ namespace Client.Site.Provider {
     public class ExcelProvider : IHttpHandler ,IRequiresSessionState{
 
         public void ProcessRequest(HttpContext context) {
-            List<Article> ExportItems = context.Session["ExportItems"] as List<Article>;
+
+            String selectedTemplate = context.Request.QueryString["template"].ToString();
+
+            List<Article> ExportItems = context.Session[SessionName.ExportItems.ToString()] as List<Article>;
             if (ExportItems.Any()) {
-                String path = context.Server.MapPath(Constants.EXCEL_TEMPLATE_FOLDER) + Constants.EXCEL_TEMPLATE_NAME;
+                String path = context.Server.MapPath(Constants.EXCEL_TEMPLATE_FOLDER) + selectedTemplate;
                 ExcelExporter exporter = new ExcelExporter(path);
                 exporter.DataSource = ExportItems;
                 exporter.DataBind();
 
                 FileInfo file = new FileInfo(exporter.TempFile);
+
                 try {
                     if (file.Exists) {
                         BinaryReader fs = new BinaryReader(file.OpenRead());
@@ -39,6 +44,7 @@ namespace Client.Site.Provider {
                     }
                 } catch (Exception e) {
                     context.Response.Write(e.Message);
+                    context.Response.Flush();
                 }
 
             }

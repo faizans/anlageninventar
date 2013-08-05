@@ -137,8 +137,9 @@
   <ItemGroup>
     <Content Include="default.aspx" />
     <Content Include="ExcelTemplates\ExportColumnNames.xlsx" />
-    <Content Include="ExcelTemplates\ReportTemplate.xls" />
+    <Content Include="ExcelTemplates\NormaleListe.xls" />
     <Content Include="ExcelTemplates\web.config" />
+    <Content Include="ExcelTemplates\RaumCheckListe.xls" />
     <None Include="Properties\PublishProfiles\BSL_SRV-Inventar_192.168.10.10.pubxml" />
     <Content Include="Resources\Styles\main.css">
       <DependentUpon>main.scss</DependentUpon>
@@ -181,7 +182,6 @@
     </Content>
     <Content Include="Resources\Styles\settings\_base-colors.scss" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
-    <Content Include="About.aspx" />
     <Content Include="Resources\Images\Icons\ExcelLogo.png" />
     <Content Include="Resources\Images\Icons\ExcelBiff.png" />
     <Content Include="Resources\Images\Logo\BSL-Logo.jpg" />
@@ -239,7 +239,8 @@
     <Content Include="Site\Controls\Menu\MenuControl.ascx" />
     <Content Include="Site\Controls\RoomTree\RoomTreeControl.ascx" />
     <Content Include="Site\Controls\UserSearchControl\UserSearchBox.ascx" />
-    <Content Include="Site\Login\Login.aspx" />
+    <Content Include="Login.aspx" />
+    <Content Include="SilentLogin.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -247,13 +248,6 @@
     <Content Include="SiteMaster\StandardMaster.Master" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="About.aspx.cs">
-      <DependentUpon>About.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="About.aspx.designer.cs">
-      <DependentUpon>About.aspx</DependentUpon>
-    </Compile>
     <Compile Include="default.aspx.cs">
       <DependentUpon>default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -420,12 +414,19 @@
       <DependentUpon>UserSearchBox.ascx</DependentUpon>
     </Compile>
     <Compile Include="Site\Controls\UserSearchControl\UserSearchBoxEventArgs.cs" />
-    <Compile Include="Site\Login\Login.aspx.cs">
+    <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Site\Login\Login.aspx.designer.cs">
+    <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SilentLogin.aspx.cs">
+      <DependentUpon>SilentLogin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SilentLogin.aspx.designer.cs">
+      <DependentUpon>SilentLogin.aspx</DependentUpon>
     </Compile>
     <Compile Include="Site\Provider\ExcelProvider.ashx.cs">
       <DependentUpon>ExcelProvider.ashx</DependentUpon>
@@ -438,7 +439,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\Language\" />
+    <Folder Include="Site\Login\" />
     <Folder Include="Site\Public\" />
+    <Folder Include="Site\SilentLogin\" />
     <Folder Include="Site\User\" />
   </ItemGroup>
   <ItemGroup>

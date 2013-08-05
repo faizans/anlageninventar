@@ -129,6 +129,7 @@
           <Property Name="ArticleCategoryId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="varchar" MaxLength="50" />
           <Property Name="Code" Type="varchar" MaxLength="50" />
+          <Property Name="IsDefault" Type="bit" />
         </EntityType>
         <EntityType Name="ArticleGroup">
           <Key>
@@ -167,6 +168,7 @@
           <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="Code" Type="varchar" MaxLength="50" />
           <Property Name="DepreciationSpan" Type="float" />
+          <Property Name="IsDefault" Type="bit" />
         </EntityType>
         <EntityType Name="FilterField">
           <Key>
@@ -193,6 +195,7 @@
           <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="Code" Type="varchar" MaxLength="50" />
           <Property Name="Description" Type="varchar" MaxLength="500" />
+          <Property Name="IsDefault" Type="bit" />
         </EntityType>
         <EntityType Name="Room">
           <Key>
@@ -524,6 +527,7 @@
           <Property Type="String" Name="Name" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="Code" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Articles" Relationship="Data.Model.Diagram.FK_Article_ArticleCategory" FromRole="ArticleCategory" ToRole="Article" />
+          <Property Type="Boolean" Name="IsDefault" />
         </EntityType>
         <EntityType Name="ArticleGroup">
           <Key>
@@ -569,6 +573,7 @@
           <Property Type="String" Name="Code" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Type="Double" Name="DepreciationSpan" />
           <NavigationProperty Name="Depreciations" Relationship="Data.Model.Diagram.FK_Depreciation_DepreciationCategory" FromRole="DepreciationCategory" ToRole="Depreciation" />
+          <Property Type="Boolean" Name="IsDefault" />
         </EntityType>
         <EntityType Name="Floor">
           <Key>
@@ -589,6 +594,7 @@
           <Property Type="String" Name="Code" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="Description" MaxLength="500" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Articles" Relationship="Data.Model.Diagram.FK_Article_InsuranceCategory" FromRole="InsuranceCategory" ToRole="Article" />
+          <Property Type="Boolean" Name="IsDefault" />
         </EntityType>
         <EntityType Name="Room">
           <Key>
@@ -839,6 +845,7 @@
           <EntitySetMapping Name="ArticleCategories">
             <EntityTypeMapping TypeName="Data.Model.Diagram.ArticleCategory">
               <MappingFragment StoreEntitySet="ArticleCategory">
+                <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ArticleCategoryId" ColumnName="ArticleCategoryId" />
@@ -880,6 +887,7 @@
           <EntitySetMapping Name="DepreciationCategories">
             <EntityTypeMapping TypeName="Data.Model.Diagram.DepreciationCategory">
               <MappingFragment StoreEntitySet="DepreciationCategory">
+                <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
                 <ScalarProperty Name="DepreciationSpan" ColumnName="DepreciationSpan" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -899,6 +907,7 @@
           <EntitySetMapping Name="InsuranceCategories">
             <EntityTypeMapping TypeName="Data.Model.Diagram.InsuranceCategory">
               <MappingFragment StoreEntitySet="InsuranceCategory">
+                <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="Name" ColumnName="Name" />

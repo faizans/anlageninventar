@@ -156,7 +156,7 @@
             <!-- IsAvailable -->
             <div class="input_form_row">
                 <asp:Label ID="Label7" runat="server" Text="Ist vorhanden" CssClass="element_label"></asp:Label>
-                <asp:CheckBox ID="chbIsAvailable" runat="server" CausesValidation="false"/>
+                <asp:CheckBox ID="chbIsAvailable" runat="server" CausesValidation="false" Checked="true"/>
             </div>
 
         </div>

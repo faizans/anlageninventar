@@ -13,11 +13,35 @@ using Telerik.Web.UI;
 using System.Linq.Dynamic;
 using System.Data;
 using Client.Site.Controls.CustomGrids;
+using Data.Enum;
 
 namespace Client.Site.Administrator {
     public partial class ArticleList : System.Web.UI.Page {
 
+        #region Properties
+
         private Room selectedTargetRoom = null;
+
+        private String SelectedTemplate {
+            get {
+                if (Session[SessionName.SelectedTemplate.ToString()] == null) {
+                    Session[SessionName.SelectedTemplate.ToString()] = ExcelExporter.GetTemplateFiles(Server)[0].Name;
+                }
+                return Session[SessionName.SelectedTemplate.ToString()].ToString();
+            }
+            set {
+                Session[SessionName.SelectedTemplate.ToString()] = value;
+            }
+        }
+
+        public CustomMaster SiteMaster {
+            get {
+                CustomMaster mm = (CustomMaster)Page.Master;
+                return mm;
+            }
+        }
+
+        #endregion
 
         protected void Page_Load(object sender, EventArgs e) {
 
@@ -29,11 +53,14 @@ namespace Client.Site.Administrator {
             SiteMaster.StandardMaster.InfoText = "Artikel - Verwaltung";
         }
 
-        public CustomMaster SiteMaster {
-            get {
-                CustomMaster mm = (CustomMaster)Page.Master;
-                return mm;
-            }
+        private void bindData() {
+            GridItem cmdItem = rgArticles.MasterTableView.GetItems(GridItemType.CommandItem)[0];
+
+            //Bind the data for the excel template combobox
+            RadComboBox rlbExcelTemplate = cmdItem.FindControl("rcbExcelTemplate") as RadComboBox;
+            rlbExcelTemplate.DataSource = ExcelExporter.GetTemplateFiles(Server);
+            rlbExcelTemplate.DataBind();
+            rlbExcelTemplate.Items.Where(i => i.Text == this.SelectedTemplate).SingleOrDefault().Selected = true;
         }
 
         #region Events
@@ -61,37 +88,26 @@ namespace Client.Site.Administrator {
                 EntityFactory.Context.SaveChanges();
                 rgArticles.Rebind();
 
-            } else if (e.CommandName.ToLower() == "delete") {
-                deleteArticle(int.Parse((e.Item as GridDataItem)["ArticleId"].Text));
-            } else if (e.CommandName.ToLower() == "deleteselection") {
+            }else if (e.CommandName.ToLower() == "deleteselection") {
                 foreach (GridDataItem dataItem in rgArticles.MasterTableView.Items) {
                     if ((dataItem.FindControl("chbSelection") as CheckBox).Checked) {
                         if (dataItem.ItemType == GridItemType.Item || dataItem.ItemType == GridItemType.AlternatingItem) {
                             Article articleToDelete = Article.GetById(int.Parse(dataItem["ArticleId"].Text));
                             if (articleToDelete != null) {
-                                if (!articleToDelete.IsDepreciated()) {
+                                if (articleToDelete.IsDepreciated()) {
                                     articleToDelete.Delete();
                                 } else {
-                                    //TODO Generate alert which tells that not all were deleted
+                                    //TODO show error or so
                                 }
                             }
                         }
                     }
                 }
+
+                //RadWindowManager1.RadConfirm("Der Artikel enthält einen Restbetrag. Sind Sie sicher dass Sie diesen Löschen wollen?", "confirmCallBackFn", 330, 180, null, "Bitte bestätigen");
+
                 EntityFactory.Context.SaveChanges();
                 rgArticles.Rebind();
-            }
-        }
-
-        private void deleteArticle(int id) {
-            Article articleToDelete = Article.GetById(id);
-            if (articleToDelete != null) {
-                if (!articleToDelete.IsDepreciated()) {
-                    RadWindowManager1.RadAlert(String.Format("{0} kann nicht gelöscht werden, da der Artikel noch nicht Abgeschrieben wurde.", articleToDelete.Name), 300, 130, "Operation nicht möglich", "alertCallBackFn");
-                } else {
-                    articleToDelete.Delete();
-                    EntityFactory.Context.SaveChanges();
-                }
             }
         }
 
@@ -124,6 +140,8 @@ namespace Client.Site.Administrator {
                     (headerItem.FindControl("chbHeaderSelection") as CheckBox).Checked = rgArticles.SelectedItems.Count == rgArticles.Items.Count;
                 }
             }
+
+            bindData();
         }
 
         private void rgUploads_ItemPreRender(object sender, EventArgs e) {
@@ -142,23 +160,23 @@ namespace Client.Site.Administrator {
 
         protected void btnExportToExcel_Click(object sender, ImageClickEventArgs e) {
             this.SiteMaster.ExportItems = ArticleGridHelper.GetReportItems(this.rgArticles, Article.GetAvailable().ToList(),false);
-            Response.Redirect("~/Site/Provider/ExcelProvider.ashx");
+            Response.Redirect("~/Site/Provider/ExcelProvider.ashx?template=" + this.SelectedTemplate);
         }
-
-        #endregion
-
-        #region ExportSettings
-
-        protected void btnReport_Click(object sender, ImageClickEventArgs e) {
-            this.SiteMaster.ReportDataSource = ArticleGridHelper.GetReportItems(this.rgArticles, Article.GetAvailable().ToList(),false);
-            Response.Redirect("~/Site/Administrator/ReportView.aspx");
-        }
-        #endregion
 
         protected void rgArticles_Init(object sender, EventArgs e) {
             ArticleGridHelper.ClearFilter(this.rgArticles);
         }
 
+        protected void rcbExcelTemplate_SelectedIndexChanged(object sender, RadComboBoxSelectedIndexChangedEventArgs e) {
+            this.SelectedTemplate = e.Text;
+        }
+
+        protected void btnReport_Click(object sender, ImageClickEventArgs e) {
+            this.SiteMaster.ReportDataSource = ArticleGridHelper.GetReportItems(this.rgArticles, Article.GetAvailable().ToList(), false);
+            Response.Redirect("~/Site/Administrator/ReportView.aspx");
+        }
+
+        #endregion
 
     }
 }

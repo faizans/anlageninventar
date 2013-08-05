@@ -93,6 +93,13 @@
                 <telerik:RadMenuItem runat="server" CssClass="MenuItem">
                     <ItemTemplate>
                         <div>
+                            <asp:LinkButton ID="lbRoomResponsibles" runat="server" CommandName="RoomChecklist" OnClick="lbMenuItemClicked">Raumcheckliste</asp:LinkButton>
+                        </div>
+                    </ItemTemplate>
+                </telerik:RadMenuItem>
+                <telerik:RadMenuItem runat="server" CssClass="MenuItem">
+                    <ItemTemplate>
+                        <div>
                             <asp:LinkButton ID="lbDeletedArticles" runat="server" CommandName="DeletedArticles" OnClick="lbMenuItemClicked">Gelöschte Artikel</asp:LinkButton>
                         </div>
                     </ItemTemplate>

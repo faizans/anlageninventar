@@ -157,7 +157,7 @@ namespace Client.Site.Controls.RoomTree {
                 String dataItemType = this.SelectedRoomTreeItem.DataItem != null ?
                                             ObjectContext.GetObjectType(this.SelectedRoomTreeItem.DataItem.GetType()).ToString() : null;
                 if (this.SelectedRoomTreeItem.IsRoot) {
-                    toggleButtons(true, false, false, false,true);
+                    toggleButtons(true, false, false, false,false);
                 } else if (dataItemType == typeof(Building).ToString()) {
                     toggleButtons(false, true, false, true,true);
                 } else if (dataItemType == typeof(Floor).ToString()) {
@@ -374,7 +374,7 @@ namespace Client.Site.Controls.RoomTree {
                 Response.Redirect("~/Site/Administrator/ReportView.aspx");
             }
             //Get selecteditem articles and add to report datasource
-            else if(this.SelectedRoomTreeItem != null){
+            else if(this.SelectedRoomTreeItem != null && this.SelectedRoomTreeItem.DataItem != null){
                 if (ObjectContext.GetObjectType(this.SelectedRoomTreeItem.DataItem.GetType()) == typeof(Building)) {
                     Building building = this.SelectedRoomTreeItem.DataItem as Building;
                     this.SiteMaster.ReportDataSource.AddRange(building.Articles);

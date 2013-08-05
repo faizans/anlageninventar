@@ -23,6 +23,7 @@ namespace Data.Model.Diagram
         public string Name { get; set; }
         public string Code { get; set; }
         public Nullable<double> DepreciationSpan { get; set; }
+        public Nullable<bool> IsDefault { get; set; }
     
         public virtual ICollection<Depreciation> Depreciations { get; set; }
     }

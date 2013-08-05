@@ -22,6 +22,7 @@ namespace Data.Model.Diagram
         public int ArticleCategoryId { get; set; }
         public string Name { get; set; }
         public string Code { get; set; }
+        public Nullable<bool> IsDefault { get; set; }
     
         public virtual ICollection<Article> Articles { get; set; }
     }

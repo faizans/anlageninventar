@@ -1,22 +1,13 @@
 ONLY RELATED TO EMANUEL MISTRETTA
 
 Bugs:
-1. Filter DepreciationValue (Not entity property)				2h	DONE
 
 Todo:
-1. Implement Secure Delete functions (Check if children are set to object)	2h
-	-> Articles	DONE
-	-> User	
-6. Print grids									1h
-7. Create all reports								5h	NOT NEEDED NOW
-8. Create own filter control (OPTIONAL):
-	Why?: The grids are really slow with loading and you can only print the visible items.
-	Since you need to virtually load/paging to speed up the grids you need to retrieve manually the filtered datasource from db
 
-	How?: Textboxes which are the filters where you can enter data.
-	On setting filters, FilterExpression will be created -> (Name) Like what ever as SQL statement.
-	This will executed then and retrieve filtereddatasource.
-	This way you can print all items plus you don't need to convert them.
-9. Login form									3h	DONE (Styling needed)
-10.Reverse deleted objects							1h	DONE
-11.Delete groups if nomore articles are bound to				1h 	DONE
+6. Print grids									4h 
+9. Check if there is restvalue on article and ask for deleting			2h
+11.Add fieldvalidations everywhere						2h
+
+Question
+
+1. Do we need direct print or is excel enough	

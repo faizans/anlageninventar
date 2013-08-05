@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Client.Site.Login {
+namespace Client {
     
     
-    public partial class Login {
+    public partial class _Login {
         
         /// <summary>
         /// RadAjaxPanel1 control.

@@ -9,6 +9,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Telerik.Web.UI;
 
 namespace Client.Site.Administrator
 {
@@ -56,17 +57,33 @@ namespace Client.Site.Administrator
 
         private void bindDataSource() {
             //ArticleCategory
-            this.rcbArticleCategory.DataSource = ArticleCategory.GetAll().ToList();
+            IEnumerable<ArticleCategory> articleCategories = ArticleCategory.GetAll();
+            this.rcbArticleCategory.DataSource = articleCategories != null ? articleCategories.ToList() : null;
             this.rcbArticleCategory.DataBind();
+            if (articleCategories.Any() && articleCategories.Where(i => (i.IsDefault.HasValue && i.IsDefault.Value)).Any()) {
+                rcbArticleCategory.Items.Where(i => i.Value ==
+                    articleCategories.Where(a => (a.IsDefault.HasValue && a.IsDefault.Value)).ElementAt(0).ArticleCategoryId.ToString()).SingleOrDefault().Selected = true;
+            }
+          
 
             //InsuranceCategory
-            this.rcbInsuranceCategory.DataSource = InsuranceCategory.GetAll().ToList();
+            IEnumerable<InsuranceCategory> insuranceCategories = InsuranceCategory.GetAll();
+            this.rcbInsuranceCategory.DataSource = insuranceCategories != null ? insuranceCategories.ToList() : null;
             this.rcbInsuranceCategory.DataBind();
+            if (insuranceCategories.Any() && insuranceCategories.Where(i => (i.IsDefault.HasValue && i.IsDefault.Value)).Any()) {
+                RadComboBoxItem selectedItem = rcbInsuranceCategory.Items.Where(i => i.Value ==
+                    insuranceCategories.Where(a => (a.IsDefault.HasValue && a.IsDefault.Value)).ElementAt(0).InsuranceCategoryId.ToString()).SingleOrDefault();
+                selectedItem.Selected = true;
+            }
 
             //DepreciationCategory
-            List<DepreciationCategory> depreciationCategories = DepreciationCategory.GetAll().ToList();
-            this.rcbDepreciationCategory.DataSource = depreciationCategories;
+            IEnumerable<DepreciationCategory> depreciationCategories = DepreciationCategory.GetAll();
+            this.rcbDepreciationCategory.DataSource = depreciationCategories != null ? depreciationCategories.ToList() : null;
             this.rcbDepreciationCategory.DataBind();
+            if (depreciationCategories.Any() && depreciationCategories.Where(i => (i.IsDefault.HasValue && i.IsDefault.Value)).Any()) {
+                rcbDepreciationCategory.Items.Where(i => i.Value ==
+                    depreciationCategories.Where(a => (a.IsDefault.HasValue && a.IsDefault.Value)).ElementAt(0).DepreciationCategoryId.ToString()).SingleOrDefault().Selected = true;
+            }
 
             //Supplier
             this.rcbSupplier.DataSource = Supplier.GetAll().ToList();

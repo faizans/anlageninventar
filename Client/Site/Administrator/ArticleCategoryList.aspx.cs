@@ -43,6 +43,11 @@ namespace Client.Site.Administrator {
                         categoryToDelete.Delete();
                     }
                 }
+            } else if (e.CommandName == "Update") {
+                if (e.Item is GridDataItem) {
+                    GridDataItem dataItem = e.Item as GridDataItem;
+                    //TODO change the other items to false if this is true
+                }
             }
         }
         #endregion

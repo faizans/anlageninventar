@@ -11,6 +11,16 @@ namespace Data.Model.Diagram {
 
         #region Properties
 
+        private DateTime depreciationTime = DateTime.Now;
+        public DateTime DepreciationTime {
+            get {
+                return this.depreciationTime;
+            }
+            set {
+                this.depreciationTime = value;
+            }
+        }
+
         private double? depreciationValue = 0;
         /// <summary>
         /// The value of this item will only be set if depreciation is null
@@ -19,9 +29,9 @@ namespace Data.Model.Diagram {
             get {
                 if (this.Depreciation != null) {
                     int depSpan = this.Depreciation.AdditionalEndDate.Value.Year - this.Depreciation.AdditionalStartDate.Value.Year;
-                    int currentSpan = DateTime.Now.Year - this.Depreciation.AdditionalStartDate.Value.Year;
+                    int currentSpan = DepreciationTime.Year - this.Depreciation.AdditionalStartDate.Value.Year > 0 ?  DepreciationTime.Year - this.Depreciation.AdditionalStartDate.Value.Year : 1;
                     if (currentSpan <= depSpan) {
-                        return (this.Value / depSpan) * (depSpan - currentSpan);
+                        return (this.Value / depSpan) * (currentSpan);
                     }
                     return null;
                 }
@@ -45,14 +55,20 @@ namespace Data.Model.Diagram {
             return ctx.Articles;
         }
 
+        public static List<Article> GetAllSortedByUsers() {
+            IP3AnlagenInventarEntities ctx = EntityFactory.Context;
+            var sortedList = ctx.Articles.Where(a=> ! (a.IsDeleted && a.Room != null)).OrderBy(a=>a.Room.ResponsiblePerson);
+            return sortedList.ToList();
+        }
+
         public static IEnumerable<Article> GetDeleted() {
             IP3AnlagenInventarEntities ctx = EntityFactory.Context;
             return ctx.Articles.Where(a => a.IsDeleted);
         }
 
-        public static IEnumerable<Article> GetAvailable() {
+        public static List<Article> GetAvailable() {
             IP3AnlagenInventarEntities ctx = EntityFactory.Context;
-            return ctx.Articles.Where(a => !a.IsDeleted);
+            return ctx.Articles.Where(a => !a.IsDeleted).ToList();
         }
 
         public Boolean IsDepreciated() {
