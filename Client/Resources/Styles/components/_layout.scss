@@ -1,7 +1,6 @@
 // Variables
 
-$layout-body-font: verdana;
-$ayout-body-padding: 40px;
+$layout-body-padding: 40px;
 
 // Mixins
 
@@ -11,7 +10,7 @@ body {
   margin: 0px;
   padding: 0px;
   background-color: $background-color;
-  font-family: $layout-body-font;
+  font-family: $font;
 }
 
 .Wrapper_Div {
@@ -32,8 +31,11 @@ body {
 
   span {
 
+    font-size: $title-info-text-size;
+
     &#lblInfoText {
       @include zen-margin('left', 4);
+      font-weight: bold;
       float: left;
     }
 
@@ -48,6 +50,7 @@ body {
   @include zen-padding(left, 4);
   @include zen-padding(right, 4);
   @include zen-padding-top(2);
+  @include zen-padding-bottom(2);
 }
 
 .Footer_Div {

@@ -1,0 +1,14 @@
+table {
+
+  font-size: $font-size !important;
+
+  thead tr {
+    border-radius: 10px;
+    background-color: #fff !important;
+
+  }
+
+  tbody tr:nth-child(2n+1) {
+    @include zen-color-alternating;
+  }
+}

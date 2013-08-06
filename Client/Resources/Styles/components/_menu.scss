@@ -1,9 +1,10 @@
 // Variables
 
 $menu-height: 100px !default;
-$menu-bg-color: #205081 !default;
-$menu-font-size: 18px;
-$menu-font-vertical-size: 16px;
+$menu-bg-color: #1C7DC2 !default;
+$menu-hover-color: #45A0E4 !default;
+$menu-font-size: 16px;
+$menu-font-vertical-size: 14px;
 
 // Mixins
 
@@ -45,7 +46,7 @@ $menu-font-vertical-size: 16px;
           @include zen-padding-top(1);
           @include zen-padding-bottom(1);
 
-          @include zen-hover;
+          @include zen-hover($color: $menu-hover-color);
 
           a {
             color: white;
@@ -80,7 +81,7 @@ $menu-font-vertical-size: 16px;
                   margin: 0 !important;
                 }
 
-                @include zen-hover;
+                @include zen-hover($color: $menu-hover-color);
 
                 padding-left: $zen-spacing-unit;
                 padding-right: $zen-spacing-unit;
