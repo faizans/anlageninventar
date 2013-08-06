@@ -11,7 +11,7 @@ namespace Client.SiteMaster
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+	        InfoUser = this.User.UserName ?? string.Empty; // TODO: review this crappy code
         }
 
         public String InfoText {
@@ -19,5 +19,10 @@ namespace Client.SiteMaster
                 this.lblInfoText.Text = value;
             }
         }
+
+	    public String InfoUser
+	    {
+		    set { this.lblInfoUser.Text = value; }
+	    }
     }
 }

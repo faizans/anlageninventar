@@ -24,6 +24,7 @@
             </div>
             <div class="Title_Div">
                 <asp:Label ID="lblInfoText" runat="server" Text=""></asp:Label>
+                <asp:Label ID="lblInfoUser" runat="server" Text=""></asp:Label>
             </div>
             <div class="Body_Div">
                 <asp:ContentPlaceHolder ID="ContentPlaceHolder" runat="server" />

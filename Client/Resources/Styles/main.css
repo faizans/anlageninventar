@@ -15,8 +15,12 @@ body {
   padding-bottom: 5px;
   background-color: #f5f5f5;
   border-bottom: 1px solid grey; }
-  .Title_Div span {
-    margin-left: 10px; }
+  .Title_Div span#lblInfoText {
+    margin-left: 10px;
+    float: left; }
+  .Title_Div span#lblInfoUser {
+    margin-right: 10px;
+    float: right; }
 
 .Body_Div {
   padding: 50px; }

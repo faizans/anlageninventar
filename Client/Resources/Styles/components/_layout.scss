@@ -29,7 +29,17 @@ body {
   border-bottom: 1px solid grey;
 
   span {
-    @include zen-margin('left', 1);
+
+    &#lblInfoText {
+      @include zen-margin('left', 1);
+      float: left;
+    }
+
+    &#lblInfoUser {
+      @include zen-margin('right', 1);
+      float: right;
+    }
+
   }
 }
 

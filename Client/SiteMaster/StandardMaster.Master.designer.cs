@@ -49,6 +49,15 @@ namespace Client.SiteMaster {
         protected global::System.Web.UI.WebControls.Label lblInfoText;
         
         /// <summary>
+        /// lblInfoUser control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblInfoUser;
+        
+        /// <summary>
         /// ContentPlaceHolder control.
         /// </summary>
         /// <remarks>
