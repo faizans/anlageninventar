@@ -1,14 +1,16 @@
 // Variables
-// Mixins
-// Rules
 
 $layout-body-font: verdana;
-$ayout-body-padding: 50px;
+$ayout-body-padding: 40px;
 
+// Mixins
+
+
+// Rules
 body {
   margin: 0px;
   padding: 0px;
-  background-color: #f5f5f5;
+  background-color: $background-color;
   font-family: $layout-body-font;
 }
 
@@ -21,30 +23,31 @@ body {
 .Title_Div {
   height: 20px;
 
-  padding-top: 5px;
-  padding-bottom: 5px;
+  @include zen-padding-top(0.5);
+  @include zen-padding-bottom(0.5);
 
-  background-color: #f5f5f5;
+  background-color: $background-color;
 
   border-bottom: 1px solid grey;
 
   span {
 
     &#lblInfoText {
-      @include zen-margin('left', 1);
+      @include zen-margin('left', 4);
       float: left;
     }
 
     &#lblInfoUser {
-      @include zen-margin('right', 1);
+      @include zen-margin('right', 4);
       float: right;
     }
-
   }
 }
 
 .Body_Div {
-  @include zen-spacing(padding, $ayout-body-padding);
+  @include zen-padding(left, 4);
+  @include zen-padding(right, 4);
+  @include zen-padding-top(2);
 }
 
 .Footer_Div {

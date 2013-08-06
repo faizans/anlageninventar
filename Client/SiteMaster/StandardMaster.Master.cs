@@ -11,7 +11,14 @@ namespace Client.SiteMaster
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-	        InfoUser = this.User.UserName ?? string.Empty; // TODO: review this crappy code
+	        if (this.User != null)
+	        {
+		        InfoUser = this.User.UserName;
+	        }
+	        else
+	        {
+		        InfoUser = "Anonymous";
+	        }
         }
 
         public String InfoText {

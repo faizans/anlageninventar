@@ -3,6 +3,7 @@
 
 
 // Settings and Variables
+@import "settings/base-colors";
 
 
 // Compopacity
@@ -11,5 +12,7 @@
 
 @import "components/buttons";
 @import "components/menu";
+@import "components/tables";
 
 @import "components/forms"; // TODO: update according to SCSS file structure
+

@@ -1,6 +1,6 @@
 // Variables
 
-$menu-height: 20px !default;
+$menu-height: 100px !default;
 $menu-bg-color: #205081 !default;
 $menu-font-size: 18px;
 $menu-font-vertical-size: 16px;
@@ -10,10 +10,9 @@ $menu-font-vertical-size: 16px;
 // Rules
 
 .Header_Div {
-  @include zen-padding-top(1);
-  @include zen-padding-bottom(1);
-
-  height: $menu-height;
+  display: table;
+  height: auto;
+  width: 100%;
   background-color: $menu-bg-color;
 
   .Header_Logo_Div {
@@ -32,7 +31,6 @@ $menu-font-vertical-size: 16px;
 
       ul.rmRootGroup.rmHorizontal {
         background-color: transparent;
-        height: 100%;
         border: none;
         background-image: none;
         font-size: $menu-font-size;
@@ -44,7 +42,8 @@ $menu-font-vertical-size: 16px;
           @include zen-padding('left');
           @include zen-padding('right');
 
-          cursor: pointer;
+          @include zen-padding-top(1);
+          @include zen-padding-bottom(1);
 
           @include zen-hover;
 

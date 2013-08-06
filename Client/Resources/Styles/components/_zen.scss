@@ -1,8 +1,10 @@
 // Variables
 
-$zen-spacing-unit: 10px;
+$zen-spacing-unit: 10px !default;
+$zen-brighter-color: lightblue !default;
 
 // Mixins
+
 @mixin zen-spacing($property, $value) {
   #{$property}: $value;
 }
@@ -31,9 +33,17 @@ $zen-spacing-unit: 10px;
   @include zen-padding('bottom', $unit);
 }
 
-@mixin zen-hover($color: lightblue) {
+@mixin zen-hover($color: $zen-brighter-color) {
   &:hover {
-    background-color: lightblue;
+    background-color: $color;
+    cursor: pointer;
   }
 }
+
+@mixin zen-color-alternating($color: $zen-brighter-color) {
+  background-color: $color;
+  color: black;
+
+}
+
 // Rules
