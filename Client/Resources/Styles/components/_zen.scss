@@ -46,4 +46,22 @@ $zen-brighter-color: #E1EFFD !default;
 
 }
 
+@mixin zen-button() {
+
+  @include zen-spacing(padding, 5px !important);
+
+  background-image: none !important;
+  font-weight: bold;
+  background: none;
+  background-color: #ffffff !important;
+  border: 1px solid $base-color !important;
+  border-radius: 5px;
+  height: auto !important;
+
+  &:hover {
+    background-color: $menu-hover-color !important;
+    color: #ffffff !important;
+  }
+}
+
 // Rules

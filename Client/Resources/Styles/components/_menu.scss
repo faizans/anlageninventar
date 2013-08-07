@@ -1,9 +1,8 @@
 // Variables
 
-$menu-height: 100px !default;
-$menu-bg-color: #1C7DC2 !default;
+$menu-bg-color: $base-color !default;
 $menu-hover-color: #45A0E4 !default;
-$menu-font-size: 16px;
+$menu-font-size: 18px;
 $menu-font-vertical-size: 14px;
 
 // Mixins
@@ -42,7 +41,6 @@ $menu-font-vertical-size: 14px;
           @include zen-margin('right');
           @include zen-padding('left');
           @include zen-padding('right');
-
           @include zen-padding-top(1);
           @include zen-padding-bottom(1);
 
