@@ -57,7 +57,7 @@
         <telerik:RadMenuItem runat="server" CssClass="MenuItem">
             <ItemTemplate>
                 <div>
-                    <asp:LinkButton ID="lbArticleCategories" PostBackUrl="~/Site/Administrator/RoomList.aspx" runat="server">Räume</asp:LinkButton>
+                    <asp:LinkButton ID="lbArticleCategories" PostBackUrl="~/Site/Administrator/RoomList.aspx" runat="server">Lagerorte</asp:LinkButton>
                 </div>
             </ItemTemplate>
         </telerik:RadMenuItem>

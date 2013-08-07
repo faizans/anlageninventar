@@ -398,6 +398,7 @@
     <Compile Include="Site\Controls\Menu\MenuControl.ascx.designer.cs">
       <DependentUpon>MenuControl.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Site\Controls\RoomTree\RoomTreeEventArgs.cs" />
     <Compile Include="Site\Controls\RoomTree\RoomTreeControl.ascx.cs">
       <DependentUpon>RoomTreeControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

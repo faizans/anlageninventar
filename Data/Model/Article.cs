@@ -12,6 +12,9 @@ namespace Data.Model.Diagram {
         #region Properties
 
         private DateTime depreciationTime = DateTime.Now;
+        /// <summary>
+        /// Set the year for the depreciation calculation
+        /// </summary>
         public DateTime DepreciationTime {
             get {
                 return this.depreciationTime;
@@ -66,6 +69,19 @@ namespace Data.Model.Diagram {
             return ctx.Articles.Where(a => a.IsDeleted);
         }
 
+        /// <summary>
+        /// Get all deleted articles with a rest value
+        /// </summary>
+        /// <returns></returns>
+        public static IEnumerable<Article> GetDeletedWithRestValue() {
+            IP3AnlagenInventarEntities ctx = EntityFactory.Context;
+            return ctx.Articles.Where(a => a.IsDeleted && !a.IsDepreciated());
+        } 
+
+        /// <summary>
+        /// Get all articles which are not deleted
+        /// </summary>
+        /// <returns></returns>
         public static List<Article> GetAvailable() {
             IP3AnlagenInventarEntities ctx = EntityFactory.Context;
             return ctx.Articles.Where(a => !a.IsDeleted).ToList();
@@ -80,6 +96,9 @@ namespace Data.Model.Diagram {
             ctx.Articles.Where(p => p.ArticleId == this.ArticleId).SingleOrDefault().IsDeleted = true;
         }
 
+        /// <summary>
+        /// Delete the article and its group
+        /// </summary>
         public void DeletePhysically() {
             IP3AnlagenInventarEntities ctx = EntityFactory.Context;
 

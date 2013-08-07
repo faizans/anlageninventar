@@ -12,7 +12,7 @@
     </telerik:RadAjaxManager>
 
     <telerik:RadGrid ID="rgReport" runat="server" AutoGenerateEditColumn="False" CellSpacing="0" GridLines="None" Skin="Silk" OnPreRender="rgReport_PreRender"
-        AllowPaging="False" AllowSorting="True" AllowFilteringByColumn="true" ShowStatusBar="true" OnDataBound="rgReport_DataBound" OnInit="rgReport_Init">
+        AllowPaging="False" AllowSorting="True" AllowFilteringByColumn="true" ShowStatusBar="true" OnDataBound="rgReport_DataBound" OnInit="rgReport_Init" Height="600px">
 
         <ClientSettings>
             <Scrolling AllowScroll="True" UseStaticHeaders="True"></Scrolling>
@@ -33,12 +33,16 @@
 
                         <telerik:RadButton ID="btnCalculate" runat="server" Text="Berechnen" AutoPostBack="true" OnClick="btnApplyYear_Click"></telerik:RadButton>
                     </div>
-                    <div style="float: right;">
-                        <telerik:RadComboBox ID="rcbExcelTemplate" runat="server" DataValueField="FullName" DataTextField="Name" Label="Excelvorlage" AutoPostBack="true" OnSelectedIndexChanged="rcbExcelTemplate_SelectedIndexChanged"></telerik:RadComboBox>
-                        <div style="margin-right: 10px; margin-left: 10px; float: right;">
-                            <asp:ImageButton ID="btnExportToExcel" ImageUrl="~/Resources/Images/Icons/ExcelBiff.png" ToolTip="Exportiere zu Excel"
-                                OnClick="btnExportToExcel_Click" runat="server" CssClass="ImageButtons" Height="23px" />
-                        </div>
+                    <div style="float: right; margin-top: 3px;">
+                        <telerik:RadButton ID="btnExport" runat="server" Text="RadButton" OnClientClicking="OnExportToExcel" ToolTip="Exportiere zu Excel" Height="20px" Width="20px"
+                            OnClick="btnExportToExcel_Click">
+                            <Image ImageUrl="~/Resources/Images/Icons/Excel.jpg" />
+                        </telerik:RadButton>
+                    </div>
+                    <div style="float: right;margin-left:5px; margin-right:5px;">
+                        <telerik:RadComboBox ID="rcbExcelTemplate" runat="server" DataValueField="FullName" DataTextField="Name" Label="Excelvorlage" AutoPostBack="true"
+                            OnSelectedIndexChanged="rcbExcelTemplate_SelectedIndexChanged">
+                        </telerik:RadComboBox>
                     </div>
                 </div>
             </CommandItemTemplate>

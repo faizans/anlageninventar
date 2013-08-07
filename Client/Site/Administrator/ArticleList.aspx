@@ -13,7 +13,6 @@
         </AjaxSettings>
     </telerik:RadAjaxManager>
 
-
     <telerik:RadGrid ID="rgArticles" runat="server" AutoGenerateEditColumn="True" CellSpacing="0" GridLines="None" Skin="Silk" OnInit="rgArticles_Init"
         AllowPaging="True" AllowSorting="True" AllowFilteringByColumn="true" ShowStatusBar="true" Height="580px" ClientSettings-DataBinding-EnableCaching="true"
         OnItemCommand="rgArticles_ItemCommand" DataSourceID="GridSource" AllowMultiRowSelection="True" OnPreRender="rgArticles_PreRender" OnItemCreated="rgArticles_ItemCreated">
@@ -47,15 +46,18 @@
                         <asp:ImageButton ID="btnReport" ImageUrl="~/Resources/Images/Icons/Report1.png" ToolTip="Generiere Report"
                             OnClick="btnReport_Click" runat="server" CssClass="ImageButtons" Height="25px" />
                     </div>
-                    <div style="float: right; margin-right: 5px;">
+                    <div style="float: right; margin-top: 3px;">
+                        <telerik:RadButton ID="btnExport" runat="server" Text="RadButton" OnClientClicking="OnExportToExcel" ToolTip="Exportiere zu Excel" Height="20px" Width="20px"
+                            OnClick="btnExportToExcel_Click">
+                            <Image ImageUrl="~/Resources/Images/Icons/Excel.jpg" />
+                        </telerik:RadButton>
+                    </div>
+                    <div style="float: right;margin-left:5px; margin-right:5px;">
                         <telerik:RadComboBox ID="rcbExcelTemplate" runat="server" DataValueField="FullName" DataTextField="Name" Label="Excelvorlage" AutoPostBack="true"
                             OnSelectedIndexChanged="rcbExcelTemplate_SelectedIndexChanged">
                         </telerik:RadComboBox>
-                        <div style="margin-right: 10px; margin-left: 10px; float: right;">
-                            <asp:ImageButton ID="btnExportToExcel" ImageUrl="~/Resources/Images/Icons/ExcelBiff.png" ToolTip="Exportiere zu Excel"
-                                OnClick="btnExportToExcel_Click" runat="server" CssClass="ImageButtons" Height="23px" />
-                        </div>
                     </div>
+
                 </div>
             </CommandItemTemplate>
 
@@ -104,12 +106,10 @@
 
     <telerik:RadWindowManager ID="RadWindowManager1" runat="server">
     </telerik:RadWindowManager>
+
+
     <script type="text/javascript">
         function alertCallBackFn(arg) {
-
-        }
-
-        function confirmCallBackFn(arg) {
 
         }
 
@@ -125,6 +125,18 @@
             args.set_cancel(true);
         }
 
+        function OnExportToExcel(sender, args) {
+            var callBackFunction = Function.createDelegate(sender, function (argument) {
+                if (argument) {
+                    this.click();
+                }
+            });
+
+            var text = "Der Export kann einige Zeit in Anspruch nehmen. Sind Sie sicher dass Sie exportieren wollen?";
+            radconfirm(text, callBackFunction, 300, 100, null, "Verschieben");
+            args.set_cancel(true);
+        }
+
         function OnClientClicking(sender, args) {
             var callBackFunction = Function.createDelegate(sender, function (argument) {
                 if (argument) {
@@ -132,7 +144,7 @@
                 }
             });
 
-            var text = "Sind Sie sicher dass Sie den Artikel entfernen wollen?";
+            var text = "Sind Sie sicher dass Sie den Artikel entfernen wollen?\nAchtung Artikel kann Restwert enthalten";
             radconfirm(text, callBackFunction, 300, 100, null, "Löschen");
             args.set_cancel(true);
         }
@@ -141,6 +153,10 @@
             if (args.get_eventTarget().indexOf("ExportTo") >= 0) {
                 args.set_enableAjax(false);
             }
+        }
+
+        function confirmCallBackFn(arg) {
+
         }
 
     </script>

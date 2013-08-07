@@ -11,10 +11,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Telerik.Web.UI;
 
-namespace Client.Site.Administrator
-{
-    public partial class ManageArticle : System.Web.UI.Page
-    {
+namespace Client.Site.Administrator {
+    public partial class ManageArticle : System.Web.UI.Page {
 
         private Article article;
 
@@ -36,20 +34,16 @@ namespace Client.Site.Administrator
 
         #region Initialisation
 
-        private void loadPage()
-        {
+        private void loadPage() {
             getParameters();
-            if (!IsPostBack)
-            {
+            if (!IsPostBack) {
                 bindDataSource();
                 bindEntityData(this.article);
             }
         }
 
-        private void getParameters()
-        {
-            if (Request.QueryString["ai"] != null && Request.QueryString["ai"] != "")
-            {
+        private void getParameters() {
+            if (Request.QueryString["ai"] != null && Request.QueryString["ai"] != "") {
                 int articleId = int.Parse(Request.QueryString["ai"]);
                 this.article = Article.GetById(articleId);
             }
@@ -64,7 +58,7 @@ namespace Client.Site.Administrator
                 rcbArticleCategory.Items.Where(i => i.Value ==
                     articleCategories.Where(a => (a.IsDefault.HasValue && a.IsDefault.Value)).ElementAt(0).ArticleCategoryId.ToString()).SingleOrDefault().Selected = true;
             }
-          
+
 
             //InsuranceCategory
             IEnumerable<InsuranceCategory> insuranceCategories = InsuranceCategory.GetAll();
@@ -94,10 +88,8 @@ namespace Client.Site.Administrator
             this.rcbBuilding.DataBind();
         }
 
-        private void bindEntityData(Article article)
-        {
-            if (article != null)
-            {
+        private void bindEntityData(Article article) {
+            if (article != null) {
                 //TExtboxes
                 this.rtbName.Text = article.Name;
                 this.rtbBarcode.Text = article.Barcode;
@@ -152,15 +144,13 @@ namespace Client.Site.Administrator
             }
         }
 
-        private void save()
-        {
-            if (this.article == null)
-            {
+        private void save() {
+            if (this.article == null) {
                 //Do barcode preperations
                 String groupBarCode = this.rtbGroupBarcode.Text;
                 String barCodeCounterPart = groupBarCode != "" && groupBarCode != null ? groupBarCode.Split('.')[groupBarCode.Split('.').Length - 1] : null;
-                int barCode = barCodeCounterPart!="" && barCodeCounterPart != null ? int.Parse(barCodeCounterPart) : -1;
-                int barCodeDigits = barCode > -1 ? barCode.ToString().Length:-1;
+                int barCode = barCodeCounterPart != "" && barCodeCounterPart != null ? int.Parse(barCodeCounterPart) : -1;
+                int barCodeDigits = barCode > -1 ? barCode.ToString().Length : -1;
 
                 ArticleGroup group = null;
                 //if amount is bigger than 1 -> Create article group
@@ -169,26 +159,25 @@ namespace Client.Site.Administrator
                     group.Name = this.rtbGroupName.Text;
                     group.Barcode = this.rtbGroupBarcode.Text;
                     group.RoomId = int.Parse(this.rcbRoom.SelectedItem.Value);
+                }
 
+                //If amount is bigger than 1 create entites regarding to amount.
+                for (int i = 1; i <= this.rtbAmount.Value; i++) {
+                    this.article = new Article();
 
-                    //If amount is bigger than 1 create entites regarding to amount.
-                    for (int i = 1; i <= this.rtbAmount.Value; i++) {
-                        this.article = new Article();
+                    setData(this.article);
 
-                        setData(this.article);
-
-                        if (group != null) {
-                            this.article.ArticleGroup = group;
-                            barCode++;
-                            //Handle Barcode
-                            String newBarCodeEnd = barCodeCounterPart.Remove(barCodeDigits.ToString().Length - 1, barCode.ToString().Length) + barCode;
-                            this.article.Barcode = groupBarCode.Remove((groupBarCode.Length) - (barCodeCounterPart.Length), barCodeCounterPart.Length)
-                                + newBarCodeEnd;
-                        }
-
-                        EntityFactory.Context.Articles.Add(this.article);
+                    if (group != null) {
+                        this.article.ArticleGroup = group;
+                        barCode++;
+                        //Handle Barcode
+                        String newBarCodeEnd = barCodeCounterPart.Remove(barCodeDigits.ToString().Length - 1, barCode.ToString().Length) + barCode;
+                        this.article.Barcode = groupBarCode.Remove((groupBarCode.Length) - (barCodeCounterPart.Length), barCodeCounterPart.Length)
+                            + newBarCodeEnd;
                     }
-                } 
+
+                    EntityFactory.Context.Articles.Add(this.article);
+                }
             } else {
                 setData(this.article);
             }
@@ -282,13 +271,11 @@ namespace Client.Site.Administrator
             this.rcbRoom.DataBind();
         }
 
-        protected void btnBack_Click(object sender, EventArgs e)
-        {
+        protected void btnBack_Click(object sender, EventArgs e) {
             Response.Redirect("~/Site/Administrator/ArticleList.aspx");
         }
 
-        protected void btnSave_Click(object sender, EventArgs e)
-        {
+        protected void btnSave_Click(object sender, EventArgs e) {
             save();
         }
 

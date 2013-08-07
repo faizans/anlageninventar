@@ -22,7 +22,6 @@ namespace Client.Site.Administrator
             }
 
             SiteMaster.StandardMaster.InfoText = "Abschreibungskategorien - Verwaltung";
-            bindData();
         }
 
         public CustomMaster SiteMaster {
@@ -65,6 +64,10 @@ namespace Client.Site.Administrator
                     //TODO change the other items to false if this is true
                 }
             }
+        }
+
+        protected void rgCategories_PreRender(object sender, EventArgs e) {
+            bindData();
         }
 
     }

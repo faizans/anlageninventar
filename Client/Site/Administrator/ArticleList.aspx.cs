@@ -94,17 +94,13 @@ namespace Client.Site.Administrator {
                         if (dataItem.ItemType == GridItemType.Item || dataItem.ItemType == GridItemType.AlternatingItem) {
                             Article articleToDelete = Article.GetById(int.Parse(dataItem["ArticleId"].Text));
                             if (articleToDelete != null) {
-                                if (articleToDelete.IsDepreciated()) {
-                                    articleToDelete.Delete();
-                                } else {
-                                    //TODO show error or so
-                                }
+                                //if (articleToDelete.IsDepreciated()) {
+                                articleToDelete.Delete();
+                                //}
                             }
                         }
                     }
                 }
-
-                //RadWindowManager1.RadConfirm("Der Artikel enthält einen Restbetrag. Sind Sie sicher dass Sie diesen Löschen wollen?", "confirmCallBackFn", 330, 180, null, "Bitte bestätigen");
 
                 EntityFactory.Context.SaveChanges();
                 rgArticles.Rebind();
@@ -158,7 +154,7 @@ namespace Client.Site.Administrator {
             this.selectedTargetRoom = Room.GetById(int.Parse(e.Value));
         }
 
-        protected void btnExportToExcel_Click(object sender, ImageClickEventArgs e) {
+        protected void btnExportToExcel_Click(object sender, EventArgs e) {
             this.SiteMaster.ExportItems = ArticleGridHelper.GetReportItems(this.rgArticles, Article.GetAvailable().ToList(),false);
             Response.Redirect("~/Site/Provider/ExcelProvider.ashx?template=" + this.SelectedTemplate);
         }
@@ -171,12 +167,14 @@ namespace Client.Site.Administrator {
             this.SelectedTemplate = e.Text;
         }
 
-        protected void btnReport_Click(object sender, ImageClickEventArgs e) {
+        protected void btnReport_Click(object sender, EventArgs e) {
             this.SiteMaster.ReportDataSource = ArticleGridHelper.GetReportItems(this.rgArticles, Article.GetAvailable().ToList(), false);
             Response.Redirect("~/Site/Administrator/ReportView.aspx");
         }
 
+
         #endregion
+
 
     }
 }

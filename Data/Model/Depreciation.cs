@@ -32,7 +32,6 @@ namespace Data.Model.Diagram
         {
             IP3AnlagenInventarEntities ctx = EntityFactory.Context;
             ctx.Depreciations.Remove(ctx.Depreciations.Where(c => c.DepreciationId == this.DepreciationId).SingleOrDefault());
-            ctx.SaveChanges();
         }
 
         public Boolean HasArticles() {

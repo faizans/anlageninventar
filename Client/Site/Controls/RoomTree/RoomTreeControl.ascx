@@ -8,16 +8,20 @@
         <telerik:RadButton ID="btnAddFloor" runat="server" Text="Neuer Stock" OnClick="btnAddFloor_Click" Enabled="false"></telerik:RadButton>
         <telerik:RadButton ID="btnAddRoom" runat="server" Text="Neuer Raum" OnClick="btnAddRoom_Click" Enabled="false"></telerik:RadButton>
         <telerik:RadButton ID="btnReport" runat="server" Text="Report" OnClick="btnReport_Click" Enabled="false"></telerik:RadButton>
-        <telerik:RadButton ID="btnDelete" runat="server" Text="Delete" OnClick="btnDelete_Click" Enabled="false"></telerik:RadButton>
+        <telerik:RadButton ID="btnDelete" runat="server" Text="Löschen" OnClick="btnDelete_Click" Enabled="false"></telerik:RadButton>
     </div>
 
-    <div style="float: left; height: 300px; width: 300px; border: 1px solid black; padding: 10px; background-color: white;">
+    <div style="margin-bottom: 20px;">
+       <asp:Label ID="lblWarning" runat="server" />
+    </div>
+
+    <div style="float: left; min-height: 300px; width: 300px; border: 1px solid black; padding: 10px; background-color: white;">
         <telerik:RadTreeView ID="RadTreeView1" runat="server" DataFieldID="Id" DataFieldParentID="ParentId" DataTextField="Text"
             OnNodeClick="RadTreeView1_NodeClick" OnNodeDataBound="RadTreeView1_NodeDataBound" CheckBoxes="true" OnNodeCheck="RadTreeView1_NodeCheck">
         </telerik:RadTreeView>
     </div>
 
-    <div style="float: left; height: 300px; width: 300px; border: 1px solid black; margin-left: 20px; padding: 10px; background-color: white;" runat="server" id="EditForm" visible="false">
+    <div style="float: left; min-height: 300px; width: 300px; border: 1px solid black; margin-left: 20px; padding: 10px; background-color: white;" runat="server" id="EditForm" visible="false">
         <div id="Div1" class="content_input_form" runat="server">
             <div class="input_form_row">
                 <asp:Label ID="Label0" runat="server" Text="Name" CssClass="element_label"></asp:Label>
@@ -31,16 +35,9 @@
             </div>
         </div>
         <div class="input_interaction_row">
-            <telerik:RadButton ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" />
+            <telerik:RadButton ID="btnSave" runat="server" Text="Speichern" OnClick="btnSave_Click" />
         </div>
     </div>
 </telerik:RadAjaxPanel>
-<telerik:RadWindowManager ID="RadWindowManager1" runat="server">
-</telerik:RadWindowManager>
-<script>
-    function alertCallBackFn(arg) {
 
-    }
-
-</script>
 

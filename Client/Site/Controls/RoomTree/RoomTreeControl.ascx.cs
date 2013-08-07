@@ -17,6 +17,7 @@ namespace Client.Site.Controls.RoomTree {
     public partial class RoomTreeControl : System.Web.UI.UserControl {
 
         protected void Page_Load(object sender, EventArgs e) {
+
             if (!IsPostBack) {
                 resetSession();
                 initDataSource();
@@ -49,6 +50,9 @@ namespace Client.Site.Controls.RoomTree {
             }
         }
 
+        /// <summary>
+        /// Session with all checked items
+        /// </summary>
         public List<RoomTreeItem> CheckedItems {
             get {
                 if (Session["CheckedItems"] == null) {
@@ -61,6 +65,9 @@ namespace Client.Site.Controls.RoomTree {
             }
         }
 
+        /// <summary>
+        /// The datasource for the treeview
+        /// </summary>
         public List<RoomTreeItem> DataSource {
             set {
                 this.RadTreeView1.DataSource = value;
@@ -68,6 +75,9 @@ namespace Client.Site.Controls.RoomTree {
             }
         }
 
+        /// <summary>
+        /// Session with the items
+        /// </summary>
         public List<RoomTreeItem> RoomTreeItems {
             get {
                 if (Session["RoomTreeItems"] == null) {
@@ -80,6 +90,9 @@ namespace Client.Site.Controls.RoomTree {
             }
         }
 
+        /// <summary>
+        /// The selected item
+        /// </summary>
         public RadTreeNode SelectedItem {
             get {
                 if (Session["SelectedItem"] == null) {
@@ -92,8 +105,23 @@ namespace Client.Site.Controls.RoomTree {
             }
         }
 
+        private String ErrorMessage {
+            get {
+                if (Session["ErrorMessage"] == null) {
+                    return null;
+                }
+                return Session["ErrorMessage"].ToString();
+            }
+            set {
+                Session["ErrorMessage"] = value;
+            }
+        }
+
         #endregion
 
+        /// <summary>
+        /// Clear the sesssions
+        /// </summary>
         private void resetSession() {
             this.CheckedItems = null;
             this.RoomTreeItems = null;
@@ -170,6 +198,9 @@ namespace Client.Site.Controls.RoomTree {
             }
         }
 
+        /// <summary>
+        /// Enable or disable the action  buttons
+        /// </summary>
         private void toggleButtons(bool enableBuilding, bool enableFloor, bool enableRoom, bool enableDelete, bool enableReport) {
             this.btnAddBuilding.Enabled = enableBuilding;
             this.btnAddFloor.Enabled = enableFloor;
@@ -213,9 +244,12 @@ namespace Client.Site.Controls.RoomTree {
         #region Tree
 
         protected void RadTreeView1_NodeClick(object sender, RadTreeNodeEventArgs e) {
+            //set the selected item to the clicked node
             this.SelectedItem = e.Node;
+            //update buttons
             toggleButtons();
             e.Node.Expanded = true;
+            //update editform
             this.updateEditForm();
         }
 
@@ -262,10 +296,9 @@ namespace Client.Site.Controls.RoomTree {
 
         #region Buttons
 
+        public event EventHandler ItemRemove;
         protected void btnDelete_Click(object sender, EventArgs e) {
             StringBuilder errorMessage = new StringBuilder();
-            errorMessage.AppendLine("Einige Objekte könne nicht gelöschte werden:");
-            Boolean showErrorMessage = false;
 
             if (this.CheckedItems != null) {
                 foreach (RoomTreeItem roomTreeItem in this.CheckedItems) {
@@ -277,24 +310,23 @@ namespace Client.Site.Controls.RoomTree {
                         if (!buildingToDelete.HasArticles()) {
                             buildingToDelete.Delete();
                             //Remove the item from radtree
-                            this.RadTreeView1.GetAllNodes().Where(n => n.Value == roomTreeItem.Value
-                                && ObjectContext.GetObjectType(n.DataItem.GetType()) == typeof(Building)).SingleOrDefault().Remove();
+                            this.RadTreeView1.GetAllNodes().Where(n => n.Value == roomTreeItem.Value && n.Text == roomTreeItem.Text).SingleOrDefault().Remove();
+                                //&& (n.DataItem != null && ObjectContext.GetObjectType(n.DataItem.GetType()) == typeof(Building))).SingleOrDefault().Remove();
                             this.SelectedItem = null;
                         } else {
                             errorMessage.AppendLine(String.Format("{0} kann nicht gelöscht werden, da Artikel dem Gebäude zugewiesen sind.", buildingToDelete.Name));
-                            showErrorMessage = true;
                         }
                     } else if (ObjectContext.GetObjectType(roomTreeItem.DataItem.GetType()) == typeof(Floor)) {
                         Floor floorToDelete = roomTreeItem.DataItem as Floor;
                         if (!floorToDelete.HasArticles()) {
                             floorToDelete.Delete();
                             //Remove the item from radtree
-                            this.RadTreeView1.GetAllNodes().Where(n => n.Value == roomTreeItem.Value
-                                && ObjectContext.GetObjectType(n.DataItem.GetType()) == typeof(Floor)).SingleOrDefault().Remove();
+                            this.RadTreeView1.GetAllNodes().Where(n => n.Value == roomTreeItem.Value && n.Text == roomTreeItem.Text).SingleOrDefault().Remove();
+                            //this.RadTreeView1.GetAllNodes().Where(n => n.Value == roomTreeItem.Value
+                            //    && ObjectContext.GetObjectType(n.DataItem.GetType()) == typeof(Floor)).SingleOrDefault().Remove();
                             this.SelectedItem = null;
                         } else {
                             errorMessage.AppendLine(String.Format("{0} kann nicht gelöscht werden, da Artikel dem Stockwerk zugewiesen sind.", floorToDelete.Name));
-                            showErrorMessage = true;
                         }
                     } else if (ObjectContext.GetObjectType(roomTreeItem.DataItem.GetType()) == typeof(Room)) {
                         Room roomToDelete = roomTreeItem.DataItem as Room;
@@ -306,7 +338,6 @@ namespace Client.Site.Controls.RoomTree {
                             this.SelectedItem = null;
                         } else {
                             errorMessage.AppendLine(String.Format("{0} kann nicht gelöscht werden, da Artikel dem Raum zugewiesen sind.", roomToDelete.Name));
-                            showErrorMessage = true;
                         }
                     }
                 }
@@ -319,9 +350,13 @@ namespace Client.Site.Controls.RoomTree {
                 //update the edit forms
                 updateEditForm();
 
-                //Error MEssage
-                if (showErrorMessage)
-                    RadWindowManager1.RadAlert(errorMessage.ToString(), 300, 130, "Operation nicht möglich", "alertCallBackFn");
+                if (errorMessage.Length > 0) {
+                    errorMessage.Clear();
+
+                    errorMessage.Insert(0, "Einige Objekte könne nicht gelöschte werden da Artikel zugewiesen sind");
+
+                    this.lblWarning.Text = errorMessage.ToString();
+                }
             }
         }
 
@@ -337,6 +372,10 @@ namespace Client.Site.Controls.RoomTree {
             addNewNode(new Room());
         }
 
+        /// <summary>
+        /// Add a new Node to the TreeView
+        /// </summary>
+        /// <param name="dataItem"></param>
         private void addNewNode(object dataItem) {
             RoomTreeItem newNode = new RoomTreeItem();
             newNode.DataItem = dataItem;
@@ -393,6 +432,7 @@ namespace Client.Site.Controls.RoomTree {
         #endregion
 
         protected void RadTreeView1_NodeDataBound(object sender, RadTreeNodeEventArgs e) {
+            //Set some additional attributes for the note items because objects cannot be saved 
             if (e.Node.DataItem != null && e.Node.DataItem.GetType() == typeof(RoomTreeItem)) {
                 RoomTreeItem roomTreeNodeItem = e.Node.DataItem as RoomTreeItem;
                 e.Node.Value = roomTreeNodeItem.Value;
@@ -404,6 +444,7 @@ namespace Client.Site.Controls.RoomTree {
         }
 
         protected void RadTreeView1_NodeCheck(object sender, RadTreeNodeEventArgs e) {
+            //Get the checked node and add or remove it from checkeditems
             if (e.Node.Value != null && e.Node.Value != "") {
                 if (e.Node.Checked) {
                     e.Node.Selected = true;

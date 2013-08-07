@@ -82,7 +82,7 @@ namespace Client.Site.Administrator {
             bindData();
         }
 
-        protected void btnExportToExcel_Click(object sender, ImageClickEventArgs e) {
+        protected void btnExportToExcel_Click(object sender, EventArgs e) {
             this.SiteMaster.ExportItems = ArticleGridHelper.GetReportItems(this.rgReport, this.SiteMaster.ReportDataSource, true);
             Response.Redirect("~/Site/Provider/ExcelProvider.ashx?template="+this.SelectedTemplate);
         }

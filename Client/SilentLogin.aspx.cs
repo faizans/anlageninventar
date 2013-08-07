@@ -16,12 +16,15 @@ namespace Client {
         }
 
         protected override void OnPreRender(EventArgs e) {
+
             string userid = Request.ServerVariables["LOGON_USER"];
+
             if (userid != null && userid.Length > 0) {
                 String username = AppUser.GetUserNameFromDomainString(userid);
                 String domain = AppUser.GetDomainFromDomainString(userid);
 
                 AppUser loggedUser = AppUser.GetByUserNameAndDomain(username, domain);
+
                 if (loggedUser != null && loggedUser.IsActive && loggedUser.IsAdmin) {
                     Global.SetUpFormAuthenticationTicket(userid, "Administrator", Response);
                     Response.Redirect(Constants.DEFAULT_PAGE);
