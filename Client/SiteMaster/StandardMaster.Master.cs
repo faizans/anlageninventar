@@ -13,7 +13,7 @@ namespace Client.SiteMaster
         {
 	        if (this.User != null)
 	        {
-		        InfoUser = this.User.UserName;
+		        InfoUser = this.User.FirstName + " " + this.User.LastName;
 	        }
 	        else
 	        {

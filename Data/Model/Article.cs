@@ -69,6 +69,12 @@ namespace Data.Model.Diagram {
             return ctx.Articles.Where(a => a.IsDeleted);
         }
 
+        public static IEnumerable<Article> GetLost() {
+            IP3AnlagenInventarEntities ctx = EntityFactory.Context;
+            return ctx.Articles.Where(a => (a.IsAvailable.HasValue && !a.IsAvailable.Value));
+        }
+
+
         /// <summary>
         /// Get all deleted articles with a rest value
         /// </summary>

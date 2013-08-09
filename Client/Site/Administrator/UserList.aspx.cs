@@ -1,4 +1,5 @@
-﻿using Client.SiteMaster;
+﻿using Client.Site.Controls.CustomGrids;
+using Client.SiteMaster;
 using Client.Util;
 using Data.Model;
 using Data.Model.Diagram;
@@ -19,7 +20,7 @@ namespace Client.Site.Administrator
 
             //Check if the set user is allowed to access
             if (this.SiteMaster.User == null || !this.SiteMaster.User.IsAdmin || !this.SiteMaster.User.IsActive) {
-                Response.Redirect(Constants.AUTHORIZATION_MANUALLY_LOGIN);
+                Response.Redirect(Constants.AUTHORIZATION_WINDOWS_LOGIN);
             }
 
             SiteMaster.StandardMaster.InfoText = "Benutzer - Verwaltung";
@@ -59,6 +60,10 @@ namespace Client.Site.Administrator
 
                 RadWindowManager1.RadAlert(String.Format("Sie agieren nun als {0}", (userToLogin.FirstName + " " + userToLogin.LastName)), 300, 130, "Benutzer wechseln", "alertCallBackFn");
             }
+        }
+
+        protected void rgUsers_Init(object sender, EventArgs e) {
+            ArticleGridHelper.ClearFilter(this.rgUsers);
         }
     }
 }

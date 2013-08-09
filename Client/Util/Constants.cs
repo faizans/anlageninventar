@@ -11,7 +11,8 @@ namespace Client.Util {
         public static String ldapPassword = ConfigurationManager.AppSettings.Get("LDAP_PASSWORD");
 
         public static string AUTHORIZATION_COOKIE_NAME = "AUTHORIZATION_COOKIE";
-        public static string AUTHORIZATION_MANUALLY_LOGIN = "~/SilentLogin.aspx";
+        public static string AUTHORIZATION_WINDOWS_LOGIN = "~/SilentLogin.aspx";
+        public static string AUTHORIZATION_FORMS_LOGIN = "~/Login.aspx";
 
         public static string DEFAULT_PAGE = "~/default.aspx";
 

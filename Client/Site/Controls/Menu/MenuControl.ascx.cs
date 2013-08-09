@@ -11,7 +11,7 @@ using Telerik.Web.UI;
 namespace Client.Site.Controls.Menu {
     public partial class MenuControl : System.Web.UI.UserControl {
         protected void Page_Load(object sender, EventArgs e) {
-           
+
         }
 
         public CustomMaster SiteMaster {
@@ -36,6 +36,10 @@ namespace Client.Site.Controls.Menu {
                 case "RoomChecklist":
                     this.SiteMaster.ReportDataSource = Article.GetAllSortedByUsers();
                     break;
+                case "NotAvailableArticles":
+                    this.SiteMaster.ReportDataSource = Article.GetLost().ToList();;
+                    break;
+
             }
 
             Response.Redirect("~/Site/Administrator/ReportView.aspx");

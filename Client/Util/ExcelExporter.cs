@@ -9,9 +9,9 @@ using System.Web;
 
 namespace Client.Util {
     public class ExcelExporter {
-        Application oApp;
-        Workbook oWorkbook;
-        Worksheet oWorksheet;
+        Application oApp = null;
+        Workbook oWorkbook = null;
+        Worksheet oWorksheet = null;
 
         public String TempFile { get; set; }
         private string fileName = Constants.EXCEL_EXPORT_NAME;
@@ -59,7 +59,11 @@ namespace Client.Util {
         }
 
         private void handleExcelFile(String path) {
-            this.oApp = new Application();
+
+            if (oApp == null) {
+                this.oApp = new Microsoft.Office.Interop.Excel.Application();
+            }
+
             try {
                 this.TempFile = Path.GetTempPath() + FileName;
                 oWorkbook = oApp.Workbooks.Open(path);

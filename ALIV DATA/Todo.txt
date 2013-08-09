@@ -1,14 +1,10 @@
 ONLY RELATED TO EMANUEL MISTRETTA
 
-Bugs:
-
-1. Show radwindow in treecontrol
-
 Todo:
 
 (9. Check if there is restvalue on article and ask for deleting			2h)
 13.Check if already existing							5h
-14.Style login
+
 
 Questions
 

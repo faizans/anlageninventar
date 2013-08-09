@@ -13,7 +13,7 @@
     </telerik:RadAjaxManager>
 
 
-    <telerik:RadGrid ID="rgArticles" runat="server" AutoGenerateEditColumn="False" CellSpacing="0" GridLines="None" Skin="Silk"
+    <telerik:RadGrid ID="rgArticles" runat="server" AutoGenerateEditColumn="False" CellSpacing="0" GridLines="None" Skin="Silk" OnInit="rgArticles_Init"
         AllowPaging="True" AllowSorting="True" AllowFilteringByColumn="true" ShowStatusBar="true" Height="580px" ClientSettings-DataBinding-EnableCaching="true"
         OnItemCommand="rgArticles_ItemCommand" DataSourceID="GridSource" AllowMultiRowSelection="True" OnPreRender="rgArticles_PreRender" OnItemCreated="rgArticles_ItemCreated">
 

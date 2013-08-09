@@ -23,7 +23,7 @@ namespace Client.Site.Administrator {
 
             //Check if the set user is allowed to access
             if (this.SiteMaster.User == null || !this.SiteMaster.User.IsAdmin || !this.SiteMaster.User.IsActive) {
-                Response.Redirect(Constants.AUTHORIZATION_MANUALLY_LOGIN);
+                Response.Redirect(Constants.AUTHORIZATION_WINDOWS_LOGIN);
             }
 
             SiteMaster.StandardMaster.InfoText = "Gelöschte Artikel - Verwaltung";
@@ -112,6 +112,10 @@ namespace Client.Site.Administrator {
 
         protected void rcbTargetRoom_SelectedIndexChanged(object sender, RadComboBoxSelectedIndexChangedEventArgs e) {
             this.selectedTargetRoom = Room.GetById(int.Parse(e.Value));
+        }
+
+        protected void rgArticles_Init(object sender, EventArgs e) {
+            ArticleGridHelper.ClearFilter(this.rgArticles);
         }
 
         #endregion

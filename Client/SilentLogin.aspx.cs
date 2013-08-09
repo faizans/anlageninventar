@@ -29,10 +29,10 @@ namespace Client {
                     Global.SetUpFormAuthenticationTicket(userid, "Administrator", Response);
                     Response.Redirect(Constants.DEFAULT_PAGE);
                 } else {
-                    Response.Redirect(Constants.AUTHORIZATION_MANUALLY_LOGIN);
+                    Response.Redirect(Constants.AUTHORIZATION_FORMS_LOGIN);
                 }
             } else {
-                Response.Redirect(Constants.AUTHORIZATION_MANUALLY_LOGIN);
+                Response.Redirect(Constants.AUTHORIZATION_FORMS_LOGIN);
             }
         }
     }

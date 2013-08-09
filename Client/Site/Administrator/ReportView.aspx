@@ -73,5 +73,27 @@
             </Columns>
         </MasterTableView>
     </telerik:RadGrid>
+    <telerik:RadWindowManager ID="RadWindowManager1" runat="server">
+    </telerik:RadWindowManager>
 
+
+    <script type="text/javascript">
+        function alertCallBackFn(arg) {
+
+        }
+
+        function OnExportToExcel(sender, args) {
+            var callBackFunction = Function.createDelegate(sender, function (argument) {
+                if (argument) {
+                    this.click();
+                }
+            });
+
+            var text = "Der Export kann einige Zeit in Anspruch nehmen. Sind Sie sicher dass Sie exportieren wollen?";
+            radconfirm(text, callBackFunction, 300, 100, null, "Verschieben");
+            args.set_cancel(true);
+        }
+
+
+    </script>
 </asp:Content>

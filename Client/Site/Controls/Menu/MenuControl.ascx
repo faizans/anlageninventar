@@ -104,6 +104,13 @@
                         </div>
                     </ItemTemplate>
                 </telerik:RadMenuItem>
+                <telerik:RadMenuItem runat="server" CssClass="MenuItem">
+                    <ItemTemplate>
+                        <div>
+                            <asp:LinkButton ID="lbNotAvailableArticles" runat="server" CommandName="NotAvailableArticles" OnClick="lbMenuItemClicked">Nicht vorhandene Artikel</asp:LinkButton>
+                        </div>
+                    </ItemTemplate>
+                </telerik:RadMenuItem>
             </Items>
         </telerik:RadMenuItem>
         <telerik:RadMenuItem runat="server" CssClass="MenuItem">

@@ -20,7 +20,7 @@ namespace Client.Site.Administrator
 
             //Check if the set user is allowed to access
             if (this.SiteMaster.User == null || !this.SiteMaster.User.IsAdmin || !this.SiteMaster.User.IsActive) {
-                Response.Redirect(Constants.AUTHORIZATION_MANUALLY_LOGIN);
+                Response.Redirect(Constants.AUTHORIZATION_WINDOWS_LOGIN);
             }
 
             SiteMaster.StandardMaster.InfoText = "Lagerräume - Verwaltung";
