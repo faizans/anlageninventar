@@ -7,7 +7,7 @@
         <div class="content_input_form">
             <!-- ADUSer -->
             <div class="input_form_row">
-                <asp:Label ID="Label9" runat="server" Text="AD Benutzer" CssClass="element_label"></asp:Label>
+                <asp:Label ID="Label9" runat="server" Text="Benutzersuche" CssClass="element_label"></asp:Label>
                 <uc1:UserSearchBox runat="server" ID="UserSearchBox"  Width="300px" MinimumInput="3" OnUserSearchBoxIndexChanged="UserSearchBox_UserSearchBoxIndexChanged" />
             </div>
             <!-- FirstName -->

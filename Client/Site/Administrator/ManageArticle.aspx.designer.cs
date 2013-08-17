@@ -76,6 +76,15 @@ namespace Client.Site.Administrator {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvAmount;
         
         /// <summary>
+        /// BarCodePanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel BarCodePanel;
+        
+        /// <summary>
         /// Label2 control.
         /// </summary>
         /// <remarks>
@@ -121,13 +130,13 @@ namespace Client.Site.Administrator {
         protected global::Telerik.Web.UI.RadTextBox rtbGroupName;
         
         /// <summary>
-        /// Label8 control.
+        /// lblGroupBarCode control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label8;
+        protected global::System.Web.UI.WebControls.Label lblGroupBarCode;
         
         /// <summary>
         /// rtbGroupBarcode control.
@@ -274,6 +283,15 @@ namespace Client.Site.Administrator {
         protected global::Telerik.Web.UI.RadComboBox rcbSupplier;
         
         /// <summary>
+        /// btnCreateSupplier control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadButton btnCreateSupplier;
+        
+        /// <summary>
         /// Label16 control.
         /// </summary>
         /// <remarks>
@@ -398,6 +416,15 @@ namespace Client.Site.Administrator {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Telerik.Web.UI.RadTextBox rtbComment;
+        
+        /// <summary>
+        /// IsAvailablePanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl IsAvailablePanel;
         
         /// <summary>
         /// Label7 control.

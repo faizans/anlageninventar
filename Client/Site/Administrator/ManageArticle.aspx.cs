@@ -141,13 +141,20 @@ namespace Client.Site.Administrator {
 
                 //Checkboxes
                 this.chbIsAvailable.Checked = article.IsAvailable.Value;
+
+                //visibilities
+                this.BarCodePanel.Visible = true;
+            } else {
+                this.IsAvailablePanel.Visible = false;
             }
         }
 
         private void save() {
             if (this.article == null) {
                 //Do barcode preperations
-                String groupBarCode = this.rtbGroupBarcode.Text;
+                String groupBarCode = LatestBarCode.GenerateFullBarCode();
+                LatestBarCode.Set(groupBarCode);
+
                 String barCodeCounterPart = groupBarCode != "" && groupBarCode != null ? groupBarCode.Split('.')[groupBarCode.Split('.').Length - 1] : null;
                 int barCode = barCodeCounterPart != "" && barCodeCounterPart != null ? int.Parse(barCodeCounterPart) : -1;
                 int barCodeDigits = barCode > -1 ? barCode.ToString().Length : -1;
@@ -157,7 +164,7 @@ namespace Client.Site.Administrator {
                 if (rtbAmount.Value > 1) {
                     group = new ArticleGroup();
                     group.Name = this.rtbGroupName.Text;
-                    group.Barcode = this.rtbGroupBarcode.Text;
+                    group.Barcode = groupBarCode;
                     group.RoomId = int.Parse(this.rcbRoom.SelectedItem.Value);
                 }
 
@@ -165,29 +172,29 @@ namespace Client.Site.Administrator {
                 for (int i = 1; i <= this.rtbAmount.Value; i++) {
                     this.article = new Article();
 
-                    setData(this.article);
+                    setData(this.article, groupBarCode);
 
                     if (group != null) {
                         this.article.ArticleGroup = group;
                         barCode++;
                         //Handle Barcode
                         String newBarCodeEnd = barCodeCounterPart.Remove(barCodeDigits.ToString().Length - 1, barCode.ToString().Length) + barCode;
+
+                        //Override articles barcode
                         this.article.Barcode = groupBarCode.Remove((groupBarCode.Length) - (barCodeCounterPart.Length), barCodeCounterPart.Length)
                             + newBarCodeEnd;
                     }
-
                     EntityFactory.Context.Articles.Add(this.article);
                 }
             } else {
-                setData(this.article);
+                setData(this.article,this.article.Barcode);
             }
 
             EntityFactory.Context.SaveChanges();
-            Response.Redirect("~/Site/Administrator/ArticleList.aspx");
         }
 
-        private void setData(Article article) {
-            this.article.Barcode = this.rtbBarcode.Text;
+        private void setData(Article article, String barCode) {
+            this.article.Barcode = barCode;
             this.article.Name = this.rtbName.Text;
             this.article.AcquisitionDate = this.rdpAcquisitionDate.SelectedDate;
             this.article.Amount = 1;
@@ -219,11 +226,8 @@ namespace Client.Site.Administrator {
         protected void rtbAmount_TextChanged(object sender, EventArgs e) {
             if (this.rtbAmount.Value > 1) {
                 this.GroupPanel.Visible = true;
-                this.rtbBarcode.Text = null;
-                this.rtbBarcode.Enabled = false;
             } else {
                 this.GroupPanel.Visible = false;
-                this.rtbBarcode.Enabled = true;
             }
         }
 
@@ -277,6 +281,11 @@ namespace Client.Site.Administrator {
 
         protected void btnSave_Click(object sender, EventArgs e) {
             save();
+            Response.Redirect("~/Site/Administrator/ArticleList.aspx");
+        }
+
+        protected void btnCreateSupplier_Click(object sender, EventArgs e) {
+            Response.Redirect("~/Site/Administrator/ManageSupplier.aspx?back=ManageArticle");
         }
 
         #endregion

@@ -17,6 +17,13 @@ namespace Client.Site.Controls.ListBox2
 
         #region Properties
 
+        public Boolean AppliedData {
+            set {
+                this.btnAdd.Enabled = value;
+                this.ListBox.Enabled = value;
+            }
+        }
+
         public List<ListBoxItem> ItemsToDelete
         {
             get
@@ -55,7 +62,7 @@ namespace Client.Site.Controls.ListBox2
                 if (this.ListBox.SelectedItem != null) {
                     return this.ListItems.Where(i => i.Value == this.ListBox.SelectedItem.Value).SingleOrDefault();
                 } else {
-                    return this.ListItems.ElementAt(this.ListItems.Count - 1);
+                    return null;
                 }
 
             }
@@ -98,13 +105,18 @@ namespace Client.Site.Controls.ListBox2
             ListBoxItem newItem = new ListBoxItem("Neues Item", Guid.NewGuid().ToString(), null);
             this.ListItems.Add(newItem);
             this.ListBox.Items.Insert(0,newItem);
+            this.ListBox.SelectedIndex = 0;
 
             if (AddNewItem != null)
             {
                 ListBoxItemEventArgs listBoxItemArgs = new ListBoxItemEventArgs();
                 listBoxItemArgs.Item = newItem;
+                listBoxItemArgs.index = 0;
                 AddNewItem(this, listBoxItemArgs);
             }
+
+            this.ListBox.Enabled = false;
+            this.btnAdd.Enabled = false;
         }
 
         public event EventHandler ItemRemove;

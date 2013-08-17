@@ -52,6 +52,7 @@
     <Compile Include="Model\AppUser.cs" />
     <Compile Include="Model\Article.cs" />
     <Compile Include="Model\ArticleGroup.cs" />
+    <Compile Include="Model\LatestBarCode.cs" />
     <Compile Include="Model\Depreciation.cs" />
     <Compile Include="Model\DepreciationCategory.cs" />
     <Compile Include="Model\Diagram\AnlagenInventarModel.Context.cs">
@@ -97,6 +98,9 @@
       <DependentUpon>AnlagenInventarModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Diagram\InsuranceCategory.cs">
+      <DependentUpon>AnlagenInventarModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Diagram\LatestBarCode.cs">
       <DependentUpon>AnlagenInventarModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Diagram\Room.cs">

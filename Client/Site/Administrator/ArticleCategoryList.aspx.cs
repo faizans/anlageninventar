@@ -19,7 +19,7 @@ namespace Client.Site.Administrator {
                 Response.Redirect(Constants.AUTHORIZATION_WINDOWS_LOGIN);
             }
 
-            SiteMaster.StandardMaster.InfoText = "Artikelkategorie-Verwaltung";
+            SiteMaster.StandardMaster.InfoText = "Artikelkategorie - Verwaltung";
         }
 
         public CustomMaster SiteMaster {
@@ -29,27 +29,24 @@ namespace Client.Site.Administrator {
             }
         }
 
-        #region Events
-        protected void rgArticleCategories_ItemCommand(object sender, Telerik.Web.UI.GridCommandEventArgs e) {
-            if (e.CommandName == "Delete") {
+        protected void rgCategories_ItemCommand(object sender, Telerik.Web.UI.GridCommandEventArgs e) {
+            if (e.CommandName.ToLower() == "initinsert") {
+                Response.Redirect("~/Site/Administrator/ManageArticleCategory.aspx");
+            } else if (e.CommandName.ToLower() == "edit") {
+                Response.Redirect("~/Site/Administrator/ManageArticleCategory.aspx?ic=" + (e.Item as GridDataItem)["ArticleCategoryId"].Text);
+            }
+            else if (e.CommandName == "Delete") {
                 if (e.Item is GridDataItem) {
                     GridDataItem dataItem = e.Item as GridDataItem;
 
                     ArticleCategory categoryToDelete = ArticleCategory.GetById(int.Parse(dataItem.GetDataKeyValue("ArticleCategoryId").ToString()));
                     if (categoryToDelete.HasArticles()) {
-                        RadWindowManager1.RadAlert(String.Format("{0} kann nicht gelöscht werden, da Artikel mit dieser Kategorie versehen sind.", categoryToDelete.Name), 300, 130, "Operation nicht möglich", "alertCallBackFn");
+                        RadWindowManager1.RadAlert(String.Format("{0} kann nicht gelöscht werden da Artikel damit versehen sind", categoryToDelete.Name), 300, 130, "Operation nicht möglich", "alertCallBackFn");
                     } else {
-                        //TODO
                         categoryToDelete.Delete();
                     }
                 }
-            } else if (e.CommandName == "Update") {
-                if (e.Item is GridDataItem) {
-                    GridDataItem dataItem = e.Item as GridDataItem;
-                    //TODO change the other items to false if this is true
-                }
-            }
+            } 
         }
-        #endregion
     }
 }

@@ -23,6 +23,11 @@ namespace Data.Model.Diagram
             return ctx.Floors;
         }
 
+        public static IEnumerable<Floor> GetByNameAndBuilding(String name, String buildingName) {
+            IP3AnlagenInventarEntities ctx = EntityFactory.Context;
+            return ctx.Floors.Where(c => c.Name == name && c.Building.Name == buildingName);
+        }
+
         public Boolean HasArticles()
         {
             if (this.Rooms.Any())

@@ -9,5 +9,6 @@ namespace Client.Site.Controls.ListBox2
     public class ListBoxItemEventArgs : EventArgs
     {
         public ListBoxItem Item;
+        public int index;
     }
 }

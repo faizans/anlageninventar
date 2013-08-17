@@ -108,8 +108,10 @@ namespace Data.Model.Diagram {
         public void DeletePhysically() {
             IP3AnlagenInventarEntities ctx = EntityFactory.Context;
 
-            this.ArticleGroup.Articles.Remove(this);
+
             if (this.ArticleGroup != null) {
+                this.ArticleGroup.Articles.Remove(this);
+
                 if (this.ArticleGroup.Articles.Count == 0) {
                     this.ArticleGroup.Delete();
                 }

@@ -30,7 +30,12 @@ namespace Client.Site.Administrator {
         }
 
         protected void rgCategories_ItemCommand(object sender, Telerik.Web.UI.GridCommandEventArgs e) {
-            if (e.CommandName == "Delete") {
+            if (e.CommandName.ToLower() == "initinsert") {
+                Response.Redirect("~/Site/Administrator/ManageInsuranceCategory.aspx");
+            } else if (e.CommandName.ToLower() == "edit") {
+                Response.Redirect("~/Site/Administrator/ManageInsuranceCategory.aspx?ic=" + (e.Item as GridDataItem)["InsuranceCategoryId"].Text);
+            }
+            else if (e.CommandName == "Delete") {
                 if (e.Item is GridDataItem) {
                     GridDataItem dataItem = e.Item as GridDataItem;
 
@@ -40,11 +45,6 @@ namespace Client.Site.Administrator {
                     } else {
                         categoryToDelete.Delete();
                     }
-                }
-            } else if (e.CommandName == "Update") {
-                if (e.Item is GridDataItem) {
-                    GridDataItem dataItem = e.Item as GridDataItem;
-                    //TODO change the other items to false if this is true
                 }
             }
         }

@@ -32,6 +32,7 @@
         <AssociationConnector Association="Data.Model.Diagram.FK_SupplierBranch_Supplier" />
         <AssociationConnector Association="Data.Model.Diagram.AppUser2Room" />
         <EntityTypeShape EntityType="Data.Model.Diagram.FilterField" Width="1.5" PointX="2.5006999087057542" PointY="20.161594385356452" />
+        <EntityTypeShape EntityType="Data.Model.Diagram.LatestBarCode" Width="1.5" PointX="13.5" PointY="18.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -10,16 +10,17 @@
                 <Scrolling AllowScroll="True" UseStaticHeaders="True"></Scrolling>
             </ClientSettings>
 
-            <MasterTableView DataSourceID="EntityDataSource1" DataKeyNames="InsuranceCategoryId" AutoGenerateColumns="False" AllowAutomaticDeletes="true" AllowAutomaticInserts="true" AllowAutomaticUpdates="true"
+            <MasterTableView DataKeyNames="InsuranceCategoryId" AutoGenerateColumns="False" AllowAutomaticDeletes="true" AllowAutomaticInserts="true" AllowAutomaticUpdates="true"
                 CommandItemDisplay="Top" InsertItemPageIndexAction="ShowItemOnCurrentPage">
 
                 <CommandItemTemplate>
                     <div style="padding: 5px;">
-                        <telerik:RadButton ID="btnNew" runat="server" CommandName="InitInsert" Text="Neue Kategorie" /> </div>
+                        <telerik:RadButton ID="btnNew" runat="server" CommandName="InitInsert" Text="Neue Kategorie" AutoPostBack="true"/>
+                    </div>
                 </CommandItemTemplate>
 
                 <Columns>
-                    <telerik:GridBoundColumn DataField="InsuranceCategoryId" Visible="false" ReadOnly="True" HeaderText="InsuranceCategoryId" SortExpression="InsuranceCategoryId" UniqueName="InsuranceCategoryId" DataType="System.Int32" FilterControlAltText="Filter InsuranceCategoryId column">
+                    <telerik:GridBoundColumn DataField="InsuranceCategoryId" Display="false" ReadOnly="True" HeaderText="InsuranceCategoryId" SortExpression="InsuranceCategoryId" UniqueName="InsuranceCategoryId" DataType="System.Int32" FilterControlAltText="Filter InsuranceCategoryId column">
                     </telerik:GridBoundColumn>
                     <telerik:GridBoundColumn DataField="Name" HeaderText="Name" SortExpression="Name" UniqueName="Name" FilterControlAltText="Filter Name column">
                     </telerik:GridBoundColumn>

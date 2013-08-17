@@ -31,6 +31,11 @@ namespace Data.Model.Diagram {
             return ctx.Rooms.Where(c => c.Name == name && c.FloorId == floorId).SingleOrDefault();
         }
 
+        public static IEnumerable<Room> GetByNameAndFloorAndBuilding(String name, String floorName, String buildingName) {
+            IP3AnlagenInventarEntities ctx = EntityFactory.Context;
+            return ctx.Rooms.Where(c => c.Name == name && c.Floor.Name == floorName && c.Floor.Building.Name == buildingName);
+        }
+
         public static IEnumerable<Room> GetAll() {
             IP3AnlagenInventarEntities ctx = EntityFactory.Context;
             return ctx.Rooms;

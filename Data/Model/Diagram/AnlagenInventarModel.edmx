@@ -17,6 +17,7 @@
           <EntitySet Name="FilterField" EntityType="Data.Model.Diagram.Store.FilterField" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Floor" EntityType="Data.Model.Diagram.Store.Floor" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="InsuranceCategory" EntityType="Data.Model.Diagram.Store.InsuranceCategory" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="LatestBarCode" EntityType="Data.Model.Diagram.Store.LatestBarCode" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Room" EntityType="Data.Model.Diagram.Store.Room" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Supplier" EntityType="Data.Model.Diagram.Store.Supplier" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="SupplierBranch" EntityType="Data.Model.Diagram.Store.SupplierBranch" store:Type="Tables" Schema="dbo" />
@@ -196,6 +197,13 @@
           <Property Name="Code" Type="varchar" MaxLength="50" />
           <Property Name="Description" Type="varchar" MaxLength="500" />
           <Property Name="IsDefault" Type="bit" />
+        </EntityType>
+        <EntityType Name="LatestBarCode">
+          <Key>
+            <PropertyRef Name="BarCodeId" />
+          </Key>
+          <Property Name="BarCodeId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="BarCode" Type="varchar" Nullable="false" MaxLength="50" />
         </EntityType>
         <EntityType Name="Room">
           <Key>
@@ -474,6 +482,7 @@
             <End Role="Room" EntitySet="Rooms" />
           </AssociationSet>
           <EntitySet Name="FilterFields" EntityType="Data.Model.Diagram.FilterField" />
+          <EntitySet Name="LatestBarCodes" EntityType="Data.Model.Diagram.LatestBarCode" />
         </EntityContainer>
         <EntityType Name="AppUser">
           <Key>
@@ -798,6 +807,13 @@
           <Property Type="String" Name="Value" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Type="Int32" Name="PredefinedFilterId" Nullable="false" />
         </EntityType>
+        <EntityType Name="LatestBarCode">
+          <Key>
+            <PropertyRef Name="BarCodeId" />
+          </Key>
+          <Property Type="Int32" Name="BarCodeId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="BarCode" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -972,6 +988,14 @@
                 <ScalarProperty Name="Value" ColumnName="Value" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="FilterFieldId" ColumnName="FilterFieldId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LatestBarCodes">
+            <EntityTypeMapping TypeName="Data.Model.Diagram.LatestBarCode">
+              <MappingFragment StoreEntitySet="LatestBarCode">
+                <ScalarProperty Name="BarCode" ColumnName="BarCode" />
+                <ScalarProperty Name="BarCodeId" ColumnName="BarCodeId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

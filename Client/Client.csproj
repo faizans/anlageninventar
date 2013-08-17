@@ -222,9 +222,11 @@
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Global.asax" />
-    <Content Include="Site\Administrator\ArticleCategoryList.aspx" />
     <Content Include="Site\Administrator\ArticleList.aspx" />
     <Content Include="Site\Administrator\CategoryList.aspx" />
+    <Content Include="Site\Administrator\ArticleCategoryList.aspx" />
+    <Content Include="Site\Administrator\ManageArticleCategory.aspx" />
+    <Content Include="Site\Administrator\ManageInsuranceCategory.aspx" />
     <Content Include="Site\Administrator\DeletedArticleList.aspx" />
     <Content Include="Site\Administrator\ManageArticle.aspx" />
     <Content Include="Site\Administrator\ManageDepreciationCategory.aspx" />
@@ -278,13 +280,6 @@
     <Compile Include="SiteMaster\StandardMaster.Master.designer.cs">
       <DependentUpon>StandardMaster.Master</DependentUpon>
     </Compile>
-    <Compile Include="Site\Administrator\ArticleCategoryList.aspx.cs">
-      <DependentUpon>ArticleCategoryList.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Site\Administrator\ArticleCategoryList.aspx.designer.cs">
-      <DependentUpon>ArticleCategoryList.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Site\Administrator\ArticleList.aspx.cs">
       <DependentUpon>ArticleList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -298,6 +293,27 @@
     </Compile>
     <Compile Include="Site\Administrator\CategoryList.aspx.designer.cs">
       <DependentUpon>CategoryList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Site\Administrator\ArticleCategoryList.aspx.cs">
+      <DependentUpon>ArticleCategoryList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site\Administrator\ArticleCategoryList.aspx.designer.cs">
+      <DependentUpon>ArticleCategoryList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Site\Administrator\ManageArticleCategory.aspx.cs">
+      <DependentUpon>ManageArticleCategory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site\Administrator\ManageArticleCategory.aspx.designer.cs">
+      <DependentUpon>ManageArticleCategory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Site\Administrator\ManageInsuranceCategory.aspx.cs">
+      <DependentUpon>ManageInsuranceCategory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site\Administrator\ManageInsuranceCategory.aspx.designer.cs">
+      <DependentUpon>ManageInsuranceCategory.aspx</DependentUpon>
     </Compile>
     <Compile Include="Site\Administrator\DeletedArticleList.aspx.cs">
       <DependentUpon>DeletedArticleList.aspx</DependentUpon>
@@ -485,7 +501,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
+      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

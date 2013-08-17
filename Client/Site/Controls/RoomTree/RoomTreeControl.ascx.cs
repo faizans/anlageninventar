@@ -185,16 +185,16 @@ namespace Client.Site.Controls.RoomTree {
                 String dataItemType = this.SelectedRoomTreeItem.DataItem != null ?
                                             ObjectContext.GetObjectType(this.SelectedRoomTreeItem.DataItem.GetType()).ToString() : null;
                 if (this.SelectedRoomTreeItem.IsRoot) {
-                    toggleButtons(true, false, false, false,false);
+                    toggleButtons(true, false, false, false, false);
                 } else if (dataItemType == typeof(Building).ToString()) {
-                    toggleButtons(false, true, false, true,true);
+                    toggleButtons(false, true, false, true, true);
                 } else if (dataItemType == typeof(Floor).ToString()) {
-                    toggleButtons(false, false, true, true,true);
+                    toggleButtons(false, false, true, true, true);
                 } else if (dataItemType == typeof(Room).ToString()) {
-                    toggleButtons(false, false, false, true,true);
+                    toggleButtons(false, false, false, true, true);
                 }
             } else {
-                toggleButtons(false, false, false, false,false);
+                toggleButtons(false, false, false, false, false);
             }
         }
 
@@ -262,28 +262,54 @@ namespace Client.Site.Controls.RoomTree {
 
                 if (ObjectContext.GetObjectType(this.SelectedRoomTreeItem.DataItem.GetType()) == typeof(Building)) {
                     Building selectedBuilding = this.SelectedRoomTreeItem.DataItem as Building;
-                    if (this.SelectedRoomTreeItem.Value.Contains("-")) {
-                        EntityFactory.Context.Buildings.Add(selectedBuilding);
+
+                    //Dont allow duplicates
+                    if (Building.GetByName(this.txtNodeName.Text) == null) {
+                        if (this.SelectedRoomTreeItem.Value.Contains("-")) {
+                            EntityFactory.Context.Buildings.Add(selectedBuilding);
+                        }
+                        selectedBuilding.Name = this.txtNodeName.Text;
+                        this.lblWarning.Text = "";
+                    } else {
+                        this.lblWarning.Text = "Gebäude existiert schon. Bitte anderen Namen wählen.";
+                        this.txtNodeName.Text = this.txtNodeName.Text + " Kopie";
                     }
-                    selectedBuilding.Name = this.txtNodeName.Text;
 
                 } else if (ObjectContext.GetObjectType(this.SelectedRoomTreeItem.DataItem.GetType()) == typeof(Floor)) {
                     Floor selectedFloor = this.SelectedRoomTreeItem.DataItem as Floor;
-                    if (this.SelectedRoomTreeItem.Value.Contains("-")) {
-                        selectedFloor.Building = this.RoomTreeItems.Where(i => i.Value == this.SelectedRoomTreeItem.ParentNode.Value
-                                                                            && ObjectContext.GetObjectType(i.DataItem.GetType()) == typeof(Building)).SingleOrDefault().DataItem as Building;
-                        EntityFactory.Context.Floors.Add(selectedFloor);
+
+                    //Dont allow duplicates
+                    if (!Floor.GetByNameAndBuilding(this.txtNodeName.Text, this.SelectedRoomTreeItem.ParentNode.Text).Any()) {
+                        if (this.SelectedRoomTreeItem.Value.Contains("-")) {
+                            selectedFloor.Building = this.RoomTreeItems.Where(i => i.Value == this.SelectedRoomTreeItem.ParentNode.Value
+                                && ObjectContext.GetObjectType(i.DataItem.GetType()) == typeof(Building)).SingleOrDefault().DataItem as Building;
+                            EntityFactory.Context.Floors.Add(selectedFloor);
+                        }
+                        selectedFloor.Name = this.txtNodeName.Text;
+                        this.lblWarning.Text = "";
+                    } else {
+                        this.lblWarning.Text = "Stockwerk existiert schon. Bitte anderen Namen wählen.";
+                        this.txtNodeName.Text = this.txtNodeName.Text + " Kopie";
                     }
-                    selectedFloor.Name = this.txtNodeName.Text;
+
                 } else if (ObjectContext.GetObjectType(this.SelectedRoomTreeItem.DataItem.GetType()) == typeof(Room)) {
                     Room selectedRoom = this.SelectedRoomTreeItem.DataItem as Room;
-                    if (this.SelectedRoomTreeItem.Value.Contains("-")) {
-                        selectedRoom.Floor = this.RoomTreeItems.Where(i => i.Value == this.SelectedRoomTreeItem.ParentNode.Value
-                                                                            && ObjectContext.GetObjectType(i.DataItem.GetType()) == typeof(Floor)).SingleOrDefault().DataItem as Floor;
-                        EntityFactory.Context.Rooms.Add(selectedRoom);
+
+                    //Dont allow duplicates
+                    if (!Room.GetByNameAndFloorAndBuilding(this.txtNodeName.Text, this.SelectedRoomTreeItem.ParentNode.Text, this.SelectedRoomTreeItem.ParentNode.ParentNode.Text).Any()) {
+                        if (this.SelectedRoomTreeItem.Value.Contains("-")) {
+                            selectedRoom.Floor = this.RoomTreeItems.Where(i => i.Value == this.SelectedRoomTreeItem.ParentNode.Value
+                                && ObjectContext.GetObjectType(i.DataItem.GetType()) == typeof(Floor)).SingleOrDefault().DataItem as Floor;
+                            EntityFactory.Context.Rooms.Add(selectedRoom);
+                        }
+                        selectedRoom.Name = this.txtNodeName.Text;
+                        selectedRoom.ResponsiblePerson = this.UserSearchBox.Text;
+                        this.lblWarning.Text = "";
+                    } else {
+                        this.lblWarning.Text = "Raum existiert schon. Bitte anderen Namen wählen.";
+                        this.txtNodeName.Text = this.txtNodeName.Text + " Kopie";
                     }
-                    selectedRoom.Name = this.txtNodeName.Text;
-                    selectedRoom.ResponsiblePerson = this.UserSearchBox.Text;
+
                 }
                 this.RadTreeView1.SelectedNode.Text = this.txtNodeName.Text;
                 EntityFactory.Context.SaveChanges();
@@ -311,7 +337,7 @@ namespace Client.Site.Controls.RoomTree {
                             buildingToDelete.Delete();
                             //Remove the item from radtree
                             this.RadTreeView1.GetAllNodes().Where(n => n.Value == roomTreeItem.Value && n.Text == roomTreeItem.Text).SingleOrDefault().Remove();
-                                //&& (n.DataItem != null && ObjectContext.GetObjectType(n.DataItem.GetType()) == typeof(Building))).SingleOrDefault().Remove();
+                            //&& (n.DataItem != null && ObjectContext.GetObjectType(n.DataItem.GetType()) == typeof(Building))).SingleOrDefault().Remove();
                             this.SelectedItem = null;
                         } else {
                             errorMessage.AppendLine(String.Format("{0} kann nicht gelöscht werden, da Artikel dem Gebäude zugewiesen sind.", buildingToDelete.Name));
@@ -396,7 +422,7 @@ namespace Client.Site.Controls.RoomTree {
             this.SiteMaster.ReportDataSource = null;
 
             //Go through all the checked items and add articles to report datasource
-            if(this.CheckedItems.Any()){
+            if (this.CheckedItems.Any()) {
                 foreach (RoomTreeItem roomTreeItem in this.CheckedItems) {
                     if (ObjectContext.GetObjectType(roomTreeItem.DataItem.GetType()) == typeof(Building)) {
                         Building building = roomTreeItem.DataItem as Building;
@@ -412,8 +438,8 @@ namespace Client.Site.Controls.RoomTree {
                 this.CheckedItems = null;
                 Response.Redirect("~/Site/Administrator/ReportView.aspx");
             }
-            //Get selecteditem articles and add to report datasource
-            else if(this.SelectedRoomTreeItem != null && this.SelectedRoomTreeItem.DataItem != null){
+                //Get selecteditem articles and add to report datasource
+            else if (this.SelectedRoomTreeItem != null && this.SelectedRoomTreeItem.DataItem != null) {
                 if (ObjectContext.GetObjectType(this.SelectedRoomTreeItem.DataItem.GetType()) == typeof(Building)) {
                     Building building = this.SelectedRoomTreeItem.DataItem as Building;
                     this.SiteMaster.ReportDataSource.AddRange(building.Articles);

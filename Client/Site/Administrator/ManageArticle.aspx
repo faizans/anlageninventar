@@ -9,7 +9,7 @@
             <div class="input_form_row">
                 <asp:Label ID="Label1" runat="server" Text="Name" CssClass="element_label"></asp:Label>
                 <telerik:RadTextBox ID="rtbName" runat="server" Width="300px" ReadOnly="false"></telerik:RadTextBox>
-                <asp:RequiredFieldValidator ID="rfvName" runat="server" ErrorMessage="Eingabe benötigt." ControlToValidate="rtbName" Display="Dynamic"/>
+                <asp:RequiredFieldValidator ID="rfvName" runat="server" ErrorMessage="Eingabe benötigt." ControlToValidate="rtbName" Display="Dynamic" />
             </div>
 
             <!-- Amount -->
@@ -22,10 +22,12 @@
             </div>
 
             <!-- Barcode -->
-            <div class="input_form_row">
-                <asp:Label ID="Label2" runat="server" Text="Barcode" CssClass="element_label"></asp:Label>
-                <telerik:RadTextBox ID="rtbBarcode" runat="server" Width="300px" ReadOnly="false"></telerik:RadTextBox>
-            </div>
+            <asp:Panel runat="server" ID="BarCodePanel" Visible="false">
+                <div class="input_form_row">
+                    <asp:Label ID="Label2" runat="server" Text="Barcode" CssClass="element_label"></asp:Label>
+                    <telerik:RadTextBox ID="rtbBarcode" runat="server" Width="300px" ReadOnly="true"></telerik:RadTextBox>
+                </div>
+            </asp:Panel>
 
             <asp:Panel runat="server" ID="GroupPanel" Visible="false">
                 <!-- Group Name -->
@@ -36,8 +38,8 @@
 
                 <!-- Group Code -->
                 <div class="input_form_row">
-                    <asp:Label ID="Label8" runat="server" Text="Gruppencode" CssClass="element_label"></asp:Label>
-                    <telerik:RadTextBox ID="rtbGroupBarcode" runat="server" Width="300px" ReadOnly="false"></telerik:RadTextBox>
+                    <asp:Label ID="lblGroupBarCode" runat="server" Text="Gruppencode" CssClass="element_label" Visible="false"></asp:Label>
+                    <telerik:RadTextBox ID="rtbGroupBarcode" runat="server" Width="300px" ReadOnly="true" Visible="false"></telerik:RadTextBox>
                 </div>
             </asp:Panel>
 
@@ -55,10 +57,10 @@
                     <Calendar ID="Calendar1" RangeMinDate="1900-01-01" runat="server">
                     </Calendar>
                 </telerik:RadDatePicker>
-                 <asp:RequiredFieldValidator ID="rfvDate" runat="server" ErrorMessage="Eingabe benötigt." ControlToValidate="rdpAcquisitionDate" Display="Dynamic" />
+                <asp:RequiredFieldValidator ID="rfvDate" runat="server" ErrorMessage="Eingabe benötigt." ControlToValidate="rdpAcquisitionDate" Display="Dynamic" />
             </div>
 
-             <!-- Building -->
+            <!-- Building -->
             <div class="input_form_row">
                 <asp:Label ID="Label17" runat="server" Text="Gebäude" CssClass="element_label"></asp:Label>
                 <telerik:RadComboBox ID="rcbBuilding" runat="server" Width="300px"
@@ -92,8 +94,9 @@
                 <telerik:RadComboBox ID="rcbSupplier" runat="server" Width="300px"
                     DataValueField="SupplierId" DataTextField="Name"
                     OnSelectedIndexChanged="rcbLieferant_SelectedIndexChanged" AutoPostBack="true" CausesValidation="false"
-                    EmptyMessage="- Bitte auswählen -" >
+                    EmptyMessage="- Bitte auswählen -">
                 </telerik:RadComboBox>
+                <telerik:RadButton ID="btnCreateSupplier" runat="server" Text="Neu erfassen" OnClick="btnCreateSupplier_Click" CausesValidation="false"></telerik:RadButton>
             </div>
 
             <!-- SupplierBranch -->
@@ -154,15 +157,15 @@
             </div>
 
             <!-- IsAvailable -->
-            <div class="input_form_row">
+            <div class="input_form_row" runat="server" id="IsAvailablePanel">
                 <asp:Label ID="Label7" runat="server" Text="Ist vorhanden" CssClass="element_label"></asp:Label>
-                <asp:CheckBox ID="chbIsAvailable" runat="server" CausesValidation="false" Checked="true"/>
+                <asp:CheckBox ID="chbIsAvailable" runat="server" CausesValidation="false" Checked="true" />
             </div>
 
         </div>
         <div class="input_interaction_row">
             <telerik:RadButton ID="btnBack" runat="server" Text="Zurück" OnClick="btnBack_Click" CausesValidation="false" />
-            <telerik:RadButton ID="btnSave" runat="server" Text="Speichern" OnClick="btnSave_Click" CausesValidation="true"/>
+            <telerik:RadButton ID="btnSave" runat="server" Text="Speichern" OnClick="btnSave_Click" CausesValidation="true" />
         </div>
     </telerik:RadAjaxPanel>
 </asp:Content>
