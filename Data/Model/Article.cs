@@ -81,7 +81,9 @@ namespace Data.Model.Diagram {
         /// <returns></returns>
         public static IEnumerable<Article> GetDeletedWithRestValue() {
             IP3AnlagenInventarEntities ctx = EntityFactory.Context;
-            return ctx.Articles.Where(a => a.IsDeleted && !a.IsDepreciated());
+            List<Article> articles =  ctx.Articles.Where(a => a.IsDeleted).ToList();
+            articles = articles.Where(a => !a.IsDepreciated()).ToList();
+            return articles;
         } 
 
         /// <summary>
