@@ -20,11 +20,12 @@ namespace Data.Model.Diagram
         }
     
         public int ArticleGroupId { get; set; }
-        public string Name { get; set; }
+        public int ArticleCategoryId { get; set; }
         public int RoomId { get; set; }
         public string Barcode { get; set; }
     
         public virtual ICollection<Article> Articles { get; set; }
+        public virtual ArticleCategory ArticleCategory { get; set; }
         public virtual Room Room { get; set; }
     }
 }

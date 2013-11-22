@@ -19,7 +19,8 @@ namespace Data.Model.Diagram
         public static IEnumerable<Supplier> GetAll()
         {
             IP3AnlagenInventarEntities ctx = EntityFactory.Context;
-            return ctx.Suppliers;
+            var result = ctx.Suppliers.OrderBy(s => s.Name);
+            return result;
         }
 
         public Boolean HasArticles() {

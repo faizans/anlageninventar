@@ -12,11 +12,36 @@ namespace Data.Enum
         User
     }
 
-    public enum SessionName
-    {
+    public enum SessionName {
         LoggedUser,
         ExportItems,
         ReportYear,
-        SelectedTemplate
+        SelectedTemplate,
+        SelectedTelerikTemplate,
+        InOutYear
+
+    }
+
+    public enum DownloadType {
+        Template
+    }
+
+    public enum ReportType {
+        Categorized
+    }
+
+    public enum ReportCategories {
+        Room,
+        Building,
+        Responsible,
+        Group
+    }
+
+    public enum TelerikReports { 
+        Standart,
+        RaumCheckliste,
+        RaumGruppierung,
+        KategorieGruppierung
     }
 }
+

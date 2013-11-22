@@ -119,6 +119,9 @@ namespace Client.Site.Administrator {
             this.rtbBranchPlace.Enabled = enabled;
             this.rtbBranchPlz.Enabled = enabled;
             this.rtbComment.Enabled = enabled;
+
+
+            this.btnSave.Enabled = !enabled;
         }
 
         protected void ListBoxControl_AddNewItem(object sender, EventArgs e) {
@@ -147,6 +150,7 @@ namespace Client.Site.Administrator {
                         RadWindowManager1.RadAlert(String.Format("Standort kann nicht gelöscht werden, da Standort von Artikeln verwendet wird."), 300, 130, "Operation nicht möglich", "alertCallBackFn");
                     } else {
                         this.ListBoxControl.Remove(eventArgs.Item);
+                        this.supplier.SupplierBranches.Remove(supplierBranchToRemove);
                         this.rtbBranchPlace.Text = null;
                         this.rtbBranchPlz.Text = null;
                         this.rtbComment.Text = null;
@@ -162,9 +166,7 @@ namespace Client.Site.Administrator {
             } 
         }
 
-        #region FormEvents
-
-        protected void btnBack_Click(object sender, EventArgs e) {
+        private void back() {
             if (Request.QueryString["back"] != null) {
                 Response.Redirect("~/Site/Administrator/" + Request.QueryString["back"] + ".aspx");
             } else {
@@ -172,9 +174,15 @@ namespace Client.Site.Administrator {
             }
         }
 
+        #region FormEvents
+
+        protected void btnBack_Click(object sender, EventArgs e) {
+            back();
+        }
+
         protected void btnSave_Click(object sender, EventArgs e) {
             save();
-            Response.Redirect("~/Site/Administrator/SupplierList.aspx");
+            back();
         }
 
         public void UpdateItem() {
@@ -191,6 +199,7 @@ namespace Client.Site.Administrator {
 
         protected void btnApply_Click(object sender, EventArgs e) {
             UpdateItem();
+            this.btnSave.Enabled = true;
         }
 
         #endregion

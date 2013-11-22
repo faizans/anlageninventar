@@ -55,7 +55,6 @@ namespace Client.Site.Administrator {
 
         private void bindData() {
             GridItem cmdItem = rgArticles.MasterTableView.GetItems(GridItemType.CommandItem)[0];
-
             //Bind the data for the excel template combobox
             RadComboBox rlbExcelTemplate = cmdItem.FindControl("rcbExcelTemplate") as RadComboBox;
             rlbExcelTemplate.DataSource = ExcelExporter.GetTemplateFiles(Server);
@@ -87,6 +86,7 @@ namespace Client.Site.Administrator {
                 }
                 EntityFactory.Context.SaveChanges();
                 rgArticles.Rebind();
+                RadWindowManager1.RadAlert("Auswahl wurde verschoben", null, 100, "Artikel verschieben", "alertCallBackFn");
 
             }else if (e.CommandName.ToLower() == "deleteselection") {
                 foreach (GridDataItem dataItem in rgArticles.MasterTableView.Items) {
@@ -94,9 +94,7 @@ namespace Client.Site.Administrator {
                         if (dataItem.ItemType == GridItemType.Item || dataItem.ItemType == GridItemType.AlternatingItem) {
                             Article articleToDelete = Article.GetById(int.Parse(dataItem["ArticleId"].Text));
                             if (articleToDelete != null) {
-                                //if (articleToDelete.IsDepreciated()) {
                                 articleToDelete.Delete();
-                                //}
                             }
                         }
                     }
@@ -169,9 +167,13 @@ namespace Client.Site.Administrator {
 
         protected void btnReport_Click(object sender, EventArgs e) {
             this.SiteMaster.ReportDataSource = ArticleGridHelper.GetReportItems(this.rgArticles, Article.GetAvailable().ToList(), false);
-            Response.Redirect("~/Site/Administrator/ReportView.aspx");
+            Response.Redirect("~/Site/Administrator/Report/ReportView.aspx");
         }
 
+        protected void btnReportView_Click(object sender, EventArgs e) {
+            this.SiteMaster.ReportDataSource = ArticleGridHelper.GetReportItems(this.rgArticles, Article.GetAvailable().ToList(), false);
+            Response.Redirect("~/Site/Administrator/Report/ReportView.aspx");
+        }
 
         #endregion
 

@@ -115,11 +115,14 @@
     <Reference Include="Microsoft.AspNet.Membership.OpenAuth, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
       <HintPath>..\packages\Microsoft.AspNet.Membership.OpenAuth.1.0.0\lib\net45\Microsoft.AspNet.Membership.OpenAuth.dll</HintPath>
     </Reference>
+    <Reference Include="Telerik.Reporting, Version=7.2.13.1016, Culture=neutral, PublicKeyToken=a9d7983dfcc261be, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.ReportViewer.WebForms, Version=7.2.13.1016, Culture=neutral, PublicKeyToken=a9d7983dfcc261be, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.ReportViewer.WinForms, Version=7.2.13.1016, Culture=neutral, PublicKeyToken=a9d7983dfcc261be, processorArchitecture=MSIL" />
     <Reference Include="Telerik.Web.UI">
-      <HintPath>..\lib\RCAJAX\2013.2.611.45.Trial\Telerik.Web.UI.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Telerik\RadControls for ASP.NET AJAX Q2 2013\Bin45\Telerik.Web.UI.dll</HintPath>
     </Reference>
     <Reference Include="Telerik.Web.UI.Skins">
-      <HintPath>..\lib\RCAJAX\2013.2.611.45.Trial\Telerik.Web.UI.Skins.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Telerik\RadControls for ASP.NET AJAX Q2 2013\Bin45\Telerik.Web.UI.Skins.dll</HintPath>
     </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
@@ -183,6 +186,8 @@
       <DebugInfo>True</DebugInfo>
     </Content>
     <Content Include="Resources\Styles\settings\_base-colors.scss" />
+    <Content Include="Resources\Styles\components\_table.scss" />
+    <None Include="Properties\PublishProfiles\Local.pubxml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Resources\Images\Icons\ExcelLogo.png" />
     <Content Include="Resources\Images\Icons\ExcelBiff.png" />
@@ -225,6 +230,7 @@
     <Content Include="Site\Administrator\ArticleList.aspx" />
     <Content Include="Site\Administrator\CategoryList.aspx" />
     <Content Include="Site\Administrator\ArticleCategoryList.aspx" />
+    <Content Include="Site\Administrator\Report\BigReport.aspx" />
     <Content Include="Site\Administrator\ManageArticleCategory.aspx" />
     <Content Include="Site\Administrator\ManageInsuranceCategory.aspx" />
     <Content Include="Site\Administrator\DeletedArticleList.aspx" />
@@ -233,7 +239,9 @@
     <Content Include="Site\Administrator\DepreciationCategoryList.aspx" />
     <Content Include="Site\Administrator\InsuranceCategoryList.aspx" />
     <Content Include="Site\Administrator\ManageUser.aspx" />
-    <Content Include="Site\Administrator\ReportView.aspx" />
+    <Content Include="Site\Administrator\Report\InAndOutReportView.aspx" />
+    <Content Include="Site\Administrator\Report\PrintView.aspx" />
+    <Content Include="Site\Administrator\Report\ReportView.aspx" />
     <Content Include="Site\Administrator\RoomList.aspx" />
     <Content Include="Site\Administrator\SupplierList.aspx" />
     <Content Include="Site\Administrator\ManageSupplier.aspx" />
@@ -301,6 +309,13 @@
     <Compile Include="Site\Administrator\ArticleCategoryList.aspx.designer.cs">
       <DependentUpon>ArticleCategoryList.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Site\Administrator\Report\BigReport.aspx.cs">
+      <DependentUpon>BigReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site\Administrator\Report\BigReport.aspx.designer.cs">
+      <DependentUpon>BigReport.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Site\Administrator\ManageArticleCategory.aspx.cs">
       <DependentUpon>ManageArticleCategory.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -357,11 +372,25 @@
     <Compile Include="Site\Administrator\ManageUser.aspx.designer.cs">
       <DependentUpon>ManageUser.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Site\Administrator\ReportView.aspx.cs">
+    <Compile Include="Site\Administrator\Report\InAndOutReportView.aspx.cs">
+      <DependentUpon>InAndOutReportView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site\Administrator\Report\InAndOutReportView.aspx.designer.cs">
+      <DependentUpon>InAndOutReportView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Site\Administrator\Report\PrintView.aspx.cs">
+      <DependentUpon>PrintView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site\Administrator\Report\PrintView.aspx.designer.cs">
+      <DependentUpon>PrintView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Site\Administrator\Report\ReportView.aspx.cs">
       <DependentUpon>ReportView.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Site\Administrator\ReportView.aspx.designer.cs">
+    <Compile Include="Site\Administrator\Report\ReportView.aspx.designer.cs">
       <DependentUpon>ReportView.aspx</DependentUpon>
     </Compile>
     <Compile Include="Site\Administrator\RoomList.aspx.cs">
@@ -452,6 +481,8 @@
     </Compile>
     <Compile Include="Util\AdLookup.cs" />
     <Compile Include="Util\Constants.cs" />
+    <Compile Include="Util\RepeaterExcelExporter.cs" />
+    <Compile Include="Util\ExcelExporter2.cs" />
     <Compile Include="Util\Dynamic.cs" />
     <Compile Include="Util\EnumObjectFactory.cs" />
     <Compile Include="Util\ExcelExporter.cs" />
@@ -477,6 +508,10 @@
       <Project>{1f4b15c0-9a72-4edd-96a2-fe1635afbc22}</Project>
       <Name>Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Reporting\Reporting.csproj">
+      <Project>{14127632-50b7-46d3-81ba-17d256a49855}</Project>
+      <Name>Reporting</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -501,7 +536,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
+      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

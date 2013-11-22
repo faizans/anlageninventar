@@ -54,6 +54,8 @@ namespace Client.Site.Controls.RoomTree
         public object DataItem { get; set; }
         public bool IsRoot { get; set; }
         public string Responsible { get; set; }
+        //public RoomTreeItem ParentNode { get; set; }
+        public bool IsNew = false;
 
         public void AddAttributesTo(RadTreeNode node)
         {

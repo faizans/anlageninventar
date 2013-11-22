@@ -9,33 +9,14 @@
             <div class="input_form_row">
                 <asp:Label ID="Label1" runat="server" Text="Name" CssClass="element_label"></asp:Label>
                 <telerik:RadTextBox ID="rtbName" runat="server" Width="300px" ReadOnly="false"></telerik:RadTextBox>
+                <asp:RequiredFieldValidator ID="rfvName" runat="server" ErrorMessage="Eingabe benötigt." ControlToValidate="rtbName" Display="Dynamic" />
             </div>
             <div class="input_form_row">
-                <asp:Label ID="Label2" runat="server" Text="" CssClass="element_label"></asp:Label>
-            </div>
-            <div class="input_form_row">
-                <asp:Label ID="Label6" runat="server" Text="Abschreibungen" CssClass="element_label"></asp:Label>
-                <div style="float: left;">
-                    <uc1:ListBoxControl runat="server" ID="ListBoxControl"
-                        OnSelectedIndexChanged="ListBoxControl_SelectedIndexChanged"
-                        OnAddNewItem="ListBoxControl_AddNewItem"
-                        OnItemRemove="ListBoxControl_ItemRemove" />
-                </div>
-            </div>
-            <div class="input_form_row">
-                <asp:Label ID="Label4" runat="server" Text="Von" CssClass="element_label"></asp:Label>
-                <telerik:RadNumericTextBox ID="rtbFromYear" runat="server" Enabled="false">
+                <asp:Label ID="Label4" runat="server" Text="Zeitspanne" CssClass="element_label"></asp:Label>
+                <telerik:RadNumericTextBox ID="rtbTimeSpan" runat="server" Width="300px">
                     <NumberFormat GroupSeparator="" DecimalDigits="0" />
                 </telerik:RadNumericTextBox>
-            </div>
-            <div class="input_form_row">
-                <asp:Label ID="Label5" runat="server" Text="Bis" CssClass="element_label"></asp:Label>
-                <telerik:RadNumericTextBox ID="rtbToYear" runat="server" Enabled="false">
-                    <NumberFormat GroupSeparator="" DecimalDigits="0" />
-                </telerik:RadNumericTextBox>
-            </div>
-            <div class="input_form_row">
-                <telerik:RadButton ID="btnApply" runat="server" Text="Übernehmen" OnClick="btnApply_Click" CausesValidation="false" Enabled="false" />
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Eingabe benötigt." ControlToValidate="rtbTimeSpan" Display="Dynamic" />
             </div>
         </div>
         <div class="input_interaction_row">

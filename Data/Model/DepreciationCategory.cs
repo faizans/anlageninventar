@@ -25,14 +25,14 @@ namespace Data.Model.Diagram
         #region Public methods
 
         public Boolean HasArticles() {
-            if (this.Depreciations.Any()) {
-                foreach (Depreciation depreciation in this.Depreciations) {
-                    if (depreciation.HasArticles()) {
-                        return true;
-                    }
-                }
-            }
-            return false;
+            //if (this.Depreciations.Any()) {
+            //    foreach (Depreciation depreciation in this.Depreciations) {
+            //        if (depreciation.HasArticles()) {
+            //            return true;
+            //        }
+            //    }
+            //}
+            return this.Articles.Any();
         }
 
         public void Delete()

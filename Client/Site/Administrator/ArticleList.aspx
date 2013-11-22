@@ -14,7 +14,7 @@
     </telerik:RadAjaxManager>
 
     <telerik:RadGrid ID="rgArticles" runat="server" AutoGenerateEditColumn="True" CellSpacing="0" GridLines="None" Skin="Silk" OnInit="rgArticles_Init"
-        AllowPaging="True" AllowSorting="True" AllowFilteringByColumn="true" ShowStatusBar="true" Height="580px" ClientSettings-DataBinding-EnableCaching="true"
+        AllowPaging="True" AllowSorting="True" AllowFilteringByColumn="true" ShowStatusBar="true" Width="100%" Height="600px" ClientSettings-DataBinding-EnableCaching="true"
         OnItemCommand="rgArticles_ItemCommand" DataSourceID="GridSource" AllowMultiRowSelection="True" OnPreRender="rgArticles_PreRender" OnItemCreated="rgArticles_ItemCreated">
 
         <PagerStyle Visible="true"></PagerStyle>
@@ -42,22 +42,29 @@
                     </telerik:RadComboBox>
 
                     <telerik:RadButton ID="btnMoveToRoom" runat="server" CommandName="MoveSelection" Text="Verschieben" OnClientClicking="OnMoveToRoom" />
-                    <div style="float: right; margin-right: 5px;">
+                    <%--<div style="float: right; margin-right: 5px;">
                         <asp:ImageButton ID="btnReport" ImageUrl="~/Resources/Images/Icons/Report1.png" ToolTip="Generiere Report"
                             OnClick="btnReport_Click" runat="server" CssClass="ImageButtons" Height="25px" />
-                    </div>
+                    </div>--%>
                     <div style="float: right; margin-top: 3px;">
-                        <telerik:RadButton ID="btnExport" runat="server" Text="RadButton" OnClientClicking="OnExportToExcel" ToolTip="Exportiere zu Excel" Height="20px" Width="20px"
-                            OnClick="btnExportToExcel_Click">
-                            <Image ImageUrl="~/Resources/Images/Icons/Excel.jpg" />
-                        </telerik:RadButton>
+                            <telerik:RadButton ID="btnReportView" runat="server" Text="RadButton" ToolTip="Öffne Artikel in Reportansicht" Height="20px" Width="20px"
+                                OnClick="btnReportView_Click">
+                                <Image ImageUrl="~/Resources/Images/Icons/Report1.png" />
+                            </telerik:RadButton>
+                        </div>
+                    <div style="display: none;">
+                        <div style="float: right; margin-top: 3px;">
+                            <telerik:RadButton ID="btnExport" runat="server" Text="RadButton" OnClientClicking="OnExportToExcel" ToolTip="Exportiere zu Excel" Height="20px" Width="20px"
+                                OnClick="btnExportToExcel_Click">
+                                <Image ImageUrl="~/Resources/Images/Icons/Excel.jpg" />
+                            </telerik:RadButton>
+                        </div>
+                        <div style="float: right; margin-left: 5px; margin-right: 5px;">
+                            <telerik:RadComboBox ID="rcbExcelTemplate" runat="server" DataValueField="FullName" DataTextField="Name" Label="Excelvorlage" AutoPostBack="true"
+                                OnSelectedIndexChanged="rcbExcelTemplate_SelectedIndexChanged">
+                            </telerik:RadComboBox>
+                        </div>
                     </div>
-                    <div style="float: right;margin-left:5px; margin-right:5px;">
-                        <telerik:RadComboBox ID="rcbExcelTemplate" runat="server" DataValueField="FullName" DataTextField="Name" Label="Excelvorlage" AutoPostBack="true"
-                            OnSelectedIndexChanged="rcbExcelTemplate_SelectedIndexChanged">
-                        </telerik:RadComboBox>
-                    </div>
-
                 </div>
             </CommandItemTemplate>
 
@@ -81,12 +88,9 @@
                 <telerik:GridNumericColumn DataField="Value" HeaderText="Preis" SortExpression="Value" UniqueName="Value" FilterControlAltText="Filter Value column"
                     DataFormatString="{0:##,##0.00}" FilterControlWidth="80px">
                 </telerik:GridNumericColumn>
-                <telerik:GridNumericColumn DataField="DepreciationValue" HeaderText="Abschreibung" SortExpression="DepreciationValue" UniqueName="DepreciationValue" FilterControlAltText="Filter DepreciationValue column"
-                    DataFormatString="{0:##,##0.00}" FilterControlWidth="80px">
-                </telerik:GridNumericColumn>
-                <telerik:GridBoundColumn DataField="ArticleGroup.Name" HeaderText="Gruppe" SortExpression="ArticleGroup.Name" UniqueName="ArticleGroup.Name" FilterControlAltText="Filter ArticleGroup.Name column">
+                <telerik:GridBoundColumn DataField="ArticleGroup.ArticleCategory.Name" Display="false" HeaderText="Artikelgruppe" SortExpression="ArticleGroup.ArticleCategory.Name" UniqueName="ArticleGroup.ArticleCategory.Name" FilterControlAltText="Filter ArticleGroup.ArticleCategory.Name column">
                 </telerik:GridBoundColumn>
-                <telerik:GridBoundColumn DataField="AcquisitionDate" DataFormatString="{0:MM/dd/yy}" HeaderText="Anschaffungsdatum" SortExpression="AcquisitionDate" UniqueName="AcquisitionDate" FilterControlAltText="Filter AcquisitionDate column">
+                <telerik:GridBoundColumn DataField="AcquisitionDate" DataFormatString="{0:dd/MM/yyyy}" HeaderText="Anschaffungsdatum" SortExpression="AcquisitionDate" UniqueName="AcquisitionDate" FilterControlAltText="Filter AcquisitionDate column">
                 </telerik:GridBoundColumn>
                 <telerik:GridBoundColumn DataField="SupplierBranch.Supplier.Name" HeaderText="Lieferant" SortExpression="SupplierBranch.Supplier" UniqueName="SupplierBranch.Supplier" FilterControlAltText="Filter SupplierBranch.Supplier column">
                 </telerik:GridBoundColumn>
@@ -96,7 +100,7 @@
         </MasterTableView>
 
     </telerik:RadGrid>
-    <asp:ObjectDataSource ID="GridSource" runat="server" SelectMethod="GetAvailable" TypeName="Data.Model.Diagram.Article"></asp:ObjectDataSource>
+    <asp:ObjectDataSource ID="GridSource" runat="server" SelectMethod="GetAllNotDeleted" TypeName="Data.Model.Diagram.Article"></asp:ObjectDataSource>
 
     <asp:EntityDataSource ID="RoomDataSource" runat="server"
         ConnectionString="name=IP3AnlagenInventarEntities"
@@ -106,7 +110,6 @@
 
     <telerik:RadWindowManager ID="RadWindowManager1" runat="server">
     </telerik:RadWindowManager>
-
 
     <script type="text/javascript">
         function alertCallBackFn(arg) {

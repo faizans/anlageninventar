@@ -11,17 +11,13 @@
         </AjaxSettings>
     </telerik:RadAjaxManager>
 
-    <telerik:RadGrid ID="rgReport" runat="server" AutoGenerateEditColumn="False" CellSpacing="0" GridLines="None" Skin="Silk" OnPreRender="rgReport_PreRender"
-        AllowPaging="False" AllowSorting="True" AllowFilteringByColumn="true" ShowStatusBar="true" OnDataBound="rgReport_DataBound" OnInit="rgReport_Init" Height="600px">
-
-        <ClientSettings>
-            <Scrolling AllowScroll="True" UseStaticHeaders="True"></Scrolling>
-        </ClientSettings>
-
-        <ExportSettings HideStructureColumns="true" />
+    <telerik:RadGrid ID="rgReport" runat="server" AutoGenerateEditColumn="False" GridLines="None" Skin="Silk"
+        OnPreRender="rgReport_PreRender" AllowSorting="True" AllowFilteringByColumn="true" AllowPaging="true" PageSize="80"
+        ShowStatusBar="true" OnDataBound="rgReport_DataBound" OnInit="rgReport_Init" Height="600px"
+        ShowFooter="true">
 
         <MasterTableView DataKeyNames="ArticleId" AutoGenerateColumns="False" AllowFilteringByColumn="true" ShowFooter="true"
-            CssClass="MasterTableViewNoHeight" CommandItemDisplay="Top">
+            CssClass="MasterTableViewNoHeight" CommandItemDisplay="Top" AllowSorting="true">
 
             <CommandItemTemplate>
                 <div style="padding: 5px;">
@@ -34,15 +30,28 @@
                         <telerik:RadButton ID="btnCalculate" runat="server" Text="Berechnen" AutoPostBack="true" OnClick="btnApplyYear_Click"></telerik:RadButton>
                     </div>
                     <div style="float: right; margin-top: 3px;">
-                        <telerik:RadButton ID="btnExport" runat="server" Text="RadButton" OnClientClicking="OnExportToExcel" ToolTip="Exportiere zu Excel" Height="20px" Width="20px"
-                            OnClick="btnExportToExcel_Click">
-                            <Image ImageUrl="~/Resources/Images/Icons/Excel.jpg" />
+                        <telerik:RadButton ID="btnTelerikExport" runat="server" Text="RadButton" OnClientClicking="OnExportToPrintView" ToolTip="Öffne Druckansicht" Height="20px" Width="20px"
+                            OnClick="btnTelerikExport_Click" Target="_blank">
+                            <Image ImageUrl="~/Resources/Images/Icons/Report1.png" />
                         </telerik:RadButton>
                     </div>
-                    <div style="float: right;margin-left:5px; margin-right:5px;">
-                        <telerik:RadComboBox ID="rcbExcelTemplate" runat="server" DataValueField="FullName" DataTextField="Name" Label="Excelvorlage" AutoPostBack="true"
-                            OnSelectedIndexChanged="rcbExcelTemplate_SelectedIndexChanged">
+                    <div style="float: right; margin-left: 5px; margin-right: 5px;">
+                        <telerik:RadComboBox ID="rcbTelerikReport" runat="server" Label="Exportansicht" AutoPostBack="true"
+                            OnSelectedIndexChanged="rcbTelerikReport_SelectedIndexChanged">
                         </telerik:RadComboBox>
+                    </div>
+                    <div style="display:none;">
+                        <div style="float: right; margin-top: 3px;">
+                            <telerik:RadButton ID="btnExport" runat="server" Text="RadButton" OnClientClicking="OnExportToExcel" ToolTip="Exportiere zu Excel" Height="20px" Width="20px"
+                                OnClick="btnExportToExcel_Click">
+                                <Image ImageUrl="~/Resources/Images/Icons/Excel.jpg" />
+                            </telerik:RadButton>
+                        </div>
+                        <div style="float: right; margin-left: 5px; margin-right: 5px;">
+                            <telerik:RadComboBox ID="rcbExcelTemplate" runat="server" DataValueField="FullName" DataTextField="Name" Label="Excelvorlage" AutoPostBack="true"
+                                OnSelectedIndexChanged="rcbExcelTemplate_SelectedIndexChanged">
+                            </telerik:RadComboBox>
+                        </div>
                     </div>
                 </div>
             </CommandItemTemplate>
@@ -57,12 +66,18 @@
                 <telerik:GridNumericColumn DataField="Value" HeaderText="Preis" SortExpression="Value" UniqueName="Value" FilterControlAltText="Filter Value column"
                     DataFormatString="{0:##,##0.00}" FilterControlWidth="80px">
                 </telerik:GridNumericColumn>
-                <telerik:GridNumericColumn DataField="DepreciationValue" HeaderText="Abschreibung" SortExpression="DepreciationValue" UniqueName="DepreciationValue" FilterControlAltText="Filter DepreciationValue column"
+                <telerik:GridNumericColumn DataField="AverageDepreciation" HeaderText="Abschreibung/Jahr" SortExpression="AverageDepreciation" UniqueName="AverageDepreciation" FilterControlAltText="Filter AverageDepreciation column"
                     DataFormatString="{0:##,##0.00}" FilterControlWidth="80px">
                 </telerik:GridNumericColumn>
-                <telerik:GridBoundColumn DataField="ArticleGroup.Name" HeaderText="ArticleGroup" SortExpression="ArticleGroup.Name" UniqueName="ArticleGroup.Name" FilterControlAltText="Filter ArticleGroup.Name column">
+                <telerik:GridNumericColumn DataField="CumulatedDepreciation" HeaderText="Kumuliert" SortExpression="CumulatedDepreciation" UniqueName="CumulatedDepreciation" FilterControlAltText="Filter CumulatedDepreciation column"
+                    DataFormatString="{0:##,##0.00}" FilterControlWidth="80px">
+                </telerik:GridNumericColumn>
+                <telerik:GridNumericColumn DataField="DepreciationValue" HeaderText="Ist-Wert" SortExpression="DepreciationValue" UniqueName="DepreciationValue" FilterControlAltText="Filter DepreciationValue column"
+                    DataFormatString="{0:##,##0.00}" FilterControlWidth="80px">
+                </telerik:GridNumericColumn>
+                <telerik:GridBoundColumn DataField="ArticleGroup.ArticleCategory.Name" HeaderText="Artikelgruppe" SortExpression="ArticleGroup.ArticleCategory.Name" UniqueName="ArticleGroup.ArticleCategory.Name" FilterControlAltText="Filter ArticleGroup.ArticleCategory.Name column">
                 </telerik:GridBoundColumn>
-                <telerik:GridBoundColumn DataField="AcquisitionDate" DataFormatString="{0:MM/dd/yy}" HeaderText="Anschaffungsdatum" SortExpression="AcquisitionDate" UniqueName="AcquisitionDate" FilterControlAltText="Filter AcquisitionDate column">
+                <telerik:GridBoundColumn DataField="AcquisitionDate" DataFormatString="{0:dd/MM/yyyy}" HeaderText="Anschaffungsdatum" SortExpression="AcquisitionDate" UniqueName="AcquisitionDate" FilterControlAltText="Filter AcquisitionDate column">
                 </telerik:GridBoundColumn>
                 <telerik:GridBoundColumn DataField="SupplierBranch.Supplier.Name" HeaderText="Lieferant" SortExpression="SupplierBranch.Supplier.Name" UniqueName="SupplierBranch.Supplier.Name" FilterControlAltText="Filter SupplierBranch.Supplier.Name column">
                 </telerik:GridBoundColumn>
@@ -72,6 +87,13 @@
                 </telerik:GridBoundColumn>
             </Columns>
         </MasterTableView>
+
+        <ClientSettings>
+            <Scrolling AllowScroll="true" UseStaticHeaders="true" SaveScrollPosition="true" EnableVirtualScrollPaging="true"></Scrolling>
+        </ClientSettings>
+
+        <PagerStyle Visible="false" AlwaysVisible="false" Height="0px" />
+
     </telerik:RadGrid>
     <telerik:RadWindowManager ID="RadWindowManager1" runat="server">
     </telerik:RadWindowManager>
@@ -90,10 +112,21 @@
             });
 
             var text = "Der Export kann einige Zeit in Anspruch nehmen. Sind Sie sicher dass Sie exportieren wollen?";
-            radconfirm(text, callBackFunction, 300, 100, null, "Verschieben");
+            radconfirm(text, callBackFunction, 300, 100, null, "Exportieren");
             args.set_cancel(true);
         }
 
+        function OnExportToPrintView(sender, args) {
+            var callBackFunction = Function.createDelegate(sender, function (argument) {
+                if (argument) {
+                    this.click();
+                }
+            });
+
+            var text = "Das öffnen in der Druckansicht sowie das Exportieren oder Drucken können einige Zeit in Anspruch nehmen.";
+            radconfirm(text, callBackFunction, 300, 100, null, "Druckansicht öffnen");
+            args.set_cancel(true);
+        }
 
     </script>
 </asp:Content>

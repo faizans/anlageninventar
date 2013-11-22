@@ -79,41 +79,106 @@
         <telerik:RadMenuItem Value="ReportItem" runat="server" CssClass="MenuItem">
             <ItemTemplate>
                 <div>
-                    <asp:LinkButton ID="lbReports" runat="server">Reports</asp:LinkButton>
+                    <asp:LinkButton ID="lbReports" runat="server">Inventar</asp:LinkButton>
                 </div>
             </ItemTemplate>
             <Items>
                 <telerik:RadMenuItem runat="server" CssClass="MenuItem">
                     <ItemTemplate>
                         <div>
-                            <asp:LinkButton ID="lbAllReport" runat="server" CommandName="AllArticles" OnClick="lbMenuItemClicked">Alle Artikel</asp:LinkButton>
+                            <asp:LinkButton ID="lbAllReport" runat="server" CommandName="AllArticles_Inventory" OnClick="lbMenuItemClicked">Alle Artikel</asp:LinkButton>
                         </div>
                     </ItemTemplate>
                 </telerik:RadMenuItem>
                 <telerik:RadMenuItem runat="server" CssClass="MenuItem">
                     <ItemTemplate>
                         <div>
-                            <asp:LinkButton ID="lbRoomResponsibles" runat="server" CommandName="RoomChecklist" OnClick="lbMenuItemClicked">Raumcheckliste</asp:LinkButton>
+                            <asp:LinkButton ID="lbRoomResponsibles" runat="server" CommandName="RoomChecklist_Inventory" OnClick="lbMenuItemClicked">Raumcheckliste</asp:LinkButton>
                         </div>
                     </ItemTemplate>
                 </telerik:RadMenuItem>
                 <telerik:RadMenuItem runat="server" CssClass="MenuItem">
                     <ItemTemplate>
                         <div>
-                            <asp:LinkButton ID="lbDeletedArticles" runat="server" CommandName="DeletedArticles" OnClick="lbMenuItemClicked">Gelöschte Artikel</asp:LinkButton>
+                            <asp:LinkButton ID="lbDeletedArticles" runat="server" CommandName="DeletedArticles_Inventory" OnClick="lbMenuItemClicked">Gelöschte Artikel</asp:LinkButton>
                         </div>
                     </ItemTemplate>
                 </telerik:RadMenuItem>
                 <telerik:RadMenuItem runat="server" CssClass="MenuItem">
                     <ItemTemplate>
                         <div>
-                            <asp:LinkButton ID="lbNotAvailableArticles" runat="server" CommandName="NotAvailableArticles" OnClick="lbMenuItemClicked">Nicht vorhandene Artikel</asp:LinkButton>
+                            <asp:LinkButton ID="lbNotAvailableArticles" runat="server" CommandName="NotAvailableArticles_Inventory" OnClick="lbMenuItemClicked">Nicht vorhandene Artikel</asp:LinkButton>
+                        </div>
+                    </ItemTemplate>
+                </telerik:RadMenuItem>
+                <telerik:RadMenuItem runat="server" CssClass="MenuItem">
+                    <ItemTemplate>
+                        <div>
+                            <asp:LinkButton ID="lbAllAttributes" runat="server" CommandName="BigReport_Inventory" OnClick="lbMenuItemClicked">Alle Attribute</asp:LinkButton>
+                        </div>
+                    </ItemTemplate>
+                </telerik:RadMenuItem>
+                <telerik:RadMenuItem runat="server" CssClass="MenuItem">
+                    <ItemTemplate>
+                        <div>
+                            <asp:LinkButton ID="lbEntrances" runat="server" CommandName="Entrances_Inventory" OnClick="lbMenuItemClicked">Zugänge</asp:LinkButton>
+                        </div>
+                    </ItemTemplate>
+                </telerik:RadMenuItem>
+                <telerik:RadMenuItem runat="server" CssClass="MenuItem">
+                    <ItemTemplate>
+                        <div>
+                            <asp:LinkButton ID="lbDisposals" runat="server" CommandName="Disposals_Inventory" OnClick="lbMenuItemClicked">Abgänge</asp:LinkButton>
                         </div>
                     </ItemTemplate>
                 </telerik:RadMenuItem>
             </Items>
         </telerik:RadMenuItem>
-        <telerik:RadMenuItem runat="server" CssClass="MenuItem">
+        <telerik:RadMenuItem Value="ReportItem" runat="server" CssClass="MenuItem">
+            <ItemTemplate>
+                <div>
+                    <asp:LinkButton ID="lbReports" runat="server">Anlagenbuchhaltung</asp:LinkButton>
+                </div>
+            </ItemTemplate>
+            <Items>
+                 <telerik:RadMenuItem runat="server" CssClass="MenuItem">
+                    <ItemTemplate>
+                        <div>
+                            <asp:LinkButton ID="lbAllReport" runat="server" CommandName="AllArticles_Accounting" OnClick="lbMenuItemClicked">Alle Artikel</asp:LinkButton>
+                        </div>
+                    </ItemTemplate>
+                </telerik:RadMenuItem>
+               <telerik:RadMenuItem runat="server" CssClass="MenuItem">
+                    <ItemTemplate>
+                        <div>
+                            <asp:LinkButton ID="lbEntrances" runat="server" CommandName="Entrances_Accounting" OnClick="lbMenuItemClicked">Zugänge</asp:LinkButton>
+                        </div>
+                    </ItemTemplate>
+                </telerik:RadMenuItem>
+                <telerik:RadMenuItem runat="server" CssClass="MenuItem">
+                    <ItemTemplate>
+                        <div>
+                            <asp:LinkButton ID="lbDisposals" runat="server" CommandName="Disposals_Accounting" OnClick="lbMenuItemClicked">Abgänge</asp:LinkButton>
+                        </div>
+                    </ItemTemplate>
+                </telerik:RadMenuItem>
+                <telerik:RadMenuItem runat="server" CssClass="MenuItem">
+                    <ItemTemplate>
+                        <div>
+                            <asp:LinkButton ID="lbIt" runat="server" CommandName="IT_Accounting" OnClick="lbMenuItemClicked">IT</asp:LinkButton>
+                        </div>
+                    </ItemTemplate>
+                </telerik:RadMenuItem>
+                <telerik:RadMenuItem runat="server" CssClass="MenuItem">
+                    <ItemTemplate>
+                        <div>
+                            <asp:LinkButton ID="lbMobiliar" runat="server" CommandName="Mobiliar_Accounting" OnClick="lbMenuItemClicked">Mobiliar</asp:LinkButton>
+                        </div>
+                    </ItemTemplate>
+                </telerik:RadMenuItem>
+            </Items>
+        </telerik:RadMenuItem>
+        <telerik:RadMenuItem runat="server" CssClass="MenuItem" Visible="false">
             <ItemTemplate>
                 <div>
                     <asp:LinkButton ID="lbUpuloadTemplate" PostBackUrl="~/Site/Administrator/UploadTemplate.aspx" runat="server">Einstellungen</asp:LinkButton>

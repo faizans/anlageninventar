@@ -52,24 +52,6 @@
     <Compile Include="Model\AppUser.cs" />
     <Compile Include="Model\Article.cs" />
     <Compile Include="Model\ArticleGroup.cs" />
-    <Compile Include="Model\LatestBarCode.cs" />
-    <Compile Include="Model\Depreciation.cs" />
-    <Compile Include="Model\DepreciationCategory.cs" />
-    <Compile Include="Model\Diagram\AnlagenInventarModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AnlagenInventarModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Diagram\AnlagenInventarModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AnlagenInventarModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Diagram\AnlagenInventarModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AnlagenInventarModel.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Model\Diagram\AppUser.cs">
       <DependentUpon>AnlagenInventarModel.tt</DependentUpon>
     </Compile>
@@ -103,6 +85,9 @@
     <Compile Include="Model\Diagram\LatestBarCode.cs">
       <DependentUpon>AnlagenInventarModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Diagram\PredefinedFilter.cs">
+      <DependentUpon>AnlagenInventarModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\Diagram\Room.cs">
       <DependentUpon>AnlagenInventarModel.tt</DependentUpon>
     </Compile>
@@ -114,6 +99,24 @@
     </Compile>
     <Compile Include="Model\Diagram\sysdiagram.cs">
       <DependentUpon>AnlagenInventarModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\LatestBarCode.cs" />
+    <Compile Include="Model\Depreciation.cs" />
+    <Compile Include="Model\DepreciationCategory.cs" />
+    <Compile Include="Model\Diagram\AnlagenInventarModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AnlagenInventarModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Diagram\AnlagenInventarModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AnlagenInventarModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Diagram\AnlagenInventarModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AnlagenInventarModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Model\EntityFactory.cs" />
     <Compile Include="Model\Floor.cs" />

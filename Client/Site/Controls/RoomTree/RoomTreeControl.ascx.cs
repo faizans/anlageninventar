@@ -132,7 +132,8 @@ namespace Client.Site.Controls.RoomTree {
         /// Create Treestructured Datasource out of the entity objects
         /// </summary>
         private void initDataSource() {
-            RoomTreeItem rootItem = new RoomTreeItem("Gebäude");
+            RoomTreeItem rootItem = new RoomTreeItem("BSL");
+            rootItem.Value = "bsl";
             //
             this.RoomTreeItems.Add(rootItem);
 
@@ -173,6 +174,16 @@ namespace Client.Site.Controls.RoomTree {
             }
             this.DataSource = RoomTreeItems;
         }
+
+        #region Helpermethods
+
+        private List<Article> orderListByPersonAndRoom(IEnumerable<Article> list) {
+            var order1 = list.OrderBy(f => f.Room.Name).ToList();
+            var order2 = order1.OrderBy(f => f.Room.ResponsiblePerson).ToList();
+            return order2;
+        }
+
+        #endregion
 
         #region EditForm
 
@@ -221,7 +232,6 @@ namespace Client.Site.Controls.RoomTree {
                 } else {
                     this.EditForm.Visible = true;
                     this.txtNodeName.Text = this.RadTreeView1.SelectedNode.Text;
-
                     //Additional form for room
                     if (ObjectContext.GetObjectType(this.SelectedRoomTreeItem.DataItem.GetType()) == typeof(Room)) {
                         Room selectedRoom = this.SelectedRoomTreeItem.DataItem as Room;
@@ -264,7 +274,7 @@ namespace Client.Site.Controls.RoomTree {
                     Building selectedBuilding = this.SelectedRoomTreeItem.DataItem as Building;
 
                     //Dont allow duplicates
-                    if (Building.GetByName(this.txtNodeName.Text) == null) {
+                    if (!this.SelectedRoomTreeItem.IsNew || Building.GetByName(this.txtNodeName.Text) == null) {
                         if (this.SelectedRoomTreeItem.Value.Contains("-")) {
                             EntityFactory.Context.Buildings.Add(selectedBuilding);
                         }
@@ -279,7 +289,7 @@ namespace Client.Site.Controls.RoomTree {
                     Floor selectedFloor = this.SelectedRoomTreeItem.DataItem as Floor;
 
                     //Dont allow duplicates
-                    if (!Floor.GetByNameAndBuilding(this.txtNodeName.Text, this.SelectedRoomTreeItem.ParentNode.Text).Any()) {
+                    if (!this.SelectedRoomTreeItem.IsNew || !Floor.GetByNameAndBuilding(this.txtNodeName.Text, this.SelectedRoomTreeItem.ParentNode.Text).Any()) {
                         if (this.SelectedRoomTreeItem.Value.Contains("-")) {
                             selectedFloor.Building = this.RoomTreeItems.Where(i => i.Value == this.SelectedRoomTreeItem.ParentNode.Value
                                 && ObjectContext.GetObjectType(i.DataItem.GetType()) == typeof(Building)).SingleOrDefault().DataItem as Building;
@@ -296,7 +306,7 @@ namespace Client.Site.Controls.RoomTree {
                     Room selectedRoom = this.SelectedRoomTreeItem.DataItem as Room;
 
                     //Dont allow duplicates
-                    if (!Room.GetByNameAndFloorAndBuilding(this.txtNodeName.Text, this.SelectedRoomTreeItem.ParentNode.Text, this.SelectedRoomTreeItem.ParentNode.ParentNode.Text).Any()) {
+                    if (!this.SelectedRoomTreeItem.IsNew || !Room.GetByNameAndFloorAndBuilding(this.txtNodeName.Text, this.SelectedRoomTreeItem.ParentNode.Text, this.SelectedRoomTreeItem.ParentNode.ParentNode.Text).Any()) {
                         if (this.SelectedRoomTreeItem.Value.Contains("-")) {
                             selectedRoom.Floor = this.RoomTreeItems.Where(i => i.Value == this.SelectedRoomTreeItem.ParentNode.Value
                                 && ObjectContext.GetObjectType(i.DataItem.GetType()) == typeof(Floor)).SingleOrDefault().DataItem as Floor;
@@ -313,6 +323,7 @@ namespace Client.Site.Controls.RoomTree {
                 }
                 this.RadTreeView1.SelectedNode.Text = this.txtNodeName.Text;
                 EntityFactory.Context.SaveChanges();
+                this.SelectedRoomTreeItem.IsNew = false;
                 this.SelectedItem = this.RadTreeView1.SelectedNode;
                 toggleButtons();
             }
@@ -408,10 +419,14 @@ namespace Client.Site.Controls.RoomTree {
             newNode.Attributes["DataType"] = ObjectContext.GetObjectType(dataItem.GetType()).ToString();
             newNode.Value = Guid.NewGuid().ToString();
             newNode.Selected = true;
+            newNode.IsNew = true;
 
             this.SelectedItem = newNode;
             this.RadTreeView1.SelectedNode.Nodes.Add(newNode);
             this.RoomTreeItems.Add(newNode);
+
+            this.RadTreeView1.UncheckAllNodes();
+            this.CheckedItems = null;
 
             this.updateEditForm();
             this.txtNodeName.Focus();
@@ -436,7 +451,8 @@ namespace Client.Site.Controls.RoomTree {
                     }
                 }
                 this.CheckedItems = null;
-                Response.Redirect("~/Site/Administrator/ReportView.aspx");
+                this.SiteMaster.ReportDataSource = orderListByPersonAndRoom(this.SiteMaster.ReportDataSource);
+                Response.Redirect("~/Site/Administrator/Report/ReportView.aspx");
             }
                 //Get selecteditem articles and add to report datasource
             else if (this.SelectedRoomTreeItem != null && this.SelectedRoomTreeItem.DataItem != null) {
@@ -451,7 +467,8 @@ namespace Client.Site.Controls.RoomTree {
                     this.SiteMaster.ReportDataSource.AddRange(room.Articles);
                 }
                 this.CheckedItems = null;
-                Response.Redirect("~/Site/Administrator/ReportView.aspx");
+                this.SiteMaster.ReportDataSource = orderListByPersonAndRoom(this.SiteMaster.ReportDataSource);
+                Response.Redirect("~/Site/Administrator/Report/ReportView.aspx");
             }
         }
 
@@ -481,7 +498,6 @@ namespace Client.Site.Controls.RoomTree {
                 } else {
                     this.CheckedItems.Remove(this.SelectedRoomTreeItem);
                 }
-
                 toggleButtons();
             }
         }

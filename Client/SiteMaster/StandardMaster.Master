@@ -27,7 +27,7 @@
                 <asp:Label ID="lblInfoUser" runat="server" Text=""></asp:Label>
             </div>
             <div class="Body_Div">
-                <asp:ContentPlaceHolder ID="ContentPlaceHolder" runat="server" />
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder" runat="server"/>
             </div>
             <div class="Footer_Div">
             </div>

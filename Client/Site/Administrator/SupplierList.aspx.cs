@@ -22,9 +22,6 @@ namespace Client.Site.Administrator
             }
 
             SiteMaster.StandardMaster.InfoText = "Lieferanten - Verwaltung";
-            if (!IsPostBack) {
-                bindData();
-            }
         }
 
         public CustomMaster SiteMaster {
@@ -32,11 +29,6 @@ namespace Client.Site.Administrator
                 CustomMaster mm = (CustomMaster)Page.Master;
                 return mm;
             }
-        }
-
-        private void bindData() {
-            this.rgSupplierlist.DataSource = Supplier.GetAll().ToList();
-            this.rgSupplierlist.DataBind();
         }
 
         protected void rgCategories_ItemCommand(object sender, Telerik.Web.UI.GridCommandEventArgs e)
@@ -58,7 +50,6 @@ namespace Client.Site.Administrator
                     } else {
                         supplierToDelete.Delete();
                         EntityFactory.Context.SaveChanges();
-                        bindData();
                     }
                 }
             }

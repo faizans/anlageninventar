@@ -15,8 +15,9 @@
             <!-- Amount -->
             <div class="input_form_row">
                 <asp:Label ID="Label3" runat="server" Text="Anzahl" CssClass="element_label"></asp:Label>
-                <telerik:RadNumericTextBox ID="rtbAmount" runat="server" Width="300px"
+                <telerik:RadNumericTextBox ID="rtbAmount" runat="server" Width="300px" MinValue="0"
                     OnTextChanged="rtbAmount_TextChanged" AutoPostBack="true" CausesValidation="false">
+                     <NumberFormat GroupSeparator="" DecimalDigits="0" /> 
                 </telerik:RadNumericTextBox>
                 <asp:RequiredFieldValidator ID="rfvAmount" runat="server" ErrorMessage="Eingabe benötigt." ControlToValidate="rtbAmount" Display="Dynamic" />
             </div>
@@ -29,23 +30,18 @@
                 </div>
             </asp:Panel>
 
-            <asp:Panel runat="server" ID="GroupPanel" Visible="false">
                 <!-- Group Name -->
                 <div class="input_form_row">
                     <asp:Label ID="Label6" runat="server" Text="Gruppenname" CssClass="element_label"></asp:Label>
-                    <telerik:RadTextBox ID="rtbGroupName" runat="server" Width="300px" ReadOnly="false"></telerik:RadTextBox>
+                    <telerik:RadComboBox ID="rcbArticleCategory" runat="server" Width="300px"
+                        DataValueField="ArticleCategoryId" DataTextField="Name" CausesValidation="false"
+                        EmptyMessage="- Bitte auswählen -">
+                    </telerik:RadComboBox>
                 </div>
-
-                <!-- Group Code -->
-                <div class="input_form_row">
-                    <asp:Label ID="lblGroupBarCode" runat="server" Text="Gruppencode" CssClass="element_label" Visible="false"></asp:Label>
-                    <telerik:RadTextBox ID="rtbGroupBarcode" runat="server" Width="300px" ReadOnly="true" Visible="false"></telerik:RadTextBox>
-                </div>
-            </asp:Panel>
 
             <!-- Price -->
             <div class="input_form_row">
-                <asp:Label ID="Label4" runat="server" Text="Preis" CssClass="element_label"></asp:Label>
+                <asp:Label ID="Label4" runat="server" Text="Gesamtpreis" CssClass="element_label"></asp:Label>
                 <telerik:RadNumericTextBox ID="rtbPrice" runat="server" Width="300px"></telerik:RadNumericTextBox>
                 <asp:RequiredFieldValidator ID="rfvPrice" runat="server" ErrorMessage="Eingabe benötigt." ControlToValidate="rtbPrice" Display="Dynamic" />
             </div>
@@ -108,15 +104,6 @@
                 </telerik:RadComboBox>
             </div>
 
-            <!-- ArticleCategory -->
-            <div class="input_form_row">
-                <asp:Label ID="Label9" runat="server" Text="Aritkelkategorie" CssClass="element_label"></asp:Label>
-                <telerik:RadComboBox ID="rcbArticleCategory" runat="server" Width="300px"
-                    DataValueField="ArticleCategoryId" DataTextField="Name" CausesValidation="false"
-                    EmptyMessage="- Bitte auswählen -">
-                </telerik:RadComboBox>
-            </div>
-
             <!-- InsuranceCategory -->
             <div class="input_form_row">
                 <asp:Label ID="Label10" runat="server" Text="Versicherungskategorie" CssClass="element_label"></asp:Label>
@@ -136,13 +123,13 @@
                 </telerik:RadComboBox>
             </div>
             <!-- Depreciation -->
-            <div class="input_form_row">
+            <%--<div class="input_form_row">
                 <asp:Label ID="Label12" runat="server" Text="Interval" CssClass="element_label"></asp:Label>
                 <telerik:RadComboBox ID="rcbDepreciationInterval" runat="server" Width="300px"
                     DataValueField="DepreciationId" DataTextField="Name" CausesValidation="false"
                     EmptyMessage="- Bitte auswählen -">
                 </telerik:RadComboBox>
-            </div>
+            </div>--%>
 
             <!-- Old Barcode -->
             <div class="input_form_row">

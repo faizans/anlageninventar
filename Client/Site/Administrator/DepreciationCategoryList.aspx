@@ -23,8 +23,8 @@
                     </telerik:GridBoundColumn>
                     <telerik:GridBoundColumn DataField="Name" HeaderText="Name" SortExpression="Name" UniqueName="Name" FilterControlAltText="Filter Name column">
                     </telerik:GridBoundColumn>
-                    <telerik:GridCheckBoxColumn DataField="IsDefault" HeaderText="Standard" SortExpression="IsDefault" UniqueName="IsDefault" FilterControlAltText="Filter IsDefault column">
-                    </telerik:GridCheckBoxColumn>
+                    <telerik:GridBoundColumn DataField="DepreciationSpan" HeaderText="Zeitspanne" SortExpression="DepreciationSpan" UniqueName="DepreciationSpan" FilterControlAltText="Filter DepreciationSpan column">
+                    </telerik:GridBoundColumn>
                 </Columns>
             </MasterTableView>
 
@@ -35,7 +35,19 @@
     </telerik:RadWindowManager>
     <script>
         function alertCallBackFn(arg) {
+            
+        }
 
+        function OnClientClicking(sender, args) {
+            var callBackFunction = Function.createDelegate(sender, function (argument) {
+                if (argument) {
+                    this.click();
+                }
+            });
+
+            var text = "Sind Sie sicher dass Sie die Kategorie entfernen wollen?";
+            radconfirm(text, callBackFunction, 300, 100, null, "Löschen");
+            args.set_cancel(true);
         }
 
     </script>

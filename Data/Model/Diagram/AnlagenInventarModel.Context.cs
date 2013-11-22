@@ -32,13 +32,14 @@ namespace Data.Model.Diagram
         public DbSet<Building> Buildings { get; set; }
         public DbSet<Depreciation> Depreciations { get; set; }
         public DbSet<DepreciationCategory> DepreciationCategories { get; set; }
+        public DbSet<FilterField> FilterFields { get; set; }
         public DbSet<Floor> Floors { get; set; }
         public DbSet<InsuranceCategory> InsuranceCategories { get; set; }
+        public DbSet<LatestBarCode> LatestBarCodes { get; set; }
+        public DbSet<PredefinedFilter> PredefinedFilters { get; set; }
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<SupplierBranch> SupplierBranches { get; set; }
         public DbSet<sysdiagram> sysdiagrams { get; set; }
-        public DbSet<FilterField> FilterFields { get; set; }
-        public DbSet<LatestBarCode> LatestBarCodes { get; set; }
     }
 }

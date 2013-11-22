@@ -15,7 +15,7 @@
                 <asp:Label ID="Label2" runat="server" Text="" CssClass="element_label"></asp:Label>
             </div>
             <div class="input_form_row">
-                <asp:Label ID="Label6" runat="server" Text="Standorte" CssClass="element_label"></asp:Label>
+                <asp:Label ID="Label6" runat="server" Text="Filialenstandort" CssClass="element_label"></asp:Label>
                 <div style="float: left;">
                     <uc1:ListBoxControl runat="server" ID="ListBoxControl"
                         OnSelectedIndexChanged="ListBoxControl_SelectedIndexChanged"
@@ -24,13 +24,13 @@
                 </div>
             </div>
             <div class="input_form_row">
-                <asp:Label ID="Label4" runat="server" Text="Ort" CssClass="element_label"></asp:Label>
-                <telerik:RadTextBox ID="rtbBranchPlace" runat="server" Width="300px" Enabled="false">
+                <asp:Label ID="Label5" runat="server" Text="PLZ" CssClass="element_label"></asp:Label>
+                <telerik:RadTextBox ID="rtbBranchPlz" runat="server" Width="300px" Enabled="false">
                 </telerik:RadTextBox>
             </div>
             <div class="input_form_row">
-                <asp:Label ID="Label5" runat="server" Text="PLZ" CssClass="element_label"></asp:Label>
-                <telerik:RadTextBox ID="rtbBranchPlz" runat="server" Width="300px" Enabled="false">
+                <asp:Label ID="Label4" runat="server" Text="Ort" CssClass="element_label"></asp:Label>
+                <telerik:RadTextBox ID="rtbBranchPlace" runat="server" Width="300px" Enabled="false">
                 </telerik:RadTextBox>
             </div>
             <div class="input_form_row">
@@ -43,8 +43,8 @@
             </div>
         </div>
         <div class="input_interaction_row">
-            <telerik:RadButton ID="btnBack" runat="server" Text="Back" OnClick="btnBack_Click" CausesValidation="false" />
-            <telerik:RadButton ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" />
+            <telerik:RadButton ID="btnBack" runat="server" Text="Zurück" OnClick="btnBack_Click" CausesValidation="false" />
+            <telerik:RadButton ID="btnSave" runat="server" Text="Speichern" OnClick="btnSave_Click" />
         </div>
     </telerik:RadAjaxPanel>
     <telerik:RadWindowManager ID="RadWindowManager1" runat="server">

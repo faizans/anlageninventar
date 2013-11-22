@@ -16,7 +16,7 @@ namespace Data.Model.Diagram
     {
         public ArticleCategory()
         {
-            this.Articles = new HashSet<Article>();
+            this.ArticleGroups = new HashSet<ArticleGroup>();
         }
     
         public int ArticleCategoryId { get; set; }
@@ -24,6 +24,6 @@ namespace Data.Model.Diagram
         public string Code { get; set; }
         public Nullable<bool> IsDefault { get; set; }
     
-        public virtual ICollection<Article> Articles { get; set; }
+        public virtual ICollection<ArticleGroup> ArticleGroups { get; set; }
     }
 }

@@ -11,6 +11,8 @@ namespace Data.Model.Diagram {
 
         #region Properties
 
+        public Boolean UseStoredValues { get; set; }
+
         private DateTime depreciationTime = DateTime.Now;
         /// <summary>
         /// Set the year for the depreciation calculation
@@ -26,25 +28,83 @@ namespace Data.Model.Diagram {
 
         private double? depreciationValue = 0;
         /// <summary>
-        /// The value of this item will only be set if depreciation is null
+        /// Returns the current value of the article
         /// </summary>
         public double? DepreciationValue {
             get {
-                if (this.Depreciation != null) {
-                    int depSpan = this.Depreciation.AdditionalEndDate.Value.Year - this.Depreciation.AdditionalStartDate.Value.Year;
-                    int currentSpan = DepreciationTime.Year - this.Depreciation.AdditionalStartDate.Value.Year > 0 ?  DepreciationTime.Year - this.Depreciation.AdditionalStartDate.Value.Year : 1;
-                    if (currentSpan <= depSpan) {
-                        return (this.Value / depSpan) * (currentSpan);
+
+                if (this.UseStoredValues) {
+                    return this.depreciationValue;
+                }
+
+                if (this.DepreciationCategory != null && this.DepreciationCategory.DepreciationSpan > 0) {
+                    if (DepreciationTime.Year < this.AcquisitionDate.Value.Year) {
+                        depreciationValue = this.Value;
                     }
-                    return null;
+                    int currentSpan = DepreciationTime.Year - this.AcquisitionDate.Value.Year;
+                    int depSpan = int.Parse(this.DepreciationCategory.DepreciationSpan.ToString());
+                    if (currentSpan <= depSpan) {
+                        depreciationValue = this.Value - ((this.Value / depSpan) * (currentSpan));
+                    } else {
+                        depreciationValue = 0;
+                    }
+                } else {
+                    depreciationValue = this.Value;
                 }
                 return depreciationValue;
             }
             set {
-                if(this.Depreciation == null)
-                    this.depreciationValue = value;
+                this.depreciationValue = value;
             }
         }
+
+        private double? averageDepreciation;
+        public double? AverageDepreciation {
+            get {
+
+                if (this.UseStoredValues) {
+                    return averageDepreciation;
+                }
+
+                if (this.DepreciationCategory != null && this.DepreciationCategory.DepreciationSpan > 0) {
+                    averageDepreciation = (this.Value / this.DepreciationCategory.DepreciationSpan);
+                } else {
+                    averageDepreciation = 0;
+                }
+                return averageDepreciation;
+            }
+        }
+
+        private double? cumulatedDepreciation;
+        public double? CumulatedDepreciation {
+            get {
+                if (this.UseStoredValues) {
+                    return this.cumulatedDepreciation;
+                }
+                cumulatedDepreciation = this.Value - this.DepreciationValue;
+                return cumulatedDepreciation;
+            }
+        }
+
+
+        #region WorkAround for Telerik reporting
+        //Telerik reporting grouping doesnt work on entity types (failed to compare items because of item type proxy .kjsflasjfkjsakldfj)
+        public String BuildingName {
+            get {
+                return this.Room.Floor.Building.Name;
+            }
+        }
+        public String FloorName {
+            get {
+                return this.Room.Floor.Name;
+            }
+        }
+        public String RoomName {
+            get {
+                return this.Room.Name;
+            }
+        }
+        #endregion
 
         #endregion
 
@@ -55,23 +115,39 @@ namespace Data.Model.Diagram {
 
         public static IEnumerable<Article> GetAll() {
             IP3AnlagenInventarEntities ctx = EntityFactory.Context;
-            return ctx.Articles;
+            return ctx.Articles
+                .Include("Room")
+                .Include("Room.Floor")
+                .Include("Room.Floor.Building")
+                .Include("Room.AppUsers")
+                .Include("SupplierBranch")
+                .Include("SupplierBranch.Supplier")
+                .Include("InsuranceCategory")
+                .Include("DepreciationCategory")
+                ;
         }
 
         public static List<Article> GetAllSortedByUsers() {
             IP3AnlagenInventarEntities ctx = EntityFactory.Context;
-            var sortedList = ctx.Articles.Where(a=> ! (a.IsDeleted && a.Room != null)).OrderBy(a=>a.Room.ResponsiblePerson);
+            var sortedList = Article.GetAll().Where(a => !a.IsDeleted && a.IsAvailable.Value).OrderBy(a => a.Room.ResponsiblePerson).OrderBy(a => a.Room.Name);
             return sortedList.ToList();
         }
 
         public static IEnumerable<Article> GetDeleted() {
             IP3AnlagenInventarEntities ctx = EntityFactory.Context;
-            return ctx.Articles.Where(a => a.IsDeleted);
+            var sortedList = GetAll().Where(a => a.IsDeleted).OrderBy(a => a.Name) ;
+            return sortedList;
         }
 
         public static IEnumerable<Article> GetLost() {
             IP3AnlagenInventarEntities ctx = EntityFactory.Context;
-            return ctx.Articles.Where(a => (a.IsAvailable.HasValue && !a.IsAvailable.Value));
+            var sortedList = Article.GetAll().Where(a => (a.IsAvailable.HasValue && !a.IsAvailable.Value)).OrderBy(a => a.Name);
+            return sortedList;
+        }
+
+        public static IEnumerable<Article> GetLostOrDeleted() {
+            IP3AnlagenInventarEntities ctx = EntityFactory.Context;
+            return Article.GetAll().Where(a => (a.IsAvailable.HasValue && !a.IsAvailable.Value) || (a.IsDeleted)).OrderBy(a => a.Name);
         }
 
 
@@ -81,27 +157,52 @@ namespace Data.Model.Diagram {
         /// <returns></returns>
         public static IEnumerable<Article> GetDeletedWithRestValue() {
             IP3AnlagenInventarEntities ctx = EntityFactory.Context;
-            List<Article> articles =  ctx.Articles.Where(a => a.IsDeleted).ToList();
-            articles = articles.Where(a => !a.IsDepreciated()).ToList();
+            List<Article> articles = Article.GetAll().Where(a => a.IsDeleted).ToList();
+            articles = articles.Where(a => !a.IsDepreciated() && a.IsAvailable.Value).OrderBy(a=>a.Name).ToList();
             return articles;
-        } 
+        }
 
         /// <summary>
         /// Get all articles which are not deleted
         /// </summary>
         /// <returns></returns>
+        public static List<Article> GetAllNotDeleted() {
+            IP3AnlagenInventarEntities ctx = EntityFactory.Context;
+            var result = Article.GetAll().Where(a => !a.IsDeleted).OrderBy(a => a.Name).ToList();
+            return result;
+        }
+
+        /// <summary>
+        /// Get all articles which are available
+        /// </summary>
+        /// <returns></returns>
         public static List<Article> GetAvailable() {
             IP3AnlagenInventarEntities ctx = EntityFactory.Context;
-            return ctx.Articles.Where(a => !a.IsDeleted).ToList();
+            return Article.GetAll().Where(a => !a.IsDeleted && a.IsAvailable.Value).OrderBy(a => a.Name).ToList();
+        }
+
+        public static List<Article> GetEntrances(int year) {
+            IP3AnlagenInventarEntities ctx = EntityFactory.Context;
+            return Article.GetAll().Where(a => (a.AcquisitionDate.HasValue && a.AcquisitionDate.Value.Year == year)).OrderBy(a => a.Name).ToList();
+        }
+
+        public static List<Article> GetDisposals(int year) {
+            IP3AnlagenInventarEntities ctx = EntityFactory.Context;
+            return Article.GetAll().Where(a => (a.LastChangest.HasValue && a.LastChangest.Value.Year == year)).OrderBy(a => a.Name).ToList();
         }
 
         public Boolean IsDepreciated() {
-            return this.DepreciationValue == 0;
+            if (this.DepreciationCategory != null && this.DepreciationCategory.DepreciationSpan > 0) {
+                return this.DepreciationValue == 0;
+            }
+            return false;
         }
 
         public void Delete() {
             IP3AnlagenInventarEntities ctx = EntityFactory.Context;
-            ctx.Articles.Where(p => p.ArticleId == this.ArticleId).SingleOrDefault().IsDeleted = true;
+            Article article = ctx.Articles.Where(p => p.ArticleId == this.ArticleId).SingleOrDefault();
+            article.IsDeleted = true;
+            article.LastChangest = DateTime.Now;
         }
 
         /// <summary>

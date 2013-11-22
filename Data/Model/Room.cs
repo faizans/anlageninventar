@@ -9,6 +9,13 @@ using System.Threading.Tasks;
 
 namespace Data.Model.Diagram {
     public partial class Room {
+
+        public String Path {
+            get {
+                return this.Floor.Building.Name + "/" + this.Floor.Name + "/" + this.Name;
+            }
+        }
+
         public String RoomPath {
             get {
                 Floor parent = Floor.GetById(this.FloorId);

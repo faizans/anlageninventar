@@ -103,15 +103,6 @@ namespace Client.Site.Administrator {
         protected global::Telerik.Web.UI.RadTextBox rtbBarcode;
         
         /// <summary>
-        /// GroupPanel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel GroupPanel;
-        
-        /// <summary>
         /// Label6 control.
         /// </summary>
         /// <remarks>
@@ -121,31 +112,13 @@ namespace Client.Site.Administrator {
         protected global::System.Web.UI.WebControls.Label Label6;
         
         /// <summary>
-        /// rtbGroupName control.
+        /// rcbArticleCategory control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadTextBox rtbGroupName;
-        
-        /// <summary>
-        /// lblGroupBarCode control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblGroupBarCode;
-        
-        /// <summary>
-        /// rtbGroupBarcode control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Telerik.Web.UI.RadTextBox rtbGroupBarcode;
+        protected global::Telerik.Web.UI.RadComboBox rcbArticleCategory;
         
         /// <summary>
         /// Label4 control.
@@ -310,24 +283,6 @@ namespace Client.Site.Administrator {
         protected global::Telerik.Web.UI.RadComboBox rcbSupplierBranch;
         
         /// <summary>
-        /// Label9 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label9;
-        
-        /// <summary>
-        /// rcbArticleCategory control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox rcbArticleCategory;
-        
-        /// <summary>
         /// Label10 control.
         /// </summary>
         /// <remarks>
@@ -362,24 +317,6 @@ namespace Client.Site.Administrator {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Telerik.Web.UI.RadComboBox rcbDepreciationCategory;
-        
-        /// <summary>
-        /// Label12 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label12;
-        
-        /// <summary>
-        /// rcbDepreciationInterval control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox rcbDepreciationInterval;
         
         /// <summary>
         /// Label13 control.

@@ -14,7 +14,7 @@ using Client.Util;
 using Data.Enum;
 
 namespace Client.Site.Administrator {
-    public partial class ReportView : System.Web.UI.Page {
+    public partial class BigReport : System.Web.UI.Page {
 
         #region Properties
 
@@ -27,6 +27,18 @@ namespace Client.Site.Administrator {
             }
             set {
                 Session[SessionName.ReportYear.ToString()] = value;
+            }
+        }
+
+        private String SelectedTelerikTemplate {
+            get {
+                if (Session[SessionName.SelectedTelerikTemplate.ToString()] == null) {
+                    Session[SessionName.SelectedTelerikTemplate.ToString()] = Constants.TELERIK_REPORT_TEMPLATES[0];
+                }
+                return Session[SessionName.SelectedTelerikTemplate.ToString()].ToString();
+            }
+            set {
+                Session[SessionName.SelectedTelerikTemplate.ToString()] = value;
             }
         }
 
@@ -52,10 +64,15 @@ namespace Client.Site.Administrator {
         #endregion
 
         protected void Page_Load(object sender, EventArgs e) {
-
-            //Check if the set user is allowed to access
+           //Check if the set user is allowed to access
             if (this.SiteMaster.User == null || !this.SiteMaster.User.IsAdmin || !this.SiteMaster.User.IsActive) {
                 Response.Redirect(Constants.AUTHORIZATION_WINDOWS_LOGIN);
+            }
+
+            if (!IsPostBack) {
+                this.SelectedTelerikTemplate = null;
+                this.SelectedTemplate = null;
+                this.ReportYear = DateTime.Now.Year;
             }
 
             SiteMaster.StandardMaster.InfoText = "Report";
@@ -73,6 +90,11 @@ namespace Client.Site.Administrator {
             rlbExcelTemplate.DataSource = ExcelExporter.GetTemplateFiles(Server);
             rlbExcelTemplate.DataBind();
             rlbExcelTemplate.Items.Where(i =>i.Text == this.SelectedTemplate).SingleOrDefault().Selected=true;
+
+            RadComboBox rlbTelerikTemplate = cmdItem.FindControl("rcbTelerikReport") as RadComboBox;
+            rlbTelerikTemplate.DataSource = Constants.TELERIK_REPORT_TEMPLATES;
+            rlbTelerikTemplate.DataBind();
+            rlbTelerikTemplate.Items.Where(i => i.Text == this.SelectedTelerikTemplate).SingleOrDefault().Selected = true;
         }
 
         
@@ -80,6 +102,15 @@ namespace Client.Site.Administrator {
 
         protected void rgReport_PreRender(object sender, EventArgs e) {
             bindData();
+            fixGridScroll();
+        }
+
+
+        private void fixGridScroll() {
+            rgReport.Width = Unit.Percentage(100);
+            rgReport.ClientSettings.Scrolling.AllowScroll = true;
+            rgReport.ClientSettings.Scrolling.ScrollHeight = 250;
+            rgReport.MasterTableView.Width = Unit.Percentage(140);
         }
 
         protected void btnExportToExcel_Click(object sender, EventArgs e) {
@@ -94,11 +125,17 @@ namespace Client.Site.Administrator {
         protected void rgReport_DataBound(object sender, EventArgs e) {
             if (rgReport.MasterTableView.GetItems(GridItemType.Footer) != null && rgReport.MasterTableView.GetItems(GridItemType.Footer).Count() > 0) {
                 GridFooterItem footerItem = rgReport.MasterTableView.GetItems(GridItemType.Footer).ElementAt(0) as GridFooterItem;
-                double? total = this.rgReport.MasterTableView.GetItems(GridItemType.Item, GridItemType.AlternatingItem).Sum(i => (i.DataItem as Article).Value);
-                double? depTotal = this.rgReport.MasterTableView.GetItems(GridItemType.Item, GridItemType.AlternatingItem).Sum(i => (i.DataItem as Article).DepreciationValue);
 
-                footerItem["Value"].Text = Math.Round(total.Value, 2).ToString();
-                footerItem["DepreciationValue"].Text = Math.Round(depTotal.Value, 2).ToString();
+                List<Article> ReportItems = ArticleGridHelper.GetReportItems(this.rgReport, this.SiteMaster.ReportDataSource, false);
+                double? total = ReportItems.Sum(i => i.Value);
+                double? depTotal = ReportItems.Sum(i => i.DepreciationValue);
+                double? avDepTotal = ReportItems.Sum(i => i.AverageDepreciation);
+                double? cumDepTotal = ReportItems.Sum(i => i.CumulatedDepreciation);
+
+                footerItem["Value"].Text = Math.Round(total.Value, 2).ToString(Constants.NUMBER_FORMAT, Constants.NUMBER_GROUP_FORMAT);
+                footerItem["DepreciationValue"].Text = Math.Round(depTotal.Value, 2).ToString(Constants.NUMBER_FORMAT, Constants.NUMBER_GROUP_FORMAT);
+                footerItem["AverageDepreciation"].Text = Math.Round(avDepTotal.Value, 2).ToString(Constants.NUMBER_FORMAT, Constants.NUMBER_GROUP_FORMAT);
+                footerItem["CumulatedDepreciation"].Text = Math.Round(cumDepTotal.Value, 2).ToString(Constants.NUMBER_FORMAT, Constants.NUMBER_GROUP_FORMAT);
                 footerItem["Name"].Text = "Total:";
             }
         }
@@ -117,6 +154,15 @@ namespace Client.Site.Administrator {
 
         protected void rcbExcelTemplate_SelectedIndexChanged(object sender, RadComboBoxSelectedIndexChangedEventArgs e) {
             this.SelectedTemplate = e.Text;
+        }
+
+        protected void btnTelerikExport_Click(object sender, EventArgs e) {
+            this.SiteMaster.ExportItems = ArticleGridHelper.GetReportItems(this.rgReport, this.SiteMaster.ReportDataSource, false);
+            Response.Redirect("~/Site/Administrator/Report/PrintView.aspx?template=" + this.SelectedTelerikTemplate);
+        }
+
+        protected void rcbTelerikReport_SelectedIndexChanged(object sender, RadComboBoxSelectedIndexChangedEventArgs e) {
+            this.SelectedTelerikTemplate = e.Text;
         }
 
         #endregion  

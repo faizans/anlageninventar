@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Data.Enum;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 
@@ -19,5 +21,19 @@ namespace Client.Util {
         public static string EXCEL_TEMPLATE_NAME = "ReportTemplate.xls";
         public static string EXCEL_EXPORT_NAME = "ExcelReport.xls";
         public static string EXCEL_TEMPLATE_FOLDER = "~/ExcelTemplates/";
+
+        public static string TELERIK_TEMPLATE_FOLDER = "~/ExcelTemplates/";
+
+        public static List<String> TELERIK_REPORT_TEMPLATES {
+            get {
+                return Enum.GetValues(typeof(TelerikReports)).Cast<TelerikReports>().Select(e => e.ToString()).ToList();
+            }
+        }
+
+        public static NumberFormatInfo NUMBER_GROUP_FORMAT = new NumberFormatInfo() {
+            NumberGroupSeparator = "'"
+        };
+
+        public static string NUMBER_FORMAT = "##,##0.00";
     }
 }

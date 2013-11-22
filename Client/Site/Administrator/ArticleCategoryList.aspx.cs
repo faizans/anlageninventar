@@ -40,7 +40,7 @@ namespace Client.Site.Administrator {
                     GridDataItem dataItem = e.Item as GridDataItem;
 
                     ArticleCategory categoryToDelete = ArticleCategory.GetById(int.Parse(dataItem.GetDataKeyValue("ArticleCategoryId").ToString()));
-                    if (categoryToDelete.HasArticles()) {
+                    if (categoryToDelete.ArticleGroups.Any()) {
                         RadWindowManager1.RadAlert(String.Format("{0} kann nicht gelöscht werden da Artikel damit versehen sind", categoryToDelete.Name), 300, 130, "Operation nicht möglich", "alertCallBackFn");
                     } else {
                         categoryToDelete.Delete();

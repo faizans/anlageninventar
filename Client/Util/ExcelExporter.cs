@@ -37,6 +37,12 @@ namespace Client.Util {
         int depreciationValueCellIndex = 0;
         int acquisitionDateCellIndex = 0;
         int roomResponsibleEmailCellIndex = 0;
+        //
+        int floorNameCellIndex = 0;
+        int buildingNameCellIndex = 0;
+        int yearCellIndex = 0;
+        int averageDepreciationCellIndex = 0;
+        int cumulatedDepreciationCellIndex = 0;
 
         int nameRowIndex = 0;
         int valueRowIndex = 0;
@@ -49,6 +55,13 @@ namespace Client.Util {
         int depreciationValueRowIndex = 0;
         int acquisitionDateRowIndex = 0;
         int roomResponsibleEmailRowIndex = 0;
+        //
+        int floorNameRowIndex = 0;
+        int buildingNameRowIndex = 0;
+        int yearRowIndex = 0;
+        int averageDepreciationRowIndex = 0;
+        int cumulatedDepreciationRowIndex = 0;
+
 
         int deepestRowIndex = 0;
 
@@ -147,6 +160,16 @@ namespace Client.Util {
                                     depreciationValueRowIndex = row.Row;
                                     deepestRowIndex = depreciationValueRowIndex > deepestRowIndex ? depreciationValueRowIndex : deepestRowIndex;
                                     break;
+                                case "&=Depreciation.Average":
+                                    averageDepreciationCellIndex = cellIndex;
+                                    averageDepreciationRowIndex = row.Row;
+                                    deepestRowIndex = averageDepreciationRowIndex > deepestRowIndex ? averageDepreciationRowIndex : deepestRowIndex;
+                                    break;
+                                case "&=Depreciation.Cumulated":
+                                    cumulatedDepreciationCellIndex = cellIndex;
+                                    cumulatedDepreciationRowIndex = row.Row;
+                                    deepestRowIndex = cumulatedDepreciationRowIndex > deepestRowIndex ? cumulatedDepreciationRowIndex : deepestRowIndex;
+                                    break;
                                 case "&=AcquisitionDate":
                                     acquisitionDateCellIndex = cellIndex;
                                     acquisitionDateRowIndex = row.Row;
@@ -157,11 +180,27 @@ namespace Client.Util {
                                     roomResponsibleEmailRowIndex = row.Row;
                                     deepestRowIndex = roomResponsibleEmailRowIndex > deepestRowIndex ? roomResponsibleEmailRowIndex : deepestRowIndex;
                                     break;
+                                case "&=Floor.Name":
+                                    floorNameCellIndex = cellIndex;
+                                    floorNameRowIndex = row.Row;
+                                    deepestRowIndex = floorNameRowIndex > deepestRowIndex ? floorNameRowIndex : deepestRowIndex;
+                                    break;
+                                case "&=Building.Name":
+                                    buildingNameCellIndex = cellIndex;
+                                    buildingNameRowIndex = row.Row;
+                                    deepestRowIndex = buildingNameRowIndex > deepestRowIndex ? buildingNameRowIndex : deepestRowIndex;
+                                    break;
+                                case "&=Year":
+                                    yearCellIndex = cellIndex;
+                                    yearRowIndex = row.Row;
+                                    deepestRowIndex = yearRowIndex > deepestRowIndex ? yearRowIndex : deepestRowIndex;
+                                    break;
+
+
                             }
                             cellIndex++;
                         }
                     }
-
 
                     int counter = 0;
                     foreach (Article article in this.DataSource) {
@@ -176,26 +215,38 @@ namespace Client.Util {
                             oWorksheet.Cells[barCodeRowIndex++, barCodeCellIndex] = article.Barcode;
                         //Article.Name
                         if (articleGroupNameCellIndex > 0)
-                            oWorksheet.Cells[articleGroupNameRowIndex++, articleGroupNameCellIndex] = article.ArticleGroup != null ? article.ArticleGroup.Name : "";
+                            oWorksheet.Cells[articleGroupNameRowIndex++, articleGroupNameCellIndex] = article.ArticleGroup != null ? article.ArticleGroup.ArticleCategory.Name : "";
                         //Article.Barcode
                         if (articleGroupBarCodeCellIndex > 0)
                             oWorksheet.Cells[articleGroupBarCodeRowIndex++, articleGroupBarCodeCellIndex] = article.ArticleGroup != null ? article.ArticleGroup.Barcode : "";
                         //Supplier.Name
                         if (supplierNameCellIndex > 0)
                             oWorksheet.Cells[supplierNameRowIndex++, supplierNameCellIndex] = article.SupplierBranch != null ? article.SupplierBranch.Supplier.Name : "";
+                        //Building.Name
+                        if (buildingNameCellIndex > 0)
+                            oWorksheet.Cells[buildingNameRowIndex++, buildingNameCellIndex] = article.Room.Floor.Building != null ? article.Room.Floor.Building.Name : "";
+                        //Floor.Name
+                        if (floorNameCellIndex > 0)
+                            oWorksheet.Cells[floorNameRowIndex++, floorNameCellIndex] = article.Room.Floor != null ? article.Room.Floor.Name : "";
                         //Room.Naem
                         if (roomNameCellIndex > 0)
                             oWorksheet.Cells[roomNameRowIndex++, roomNameCellIndex] = article.Room != null ? article.Room.Name : "";
                         //Room.Path
                         if (roomPathCellIndex > 0)
                             oWorksheet.Cells[roomPathRowIndex++, roomPathCellIndex] = article.Room != null ? article.Room.RoomPath : "";
-                        //Depreciation.Value
-                        if (depreciationValueCellIndex > 0)
-                            oWorksheet.Cells[depreciationValueRowIndex++, depreciationValueCellIndex] = article.DepreciationValue.HasValue ? article.DepreciationValue.Value.ToString() : "";
-                        //Depreciation.Value
+                        //Acqusition
                         if (acquisitionDateCellIndex > 0)
                             oWorksheet.Cells[acquisitionDateRowIndex++, acquisitionDateCellIndex] = article.AcquisitionDate.HasValue ? article.AcquisitionDate.Value.ToShortDateString() : null;
                         //Depreciation.Value
+                        if (depreciationValueCellIndex > 0)
+                            oWorksheet.Cells[depreciationValueRowIndex++, depreciationValueCellIndex] = article.DepreciationValue.HasValue ? article.DepreciationValue.Value.ToString() : "";
+                       //Depreciation.Average
+                        if (averageDepreciationCellIndex > 0)
+                            oWorksheet.Cells[averageDepreciationRowIndex++, averageDepreciationCellIndex] = article.AverageDepreciation.HasValue ? article.AverageDepreciation.Value.ToString() : "";
+                        //Depreciation.Cumulated
+                        if (cumulatedDepreciationCellIndex > 0)
+                            oWorksheet.Cells[cumulatedDepreciationRowIndex++, cumulatedDepreciationCellIndex] = article.CumulatedDepreciation.HasValue ? article.CumulatedDepreciation.Value.ToString() : "";
+                        //Room.Responsible
                         if (roomResponsibleEmailCellIndex > 0)
                             oWorksheet.Cells[roomResponsibleEmailRowIndex++, roomResponsibleEmailCellIndex] = article.Room != null ? article.Room.ResponsiblePerson : "";
 

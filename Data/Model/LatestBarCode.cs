@@ -19,7 +19,7 @@ namespace Data.Model.Diagram
 
         public static string GenerateFullBarCode() {
             LatestBarCode latest = Get();
-            string latestBarCode = latest != null ? latest.BarCode : null;
+            string latestBarCode = latest != null ? latest.BarCode : "000000.000";
 
             if (latestBarCode != null) {
 

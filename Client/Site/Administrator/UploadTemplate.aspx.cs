@@ -1,5 +1,6 @@
 ﻿using Client.SiteMaster;
 using Client.Util;
+using Data.Enum;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -56,6 +57,19 @@ namespace Client.Site.Administrator {
             if (this.rlbTemplates.SelectedItem != null) {
                 FileInfo fileToDelete = new FileInfo(this.rlbTemplates.SelectedItem.Value);
                 fileToDelete.Delete();
+            }
+        }
+
+        protected void btnHerunterladen_Click(object sender, EventArgs e) {
+            if(this.rlbTemplates.SelectedItem != null)
+                Response.Redirect("~/Site/Provider/ExcelProvider.ashx?template="+this.rlbTemplates.SelectedItem.Text+"&downloadType="+DownloadType.Template.ToString());
+        }
+
+        protected void rlbTemplates_SelectedIndexChanged(object sender, EventArgs e) {
+            if (this.rlbTemplates.SelectedItem != null) {
+                this.btnHerunterladen.Enabled = true;
+            } else {
+                this.btnHerunterladen.Enabled = false;
             }
         }
     }

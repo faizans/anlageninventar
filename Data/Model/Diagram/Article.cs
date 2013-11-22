@@ -30,15 +30,16 @@ namespace Data.Model.Diagram
         public Nullable<int> RoomId { get; set; }
         public Nullable<System.DateTime> AcquisitionDate { get; set; }
         public Nullable<int> DepreciationId { get; set; }
-        public Nullable<int> ArticleCategoryId { get; set; }
         public Nullable<int> InsuranceCategoryId { get; set; }
         public string Comment { get; set; }
         public Nullable<bool> IsAvailable { get; set; }
         public bool IsDeleted { get; set; }
+        public Nullable<int> DepreciationCategoryId { get; set; }
+        public Nullable<System.DateTime> LastChangest { get; set; }
     
-        public virtual ArticleCategory ArticleCategory { get; set; }
         public virtual ArticleGroup ArticleGroup { get; set; }
         public virtual Depreciation Depreciation { get; set; }
+        public virtual DepreciationCategory DepreciationCategory { get; set; }
         public virtual InsuranceCategory InsuranceCategory { get; set; }
         public virtual Room Room { get; set; }
         public virtual SupplierBranch SupplierBranch { get; set; }

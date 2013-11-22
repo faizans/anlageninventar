@@ -25,24 +25,71 @@ namespace Client.Site.Controls.Menu {
 
         protected void lbMenuItemClicked(object sender, EventArgs e) {
             LinkButton menuItem = (LinkButton)sender;
+            string title = null;
             //Load the datasources regarding to commandname and send to reportview
             switch (menuItem.CommandName) {
-                case "DeletedArticles":
+            
+                //-----------------------------INVENTORY REPORTS----------------------------------------//
+                case "DeletedArticles_Inventory":
                     this.SiteMaster.ReportDataSource = Article.GetDeletedWithRestValue().ToList();
+                    title = "Gelöschte Artikel";
                     break;
-                case "AllArticles":
+                case "AllArticles_Inventory":
                     this.SiteMaster.ReportDataSource = Article.GetAvailable().ToList();
+                    title = "Inventar - Alle Artikel";
                     break;
-                case "RoomChecklist":
+                case "RoomChecklist_Inventory":
                     this.SiteMaster.ReportDataSource = Article.GetAllSortedByUsers();
+                    title = "Inventar - Raumchecklist";
                     break;
-                case "NotAvailableArticles":
-                    this.SiteMaster.ReportDataSource = Article.GetLost().ToList();;
+                case "NotAvailableArticles_Inventory":
+                    this.SiteMaster.ReportDataSource = Article.GetLost().ToList();
+                    title = "Inventar - Nicht vorhandene Artikel";
+                    break;
+                case "BigReport_Inventory":
+                    this.SiteMaster.ReportDataSource = Article.GetAllNotDeleted().ToList();
+                    title = "Inventar - Alle Artikel";
+                    Response.Redirect("~/Site/Administrator/Report/BigReport.aspx?title="+title);
+                    break;
+                case "Entrances_Inventory":
+                    this.SiteMaster.ReportDataSource = Article.GetAll().ToList();
+                    title = "Inventar - Zugänge";
+                    Response.Redirect("~/Site/Administrator/Report/InAndOutReportView.aspx?type=in&title="+title);
+                    break;
+                case "Disposals_Inventory":
+                    this.SiteMaster.ReportDataSource = Article.GetLostOrDeleted().ToList();
+                    title = "Inventar - Abgänge";
+                    Response.Redirect("~/Site/Administrator/Report/InAndOutReportView.aspx?type=out&title="+title);
                     break;
 
+                //-----------------------------ACCOUNTING REPORTS----------------------------------------//
+                case "AllArticles_Accounting":
+                    this.SiteMaster.ReportDataSource = Article.GetAvailable().Where(a => a.DepreciationCategory != null && a.DepreciationCategory.DepreciationSpan > 0).ToList();
+                    title = "Anlagebuchhaltung - Alle Artikel";
+                    break;
+                case "Entrances_Accounting":
+                    this.SiteMaster.ReportDataSource = Article.GetAll().Where(a => (a.DepreciationCategory != null && a.DepreciationCategory.DepreciationSpan > 0
+                        && a.AcquisitionDate.Value.Year < (a.DepreciationCategory.DepreciationSpan + DateTime.Now.Year))).ToList();
+                    title = "Anlagebuchhaltung - Zugänge";
+                    Response.Redirect("~/Site/Administrator/Report/InAndOutReportView.aspx?type=in&title="+title);
+                    break;
+                case "Disposals_Accounting":
+                    this.SiteMaster.ReportDataSource = Article.GetLostOrDeleted().Where(a => (a.DepreciationCategory != null && a.DepreciationCategory.DepreciationSpan > 0 
+                        && a.AcquisitionDate.Value.Year < (a.DepreciationCategory.DepreciationSpan + DateTime.Now.Year))).ToList();
+                    title = "Anlagebuchhaltung - Abgänge";
+                    Response.Redirect("~/Site/Administrator/Report/InAndOutReportView.aspx?type=out&title="+title);
+                    break;
+                case "IT_Accounting":
+                    this.SiteMaster.ReportDataSource = Article.GetAll().Where(a => a.DepreciationCategory != null && a.DepreciationCategory.Name == "IT").ToList();
+                    title = "Anlagebuchhaltung - IT";
+                    break;
+                case "Mobiliar_Accounting":
+                    this.SiteMaster.ReportDataSource = Article.GetAll().Where(a => a.DepreciationCategory != null && a.DepreciationCategory.Name == "Mobiliar").ToList();
+                    title = "Anlagebuchhaltung - Mobiliar";
+                    break;
             }
 
-            Response.Redirect("~/Site/Administrator/ReportView.aspx");
+            Response.Redirect("~/Site/Administrator/Report/ReportView.aspx?title="+title);
         }
 
         #endregion

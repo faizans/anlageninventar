@@ -13,11 +13,14 @@
                     <asp:Label ID="Label2" runat="server" Text="Vorlagen" CssClass="element_label"></asp:Label>
                     <div style="float: left;">
                         <telerik:RadListBox ID="rlbTemplates" runat="server" DataValueField="FullName" DataTextField="Name" AllowDelete="true" OnDeleting="rlbTemplates_Deleting" AutoPostBackOnDelete="true"
-                            Width="200px" Height="100px">
+                            Width="200px" Height="100px" OnSelectedIndexChanged="rlbTemplates_SelectedIndexChanged" AutoPostBack="true">
                         </telerik:RadListBox>
+                        <br />
+                        <telerik:RadButton ID="btnHerunterladen" runat="server" Text="Herunterladen" Width="168px" OnClick="btnHerunterladen_Click" Enabled="false"></telerik:RadButton>
                     </div>
                 </div>
             </telerik:RadAjaxPanel>
+
             <div class="input_form_row">
                 <asp:Label ID="Label3" runat="server" Text="Neue Vorlage" CssClass="element_label"></asp:Label>
                 <div style="float: left;">

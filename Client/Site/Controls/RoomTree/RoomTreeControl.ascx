@@ -5,14 +5,14 @@
 
     <div style="margin-bottom: 20px;">
         <telerik:RadButton ID="btnAddBuilding" runat="server" Text="Neues Gebäude" OnClick="btnAddBuilding_Click" Enabled="false"></telerik:RadButton>
-        <telerik:RadButton ID="btnAddFloor" runat="server" Text="Neuer Stock" OnClick="btnAddFloor_Click" Enabled="false"></telerik:RadButton>
+        <telerik:RadButton ID="btnAddFloor" runat="server" Text="Neues Stockwerk" OnClick="btnAddFloor_Click" Enabled="false"></telerik:RadButton>
         <telerik:RadButton ID="btnAddRoom" runat="server" Text="Neuer Raum" OnClick="btnAddRoom_Click" Enabled="false"></telerik:RadButton>
         <telerik:RadButton ID="btnReport" runat="server" Text="Report" OnClick="btnReport_Click" Enabled="false"></telerik:RadButton>
         <telerik:RadButton ID="btnDelete" runat="server" Text="Löschen" OnClick="btnDelete_Click" Enabled="false"></telerik:RadButton>
     </div>
 
     <div style="margin-bottom: 20px;">
-       <asp:Label ID="lblWarning" runat="server" />
+        <asp:Label ID="lblWarning" runat="server" />
     </div>
 
     <div style="float: left; min-height: 300px; width: 300px; border: 1px solid black; padding: 10px; background-color: white;">
@@ -31,7 +31,9 @@
         <div class="content_input_form" runat="server" id="ResponsibleAttribute" visible="false">
             <div class="input_form_row">
                 <asp:Label ID="Label1" runat="server" Text="Verantwortlich" CssClass="element_label"></asp:Label>
-                <uc1:UserSearchBox runat="server" ID="UserSearchBox" Width="200px" MinimumInput="3" />
+                <telerik:RadAjaxPanel ID="RadAjaxPanel2" runat="server">
+                    <uc1:UserSearchBox runat="server" ID="UserSearchBox" Width="200px" MinimumInput="3" />
+                </telerik:RadAjaxPanel>
             </div>
         </div>
         <div class="input_interaction_row">

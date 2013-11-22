@@ -9,6 +9,7 @@
             <div class="input_form_row">
                 <asp:Label ID="Label1" runat="server" Text="Name" CssClass="element_label"></asp:Label>
                 <telerik:RadTextBox ID="rtbName" runat="server" Width="300px" ReadOnly="false"></telerik:RadTextBox>
+                <asp:RequiredFieldValidator ID="rfvName" runat="server" ErrorMessage="Eingabe benötigt." ControlToValidate="rtbName" Display="Dynamic" />
             </div>
              <div class="input_form_row">
                 <asp:Label ID="Label3" runat="server" Text="Ist Standart" CssClass="element_label"></asp:Label>
