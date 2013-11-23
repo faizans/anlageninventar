@@ -18,8 +18,8 @@ namespace Data.Enum
         ReportYear,
         SelectedTemplate,
         SelectedTelerikTemplate,
-        InOutYear
-
+        InOutYear,
+        GroupReport
     }
 
     public enum DownloadType {

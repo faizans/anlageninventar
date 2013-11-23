@@ -49,16 +49,19 @@ namespace Client.Site.Controls.Menu {
                 case "BigReport_Inventory":
                     this.SiteMaster.ReportDataSource = Article.GetAllNotDeleted().ToList();
                     title = "Inventar - Alle Artikel";
+                    this.SiteMaster.UngroupedReportDataSource = this.SiteMaster.ReportDataSource;
                     Response.Redirect("~/Site/Administrator/Report/BigReport.aspx?title="+title);
                     break;
                 case "Entrances_Inventory":
                     this.SiteMaster.ReportDataSource = Article.GetAll().ToList();
                     title = "Inventar - Zugänge";
+                    this.SiteMaster.UngroupedReportDataSource = this.SiteMaster.ReportDataSource;
                     Response.Redirect("~/Site/Administrator/Report/InAndOutReportView.aspx?type=in&title="+title);
                     break;
                 case "Disposals_Inventory":
                     this.SiteMaster.ReportDataSource = Article.GetLostOrDeleted().ToList();
                     title = "Inventar - Abgänge";
+                    this.SiteMaster.UngroupedReportDataSource = this.SiteMaster.ReportDataSource;
                     Response.Redirect("~/Site/Administrator/Report/InAndOutReportView.aspx?type=out&title="+title);
                     break;
 
@@ -71,12 +74,14 @@ namespace Client.Site.Controls.Menu {
                     this.SiteMaster.ReportDataSource = Article.GetAll().Where(a => (a.DepreciationCategory != null && a.DepreciationCategory.DepreciationSpan > 0
                         && a.AcquisitionDate.Value.Year < (a.DepreciationCategory.DepreciationSpan + DateTime.Now.Year))).ToList();
                     title = "Anlagebuchhaltung - Zugänge";
+                    this.SiteMaster.UngroupedReportDataSource = this.SiteMaster.ReportDataSource;
                     Response.Redirect("~/Site/Administrator/Report/InAndOutReportView.aspx?type=in&title="+title);
                     break;
                 case "Disposals_Accounting":
                     this.SiteMaster.ReportDataSource = Article.GetLostOrDeleted().Where(a => (a.DepreciationCategory != null && a.DepreciationCategory.DepreciationSpan > 0 
                         && a.AcquisitionDate.Value.Year < (a.DepreciationCategory.DepreciationSpan + DateTime.Now.Year))).ToList();
                     title = "Anlagebuchhaltung - Abgänge";
+                    this.SiteMaster.UngroupedReportDataSource = this.SiteMaster.ReportDataSource;
                     Response.Redirect("~/Site/Administrator/Report/InAndOutReportView.aspx?type=out&title="+title);
                     break;
                 case "IT_Accounting":
@@ -89,6 +94,7 @@ namespace Client.Site.Controls.Menu {
                     break;
             }
 
+            this.SiteMaster.UngroupedReportDataSource = this.SiteMaster.ReportDataSource;
             Response.Redirect("~/Site/Administrator/Report/ReportView.aspx?title="+title);
         }
 

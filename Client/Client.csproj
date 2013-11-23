@@ -145,6 +145,7 @@
     <Content Include="ExcelTemplates\RaumCheckListe.xls" />
     <None Include="Properties\PublishProfiles\BSL_SRV-Inventar_192.168.10.10.pubxml" />
     <Content Include="Resources\Images\Icons\Excel.jpg" />
+    <Content Include="Resources\Images\Icons\GroupArticles.png" />
     <Content Include="Resources\Images\Icons\Report1.png" />
     <Content Include="Resources\Styles\main.css">
       <DependentUpon>main.scss</DependentUpon>
@@ -386,6 +387,9 @@
     <Compile Include="Site\Administrator\Report\PrintView.aspx.designer.cs">
       <DependentUpon>PrintView.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Site\Administrator\Report\ReportGridBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Site\Administrator\Report\ReportView.aspx.cs">
       <DependentUpon>ReportView.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -536,7 +540,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
+      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

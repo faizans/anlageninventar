@@ -21,6 +21,8 @@ namespace Data.Model.Diagram
             set { loggedUser = value; }
         }
 
+
+
         public override int SaveChanges() {
             try {
                 return base.SaveChanges();

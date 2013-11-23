@@ -48,6 +48,18 @@
                             OnSelectedIndexChanged="rcbTelerikReport_SelectedIndexChanged">
                         </telerik:RadComboBox>
                     </div>
+                    <div>
+                        <div style="float: right; margin-top: 3px; margin-right:10px;">
+                            <telerik:RadButton ID="btnGroupSource" runat="server" ToolTip="Führt Artikel zusammen" Value="Artikel gruppieren" Height="20px" Width="20px"
+                                OnClick="btnGroupSource_Click" Target="_blank" OnClientClicking="OnGroupArticles">
+                                <Image ImageUrl="~/Resources/Images/Icons/GroupArticles.png" EnableImageButton="true" />
+                            </telerik:RadButton>
+                        </div>
+                        <div style="float: right; margin-top: 1px; margin-right:5px;">
+                            <asp:Label ID="lblGroupArticles" runat="server" Text="Artikel gruppieren" Font-Size="12px" Font-Names="segoe ui,arial,sans-serif;" ForeColor="Black" />
+
+                        </div>
+                    </div>
                     <div style="display:none;">
                         <div style="float: right; margin-top: 3px;">
                             <telerik:RadButton ID="btnExport" runat="server" Text="RadButton" OnClientClicking="OnExportToExcel" ToolTip="Exportiere zu Excel" Height="20px" Width="20px"
@@ -70,6 +82,8 @@
                 <telerik:GridBoundColumn DataField="Name" HeaderText="Name" SortExpression="Name" UniqueName="Name" FilterControlAltText="Filter Name column" HeaderStyle-Width="180px" ItemStyle-Width="180px">
                 </telerik:GridBoundColumn>
                 <telerik:GridBoundColumn DataField="Barcode" HeaderText="Barcode" SortExpression="Barcode" UniqueName="Barcode" FilterControlAltText="Filter Barcode column">
+                </telerik:GridBoundColumn>
+                <telerik:GridBoundColumn DataField="ArticleAmount" HeaderText="Anzahl" SortExpression="ArticleAmount" UniqueName="ArticleAmount" FilterControlAltText="Filter ArticleAmount column">
                 </telerik:GridBoundColumn>
                 <telerik:GridNumericColumn DataField="Value" HeaderText="Preis" SortExpression="Value" UniqueName="Value" FilterControlAltText="Filter Value column"
                     DataFormatString="{0:##,##0.00}" FilterControlWidth="80px">
@@ -133,6 +147,18 @@
 
             var text = "Das öffnen in der Druckansicht sowie das Exportieren oder Drucken können einige Zeit in Anspruch nehmen.";
             radconfirm(text, callBackFunction, 300, 100, null, "Exportieren");
+            args.set_cancel(true);
+        }
+
+        function OnGroupArticles(sender, args) {
+            var callBackFunction = Function.createDelegate(sender, function (argument) {
+                if (argument) {
+                    this.click();
+                }
+            });
+
+            var text = "Wird bearbeitet";
+            radconfirm(text, callBackFunction, 300, 100, null, "Gruppieren - Streuen");
             args.set_cancel(true);
         }
 

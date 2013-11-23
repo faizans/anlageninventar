@@ -51,6 +51,23 @@ namespace Client.SiteMaster
             }
         }
 
+        /// <summary>
+        /// This is used for the purpose of grouping. If user groups ReportDataSource in reports he cannot undo grouping.
+        /// This is why the ungrouped datasource will be stored here
+        /// </summary>
+        public List<Article> UngroupedReportDataSource {
+            get {
+                if (Session["BackupReportItems"] == null) {
+                    Session["BackupReportItems"] = new List<Article>();
+                }
+                return Session["BackupReportItems"] as List<Article>;
+            }
+            set {
+                Session["BackupReportItems"] = null;
+                Session["BackupReportItems"] = new List<Article>(value);
+            }
+        } 
+
         public List<Article> ExportItems {
             get {
                 if (Session["ExportItems"] == null) {

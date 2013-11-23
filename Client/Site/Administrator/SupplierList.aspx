@@ -26,7 +26,7 @@
             </MasterTableView>
 
         </telerik:RadGrid>
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString='<%$ ConnectionStrings:IP3AnlagenInventarConnectionString %>' SelectCommand="SELECT * FROM [Supplier]"></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString='<%$ ConnectionStrings:IP3AnlagenInventarConnectionString %>' SelectCommand="SELECT * FROM [Supplier] ORDER BY Name ASC"></asp:SqlDataSource>
     </telerik:RadAjaxPanel>
     <telerik:RadWindowManager ID="RadWindowManager1" runat="server">
     </telerik:RadWindowManager>

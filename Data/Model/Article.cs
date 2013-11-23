@@ -13,6 +13,15 @@ namespace Data.Model.Diagram {
 
         public Boolean UseStoredValues { get; set; }
 
+        public int? ArticleAmount {
+            get {
+                if (this.Amount == null || this.Amount.Value <= 1) {
+                    return 1;
+                }
+                return this.Amount;
+            }
+        }
+
         private DateTime depreciationTime = DateTime.Now;
         /// <summary>
         /// Set the year for the depreciation calculation
@@ -210,7 +219,6 @@ namespace Data.Model.Diagram {
         /// </summary>
         public void DeletePhysically() {
             IP3AnlagenInventarEntities ctx = EntityFactory.Context;
-
 
             if (this.ArticleGroup != null) {
                 this.ArticleGroup.Articles.Remove(this);
