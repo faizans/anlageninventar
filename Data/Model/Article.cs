@@ -48,10 +48,12 @@ namespace Data.Model.Diagram {
 
                 if (this.DepreciationCategory != null && this.DepreciationCategory.DepreciationSpan > 0) {
                     if (DepreciationTime.Year < this.AcquisitionDate.Value.Year) {
-                        depreciationValue = this.Value;
+                        return depreciationValue = this.Value;
                     }
-                    int currentSpan = DepreciationTime.Year - this.AcquisitionDate.Value.Year;
+
+                    int currentSpan = (DepreciationTime.Year - this.AcquisitionDate.Value.Year) + 1;
                     int depSpan = int.Parse(this.DepreciationCategory.DepreciationSpan.ToString());
+
                     if (currentSpan <= depSpan) {
                         depreciationValue = this.Value - ((this.Value / depSpan) * (currentSpan));
                     } else {
@@ -75,7 +77,7 @@ namespace Data.Model.Diagram {
                     return averageDepreciation;
                 }
 
-                if (this.DepreciationCategory != null && this.DepreciationCategory.DepreciationSpan > 0) {
+                if (this.DepreciationCategory != null && this.DepreciationCategory.DepreciationSpan > 0 && (this.AcquisitionDate.Value.Year + this.DepreciationCategory.DepreciationSpan) > this.DepreciationTime.Year) {
                     averageDepreciation = (this.Value / this.DepreciationCategory.DepreciationSpan);
                 } else {
                     averageDepreciation = 0;

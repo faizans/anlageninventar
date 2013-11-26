@@ -85,11 +85,11 @@ namespace Client.Site.Controls.Menu {
                     Response.Redirect("~/Site/Administrator/Report/InAndOutReportView.aspx?type=out&title="+title);
                     break;
                 case "IT_Accounting":
-                    this.SiteMaster.ReportDataSource = Article.GetAll().Where(a => a.DepreciationCategory != null && a.DepreciationCategory.Name == "IT").ToList();
+                    this.SiteMaster.ReportDataSource = Article.GetAvailable().Where(a => a.DepreciationCategory != null && a.DepreciationCategory.Name == "IT").ToList();
                     title = "Anlagebuchhaltung - IT";
                     break;
                 case "Mobiliar_Accounting":
-                    this.SiteMaster.ReportDataSource = Article.GetAll().Where(a => a.DepreciationCategory != null && a.DepreciationCategory.Name == "Mobiliar").ToList();
+                    this.SiteMaster.ReportDataSource = Article.GetAvailable().Where(a => a.DepreciationCategory != null && a.DepreciationCategory.Name == "Mobiliar").ToList();
                     title = "Anlagebuchhaltung - Mobiliar";
                     break;
             }

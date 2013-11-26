@@ -98,30 +98,28 @@ namespace Client.Site.Controls.CustomGrids {
             IEnumerable<IEnumerable<Article>> groupedSource = source.GroupBy(s => s.Barcode.Split('.')[0]);
             if (groupedSource != null) {
                 foreach (IEnumerable<Article> group in groupedSource) {
-                    if (group.Count() > 0) {
-                        Article groupedArticle = new Article();
-                        groupedArticle.Name = group.ElementAt(0).Name;
-                        groupedArticle.Barcode = group.ElementAt(0).Barcode;
-                        groupedArticle.AcquisitionDate = group.ElementAt(0).AcquisitionDate;
-                        groupedArticle.Amount = group.Sum(g => g.ArticleAmount);
-                        groupedArticle.ArticleGroup = group.ElementAt(0).ArticleGroup;
-                        groupedArticle.Comment = group.ElementAt(0).Comment;
-                        groupedArticle.Depreciation = group.ElementAt(0).Depreciation;
-                        groupedArticle.DepreciationCategory = group.ElementAt(0).DepreciationCategory;
-                        groupedArticle.DepreciationTime = group.ElementAt(0).DepreciationTime;
-                        groupedArticle.InsuranceCategory = group.ElementAt(0).InsuranceCategory;
-                        groupedArticle.IsAvailable = group.ElementAt(0).IsAvailable;
-                        groupedArticle.IsDeleted = group.ElementAt(0).IsDeleted;
-                        groupedArticle.LastChangest = group.ElementAt(0).LastChangest;
-                        groupedArticle.OldBarcode = group.ElementAt(0).OldBarcode;
-                        groupedArticle.Room = group.ElementAt(0).Room;
-                        groupedArticle.SupplierBranch = group.ElementAt(0).SupplierBranch;
-                        groupedArticle.UseStoredValues = group.ElementAt(0).UseStoredValues;
-                        groupedArticle.Value = group.Sum(g => g.Value);
-                        result.Add(groupedArticle);
-                    } else {
-                        result.Add(group.ElementAt(0));
-                    }
+
+                    Article groupedArticle = new Article();
+                    groupedArticle.Name = group.ElementAt(0).Name;
+                    groupedArticle.Barcode = group.ElementAt(0).Barcode;
+                    groupedArticle.AcquisitionDate = group.ElementAt(0).AcquisitionDate;
+                    groupedArticle.Amount = group.Sum(g => g.ArticleAmount);
+                    groupedArticle.ArticleGroup = group.ElementAt(0).ArticleGroup;
+                    groupedArticle.Comment = group.ElementAt(0).Comment;
+                    groupedArticle.Depreciation = group.ElementAt(0).Depreciation;
+                    groupedArticle.DepreciationCategory = group.ElementAt(0).DepreciationCategory;
+                    groupedArticle.DepreciationTime = group.ElementAt(0).DepreciationTime;
+                    groupedArticle.InsuranceCategory = group.ElementAt(0).InsuranceCategory;
+                    groupedArticle.IsAvailable = group.ElementAt(0).IsAvailable;
+                    groupedArticle.IsDeleted = group.ElementAt(0).IsDeleted;
+                    groupedArticle.LastChangest = group.ElementAt(0).LastChangest;
+                    groupedArticle.OldBarcode = group.ElementAt(0).OldBarcode;
+                    groupedArticle.Room = group.ElementAt(0).Room;
+                    groupedArticle.SupplierBranch = group.ElementAt(0).SupplierBranch;
+                    groupedArticle.UseStoredValues = group.ElementAt(0).UseStoredValues;
+                    groupedArticle.Value = group.Sum(g => g.Value);
+
+                    result.Add(groupedArticle);
                 }
             }
             return result;

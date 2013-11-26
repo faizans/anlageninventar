@@ -18,6 +18,11 @@ namespace Reporting.Reports {
             this.textBox9 = new Telerik.Reporting.TextBox();
             this.textBox10 = new Telerik.Reporting.TextBox();
             this.textBox12 = new Telerik.Reporting.TextBox();
+            this.textBox13 = new Telerik.Reporting.TextBox();
+            this.textBox14 = new Telerik.Reporting.TextBox();
+            this.textBox15 = new Telerik.Reporting.TextBox();
+            this.textBox16 = new Telerik.Reporting.TextBox();
+            this.textBox17 = new Telerik.Reporting.TextBox();
             this.labelsGroupHeaderSection = new Telerik.Reporting.GroupHeaderSection();
             this.nameCaptionTextBox = new Telerik.Reporting.TextBox();
             this.barcodeCaptionTextBox = new Telerik.Reporting.TextBox();
@@ -51,11 +56,6 @@ namespace Reporting.Reports {
             this.textBox4 = new Telerik.Reporting.TextBox();
             this.textBox5 = new Telerik.Reporting.TextBox();
             this.textBox6 = new Telerik.Reporting.TextBox();
-            this.textBox13 = new Telerik.Reporting.TextBox();
-            this.textBox14 = new Telerik.Reporting.TextBox();
-            this.textBox15 = new Telerik.Reporting.TextBox();
-            this.textBox16 = new Telerik.Reporting.TextBox();
-            this.textBox17 = new Telerik.Reporting.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
             // labelsGroupFooterSection
@@ -138,6 +138,61 @@ namespace Reporting.Reports {
             this.textBox12.Style.Padding.Left = Telerik.Reporting.Drawing.Unit.Cm(0.10000000149011612D);
             this.textBox12.StyleName = "Data";
             this.textBox12.Value = "Total";
+            // 
+            // textBox13
+            // 
+            this.textBox13.CanGrow = true;
+            this.textBox13.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Cm(5.1999998092651367D), Telerik.Reporting.Drawing.Unit.Cm(0.00010012308484874666D));
+            this.textBox13.Name = "textBox13";
+            this.textBox13.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Pixel(68.55902099609375D), Telerik.Reporting.Drawing.Unit.Pixel(30D));
+            this.textBox13.Style.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(209)))), ((int)(((byte)(240)))));
+            this.textBox13.Style.Padding.Left = Telerik.Reporting.Drawing.Unit.Cm(0.10000000149011612D);
+            this.textBox13.StyleName = "Data";
+            this.textBox13.Value = "";
+            // 
+            // textBox14
+            // 
+            this.textBox14.CanGrow = true;
+            this.textBox14.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Cm(14.800000190734863D), Telerik.Reporting.Drawing.Unit.Cm(0D));
+            this.textBox14.Name = "textBox14";
+            this.textBox14.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Pixel(60.472412109375D), Telerik.Reporting.Drawing.Unit.Pixel(30D));
+            this.textBox14.Style.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(209)))), ((int)(((byte)(240)))));
+            this.textBox14.Style.Padding.Left = Telerik.Reporting.Drawing.Unit.Cm(0.10000000149011612D);
+            this.textBox14.StyleName = "Data";
+            this.textBox14.Value = "";
+            // 
+            // textBox15
+            // 
+            this.textBox15.CanGrow = true;
+            this.textBox15.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Cm(16.5D), Telerik.Reporting.Drawing.Unit.Cm(0D));
+            this.textBox15.Name = "textBox15";
+            this.textBox15.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Pixel(86.92913818359375D), Telerik.Reporting.Drawing.Unit.Pixel(30D));
+            this.textBox15.Style.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(209)))), ((int)(((byte)(240)))));
+            this.textBox15.Style.Padding.Left = Telerik.Reporting.Drawing.Unit.Cm(0.10000000149011612D);
+            this.textBox15.StyleName = "Data";
+            this.textBox15.Value = "";
+            // 
+            // textBox16
+            // 
+            this.textBox16.CanGrow = true;
+            this.textBox16.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Cm(18.899999618530273D), Telerik.Reporting.Drawing.Unit.Cm(0D));
+            this.textBox16.Name = "textBox16";
+            this.textBox16.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Pixel(86.92913818359375D), Telerik.Reporting.Drawing.Unit.Pixel(30D));
+            this.textBox16.Style.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(209)))), ((int)(((byte)(240)))));
+            this.textBox16.Style.Padding.Left = Telerik.Reporting.Drawing.Unit.Cm(0.10000000149011612D);
+            this.textBox16.StyleName = "Data";
+            this.textBox16.Value = "";
+            // 
+            // textBox17
+            // 
+            this.textBox17.CanGrow = true;
+            this.textBox17.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Cm(21.299999237060547D), Telerik.Reporting.Drawing.Unit.Cm(0D));
+            this.textBox17.Name = "textBox17";
+            this.textBox17.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Pixel(98.26776123046875D), Telerik.Reporting.Drawing.Unit.Pixel(30D));
+            this.textBox17.Style.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(209)))), ((int)(((byte)(240)))));
+            this.textBox17.Style.Padding.Left = Telerik.Reporting.Drawing.Unit.Cm(0.10000000149011612D);
+            this.textBox17.StyleName = "Data";
+            this.textBox17.Value = "";
             // 
             // labelsGroupHeaderSection
             // 
@@ -474,61 +529,6 @@ namespace Reporting.Reports {
             this.textBox6.Style.Padding.Left = Telerik.Reporting.Drawing.Unit.Cm(0.10000000149011612D);
             this.textBox6.StyleName = "Data";
             this.textBox6.Value = "=Fields.Room.ResponsiblePerson";
-            // 
-            // textBox13
-            // 
-            this.textBox13.CanGrow = true;
-            this.textBox13.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Cm(5.1999998092651367D), Telerik.Reporting.Drawing.Unit.Cm(0.00010012308484874666D));
-            this.textBox13.Name = "textBox13";
-            this.textBox13.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Pixel(68.55902099609375D), Telerik.Reporting.Drawing.Unit.Pixel(30D));
-            this.textBox13.Style.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(209)))), ((int)(((byte)(240)))));
-            this.textBox13.Style.Padding.Left = Telerik.Reporting.Drawing.Unit.Cm(0.10000000149011612D);
-            this.textBox13.StyleName = "Data";
-            this.textBox13.Value = "";
-            // 
-            // textBox14
-            // 
-            this.textBox14.CanGrow = true;
-            this.textBox14.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Cm(14.800000190734863D), Telerik.Reporting.Drawing.Unit.Cm(0D));
-            this.textBox14.Name = "textBox14";
-            this.textBox14.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Pixel(60.472412109375D), Telerik.Reporting.Drawing.Unit.Pixel(30D));
-            this.textBox14.Style.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(209)))), ((int)(((byte)(240)))));
-            this.textBox14.Style.Padding.Left = Telerik.Reporting.Drawing.Unit.Cm(0.10000000149011612D);
-            this.textBox14.StyleName = "Data";
-            this.textBox14.Value = "";
-            // 
-            // textBox15
-            // 
-            this.textBox15.CanGrow = true;
-            this.textBox15.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Cm(16.5D), Telerik.Reporting.Drawing.Unit.Cm(0D));
-            this.textBox15.Name = "textBox15";
-            this.textBox15.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Pixel(86.92913818359375D), Telerik.Reporting.Drawing.Unit.Pixel(30D));
-            this.textBox15.Style.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(209)))), ((int)(((byte)(240)))));
-            this.textBox15.Style.Padding.Left = Telerik.Reporting.Drawing.Unit.Cm(0.10000000149011612D);
-            this.textBox15.StyleName = "Data";
-            this.textBox15.Value = "";
-            // 
-            // textBox16
-            // 
-            this.textBox16.CanGrow = true;
-            this.textBox16.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Cm(18.899999618530273D), Telerik.Reporting.Drawing.Unit.Cm(0D));
-            this.textBox16.Name = "textBox16";
-            this.textBox16.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Pixel(86.92913818359375D), Telerik.Reporting.Drawing.Unit.Pixel(30D));
-            this.textBox16.Style.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(209)))), ((int)(((byte)(240)))));
-            this.textBox16.Style.Padding.Left = Telerik.Reporting.Drawing.Unit.Cm(0.10000000149011612D);
-            this.textBox16.StyleName = "Data";
-            this.textBox16.Value = "";
-            // 
-            // textBox17
-            // 
-            this.textBox17.CanGrow = true;
-            this.textBox17.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Cm(21.299999237060547D), Telerik.Reporting.Drawing.Unit.Cm(0D));
-            this.textBox17.Name = "textBox17";
-            this.textBox17.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Pixel(98.26776123046875D), Telerik.Reporting.Drawing.Unit.Pixel(30D));
-            this.textBox17.Style.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(209)))), ((int)(((byte)(240)))));
-            this.textBox17.Style.Padding.Left = Telerik.Reporting.Drawing.Unit.Cm(0.10000000149011612D);
-            this.textBox17.StyleName = "Data";
-            this.textBox17.Value = "";
             // 
             // Standard
             // 

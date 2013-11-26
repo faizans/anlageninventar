@@ -32,6 +32,7 @@ namespace Reporting.Reports {
             this.valueCaptionTextBox = new Telerik.Reporting.TextBox();
             this.barcodeCaptionTextBox = new Telerik.Reporting.TextBox();
             this.textBox20 = new Telerik.Reporting.TextBox();
+            this.textBox4 = new Telerik.Reporting.TextBox();
             this.pageHeader = new Telerik.Reporting.PageHeaderSection();
             this.textBox22 = new Telerik.Reporting.TextBox();
             this.textBox11 = new Telerik.Reporting.TextBox();
@@ -51,7 +52,6 @@ namespace Reporting.Reports {
             this.valueDataTextBox = new Telerik.Reporting.TextBox();
             this.barcodeDataTextBox = new Telerik.Reporting.TextBox();
             this.nameDataTextBox = new Telerik.Reporting.TextBox();
-            this.textBox4 = new Telerik.Reporting.TextBox();
             this.textBox6 = new Telerik.Reporting.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
@@ -262,6 +262,17 @@ namespace Reporting.Reports {
             this.textBox20.StyleName = "Caption";
             this.textBox20.Value = "Kumuliert";
             // 
+            // textBox4
+            // 
+            this.textBox4.CanGrow = true;
+            this.textBox4.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Cm(6.0999999046325684D), Telerik.Reporting.Drawing.Unit.Cm(0.00010012308484874666D));
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Pixel(64.251983642578125D), Telerik.Reporting.Drawing.Unit.Pixel(30D));
+            this.textBox4.Style.Font.Bold = true;
+            this.textBox4.Style.Padding.Left = Telerik.Reporting.Drawing.Unit.Cm(0.10000000149011612D);
+            this.textBox4.StyleName = "Caption";
+            this.textBox4.Value = "Anzahl";
+            // 
             // pageHeader
             // 
             this.pageHeader.Height = Telerik.Reporting.Drawing.Unit.Cm(1.7000000476837158D);
@@ -390,6 +401,7 @@ namespace Reporting.Reports {
             // textBox19
             // 
             this.textBox19.CanGrow = true;
+            this.textBox19.Format = "{0:d}";
             this.textBox19.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Cm(10.711041450500488D), Telerik.Reporting.Drawing.Unit.Cm(0.00010012308484874666D));
             this.textBox19.Name = "textBox19";
             this.textBox19.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Pixel(60D), Telerik.Reporting.Drawing.Unit.Pixel(30D));
@@ -438,17 +450,6 @@ namespace Reporting.Reports {
             this.nameDataTextBox.Style.Padding.Left = Telerik.Reporting.Drawing.Unit.Cm(0.10000000149011612D);
             this.nameDataTextBox.StyleName = "Data";
             this.nameDataTextBox.Value = "=Fields.Name";
-            // 
-            // textBox4
-            // 
-            this.textBox4.CanGrow = true;
-            this.textBox4.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Cm(6.0999999046325684D), Telerik.Reporting.Drawing.Unit.Cm(0.00010012308484874666D));
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Pixel(64.251983642578125D), Telerik.Reporting.Drawing.Unit.Pixel(30D));
-            this.textBox4.Style.Font.Bold = true;
-            this.textBox4.Style.Padding.Left = Telerik.Reporting.Drawing.Unit.Cm(0.10000000149011612D);
-            this.textBox4.StyleName = "Caption";
-            this.textBox4.Value = "Anzahl";
             // 
             // textBox6
             // 

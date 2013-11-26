@@ -17,20 +17,30 @@ namespace Client.Site.Administrator.Report {
 
         protected void Page_Load(object sender, EventArgs e) {
 
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);
+
             //Check if the set user is allowed to access
             if (this.SiteMaster.User == null || !this.SiteMaster.User.IsAdmin || !this.SiteMaster.User.IsActive) {
                 Response.Redirect(Constants.AUTHORIZATION_WINDOWS_LOGIN);
             }
 
             if (!IsPostBack) {
-                this.SelectedTelerikTemplate = null;
-                this.SelectedTemplate = null;
-                this.ReportYear = DateTime.Now.Year;
-                this.InOutYear = DateTime.Now.Year;
-                this.GroupReport = false;
+                this.clearSessions();
             }
 
             SiteMaster.StandardMaster.InfoText = "Report";
+        }
+
+        private void clearSessions() {
+            this.SelectedTelerikTemplate = null;
+            this.SelectedTemplate = null;
+            this.ReportYear = DateTime.Now.Year;
+            this.InOutYear = DateTime.Now.Year;
+            this.GroupReport = false;
+        }
+
+        private void resetDataSource() {
+            this.SiteMaster.ReportDataSource = this.SiteMaster.UngroupedReportDataSource;
         }
 
         #endregion
@@ -125,13 +135,20 @@ namespace Client.Site.Administrator.Report {
 
         protected void bindData(RadGrid rgReport) {
 
+            List<Article> gridSource = new List<Article>();
             if (this.ReportType == "in") {
-                this.SiteMaster.ReportDataSource = this.SiteMaster.ReportDataSource.Where(a => a.AcquisitionDate.Value.Year == this.InOutYear).ToList();   
+                gridSource = this.SiteMaster.ReportDataSource.Where(a => a.AcquisitionDate.Value.Year == this.InOutYear).ToList();
             } else if (this.ReportType == "out") {
-                this.SiteMaster.ReportDataSource = this.SiteMaster.ReportDataSource.Where(a => (a.LastChangest.HasValue && a.LastChangest.Value.Year == this.InOutYear)).ToList(); ;
-            } 
+                gridSource = this.SiteMaster.ReportDataSource.Where(a => (a.LastChangest.HasValue && a.LastChangest.Value.Year == this.InOutYear)).ToList(); ;
+            } else {
+                gridSource = this.SiteMaster.ReportDataSource;
+            }
 
-            rgReport.DataSource = this.SiteMaster.ReportDataSource;
+            //Only show articles aqcuired before or withing the ReportYear
+            gridSource = gridSource.Where(a => a.AcquisitionDate.Value.Year <= this.ReportYear).ToList();
+
+            //Bind
+            rgReport.DataSource = gridSource;
             rgReport.DataBind();
 
             GridItem cmdItem = rgReport.MasterTableView.GetItems(GridItemType.CommandItem)[0];
@@ -169,11 +186,12 @@ namespace Client.Site.Administrator.Report {
 
                 List<Article> ReportItems = ArticleGridHelper.GetReportItems(rgReport, this.SiteMaster.ReportDataSource, false);
 
-                double? total = ReportItems.Sum(i => i.Value);
+                double? total = ReportItems.Sum(i =>i.Value);
                 double? depTotal = ReportItems.Sum(i => i.DepreciationValue);
                 double? avDepTotal = ReportItems.Sum(i => i.AverageDepreciation);
                 double? cumDepTotal = ReportItems.Sum(i => i.CumulatedDepreciation);
 
+                footerItem["Name"].Text = ReportItems.Count + " Artikel";
                 footerItem["Value"].Text = Math.Round(total.Value, 2).ToString(Constants.NUMBER_FORMAT, Constants.NUMBER_GROUP_FORMAT);
                 footerItem["DepreciationValue"].Text = Math.Round(depTotal.Value, 2).ToString(Constants.NUMBER_FORMAT, Constants.NUMBER_GROUP_FORMAT);
                 footerItem["AverageDepreciation"].Text = Math.Round(avDepTotal.Value, 2).ToString(Constants.NUMBER_FORMAT, Constants.NUMBER_GROUP_FORMAT);
@@ -189,9 +207,12 @@ namespace Client.Site.Administrator.Report {
 
         protected void ExportToPrintView(RadGrid rgReport) {
 
-            List<Article> exportSource = new List<Article>();
+            int reportYear = this.ReportYear;
+            string title = this.ReportTitle;
+            string selectedTelerikTemplate = this.SelectedTelerikTemplate;
 
             //Dirty workaround
+            List<Article> exportSource = new List<Article>();
             if (this.ReportType == "in") {
                 exportSource = this.SiteMaster.ReportDataSource.Where(a => a.AcquisitionDate.Value.Year == this.InOutYear).ToList();
             } else if (this.ReportType == "out") {
@@ -201,7 +222,12 @@ namespace Client.Site.Administrator.Report {
             }
 
             this.SiteMaster.ExportItems = ArticleGridHelper.GetReportItems(rgReport, exportSource, false);
-            Response.Redirect("~/Site/Administrator/Report/PrintView.aspx?template=" + this.SelectedTelerikTemplate + "&year=" + this.ReportYear + "&title=" + this.ReportTitle);
+
+            //Reset session and datasource
+            this.resetDataSource();
+            this.clearSessions();
+
+            Response.Redirect("~/Site/Administrator/Report/PrintView.aspx?template=" + selectedTelerikTemplate + "&year=" + reportYear + "&title=" + title);
         }
 
         protected void ReCalculateDepreciation(RadGrid rgReport) {
