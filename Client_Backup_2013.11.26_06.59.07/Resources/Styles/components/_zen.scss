@@ -1,0 +1,67 @@
+// Variables
+
+$zen-spacing-unit: 10px !default;
+$zen-brighter-color: #E1EFFD !default;
+
+// Mixins
+
+@mixin zen-spacing($property, $value) {
+  #{$property}: $value;
+}
+
+@mixin zen-padding($position, $unit: 1) {
+  @include zen-spacing(padding-#{$position}, $unit*$zen-spacing-unit);
+}
+
+@mixin zen-margin($position, $unit: 1) {
+  @include zen-spacing(margin-#{$position}, $unit*$zen-spacing-unit);
+}
+
+@mixin zen-margin-top($unit: 1) {
+  @include zen-margin('top', $unit);
+}
+
+@mixin zen-margin-bottom($unit: 1) {
+  @include zen-margin('bottom', $unit);
+}
+
+@mixin zen-padding-top($unit: 1) {
+  @include zen-padding('top', $unit);
+}
+
+@mixin zen-padding-bottom($unit: 1) {
+  @include zen-padding('bottom', $unit);
+}
+
+@mixin zen-hover($color: $zen-brighter-color) {
+  &:hover {
+    background-color: $color;
+    cursor: pointer;
+  }
+}
+
+@mixin zen-color-alternating($color: $zen-brighter-color) {
+  background-color: $color;
+  color: black;
+
+}
+
+@mixin zen-button() {
+
+  @include zen-spacing(padding, 5px !important);
+
+  background-image: none !important;
+  font-weight: bold;
+  background: none;
+  background-color: #ffffff !important;
+  border: 1px solid $base-color !important;
+  border-radius: 5px;
+  height: auto !important;
+
+  &:hover {
+    background-color: $menu-hover-color !important;
+    color: #ffffff !important;
+  }
+}
+
+// Rules

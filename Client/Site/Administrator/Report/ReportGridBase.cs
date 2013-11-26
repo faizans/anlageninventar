@@ -31,18 +31,6 @@ namespace Client.Site.Administrator.Report {
             SiteMaster.StandardMaster.InfoText = "Report";
         }
 
-        private void clearSessions() {
-            this.SelectedTelerikTemplate = null;
-            this.SelectedTemplate = null;
-            this.ReportYear = DateTime.Now.Year;
-            this.InOutYear = DateTime.Now.Year;
-            this.GroupReport = false;
-        }
-
-        private void resetDataSource() {
-            this.SiteMaster.ReportDataSource = this.SiteMaster.UngroupedReportDataSource;
-        }
-
         #endregion
 
         #region Properties
@@ -133,6 +121,8 @@ namespace Client.Site.Administrator.Report {
 
         #region Methods
 
+        #region Data methods
+
         protected void bindData(RadGrid rgReport) {
 
             List<Article> gridSource = new List<Article>();
@@ -191,14 +181,40 @@ namespace Client.Site.Administrator.Report {
                 double? avDepTotal = ReportItems.Sum(i => i.AverageDepreciation);
                 double? cumDepTotal = ReportItems.Sum(i => i.CumulatedDepreciation);
 
-                footerItem["Name"].Text = ReportItems.Count + " Artikel";
+                footerItem["Name"].Text = 
                 footerItem["Value"].Text = Math.Round(total.Value, 2).ToString(Constants.NUMBER_FORMAT, Constants.NUMBER_GROUP_FORMAT);
                 footerItem["DepreciationValue"].Text = Math.Round(depTotal.Value, 2).ToString(Constants.NUMBER_FORMAT, Constants.NUMBER_GROUP_FORMAT);
                 footerItem["AverageDepreciation"].Text = Math.Round(avDepTotal.Value, 2).ToString(Constants.NUMBER_FORMAT, Constants.NUMBER_GROUP_FORMAT);
                 footerItem["CumulatedDepreciation"].Text = Math.Round(cumDepTotal.Value, 2).ToString(Constants.NUMBER_FORMAT, Constants.NUMBER_GROUP_FORMAT);
-                footerItem["Name"].Text = "Total:";
+                footerItem["Name"].Text = ReportItems.Count + " Artikel - Total:";
             }
         }
+
+        #endregion
+
+        #region Depreciation methods
+
+        protected void ReCalculateDepreciation(RadGrid rgReport) {
+            this.SiteMaster.ReportDataSource.ForEach(a => a.DepreciationTime = new DateTime(this.ReportYear, 1, 1));
+            rgReport.Rebind();
+        }
+
+        protected void UpdateReportYear(RadGrid rgReport) {
+            GridItem cmdItem = rgReport.MasterTableView.GetItems(GridItemType.CommandItem)[0];
+            RadNumericTextBox nmYear = cmdItem.FindControl("rtbYear") as RadNumericTextBox;
+            this.ReportYear = (int)nmYear.Value;
+        }
+
+        protected void UpdateInOutYear(RadGrid rgReport) {
+            GridItem cmdItem = rgReport.MasterTableView.GetItems(GridItemType.CommandItem)[0];
+            RadNumericTextBox nmInOutYear = cmdItem.FindControl("rtbInOutYear") as RadNumericTextBox;
+            this.InOutYear = (int)nmInOutYear.Value;
+            this.ReportYear = this.InOutYear;
+        }
+
+        #endregion
+
+        #region Export methods
 
         protected void ExportToExcel(RadGrid rgReport) {
             this.SiteMaster.ExportItems = ArticleGridHelper.GetReportItems(rgReport, this.SiteMaster.ReportDataSource, true);
@@ -230,23 +246,9 @@ namespace Client.Site.Administrator.Report {
             Response.Redirect("~/Site/Administrator/Report/PrintView.aspx?template=" + selectedTelerikTemplate + "&year=" + reportYear + "&title=" + title);
         }
 
-        protected void ReCalculateDepreciation(RadGrid rgReport) {
-            this.SiteMaster.ReportDataSource.ForEach(a => a.DepreciationTime = new DateTime(this.ReportYear, 1, 1));
-            rgReport.Rebind();
-        }
+        #endregion
 
-        protected void UpdateReportYear(RadGrid rgReport) {
-            GridItem cmdItem = rgReport.MasterTableView.GetItems(GridItemType.CommandItem)[0];
-            RadNumericTextBox nmYear = cmdItem.FindControl("rtbYear") as RadNumericTextBox;
-            this.ReportYear = (int)nmYear.Value;
-        }
-
-        protected void UpdateInOutYear(RadGrid rgReport) {
-            GridItem cmdItem = rgReport.MasterTableView.GetItems(GridItemType.CommandItem)[0];
-            RadNumericTextBox nmInOutYear = cmdItem.FindControl("rtbInOutYear") as RadNumericTextBox;
-            this.InOutYear = (int)nmInOutYear.Value;
-            this.ReportYear = this.InOutYear;
-        }
+        #region HelperMethods
 
         protected void fixGridScroll(RadGrid rgReport) {
             rgReport.Width = Unit.Percentage(100);
@@ -254,6 +256,20 @@ namespace Client.Site.Administrator.Report {
             rgReport.ClientSettings.Scrolling.ScrollHeight = 250;
             rgReport.MasterTableView.Width = Unit.Percentage(120);
         }
+
+        private void clearSessions() {
+            this.SelectedTelerikTemplate = null;
+            this.SelectedTemplate = null;
+            this.ReportYear = DateTime.Now.Year;
+            this.InOutYear = DateTime.Now.Year;
+            this.GroupReport = false;
+        }
+
+        private void resetDataSource() {
+            this.SiteMaster.ReportDataSource = this.SiteMaster.UngroupedReportDataSource;
+        }
+
+        #endregion
 
         #endregion
 

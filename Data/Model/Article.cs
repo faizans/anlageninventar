@@ -13,6 +13,9 @@ namespace Data.Model.Diagram {
 
         public Boolean UseStoredValues { get; set; }
 
+        /// <summary>
+        /// If the amount is empty or smaller than 1 return 1 else return actual value
+        /// </summary>
         public int? ArticleAmount {
             get {
                 if (this.Amount == null || this.Amount.Value <= 1) {
@@ -46,6 +49,7 @@ namespace Data.Model.Diagram {
                     return this.depreciationValue;
                 }
 
+                //If the acquisitiondate is out of depreciation year return articles full value
                 if (this.DepreciationCategory != null && this.DepreciationCategory.DepreciationSpan > 0) {
                     if (DepreciationTime.Year < this.AcquisitionDate.Value.Year) {
                         return depreciationValue = this.Value;

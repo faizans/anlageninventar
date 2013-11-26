@@ -119,10 +119,10 @@
     <Reference Include="Telerik.ReportViewer.WebForms, Version=7.2.13.1016, Culture=neutral, PublicKeyToken=a9d7983dfcc261be, processorArchitecture=MSIL" />
     <Reference Include="Telerik.ReportViewer.WinForms, Version=7.2.13.1016, Culture=neutral, PublicKeyToken=a9d7983dfcc261be, processorArchitecture=MSIL" />
     <Reference Include="Telerik.Web.UI">
-      <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Telerik\RadControls for ASP.NET AJAX Q2 2013\Bin45\Telerik.Web.UI.dll</HintPath>
+      <HintPath>..\lib\RCAJAX\2013.2.717.45\Telerik.Web.UI.dll</HintPath>
     </Reference>
     <Reference Include="Telerik.Web.UI.Skins">
-      <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Telerik\RadControls for ASP.NET AJAX Q2 2013\Bin45\Telerik.Web.UI.Skins.dll</HintPath>
+      <HintPath>..\lib\RCAJAX\2013.2.717.45\Telerik.Web.UI.Skins.dll</HintPath>
     </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
@@ -143,7 +143,11 @@
     <Content Include="ExcelTemplates\NormaleListe.xls" />
     <Content Include="ExcelTemplates\web.config" />
     <Content Include="ExcelTemplates\RaumCheckListe.xls" />
+    <Content Include="App_Data\RadSpell\de-DE.tdf" />
+    <Content Include="App_Data\RadSpell\en-US.tdf" />
+    <Content Include="App_Data\RadSpell\fr-FR.tdf" />
     <None Include="Properties\PublishProfiles\BSL_SRV-Inventar_192.168.10.10.pubxml" />
+    <Content Include="Resources\Images\Icons\bgRepeater.gif" />
     <Content Include="Resources\Images\Icons\Excel.jpg" />
     <Content Include="Resources\Images\Icons\GroupArticles.png" />
     <Content Include="Resources\Images\Icons\Report1.png" />

@@ -1,0 +1,64 @@
+
+// Mixins
+
+
+@mixin table-cleanup() {
+
+  table {
+    font: $font !important;
+    border-collapse: inherit !important;
+
+    colgroup > ol {
+
+    }
+
+    thead > tr > td {
+      @include zen-spacing(padding-bottom, 5px !important);
+
+      > div {
+        overflow: hidden !important;
+        padding: 5px !important;
+        display: table !important;
+        marin-bottom: 10px !important;
+      }
+    }
+
+
+    tbody > tr > td {
+
+    }
+  }
+
+}
+
+// Rules
+
+@include table-cleanup;
+
+
+table {
+  font-size: $font-size !important;
+
+  thead {
+    tr {
+    }
+  }
+
+  tbody tr:nth-child(2n+1) {
+    @include zen-color-alternating;
+  }
+
+  span {
+    padding: 0 !important;
+    input {
+      vertical-align: middle !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      @include zen-button;
+    }
+  }
+}
+
+.RadGrid_Silk .rgMasterTable, .RadGrid_Silk .rgDetailTable, .RadGrid_Silk .rgGroupPanel table, .RadGrid_Silk .rgCommandRow table, .RadGrid_Silk .rgEditForm table, .RadGrid_Silk .rgPager table {
+  font: $font !important;
+}

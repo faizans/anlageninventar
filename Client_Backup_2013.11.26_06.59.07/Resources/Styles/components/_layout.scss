@@ -1,0 +1,61 @@
+// Variables
+
+$layout-body-padding: 40px;
+
+// Mixins
+
+
+// Rules
+body {
+  margin: 0px;
+  padding: 0px;
+  background-color: $background-color;
+  font-family: $font;
+}
+
+.Wrapper_Div {
+  height: 100%;
+  width: 100%;
+  clear: both;
+}
+
+.Title_Div {
+  height: 20px;
+
+  @include zen-padding-top(0.5);
+  @include zen-padding-bottom(0.5);
+
+  background-color: $background-color;
+
+  border-bottom: 1px solid grey;
+
+  span {
+
+    font-size: $title-info-text-size;
+
+    &#lblInfoText {
+      @include zen-margin('left', 4);
+      font-weight: bold;
+      float: left;
+    }
+
+    &#lblInfoUser {
+      @include zen-margin('right', 4);
+      float: right;
+    }
+  }
+}
+
+.Body_Div {
+  @include zen-padding(left, 4);
+  @include zen-padding(right, 4);
+  @include zen-padding-top(2);
+  @include zen-padding-bottom(2);
+}
+
+.Footer_Div {
+}
+
+.RadGrid_Silk {
+  font: normal !important;
+}

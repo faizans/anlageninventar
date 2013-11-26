@@ -1,0 +1,11 @@
+// Variables
+
+$buttons-event-button-size: 20px !default;
+
+// Mixins
+// Rules
+
+.GridEventButton {
+  width: $buttons-event-button-size !important;
+  height: $buttons-event-button-size !important;
+}
