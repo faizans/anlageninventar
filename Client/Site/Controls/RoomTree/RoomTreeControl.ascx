@@ -7,8 +7,9 @@
         <telerik:RadButton ID="btnAddBuilding" runat="server" Text="Neues Gebäude" OnClick="btnAddBuilding_Click" Enabled="false"></telerik:RadButton>
         <telerik:RadButton ID="btnAddFloor" runat="server" Text="Neues Stockwerk" OnClick="btnAddFloor_Click" Enabled="false"></telerik:RadButton>
         <telerik:RadButton ID="btnAddRoom" runat="server" Text="Neuer Raum" OnClick="btnAddRoom_Click" Enabled="false"></telerik:RadButton>
-        <telerik:RadButton ID="btnReport" runat="server" Text="Report" OnClick="btnReport_Click" Enabled="false"></telerik:RadButton>
         <telerik:RadButton ID="btnDelete" runat="server" Text="Löschen" OnClick="btnDelete_Click" Enabled="false"></telerik:RadButton>
+        <telerik:RadButton ID="btnReport" runat="server" Text="Report" OnClick="btnReport_Click" Enabled="false"></telerik:RadButton>
+        <telerik:RadButton ID="btnRoomList" runat="server" Text="Verantwortlichenliste" OnClick="btnRoomList_Click"></telerik:RadButton>
     </div>
 
     <div style="margin-bottom: 20px;">

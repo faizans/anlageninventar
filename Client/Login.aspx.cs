@@ -27,7 +27,7 @@ namespace Client {
                 this.lblAlert.Text = "Login fehlgeschlagen. Bitte Benutzernamen und Password eingeben.";
             } else {
                 this.SiteMaster.User = user;
-                Global.SetUpFormAuthenticationTicket(user.UserName, user.IsAdmin ? "Administrator" : "User", Response);
+                Global.SetUpFormAuthenticationTicket(user, user.IsAdmin ? "Administrator" : "User", Response);
 
                 Response.Redirect(Constants.DEFAULT_PAGE);
             }

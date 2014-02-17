@@ -78,6 +78,9 @@
                 </telerik:GridBoundColumn>
                 <telerik:GridBoundColumn DataField="ArticleAmount" HeaderText="Anzahl" SortExpression="ArticleAmount" UniqueName="ArticleAmount" FilterControlAltText="Filter ArticleAmount column">
                 </telerik:GridBoundColumn>
+                <telerik:GridBoundColumn DataField="UnGroupedPrice" Visible="false" HeaderText="Stückpreis" SortExpression="UnGroupedPrice" UniqueName="UnGroupedPrice" FilterControlAltText="Filter UnGroupedPrice column"
+                    DataFormatString="{0:##,##0.00}">
+                </telerik:GridBoundColumn>
                 <telerik:GridNumericColumn DataField="Value" HeaderText="Preis" SortExpression="Value" UniqueName="Value" FilterControlAltText="Filter Value column"
                     DataFormatString="{0:##,##0.00}" FilterControlWidth="80px">
                 </telerik:GridNumericColumn>
@@ -90,9 +93,9 @@
                 <telerik:GridNumericColumn DataField="DepreciationValue" HeaderText="Ist-Wert" SortExpression="DepreciationValue" UniqueName="DepreciationValue" FilterControlAltText="Filter DepreciationValue column"
                     DataFormatString="{0:##,##0.00}" FilterControlWidth="80px">
                 </telerik:GridNumericColumn>
-                <telerik:GridBoundColumn DataField="DepreciationCategory.Name" HeaderText="Abschreibungskategorie" SortExpression="DepreciationCategory.Name" UniqueName="DepreciationCategory.Name" FilterControlAltText="Filter DepreciationCategory.Name column">
+                <telerik:GridBoundColumn DataField="DepreciationCategoryName" HeaderText="Abschreibungskategorie" SortExpression="DepreciationCategoryName" UniqueName="DepreciationCategoryName" FilterControlAltText="Filter DepreciationCategoryName column">
                 </telerik:GridBoundColumn>
-                <telerik:GridBoundColumn DataField="InsuranceCategory.Name" HeaderText="Versicherungskategorie" SortExpression="InsuranceCategory.Name" UniqueName="InsuranceCategory.Name" FilterControlAltText="Filter InsuranceCategory.Name column">
+                <telerik:GridBoundColumn DataField="InsuranceCategoryName" HeaderText="Versicherungskategorie" SortExpression="InsuranceCategoryName" UniqueName="InsuranceCategoryName" FilterControlAltText="Filter InsuranceCategoryName column">
                 </telerik:GridBoundColumn>
                  <telerik:GridBoundColumn Display="false" DataField="ArticleGroup.ArticleCategory.Name" HeaderText="Artikelgruppe" SortExpression="ArticleGroup.ArticleCategory.Name" UniqueName="ArticleGroup.ArticleCategory.Name" FilterControlAltText="Filter ArticleGroup.ArticleCategory.Name column">
                 </telerik:GridBoundColumn>

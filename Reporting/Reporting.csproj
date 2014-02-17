@@ -48,6 +48,12 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Reports\RoomListReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\RoomListReport.Designer.cs">
+      <DependentUpon>RoomListReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reports\KategorieGroupList.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -74,6 +80,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Reports\RoomListReport.resx">
+      <DependentUpon>RoomListReport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\KategorieGroupList.resx">
       <DependentUpon>KategorieGroupList.cs</DependentUpon>
     </EmbeddedResource>

@@ -20,13 +20,11 @@ namespace Client {
             string userid = Request.ServerVariables["LOGON_USER"];
 
             if (userid != null && userid.Length > 0) {
-                String username = AppUser.GetUserNameFromDomainString(userid);
-                String domain = AppUser.GetDomainFromDomainString(userid);
 
-                AppUser loggedUser = AppUser.GetByUserNameAndDomain(username, domain);
+                AppUser loggedUser = AppUser.GetByLogin(Request.LogonUserIdentity, userid);
 
                 if (loggedUser != null && loggedUser.IsActive && loggedUser.IsAdmin) {
-                    Global.SetUpFormAuthenticationTicket(userid, "Administrator", Response);
+                    Global.SetUpFormAuthenticationTicket(loggedUser, "Administrator", Response);
                     Response.Redirect(Constants.DEFAULT_PAGE);
                 } else {
                     Response.Redirect(Constants.AUTHORIZATION_FORMS_LOGIN);

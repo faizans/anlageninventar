@@ -41,7 +41,8 @@ namespace Data.Enum
         Standart,
         RaumCheckliste,
         RaumGruppierung,
-        KategorieGruppierung
+        KategorieGruppierung,
+        RaumListe
     }
 }
 

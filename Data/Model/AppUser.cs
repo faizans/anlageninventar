@@ -23,7 +23,11 @@ namespace Data.Model.Diagram
 
         public bool IsInRole(String role)
         {
-            throw new Exception("No implemented");
+            Boolean isAllowed = false;
+            if (this.IsAdmin) {
+                isAllowed = true;
+            }
+            return isAllowed;
         }
 
         #endregion
@@ -56,11 +60,10 @@ namespace Data.Model.Diagram
             }
             else
             {
-                int backslashIndex = login.IndexOf("\\");
-                String domain = backslashIndex >= 0 ? login.Substring(0, backslashIndex) : "";
-                String username = backslashIndex >= 0 ? login.Substring(backslashIndex + 1, login.Length - backslashIndex - 1) : login;
+                String domain = GetDomainFromDomainString(login);
+                String username = GetUserNameFromDomainString(login);
 
-                retUser = ctx.AppUsers.Where(au => au.UserName == username).SingleOrDefault();
+                retUser = ctx.AppUsers.Where(au => au.UserName.ToLower() == username.ToLower() && au.Domain.ToLower() == domain.ToLower()).SingleOrDefault();
             }
             if (retUser != null)
             {

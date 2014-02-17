@@ -10,19 +10,6 @@ namespace Data.Model.Diagram
 {
     public partial class IP3AnlagenInventarEntities
     {
-        private AppUser loggedUser;
-
-        /// <summary>
-        /// Will contain user information, available at any time. Filled in by YambContextFactory class methods
-        /// </summary>
-        public AppUser LoggedUser
-        {
-            get { return loggedUser; }
-            set { loggedUser = value; }
-        }
-
-
-
         public override int SaveChanges() {
             try {
                 return base.SaveChanges();

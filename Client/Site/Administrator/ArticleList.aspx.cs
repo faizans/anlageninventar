@@ -167,11 +167,13 @@ namespace Client.Site.Administrator {
 
         protected void btnReport_Click(object sender, EventArgs e) {
             this.SiteMaster.ReportDataSource = ArticleGridHelper.GetReportItems(this.rgArticles, Article.GetAvailable().ToList(), false);
+            this.SiteMaster.UngroupedReportDataSource = new List<Article>(this.SiteMaster.ReportDataSource);
             Response.Redirect("~/Site/Administrator/Report/ReportView.aspx");
         }
 
         protected void btnReportView_Click(object sender, EventArgs e) {
             this.SiteMaster.ReportDataSource = ArticleGridHelper.GetReportItems(this.rgArticles, Article.GetAvailable().ToList(), false);
+            this.SiteMaster.UngroupedReportDataSource = new List<Article>(this.SiteMaster.ReportDataSource);
             Response.Redirect("~/Site/Administrator/Report/ReportView.aspx");
         }
 

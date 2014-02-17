@@ -12,6 +12,7 @@ using Data.Model.Diagram;
 using Data.Model;
 using System.Text;
 using Client.SiteMaster;
+using Data.Enum;
 
 namespace Client.Site.Controls.RoomTree {
     public partial class RoomTreeControl : System.Web.UI.UserControl {
@@ -472,6 +473,10 @@ namespace Client.Site.Controls.RoomTree {
                 this.SiteMaster.ReportDataSource = orderListByPersonAndRoom(this.SiteMaster.ReportDataSource);
                 Response.Redirect("~/Site/Administrator/Report/ReportView.aspx");
             }
+        }
+
+        protected void btnRoomList_Click(object sender, EventArgs e) {
+            Response.Redirect("~/Site/Administrator/Report/PrintView.aspx?template=" + TelerikReports.RaumListe);
         }
 
         #endregion

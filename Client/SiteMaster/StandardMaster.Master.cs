@@ -9,6 +9,7 @@ namespace Client.SiteMaster
 {
     public partial class StandardMaster : CustomMaster
     {
+
         protected void Page_Load(object sender, EventArgs e)
         {
 	        if (this.User != null)

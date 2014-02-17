@@ -88,6 +88,9 @@
                 <telerik:GridNumericColumn DataField="Value" HeaderText="Preis" SortExpression="Value" UniqueName="Value" FilterControlAltText="Filter Value column"
                     DataFormatString="{0:##,##0.00}" FilterControlWidth="80px">
                 </telerik:GridNumericColumn>
+                <telerik:GridNumericColumn DataField="DepreciationValue" HeaderText="Ist-Wert" SortExpression="DepreciationValue" UniqueName="DepreciationValue" FilterControlAltText="Filter DepreciationValue column"
+                    DataFormatString="{0:##,##0.00}" FilterControlWidth="80px">
+                </telerik:GridNumericColumn>
                 <telerik:GridBoundColumn DataField="ArticleGroup.ArticleCategory.Name" Display="false" HeaderText="Artikelgruppe" SortExpression="ArticleGroup.ArticleCategory.Name" UniqueName="ArticleGroup.ArticleCategory.Name" FilterControlAltText="Filter ArticleGroup.ArticleCategory.Name column">
                 </telerik:GridBoundColumn>
                 <telerik:GridBoundColumn DataField="AcquisitionDate" DataFormatString="{0:dd/MM/yyyy}" HeaderText="Anschaffungsdatum" SortExpression="AcquisitionDate" UniqueName="AcquisitionDate" FilterControlAltText="Filter AcquisitionDate column">
@@ -147,7 +150,7 @@
                 }
             });
 
-            var text = "Sind Sie sicher dass Sie den Artikel entfernen wollen?\nAchtung Artikel kann Restwert enthalten";
+            var text = "Sind Sie sicher dass Sie den Artikel entfernen wollen?";
             radconfirm(text, callBackFunction, 300, 100, null, "Löschen");
             args.set_cancel(true);
         }

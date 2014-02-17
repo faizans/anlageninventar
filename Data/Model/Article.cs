@@ -13,6 +13,19 @@ namespace Data.Model.Diagram {
 
         public Boolean UseStoredValues { get; set; }
 
+        private double? unGroupedPrice;
+        public double? UnGroupedPrice {
+            get {
+                if (this.unGroupedPrice != null) {
+                    return this.unGroupedPrice;
+                }
+                return this.Value;
+            }
+            set {
+                this.unGroupedPrice = value;
+            }
+        }
+
         /// <summary>
         /// If the amount is empty or smaller than 1 return 1 else return actual value
         /// </summary>
@@ -118,6 +131,25 @@ namespace Data.Model.Diagram {
             get {
                 return this.Room.Name;
             }
+        }
+
+        public String DepreciationCategoryName {
+            get {
+                if (DepreciationCategory == null) {
+                    return "Keine Abschreibung";
+                }
+                return DepreciationCategory.Name;
+            }
+        }
+
+        public String InsuranceCategoryName {
+            get {
+                if (InsuranceCategory == null) {
+                    return "mobiliarversichert";
+                }
+                return InsuranceCategory.Name;
+            }
+
         }
         #endregion
 

@@ -51,7 +51,11 @@ namespace Client.Site.Administrator.Report {
                     case TelerikReports.KategorieGruppierung:
                         this.reportView.Report = new KategorieGroupList(this.SiteMaster.ExportItems, title, year);
                         this.reportView.DataBind();
+                        break;
 
+                    case TelerikReports.RaumListe:
+                        this.reportView.Report = new RoomListReport("Verantwortlichenliste", DateTime.Now.Year.ToString());
+                        this.reportView.DataBind();
                         break;
                 }
             }

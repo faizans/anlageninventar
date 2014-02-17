@@ -23,6 +23,7 @@ namespace Reporting.Reports {
             this.textBox15 = new Telerik.Reporting.TextBox();
             this.textBox16 = new Telerik.Reporting.TextBox();
             this.textBox17 = new Telerik.Reporting.TextBox();
+            this.textBox20 = new Telerik.Reporting.TextBox();
             this.labelsGroupHeaderSection = new Telerik.Reporting.GroupHeaderSection();
             this.nameCaptionTextBox = new Telerik.Reporting.TextBox();
             this.barcodeCaptionTextBox = new Telerik.Reporting.TextBox();
@@ -34,6 +35,7 @@ namespace Reporting.Reports {
             this.textBox1 = new Telerik.Reporting.TextBox();
             this.textBox2 = new Telerik.Reporting.TextBox();
             this.textBox3 = new Telerik.Reporting.TextBox();
+            this.textBox18 = new Telerik.Reporting.TextBox();
             this.pageHeader = new Telerik.Reporting.PageHeaderSection();
             this.pictureBox1 = new Telerik.Reporting.PictureBox();
             this.textBox11 = new Telerik.Reporting.TextBox();
@@ -56,9 +58,7 @@ namespace Reporting.Reports {
             this.textBox4 = new Telerik.Reporting.TextBox();
             this.textBox5 = new Telerik.Reporting.TextBox();
             this.textBox6 = new Telerik.Reporting.TextBox();
-            this.textBox18 = new Telerik.Reporting.TextBox();
             this.textBox19 = new Telerik.Reporting.TextBox();
-            this.textBox20 = new Telerik.Reporting.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
             // labelsGroupFooterSection
@@ -198,6 +198,19 @@ namespace Reporting.Reports {
             this.textBox17.StyleName = "Data";
             this.textBox17.Value = "";
             // 
+            // textBox20
+            // 
+            this.textBox20.CanGrow = true;
+            this.textBox20.Format = "{0:N2}";
+            this.textBox20.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Cm(6.7999997138977051D), Telerik.Reporting.Drawing.Unit.Cm(0D));
+            this.textBox20.Name = "textBox20";
+            this.textBox20.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Pixel(49.133880615234375D), Telerik.Reporting.Drawing.Unit.Pixel(30D));
+            this.textBox20.Style.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(209)))), ((int)(((byte)(240)))));
+            this.textBox20.Style.Font.Bold = true;
+            this.textBox20.Style.Padding.Left = Telerik.Reporting.Drawing.Unit.Cm(0.10000000149011612D);
+            this.textBox20.StyleName = "Data";
+            this.textBox20.Value = "=Sum(Fields.ArticleAmount)";
+            // 
             // labelsGroupHeaderSection
             // 
             this.labelsGroupHeaderSection.Height = Telerik.Reporting.Drawing.Unit.Cm(0.89999997615814209D);
@@ -325,6 +338,17 @@ namespace Reporting.Reports {
             this.textBox3.Style.Padding.Left = Telerik.Reporting.Drawing.Unit.Cm(0.10000000149011612D);
             this.textBox3.StyleName = "Caption";
             this.textBox3.Value = "Verantwortlich";
+            // 
+            // textBox18
+            // 
+            this.textBox18.CanGrow = true;
+            this.textBox18.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Cm(6.7999997138977051D), Telerik.Reporting.Drawing.Unit.Cm(0.052916664630174637D));
+            this.textBox18.Name = "textBox18";
+            this.textBox18.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Pixel(49.133880615234375D), Telerik.Reporting.Drawing.Unit.Pixel(30D));
+            this.textBox18.Style.Font.Bold = true;
+            this.textBox18.Style.Padding.Left = Telerik.Reporting.Drawing.Unit.Cm(0.10000000149011612D);
+            this.textBox18.StyleName = "Caption";
+            this.textBox18.Value = "Anzahl";
             // 
             // pageHeader
             // 
@@ -536,17 +560,6 @@ namespace Reporting.Reports {
             this.textBox6.StyleName = "Data";
             this.textBox6.Value = "=Fields.Room.ResponsiblePerson";
             // 
-            // textBox18
-            // 
-            this.textBox18.CanGrow = true;
-            this.textBox18.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Cm(6.7999997138977051D), Telerik.Reporting.Drawing.Unit.Cm(0.052916664630174637D));
-            this.textBox18.Name = "textBox18";
-            this.textBox18.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Pixel(49.133880615234375D), Telerik.Reporting.Drawing.Unit.Pixel(30D));
-            this.textBox18.Style.Font.Bold = true;
-            this.textBox18.Style.Padding.Left = Telerik.Reporting.Drawing.Unit.Cm(0.10000000149011612D);
-            this.textBox18.StyleName = "Caption";
-            this.textBox18.Value = "Anzahl";
-            // 
             // textBox19
             // 
             this.textBox19.CanGrow = true;
@@ -556,19 +569,6 @@ namespace Reporting.Reports {
             this.textBox19.Style.Padding.Left = Telerik.Reporting.Drawing.Unit.Cm(0.10000000149011612D);
             this.textBox19.StyleName = "Data";
             this.textBox19.Value = "=Fields.ArticleAmount";
-            // 
-            // textBox20
-            // 
-            this.textBox20.CanGrow = true;
-            this.textBox20.Format = "{0:N2}";
-            this.textBox20.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Cm(6.7999997138977051D), Telerik.Reporting.Drawing.Unit.Cm(0D));
-            this.textBox20.Name = "textBox20";
-            this.textBox20.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Pixel(49.133880615234375D), Telerik.Reporting.Drawing.Unit.Pixel(30D));
-            this.textBox20.Style.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(209)))), ((int)(((byte)(240)))));
-            this.textBox20.Style.Font.Bold = true;
-            this.textBox20.Style.Padding.Left = Telerik.Reporting.Drawing.Unit.Cm(0.10000000149011612D);
-            this.textBox20.StyleName = "Data";
-            this.textBox20.Value = "=Sum(Fields.ArticleAmount)";
             // 
             // Standard
             // 

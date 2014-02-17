@@ -85,6 +85,9 @@
                 </telerik:GridBoundColumn>
                 <telerik:GridBoundColumn DataField="ArticleAmount" HeaderText="Anzahl" SortExpression="ArticleAmount" UniqueName="ArticleAmount" FilterControlAltText="Filter ArticleAmount column">
                 </telerik:GridBoundColumn>
+                <telerik:GridBoundColumn DataField="UnGroupedPrice" Visible="false" HeaderText="Stückpreis" SortExpression="UnGroupedPrice" UniqueName="UnGroupedPrice" FilterControlAltText="Filter UnGroupedPrice column"
+                    DataFormatString="{0:##,##0.00}">
+                </telerik:GridBoundColumn>
                 <telerik:GridNumericColumn DataField="Value" HeaderText="Preis" SortExpression="Value" UniqueName="Value" FilterControlAltText="Filter Value column"
                     DataFormatString="{0:##,##0.00}" FilterControlWidth="80px">
                 </telerik:GridNumericColumn>

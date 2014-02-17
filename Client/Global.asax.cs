@@ -47,74 +47,30 @@ namespace Client
         /// <param name="e"></param>
         protected void WindowsAuthentication_OnAuthenticate(Object source, WindowsAuthenticationEventArgs e)
         {
-            //if (Request.Cookies.Get(Constants.AUTHORIZATION_COOKIE_NAME) != null) {
-            //    return;
-            //}
-            ////} else if (EntityFactory.RequiresManualLogin) {
-            ////    SetUpAuthenticationTicket(null, null, Response);
-            ////    return;
-            ////}
-
-            //bool loggedIn = false;
-            //String strUserIdentity = e.Identity.Name;
-            //AdLookup adLookup = new AdLookup();
-            //String role = null;
-
-            //if (strUserIdentity != null && strUserIdentity != "")
-            //{
-
-            //    String userDomain = AppUser.GetDomainFromDomainString(strUserIdentity);
-            //    String userName = AppUser.GetUserNameFromDomainString(strUserIdentity);
-
-            //    loggedUser = AppUser.GetByUserNameAndDomain(userName, userDomain);
-
-            //    //If User is set, user is loggedin
-            //    if (loggedUser != null && loggedUser.UserName.Length > 0 && loggedUser.IsActive && loggedUser.IsAdmin)
-            //    {
-            //        loggedIn = true;
-            //        role = loggedUser.IsAdmin ? UserRole.Administrator.ToString() : UserRole.User.ToString();
-            //        EntityFactory.Context.LoggedUser = loggedUser;
-            //    }
-            //}
-
-            //////Create cookie for user if he is logged in
-            //if (loggedIn)
-            //{
-            //    try
-            //    {
-            //        SetUpAuthenticationTicket(strUserIdentity, role, Response);
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        throw new Exception(ex.Message);
-            //    }
-            //}
-            //else
-            //{
-            //    HttpContext.Current.User = null;
-            //    EntityFactory.RequiresManualLogin = true;
-            //    EntityFactory.Context.LoggedUser = null;
-            //    Response.Redirect(Constants.AUTHORIZATION_MANUALLY_LOGIN);
-            //}
+           
         }
 
-        public static void SetUpAuthenticationTicket(String identity, String role, HttpResponse Response) {
-            FormsAuthenticationTicket formsAuthTicket = new FormsAuthenticationTicket(1, identity, DateTime.Now, DateTime.Now.AddMinutes(20), false, role);
-            String strEncryptedTicket = FormsAuthentication.Encrypt(formsAuthTicket);
-            HttpCookie httpCook = new HttpCookie(Constants.AUTHORIZATION_COOKIE_NAME, strEncryptedTicket);
-            Response.Cookies.Add(httpCook);
+        protected void Application_OnAuthenticateRequest(Object src, EventArgs e) {
+            HttpCookie cookie = Context.Request.Cookies.Get(FormsAuthentication.FormsCookieName);
+            if (cookie != null) {
+                FormsAuthenticationTicket winAuthTicket = FormsAuthentication.Decrypt(cookie.Value);
+                string[] roles = winAuthTicket.UserData.Split(';');
+                FormsIdentity formsId = new FormsIdentity(winAuthTicket);
+                GenericPrincipal princ = new GenericPrincipal(formsId, roles);
+                HttpContext.Current.User = princ;
+                return;
+            } 
         }
 
-        public static void SetUpFormAuthenticationTicket(String identity, String role, HttpResponse Response) {
-            string uname = AppUser.GetUserNameFromDomainString(identity);
-            string domain = AppUser.GetDomainFromDomainString(identity);
+        public static void SetUpFormAuthenticationTicket(AppUser user, String role, HttpResponse Response) {
+            
 
-            GenericIdentity id = new GenericIdentity(identity);
+            GenericIdentity id = new GenericIdentity(user.Identity.Name);
 
             FormsAuthenticationTicket ticket =
                 new FormsAuthenticationTicket(
                     1,
-                    identity,
+                    user.Identity.Name,
                     DateTime.Now,
                     DateTime.Now.AddMinutes(20),
                     false,
@@ -129,8 +85,8 @@ namespace Client
                 encrypted_ticket);
 
             // Add cookie
-            HttpContext.Current.Response.Cookies.Add(cookie);
-            EntityFactory.Context.LoggedUser = AppUser.GetByUserNameAndDomain(uname, domain);
+            Response.Cookies.Add(cookie);
+            HttpContext.Current.User = user;
         }
     }
 }

@@ -13,8 +13,6 @@ namespace Client.Site.Controls.CustomGrids {
     /// </summary>
     public class ArticleGridHelper {
 
-        public String[] NonEntityFields = { "DepreciationValue", "RoomPath" };
-
         /// <summary>
         /// Apply the grids filter expression to the reportsource (uses dynamic linq)
         /// </summary>
@@ -26,7 +24,9 @@ namespace Client.Site.Controls.CustomGrids {
 
             if (rgGrid.MasterTableView.FilterExpression.Any()) {
                 String filterExpression = rgGrid.MasterTableView.FilterExpression;
-                reportSource = reportSource.AsQueryable().Where(filterExpression).ToList();
+                reportSource = reportSource.Where(a => a.DepreciationCategory != null 
+                    && a.InsuranceCategory != null
+                    ).AsQueryable().Where(filterExpression).ToList();
             }
 
             if (HasFooter) {
@@ -93,7 +93,7 @@ namespace Client.Site.Controls.CustomGrids {
             }
         }
 
-        public static List<Article> GroupReportArticles(List<Article> source) {
+        public static List<Article> GroupReportArticles(List<Article> source, bool? useStoredValues) {
             List<Article> result = new List<Article>();
             IEnumerable<IEnumerable<Article>> groupedSource = source.GroupBy(s => s.Barcode.Split('.')[0]);
             if (groupedSource != null) {
@@ -101,6 +101,7 @@ namespace Client.Site.Controls.CustomGrids {
 
                     Article groupedArticle = new Article();
                     groupedArticle.Name = group.ElementAt(0).Name;
+                    groupedArticle.UnGroupedPrice = group.ElementAt(0).Value;
                     groupedArticle.Barcode = group.ElementAt(0).Barcode;
                     groupedArticle.AcquisitionDate = group.ElementAt(0).AcquisitionDate;
                     groupedArticle.Amount = group.Sum(g => g.ArticleAmount);
@@ -116,7 +117,7 @@ namespace Client.Site.Controls.CustomGrids {
                     groupedArticle.OldBarcode = group.ElementAt(0).OldBarcode;
                     groupedArticle.Room = group.ElementAt(0).Room;
                     groupedArticle.SupplierBranch = group.ElementAt(0).SupplierBranch;
-                    groupedArticle.UseStoredValues = group.ElementAt(0).UseStoredValues;
+                    groupedArticle.UseStoredValues = useStoredValues != null ? useStoredValues.Value : group.ElementAt(0).UseStoredValues;
                     groupedArticle.Value = group.Sum(g => g.Value);
 
                     result.Add(groupedArticle);

@@ -17,15 +17,13 @@ namespace Client.Site.Administrator.Report {
 
         protected void Page_Load(object sender, EventArgs e) {
 
-            Response.Cache.SetCacheability(HttpCacheability.NoCache);
-
             //Check if the set user is allowed to access
             if (this.SiteMaster.User == null || !this.SiteMaster.User.IsAdmin || !this.SiteMaster.User.IsActive) {
                 Response.Redirect(Constants.AUTHORIZATION_WINDOWS_LOGIN);
             }
 
             if (!IsPostBack) {
-                this.clearSessions();
+                this.resetDataSource();
             }
 
             SiteMaster.StandardMaster.InfoText = "Report";
@@ -137,6 +135,16 @@ namespace Client.Site.Administrator.Report {
             //Only show articles aqcuired before or withing the ReportYear
             gridSource = gridSource.Where(a => a.AcquisitionDate.Value.Year <= this.ReportYear).ToList();
 
+            //Hide or show piece price
+            if (this.GroupReport) {
+                foreach (GridColumn column in rgReport.Columns) {
+                    if (column.UniqueName == "UnGroupedPrice") {
+                        (column as GridBoundColumn).Visible = true;
+                        break;
+                    }
+                }
+            }
+
             //Bind
             rgReport.DataSource = gridSource;
             rgReport.DataBind();
@@ -163,7 +171,7 @@ namespace Client.Site.Administrator.Report {
             this.GroupReport = !this.GroupReport;
             if (this.GroupReport) {
                 this.SiteMaster.ReportDataSource =
-                    ArticleGridHelper.GroupReportArticles(ArticleGridHelper.GetReportItems(rgReport, this.SiteMaster.ReportDataSource, false));
+                    ArticleGridHelper.GroupReportArticles(ArticleGridHelper.GetReportItems(rgReport, this.SiteMaster.ReportDataSource, false),false);
             } else {
                 this.SiteMaster.ReportDataSource = new List<Article>(this.SiteMaster.UngroupedReportDataSource);
             }
@@ -196,6 +204,7 @@ namespace Client.Site.Administrator.Report {
 
         protected void ReCalculateDepreciation(RadGrid rgReport) {
             this.SiteMaster.ReportDataSource.ForEach(a => a.DepreciationTime = new DateTime(this.ReportYear, 1, 1));
+            rgReport.DataSource = this.SiteMaster.ReportDataSource;
             rgReport.Rebind();
         }
 
@@ -217,7 +226,7 @@ namespace Client.Site.Administrator.Report {
         #region Export methods
 
         protected void ExportToExcel(RadGrid rgReport) {
-            this.SiteMaster.ExportItems = ArticleGridHelper.GetReportItems(rgReport, this.SiteMaster.ReportDataSource, true);
+            this.SiteMaster.ExportItems =new List<Article>(ArticleGridHelper.GetReportItems(rgReport, this.SiteMaster.ReportDataSource, true));
             Response.Redirect("~/Site/Provider/ExcelProvider.ashx?template=" + this.SelectedTemplate);
         }
 
