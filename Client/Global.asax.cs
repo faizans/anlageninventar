@@ -47,46 +47,48 @@ namespace Client
         /// <param name="e"></param>
         protected void WindowsAuthentication_OnAuthenticate(Object source, WindowsAuthenticationEventArgs e)
         {
-           
+            //TODO
+            //Check if cookie is set
+            
         }
 
         protected void Application_OnAuthenticateRequest(Object src, EventArgs e) {
-            HttpCookie cookie = Context.Request.Cookies.Get(FormsAuthentication.FormsCookieName);
-            if (cookie != null) {
-                FormsAuthenticationTicket winAuthTicket = FormsAuthentication.Decrypt(cookie.Value);
-                string[] roles = winAuthTicket.UserData.Split(';');
-                FormsIdentity formsId = new FormsIdentity(winAuthTicket);
-                GenericPrincipal princ = new GenericPrincipal(formsId, roles);
-                HttpContext.Current.User = princ;
-                return;
-            } 
+            //HttpCookie cookie = Context.Request.Cookies.Get(FormsAuthentication.FormsCookieName);
+            //if (cookie != null) {
+            //    FormsAuthenticationTicket winAuthTicket = FormsAuthentication.Decrypt(cookie.Value);
+            //    string[] roles = winAuthTicket.UserData.Split(';');
+            //    FormsIdentity formsId = new FormsIdentity(winAuthTicket);
+            //    GenericPrincipal princ = new GenericPrincipal(formsId, roles);
+            //    HttpContext.Current.User = princ;
+            //    return;
+            //} 
         }
 
-        public static void SetUpFormAuthenticationTicket(AppUser user, String role, HttpResponse Response) {
+        //public static void SetUpFormAuthenticationTicket(AppUser user, String role, HttpResponse Response) {
             
 
-            GenericIdentity id = new GenericIdentity(user.Identity.Name);
+        //    //GenericIdentity id = new GenericIdentity(user.Identity.Name);
 
-            FormsAuthenticationTicket ticket =
-                new FormsAuthenticationTicket(
-                    1,
-                    user.Identity.Name,
-                    DateTime.Now,
-                    DateTime.Now.AddMinutes(20),
-                    false,
-                    Guid.NewGuid().ToString());
+        //    //FormsAuthenticationTicket ticket =
+        //    //    new FormsAuthenticationTicket(
+        //    //        1,
+        //    //        user.Identity.Name,
+        //    //        DateTime.Now,
+        //    //        DateTime.Now.AddMinutes(20),
+        //    //        false,
+        //    //        Guid.NewGuid().ToString());
 
-            // Encrypt the ticket
-            string encrypted_ticket = FormsAuthentication.Encrypt(ticket);
+        //    //// Encrypt the ticket
+        //    //string encrypted_ticket = FormsAuthentication.Encrypt(ticket);
 
-            // Create cookie
-            HttpCookie cookie = new HttpCookie(
-                FormsAuthentication.FormsCookieName,
-                encrypted_ticket);
+        //    //// Create cookie
+        //    //HttpCookie cookie = new HttpCookie(
+        //    //    FormsAuthentication.FormsCookieName,
+        //    //    encrypted_ticket);
 
-            // Add cookie
-            Response.Cookies.Add(cookie);
-            HttpContext.Current.User = user;
-        }
+        //    //// Add cookie
+        //    //Response.Cookies.Add(cookie);
+        //    //HttpContext.Current.User = user;
+        //}
     }
 }

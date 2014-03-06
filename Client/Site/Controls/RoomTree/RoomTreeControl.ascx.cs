@@ -136,7 +136,6 @@ namespace Client.Site.Controls.RoomTree {
         /// </summary>
         private void initDataSource() {
             RoomTreeItem rootItem = new RoomTreeItem(RoomTreeControl.ROOT_NAME);
-            rootItem.Value = "bsl";
             //
             this.RoomTreeItems.Add(rootItem);
 
@@ -199,7 +198,7 @@ namespace Client.Site.Controls.RoomTree {
                 String dataItemType = this.SelectedRoomTreeItem.DataItem != null ?
                                             ObjectContext.GetObjectType(this.SelectedRoomTreeItem.DataItem.GetType()).ToString() : null;
                 if (this.SelectedRoomTreeItem.IsRoot) {
-                    toggleButtons(true, false, false, false, false);
+                    toggleButtons(true, false, false, false, true);
                 } else if (dataItemType == typeof(Building).ToString()) {
                     toggleButtons(false, true, false, true, true);
                 } else if (dataItemType == typeof(Floor).ToString()) {
@@ -350,8 +349,10 @@ namespace Client.Site.Controls.RoomTree {
                         if (!buildingToDelete.HasArticles()) {
                             buildingToDelete.Delete();
                             //Remove the item from radtree
-                            this.RadTreeView1.GetAllNodes().Where(n => n.Value == roomTreeItem.Value && n.Text == roomTreeItem.Text).SingleOrDefault().Remove();
-                            //&& (n.DataItem != null && ObjectContext.GetObjectType(n.DataItem.GetType()) == typeof(Building))).SingleOrDefault().Remove();
+                            RadTreeNode toDelete = this.RadTreeView1.GetAllNodes().Where(n => n.Value == roomTreeItem.Value && n.Text == roomTreeItem.Text).SingleOrDefault();
+                            if (toDelete != null) {
+                                toDelete.Remove();
+                            }
                             this.SelectedItem = null;
                         } else {
                             errorMessage.AppendLine(String.Format("{0} kann nicht gelöscht werden, da Artikel dem Gebäude zugewiesen sind.", buildingToDelete.Name));
@@ -361,9 +362,10 @@ namespace Client.Site.Controls.RoomTree {
                         if (!floorToDelete.HasArticles()) {
                             floorToDelete.Delete();
                             //Remove the item from radtree
-                            this.RadTreeView1.GetAllNodes().Where(n => n.Value == roomTreeItem.Value && n.Text == roomTreeItem.Text).SingleOrDefault().Remove();
-                            //this.RadTreeView1.GetAllNodes().Where(n => n.Value == roomTreeItem.Value
-                            //    && ObjectContext.GetObjectType(n.DataItem.GetType()) == typeof(Floor)).SingleOrDefault().Remove();
+                            RadTreeNode toDelete = this.RadTreeView1.GetAllNodes().Where(n => n.Value == roomTreeItem.Value && n.Text == roomTreeItem.Text).SingleOrDefault();
+                            if (toDelete != null) {
+                                toDelete.Remove();
+                            }
                             this.SelectedItem = null;
                         } else {
                             errorMessage.AppendLine(String.Format("{0} kann nicht gelöscht werden, da Artikel dem Stockwerk zugewiesen sind.", floorToDelete.Name));
@@ -373,8 +375,11 @@ namespace Client.Site.Controls.RoomTree {
                         if (!roomToDelete.HasArticles()) {
                             roomToDelete.Delete();
                             //Remove the item from radtree
-                            this.RadTreeView1.GetAllNodes().Where(n => n.Value == roomTreeItem.Value
-                                && n.Attributes["DataType"] == typeof(Room).ToString()).SingleOrDefault().Remove();
+                            RadTreeNode toDelete = this.RadTreeView1.GetAllNodes().Where(n => n.Value == roomTreeItem.Value
+                                && n.Attributes["DataType"] == typeof(Room).ToString()).SingleOrDefault();
+                            if (toDelete != null) {
+                                toDelete.Remove();
+                            }
                             this.SelectedItem = null;
                         } else {
                             errorMessage.AppendLine(String.Format("{0} kann nicht gelöscht werden, da Artikel dem Raum zugewiesen sind.", roomToDelete.Name));
@@ -442,19 +447,30 @@ namespace Client.Site.Controls.RoomTree {
             //Go through all the checked items and add articles to report datasource
             if (this.CheckedItems.Any()) {
                 foreach (RoomTreeItem roomTreeItem in this.CheckedItems) {
-                    if (ObjectContext.GetObjectType(roomTreeItem.DataItem.GetType()) == typeof(Building)) {
-                        Building building = roomTreeItem.DataItem as Building;
-                        this.SiteMaster.ReportDataSource.AddRange(building.Articles);
-                    } else if (ObjectContext.GetObjectType(roomTreeItem.DataItem.GetType()) == typeof(Floor)) {
-                        Floor floor = roomTreeItem.DataItem as Floor;
-                        this.SiteMaster.ReportDataSource.AddRange(floor.Articles);
-                    } else if (ObjectContext.GetObjectType(roomTreeItem.DataItem.GetType()) == typeof(Room)) {
-                        Room room = roomTreeItem.DataItem as Room;
-                        this.SiteMaster.ReportDataSource.AddRange(room.Articles);
+                    if (roomTreeItem.DataItem == null) {
+                        //So its root item
+                        List<Building> allBuildings = Building.GetAll().ToList();
+                        if (allBuildings != null) {
+                            this.SiteMaster.ReportDataSource.AddRange(allBuildings.SelectMany(b => b.Articles));
+                        }
+                        break;
                     }
+                    else{
+                        if (ObjectContext.GetObjectType(roomTreeItem.DataItem.GetType()) == typeof(Building)) {
+                            Building building = roomTreeItem.DataItem as Building;
+                            this.SiteMaster.ReportDataSource.AddRange(building.Articles);
+                        } else if (ObjectContext.GetObjectType(roomTreeItem.DataItem.GetType()) == typeof(Floor)) {
+                            Floor floor = roomTreeItem.DataItem as Floor;
+                            this.SiteMaster.ReportDataSource.AddRange(floor.Articles);
+                        } else if (ObjectContext.GetObjectType(roomTreeItem.DataItem.GetType()) == typeof(Room)) {
+                            Room room = roomTreeItem.DataItem as Room;
+                            this.SiteMaster.ReportDataSource.AddRange(room.Articles);
+                        }
+                    } 
                 }
                 this.CheckedItems = null;
                 this.SiteMaster.ReportDataSource = orderListByPersonAndRoom(this.SiteMaster.ReportDataSource);
+                this.SiteMaster.UngroupedReportDataSource = new List<Article>(this.SiteMaster.ReportDataSource);
                 Response.Redirect("~/Site/Administrator/Report/ReportView.aspx");
             }
                 //Get selecteditem articles and add to report datasource
@@ -471,6 +487,7 @@ namespace Client.Site.Controls.RoomTree {
                 }
                 this.CheckedItems = null;
                 this.SiteMaster.ReportDataSource = orderListByPersonAndRoom(this.SiteMaster.ReportDataSource);
+                this.SiteMaster.UngroupedReportDataSource = new List<Article>(this.SiteMaster.ReportDataSource);
                 Response.Redirect("~/Site/Administrator/Report/ReportView.aspx");
             }
         }
@@ -495,18 +512,19 @@ namespace Client.Site.Controls.RoomTree {
 
         protected void RadTreeView1_NodeCheck(object sender, RadTreeNodeEventArgs e) {
             //Get the checked node and add or remove it from checkeditems
-            if (e.Node.Value != null && e.Node.Value != "") {
-                if (e.Node.Checked) {
-                    e.Node.Selected = true;
-                    this.SelectedItem = e.Node;
-                    if (!this.CheckedItems.Contains(this.SelectedRoomTreeItem)) {
-                        this.CheckedItems.Add(this.SelectedRoomTreeItem);
-                    }
-                } else {
-                    this.CheckedItems.Remove(this.SelectedRoomTreeItem);
+
+            if (e.Node.Checked) {
+                e.Node.Selected = true;
+                e.Node.CheckChildNodes();
+                this.SelectedItem = e.Node;
+                if (!this.CheckedItems.Contains(this.SelectedRoomTreeItem)) {
+                    this.CheckedItems.Add(this.SelectedRoomTreeItem);
                 }
-                toggleButtons();
+            } else {
+                this.CheckedItems.Remove(this.SelectedRoomTreeItem);
+                e.Node.UncheckChildNodes();
             }
+            toggleButtons();
         }
 
         #endregion

@@ -63,7 +63,7 @@ namespace Data.Model.Diagram
                 String domain = GetDomainFromDomainString(login);
                 String username = GetUserNameFromDomainString(login);
 
-                retUser = ctx.AppUsers.Where(au => au.UserName.ToLower() == username.ToLower() && au.Domain.ToLower() == domain.ToLower()).SingleOrDefault();
+                retUser = ctx.AppUsers.Where(au => au.UserName.ToLower() == username.ToLower() /*&& au.Domain.ToLower() == domain.ToLower()*/ ).FirstOrDefault();
             }
             if (retUser != null)
             {

@@ -1,4 +1,6 @@
-﻿using Client.Util;
+﻿using Client.SiteMaster;
+using Client.Util;
+using Data.Enum;
 using Data.Model;
 using Data.Model.Diagram;
 using System;
@@ -15,6 +17,13 @@ namespace Client {
         protected void Page_Load(object sender, EventArgs e) {
         }
 
+        public CustomMaster SiteMaster {
+            get {
+                CustomMaster mm = (CustomMaster)Page.Master;
+                return mm;
+            }
+        }
+
         protected override void OnPreRender(EventArgs e) {
 
             string userid = Request.ServerVariables["LOGON_USER"];
@@ -24,7 +33,10 @@ namespace Client {
                 AppUser loggedUser = AppUser.GetByLogin(Request.LogonUserIdentity, userid);
 
                 if (loggedUser != null && loggedUser.IsActive && loggedUser.IsAdmin) {
-                    Global.SetUpFormAuthenticationTicket(loggedUser, "Administrator", Response);
+                    //Global.SetUpFormAuthenticationTicket(loggedUser, "Administrator", Response);
+
+                    Session[SessionName.LoggedUser.ToString()] = loggedUser;
+
                     Response.Redirect(Constants.DEFAULT_PAGE);
                 } else {
                     Response.Redirect(Constants.AUTHORIZATION_FORMS_LOGIN);

@@ -11,7 +11,7 @@ using System.Web.UI.WebControls;
 namespace Client {
     public partial class _Login : System.Web.UI.Page {
         protected void Page_Load(object sender, EventArgs e) {
-
+            //TODO make accessable for all roles
         }
 
         public CustomMaster SiteMaster {
@@ -27,7 +27,7 @@ namespace Client {
                 this.lblAlert.Text = "Login fehlgeschlagen. Bitte Benutzernamen und Password eingeben.";
             } else {
                 this.SiteMaster.User = user;
-                Global.SetUpFormAuthenticationTicket(user, user.IsAdmin ? "Administrator" : "User", Response);
+                //Global.SetUpFormAuthenticationTicket(user, user.IsAdmin ? "Administrator" : "User", Response);
 
                 Response.Redirect(Constants.DEFAULT_PAGE);
             }

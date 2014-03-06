@@ -37,6 +37,7 @@ namespace Client.Site.Controls.RoomTree
             this.ParentId = 0;
             this.Text = text;
             this.IsRoot = true;
+            base.Checkable = false;
         }
 
         public RoomTreeItem(int itemId, int parentId, String text, String value, object dataItem, Boolean IsRoot)
